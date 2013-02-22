@@ -15,21 +15,20 @@
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TaughtCourseController">
   <children>
     <Label fx:id="errorLabel" layoutX="143.0" layoutY="308.0" />
-    <Label id="title" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses" textFill="GREY">
+    <Label id="title" layoutX="10.0" layoutY="2.0" prefHeight="25.0" prefWidth="111.0" text="All Courses" textFill="GREY">
       <font>
         <Font name="System Bold" size="14.0" fx:id="x2" />
       </font>
     </Label>
-    <TableView fx:id="sectionTable" layoutX="14.0" layoutY="36.0" prefHeight="142.0" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView fx:id="sectionTable" layoutX="23.0" layoutY="56.0" prefHeight="392.0" prefWidth="302.0" tableMenuButtonVisible="true">
       <columns>
-        <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
-        <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
-        <TableColumn minWidth="75.0" prefWidth="75.0" text="Department" fx:id="courseDept" />
-        <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="term" fx:id="term" />
-        <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
+        <TableColumn minWidth="55.0" prefWidth="55.0" resizable="false" text="Code" fx:id="courseNum" />
+        <TableColumn minWidth="90.0" prefWidth="90.0" text="Department" fx:id="courseDept" />
+        <TableColumn minWidth="65.0" prefWidth="65.0" text="term" fx:id="term" />
+        <TableColumn editable="false" minWidth="75.0" prefWidth="75.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
       </columns>
     </TableView>
-    <TextField id="filterText" fx:id="courseFilter" layoutX="348.0" layoutY="11.0" prefWidth="238.0" promptText="type filter text">
+    <TextField id="filterText" fx:id="sectionFilter" layoutX="122.0" layoutY="26.0" prefWidth="179.0" promptText="type filter text">
       <effect>
         <InnerShadow color="#9f9f9f" />
       </effect>
@@ -37,33 +36,24 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label layoutX="278.0" layoutY="10.0" prefHeight="22.0" prefWidth="87.0" text="Search" textFill="GREY">
+    <Label layoutX="77.0" layoutY="27.0" prefHeight="22.0" prefWidth="87.0" text="Search" textFill="GREY">
       <font>
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label alignment="CENTER" font="$x1" layoutX="114.0" layoutY="187.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
+    <Label alignment="CENTER" font="$x1" layoutX="12.0" layoutY="451.0" prefHeight="22.0" prefWidth="323.0" text="Click on a section to view the students" wrapText="true">
       <textFill>
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <Separator layoutX="14.0" layoutY="209.0" minHeight="3.0" prefHeight="14.0" prefWidth="572.0">
-      <effect>
-        <DropShadow>
-          <color>
-            <Color blue="0.376" green="0.376" red="0.376" fx:id="x4" />
-          </color>
-        </DropShadow>
-      </effect>
-    </Separator>
-    <TableView fx:id="studentTable" layoutX="14.0" layoutY="253.0" prefHeight="236.0" prefWidth="372.0" tableMenuButtonVisible="true">
+    <TableView fx:id="studentTable" layoutX="355.0" layoutY="80.0" prefHeight="366.0" prefWidth="220.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="studentID" fx:id="studentID" />
         <TableColumn minWidth="100.0" prefWidth="100.0" text="Grade" fx:id="grade" />
       </columns>
     </TableView>
-    <Label font="$x2" layoutX="14.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" text="Student" textFill="GREY" />
-    <TextField id="filterText" fx:id="sectionFilter" layoutX="403.0" layoutY="305.0" prefWidth="179.0" promptText="type filter text">
+    <Label font="$x2" layoutX="357.0" layoutY="2.0" prefHeight="25.0" prefWidth="87.0" text="Student" textFill="GREY" />
+    <TextField id="filterText" fx:id="studentFilter" layoutX="440.0" layoutY="32.0" prefWidth="130.0" promptText="type filter text">
       <effect>
         <InnerShadow color="GREY" />
       </effect>
@@ -71,15 +61,11 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label font="$x1" layoutX="463.0" layoutY="273.0" prefWidth="73.0" text="Search" textFill="GREY" />
-    <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
-    <TextField  id="Grade" fx:id="gradeField" layoutX="398.0" layoutY="410.0" prefWidth="188.0" />
-    <Button fx:id="updateGrade" layoutX="457.0" layoutY="447.0" mnemonicParsing="false" text="Update"  onAction="#updateStuGrade" />
-    <Separator layoutX="392.0" layoutY="349.0" minHeight="3.0" prefHeight="14.0" prefWidth="200.0">
-      <effect>
-        <DropShadow color="$x4" />
-      </effect>
-    </Separator>
-    <Label font="$x1" layoutX="439.0" layoutY="379.0" prefWidth="94.0" text="Change Grade" textFill="GREY" />
+    <Label font="$x1" layoutX="392.0" layoutY="36.0" prefWidth="73.0" text="Search" textFill="GREY" />
+    <Label alignment="CENTER" font="$x1" layoutX="357.0" layoutY="56.0" prefHeight="22.0" prefWidth="220.0" text="Click on a student to grade" textFill="$x3" wrapText="true" />
+    <TextField id="Grade" fx:id="gradeField" layoutX="488.0" layoutY="451.0" prefWidth="87.0" />
+    <Button fx:id="updateGrade" layoutX="434.0" layoutY="484.0" mnemonicParsing="false" onAction="#updateStuGrade" text="Update" />
+    <Label font="$x1" layoutX="389.0" layoutY="455.0" prefWidth="94.0" text="Change Grade" textFill="GREY" />
+    <Separator layoutX="339.0" layoutY="2.0" minWidth="1.220703125E-4" orientation="VERTICAL" prefHeight="525.0" prefWidth="1.220703125E-4" />
   </children>
 </AnchorPane>
