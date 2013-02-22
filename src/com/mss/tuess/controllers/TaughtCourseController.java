@@ -36,8 +36,6 @@ public class TaughtCourseController implements Initializable {
     @FXML
     private TableColumn<Section, String> courseNum;
     @FXML
-    private TableColumn<Section, String> courseName;
-    @FXML
     private TableColumn<Section, String> courseDept;
     @FXML
     private TableColumn<Section, String> term;
@@ -73,7 +71,6 @@ public class TaughtCourseController implements Initializable {
      */
     public TaughtCourseController() throws SQLException {
         int courseSize;
-
         sectionTableContent.clear();
         studentTableContent.clear();
         int instructorID = CurrentUser.getUser().getID();
@@ -115,7 +112,7 @@ public class TaughtCourseController implements Initializable {
     /**
      * Handle the order for each section column
      */
-    private void sectionClassTableOrderAct() {
+    private void sectionTableOrderAct() {
         ArrayList<TableColumn<EnrollSection, ?>> sectionSortOrder = new ArrayList(studentTable.getSortOrder());
         studentTable.getSortOrder().clear();
         studentTable.getSortOrder().addAll(sectionSortOrder);
@@ -144,7 +141,7 @@ public class TaughtCourseController implements Initializable {
                 studentFilterContent.add(enrollsection);
             }
         }
-        sectionClassTableOrderAct();
+        sectionTableOrderAct();
     }
 
     /**
@@ -178,7 +175,7 @@ public class TaughtCourseController implements Initializable {
      * @param SectionClass the course object
      */
     private boolean enrollSectionFilterChecker(EnrollSection enrollsection) {
-        String filterString = sectionFilter.getText();
+        String filterString = studentFilter.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
         }
@@ -204,13 +201,34 @@ public class TaughtCourseController implements Initializable {
          * map the course table attributes
          */
         courseNum.setCellValueFactory(new PropertyValueFactory<Section, String>("courseNum"));
-        courseName.setCellValueFactory(new PropertyValueFactory<Section, String>("courseName"));
         courseDept.setCellValueFactory(new PropertyValueFactory<Section, String>("courseDept"));
-        term.setCellValueFactory(new PropertyValueFactory<Section, String>("term"));
+        term.setCellValueFactory(new PropertyValueFactory<Section, String>("termID"));
         credit.setCellValueFactory(new PropertyValueFactory<Section, String>("credit"));
 
         sectionTable.setItems(sectionFilterContent);
 
+        /**
+         * course filter event listener
+         */
+        sectionFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                sectionFilterRefresh();
+            }
+        });
+
+
+        /**
+         * section filter event listener
+         */
+        studentFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                enrollSectionFilterRefresh();
+            }
+        });
         /*
          * Event Handler to capture the selected course
          */
@@ -218,6 +236,9 @@ public class TaughtCourseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
                 int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
+                if (selectedIndex < 0) {
+                    selectedIndex = 0;
+                }
                 System.out.println("Index : " + selectedIndex);
 
                 try {
@@ -286,6 +307,8 @@ public class TaughtCourseController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //studentTable.
+        ViewManager.setStatus("Successfully Updated the Grade!");
+
+
     }
 }

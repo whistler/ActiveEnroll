@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.entity;
 
 import com.mss.tuess.util.CurrentUser;
@@ -12,14 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
- * @author chenliang
+ *TaughtCourse class
  */
 public class TaughtCourse {
 
     private static ArrayList<TaughtCourse> taughtCoursesList = new ArrayList();
     private static int totalCredits = 0;
-
+/**
+ * Fetches TaughtCourse from database into arraylist
+ * @throws SQLException 
+ */
     public static void fetch() throws SQLException {
         totalCredits = 0;
         taughtCoursesList.clear();
@@ -51,7 +49,7 @@ public class TaughtCourse {
     }
 
     /**
-     * @param credit the addCredit to set
+     * @param credits the addCredit to set
      */
     public static void addTotalCredits(int credits) {
         totalCredits += credits;
