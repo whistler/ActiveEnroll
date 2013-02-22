@@ -4,6 +4,8 @@ import com.mss.tuess.controllers.LayoutController;
 import com.mss.tuess.entity.User;
 import com.mss.tuess.start.TUESS;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,13 +15,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class ViewManager {
 
     private static Stage stage;
+    private static Stage help = new Stage();
     private static ArrayList previousNodes = new ArrayList();
 
+    public static void loadHelp()
+    {
+        Parent page;
+        try {
+            page = FXMLLoader.load(TUESS.class.getResource("/com/mss/tuess/views/Help.fxml"));
+            Scene scene = new Scene(page);
+            help.setScene(scene);
+        } catch (IOException ex) {
+            Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Sets the window(Stage) that should be used to display Views
      *
@@ -122,5 +138,14 @@ public class ViewManager {
         pane.getChildren().clear();
         pane.getChildren().addAll(previousNodes);
         setStatus("");
+    }
+    
+    public static void showHelp(String fileName) throws MalformedURLException
+    {
+        Scene scene = help.getScene();
+        WebView webview = (WebView) scene.lookup("#htmlViewer");
+        String url = TUESS.class.getResource("/com/mss/tuess/help/" + fileName).toExternalForm();
+        webview.getEngine().load(url);
+        help.show();
     }
 }
