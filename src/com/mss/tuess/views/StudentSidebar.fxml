@@ -9,7 +9,7 @@
 <AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
   <children>
     <Hyperlink layoutX="39.0" layoutY="37.0" text="My Profile" onAction="#showMyProfile" />
-    <Hyperlink layoutX="38.0" layoutY="59.0" text="Search Courses" onAction="#showSearchCourses" />
+    <Hyperlink layoutX="38.0" layoutY="59.0" text="Search Courses" onAction="#showCourseSearch" />
     <Hyperlink layoutX="38.0" layoutY="81.0" text="Registered Courses" onAction="#showRegisteredCourses" />
     <Hyperlink layoutX="38.0" layoutY="103.0" text="Transcript" onAction="#showTranscript" />
     <Hyperlink layoutX="39.0" layoutY="125.0" text="My Program" onAction="#showMyProgram" />

@@ -24,29 +24,29 @@ public class SidebarController implements Initializable {
         // TODO
     }
     
-    public void showMyProfile()
+    public void showMyProfile() throws Exception
     {
-        
+        ViewManager.replaceSceneContent("/com/mss/tuess/views/Profile.fxml");
     }
     
-    public void showSearchCourses()
+    public void showCourseSearch() throws Exception
     {
-    
+        ViewManager.replaceSceneContent("/com/mss/tuess/views/CourseSearch.fxml");
     }
     
-    public void showRegisteredCourses()
+    public void showRegisteredCourses() throws Exception
     {
-        
+        ViewManager.replaceSceneContent("/com/mss/tuess/views/ViewRegisterDropCourse.fxml");
     }
     
-    public void showTranscript()
+    public void showTranscript() throws Exception
     {
-        
+        ViewManager.replaceSceneContent("/com/mss/tuess/views/Transcript.fxml");
     }
     
-    public void showMyProgram()
+    public void showMyProgram() throws Exception
     {
-        
+        ViewManager.replaceSceneContent("/com/mss/tuess/views/DegreeRequirements.fxml");
     }
     
     public void logout() throws Exception 
