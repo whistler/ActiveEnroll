@@ -15,7 +15,7 @@ import static java.lang.System.out;
 public class DatabaseConnector {
 
     private Connection conn;
-    private String url = "jdbc:mysql://198.71.87.177:3306/tuess";
+    private String url = "jdbc:mysql://198.71.87.177:3306/TUESS";
     private String user = "user";
     private String password = "cheese";
 

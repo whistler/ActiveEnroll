@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package tuess;
+package com.mss.tuess.start;
 
+import com.mss.tuess.util.DatabaseConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +21,7 @@ public class TUESS extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+        DatabaseConnector db = new DatabaseConnector();
 
         Scene scene = new Scene(root);
 
