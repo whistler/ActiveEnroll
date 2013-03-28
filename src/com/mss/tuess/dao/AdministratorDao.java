@@ -1,4 +1,4 @@
-package com.mss.dao;
+package com.mss.tuess.dao;
 
 import com.mss.entity.Administrator;
 
