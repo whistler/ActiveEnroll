@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.views.AuthenticationController">
+<AnchorPane id="AnchorPane" prefHeight="402.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.views.AuthenticationController">
   <children>
     <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
-    <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
+    <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="335.0">
       <items>
         <fx:include source="StudentSidebar.fxml" />
         <!-- start of content -->

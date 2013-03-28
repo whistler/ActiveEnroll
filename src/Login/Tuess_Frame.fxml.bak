@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="theme" xmlns:fx="http://javafx.com/fxml" fx:controller="issuetrackinglite.IssueTrackingLiteController">
+  <children>
+    <SplitPane id="splitPaneHorizontal1" dividerPositions="0.25125" focusTraversable="true" prefHeight="535.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+      <items>
+        <AnchorPane id="anchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <ListView fx:id="list" prefHeight="535.0" prefWidth="198.0" styleClass="darkList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="0.0" />
+            <Hyperlink layoutX="67.0" layoutY="33.0" opacity="0.97" text="Hyperlink">
+              <textFill>
+                <Color blue="0.000" green="0.000" red="0.800" fx:id="x1" />
+              </textFill>
+            </Hyperlink>
+            <Hyperlink layoutX="65.0" layoutY="58.0" opacity="0.97" text="Hyperlink" textFill="$x1" />
+            <Hyperlink layoutX="65.0" layoutY="89.0" opacity="0.97" text="Hyperlink" textFill="$x1" />
+            <Hyperlink layoutX="65.0" layoutY="114.0" opacity="0.97" text="Hyperlink" textFill="$x1" />
+            <Hyperlink layoutX="65.0" layoutY="139.0" opacity="0.97" text="Hyperlink" textFill="$x1" />
+          </children>
+        </AnchorPane>
+        <AnchorPane id="anchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER" spacing="15.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="22.0">
+      <children>
+        <Button id="button1" fx:id="saveIssue" onAction="#saveIssueFired" text="Save" />
+        <Button id="button1" fx:id="deleteIssue" onAction="#deleteIssueFired" text="Delete" />
+      </children>
+    </HBox>
+    <Label alignment="CENTER" layoutY="22.0" prefHeight="25.0" prefWidth="138.0" text="TUESS" AnchorPane.leftAnchor="200.0" />
+  </children>
+  <stylesheets>
+    <URL value="@IssueTrackingLite.css" />
+  </stylesheets>
+</AnchorPane>

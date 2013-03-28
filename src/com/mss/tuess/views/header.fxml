@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-    <Pane prefHeight="67.0" prefWidth="808.0">
-      <children>
-        <Label layoutX="40.0" layoutY="26.0" text="Login">
-          <font>
-            <Font size="20.0" />
-          </font>
-        </Label>
-      </children>
-    </Pane>
+<Pane prefHeight="67.0" prefWidth="808.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <Label layoutX="348.0" layoutY="20.0" text="TUESS" textFill="#808080">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Label>
+  </children>
+</Pane>
