@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <Hyperlink layoutX="39.0" layoutY="37.0" text="My Profile" />
+    <Hyperlink layoutX="38.0" layoutY="59.0" text="Mail Grades" />
+    <Hyperlink layoutX="38.0" layoutY="81.0" text="Mail Instructions" />
+    <Hyperlink layoutX="38.0" layoutY="350.0" text="Logout" />
+  </children>
+</AnchorPane>
