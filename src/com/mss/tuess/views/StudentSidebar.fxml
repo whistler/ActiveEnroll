@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
   <children>
     <Hyperlink layoutX="39.0" layoutY="37.0" text="My Profile" onAction="#showMyProfile" />
     <Hyperlink layoutX="38.0" layoutY="59.0" text="Search Courses" onAction="#showSearchCourses" />
