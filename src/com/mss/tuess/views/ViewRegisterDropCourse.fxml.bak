@@ -3,7 +3,6 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.AuthenticationController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.views.AuthenticationController">
   <children>
     <fx:include source="header.fxml" prefHeight="67.0" prefWidth="800.0" />
     <SplitPane dividerPositions="0.23270440251572327" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
@@ -45,53 +44,17 @@
             <TextField editable="false" layoutX="301.0" layoutY="256.0" prefWidth="86.0" />
             <Label layoutX="14.0" layoutY="292.0" prefHeight="20.0" prefWidth="60.0" text="Schedule :">
               <font>
-                <Font name="System Bold Italic" size="12.0" fx:id="x1" />
+                <Font name="System Bold Italic" size="12.0" />
               </font>
             </Label>
-            <TableView layoutX="14.0" layoutY="322.0" prefHeight="92.0" prefWidth="301.0">
+            <TableView layoutX="14.0" layoutY="322.0" prefHeight="92.0" prefWidth="413.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Day" />
                 <TableColumn prefWidth="75.0" text="Start Time" />
                 <TableColumn prefWidth="75.0" text="End Time" />
                 <TableColumn prefWidth="75.0" text="Room" />
               </columns>
-              <effect>
-                <DropShadow />
-              </effect>
             </TableView>
-            <VBox alignment="CENTER" layoutX="352.0" layoutY="322.0" opacity="0.88" prefHeight="92.0" prefWidth="60.0" spacing="20.0">
-              <children>
-                <Button mnemonicParsing="false" text="Enroll" textFill="#00993d" />
-                <Button mnemonicParsing="false" text="Drop" textFill="#cc0000" />
-              </children>
-              <effect>
-                <InnerShadow />
-              </effect>
-              <padding>
-                <Insets top="10.0" />
-              </padding>
-            </VBox>
-            <Separator layoutX="445.0" layoutY="14.0" orientation="VERTICAL" prefHeight="278.0">
-              <effect>
-                <DropShadow color="#404040" />
-              </effect>
-            </Separator>
-            <VBox layoutX="466.0" layoutY="14.0" prefHeight="278.0" prefWidth="127.0">
-              <children>
-                <AnchorPane prefHeight="138.0" prefWidth="127.0">
-                  <children>
-                    <Label font="$x1" layoutY="-2.0" text="Pre-requisite:" />
-                    <ListView layoutY="22.0" prefHeight="110.0" prefWidth="127.0" />
-                  </children>
-                </AnchorPane>
-                <AnchorPane prefHeight="138.0" prefWidth="127.0">
-                  <children>
-                    <Label font="$x1" layoutY="6.0" text="Co-requisite:" />
-                    <ListView layoutY="30.0" prefHeight="110.0" prefWidth="127.0" />
-                  </children>
-                </AnchorPane>
-              </children>
-            </VBox>
           </children>
         </AnchorPane>
         <!-- end of content -->
