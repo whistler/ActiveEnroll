@@ -7,6 +7,7 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -24,34 +25,34 @@ public class SidebarController implements Initializable {
         // TODO
     }
     
-    public void showMyProfile() throws Exception
+    @FXML public void showMyProfile() throws Exception
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/Profile.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/Profile.fxml");
     }
     
-    public void showCourseSearch() throws Exception
+    @FXML public void showCourseSearch() throws Exception
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/CourseSearch.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/CourseSearch.fxml");
     }
     
-    public void showRegisteredCourses() throws Exception
+    @FXML public void showRegisteredCourses() throws Exception
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/ViewRegisterDropCourse.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/ViewRegisterDropCourse.fxml");
     }
     
-    public void showTranscript() throws Exception
+    @FXML public void showTranscript() throws Exception
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/Transcript.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/Transcript.fxml");
     }
     
-    public void showMyProgram() throws Exception
+    @FXML public void showMyProgram() throws Exception
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/DegreeRequirements.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/DegreeRequirements.fxml");
     }
     
-    public void logout() throws Exception 
+    @FXML public void logout() throws Exception 
     {
-        ViewManager.replaceSceneContent("/com/mss/tuess/views/Login.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
     }
     
 }

@@ -7,9 +7,6 @@ package com.mss.tuess.start;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.ViewManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,17 +14,12 @@ import javafx.stage.Stage;
  * @author wwh
  */
 public class TUESS extends Application {
-
-    private static ViewManager viewManager;
+    
     @Override
     public void start(Stage stage) throws Exception {
         DatabaseConnector db = new DatabaseConnector();
-        Parent root = FXMLLoader.load(getClass().getResource("/com/mss/tuess/views/Login.fxml"));
-
-        Scene scene = new Scene(root);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        ViewManager.setStage(stage);
+        ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
     }
 
     /**

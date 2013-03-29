@@ -4,28 +4,33 @@
  */
 package com.mss.tuess.util;
 
-import Login.MyLogin;
+import com.mss.tuess.start.TUESS;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author ibrahim
  */
 public class ViewManager {
-    public static Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(MyLogin.class.getResource(fxml), null, new JavaFXBuilderFactory());
-//        Scene scene = stage.getScene();
-//        if (scene == null) {
-//            scene = new Scene(page, 700, 550);
-//            scene.getStylesheets().add(MyLogin.class.getResource("demo.css").toExternalForm());
-//            stage.setScene(scene);
-//        } else {
-//            stage.getScene().setRoot(page);
-//        }
-//        stage.sizeToScene();
+    
+    private static Stage stage;
+    
+    public static void setStage(Stage newStage)
+    {
+        stage = newStage;
+    }
+    
+    public static Parent changeView(String fxml) throws Exception {
+        
+        Parent page = FXMLLoader.load(TUESS.class.getResource(fxml));
+        Scene scene = new Scene(page);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+   
         return page;
     }
 }
