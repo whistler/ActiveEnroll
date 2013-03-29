@@ -1,0 +1,21 @@
+.LoginScreen {
+    -fx-background-color:linear-gradient(white,#DDDDDD);
+    -fx-font-size: 1.2em;
+}
+.profile {
+    -fx-background-color:linear-gradient(white,#DDDDDD);
+    -fx-font-size: 1.1em;
+}
+.profile #subscribed {
+    -fx-font-size: 1.1em;
+    -fx-font-style: italic;
+}
+.profile #message {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+
+.LoginScreen #errorLabel {
+    -fx-font-size: 0.8em;
+    -fx-font-weight: bold;
+}
