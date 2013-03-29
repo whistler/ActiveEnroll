@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.views.AuthenticationController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.AuthenticationController">
   <children>
     <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
     <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
@@ -22,7 +22,7 @@
             <PasswordField fx:id="password" layoutX="226.0" layoutY="200.0" prefWidth="200.0" />
             <Label layoutX="150.0" layoutY="164.0" text="Username" />
             <Label layoutX="150.0" layoutY="203.0" text="Password" />
-            <Button layoutX="294.0" layoutY="242.0" mnemonicParsing="false" text="Login" />
+            <Button layoutX="294.0" layoutY="242.0" mnemonicParsing="false" onAction="#authenticateLogin" text="Login" />
             <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
           </children>
         </AnchorPane>

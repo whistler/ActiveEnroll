@@ -15,7 +15,7 @@ import javafx.scene.Scene;
  * @author ibrahim
  */
 public class ViewManager {
-    public Parent replaceSceneContent(String fxml) throws Exception {
+    public static Parent replaceSceneContent(String fxml) throws Exception {
         Parent page = (Parent) FXMLLoader.load(MyLogin.class.getResource(fxml), null, new JavaFXBuilderFactory());
 //        Scene scene = stage.getScene();
 //        if (scene == null) {
