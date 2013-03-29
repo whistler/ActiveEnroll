@@ -65,6 +65,7 @@ public class DatabaseConnector {
     }
 
     public ResultSet exeResultSet(String sql) throws SQLException {
+                    System.out.println(sql);
         Statement stmt = conn.createStatement();
         stmt.execute(sql);
         ResultSet rs = stmt.getResultSet();

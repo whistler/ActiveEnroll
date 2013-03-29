@@ -33,13 +33,6 @@ public class AuthenticationController implements Initializable {
     Button login;
     @FXML
     Label errorLabel;
-    private MyLogin application;
-    private UserLoginModel userLogin = new UserLoginModel();
-
-    public void setApp(MyLogin application) {
-        this.application = application;
-        errorLabel.setText("");
-    }
 
     /**
      * Initializes the controller class.
@@ -50,19 +43,19 @@ public class AuthenticationController implements Initializable {
     }
 
     public void processLogin(ActionEvent event) throws SQLException {
-        System.out.println("-------------------");
-                    System.out.println(userId.getText()+"   "+userPassword.getText());
+        System.out.println("------fff----");
+        System.out.println(userId.getText() + "   " + userPassword.getText());
         if (userId.getText().isEmpty() || userPassword.getText().isEmpty()) {
             errorLabel.setText("Username and password is mandatory!!!");
         } else {
-            ResultSet rs;
-            rs = com.mss.tuess.views.Tuess.db_con.exeResultSet("SELECT * FROM student stu WHERE stu.studentID = " + userId.getText());
-            String temp="";
-             while (rs.next()) {
-                   temp= rs.getString("password");
-                }
-            System.out.println(temp+"   "+userPassword.getText());
             
+            ResultSet rs = com.mss.tuess.views.Tuess.db_con.exeResultSet("SELECT * FROM student stu WHERE stu.studentID = " + userId.getText());
+            String temp = "";
+            while (rs.next()) {
+                temp = rs.getString("password");
+            }
+            System.out.println(temp + " @@@@@@@@@   " + userPassword.getText());
+
             if (userPassword.getText().equals(temp)) {
                 //MyLogin.getInstance().gotoStudentDashBoard();
                 System.out.println("done...");
