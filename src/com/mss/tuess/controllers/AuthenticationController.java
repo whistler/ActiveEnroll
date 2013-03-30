@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * FXML Controller class
@@ -24,43 +26,42 @@ import javafx.scene.control.TextField;
 public class AuthenticationController implements Initializable {
 
     @FXML
-    TextField userName;
+    TextField userId;
     @FXML
-    PasswordField password;
+    PasswordField userPassword;
     @FXML
     Button login;
     @FXML
     Label errorLabel;
 
-    private MyLogin application;
-    private UserLoginModel userLogin = new UserLoginModel();
-    
-    public void setApp(MyLogin application){
-        this.application = application;
-        errorLabel.setText("");
-    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         errorLabel.setText("");
-    }    
-    
-    public void processLogin(ActionEvent event) {
-            authenticateLogin();
     }
-    
-    private void authenticateLogin(){
-        if(userName.getText().isEmpty() || password.getText().isEmpty()){
+
+    public void processLogin(ActionEvent event) throws SQLException {
+        System.out.println("------fff----");
+        System.out.println(userId.getText() + "   " + userPassword.getText());
+        if (userId.getText().isEmpty() || userPassword.getText().isEmpty()) {
             errorLabel.setText("Username and password is mandatory!!!");
-        }else{
-            if(password.getText().equals(userLogin.getPassword(userName.getText()))){
-                MyLogin.getInstance().gotoStudentDashBoard();
-            }else{
+        } else {
+            
+            ResultSet rs = com.mss.tuess.views.Tuess.db_con.exeResultSet("SELECT * FROM student stu WHERE stu.studentID = " + userId.getText());
+            String temp = "";
+            while (rs.next()) {
+                temp = rs.getString("password");
+            }
+            System.out.println(temp + " @@@@@@@@@   " + userPassword.getText());
+
+            if (userPassword.getText().equals(temp)) {
+                //MyLogin.getInstance().gotoStudentDashBoard();
+                System.out.println("done...");
+            } else {
                 errorLabel.setText("Useranme/Password invalid!!!!");
-            } 
+            }
         }
     }
-    
 }

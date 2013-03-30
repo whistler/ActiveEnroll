@@ -14,6 +14,6 @@
     <Hyperlink layoutX="38.0" layoutY="125.0" onAction="#showTranscript" text="Transcript" />
     <Hyperlink layoutX="38.0" layoutY="147.0" onAction="#showMyProgram" text="My Program" />
     <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
-    <Hyperlink layoutX="37.0" layoutY="103.0" text="Time Table" />
+    <Hyperlink layoutX="39.0" layoutY="103.0" text="Time Table" />
   </children>
 </AnchorPane>
