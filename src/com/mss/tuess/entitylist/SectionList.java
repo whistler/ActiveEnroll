@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author PrabalSharma
+ * @author Prabal Sharma
  */
 public class SectionList {
 
