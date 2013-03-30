@@ -37,7 +37,7 @@ public class SidebarController implements Initializable {
     
     @FXML public void showRegisteredCourses() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/ViewRegisterDropCourse.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/RegisteredCourses.fxml");
     }
     
     @FXML public void showTranscript() throws Exception
@@ -45,9 +45,14 @@ public class SidebarController implements Initializable {
         ViewManager.changeView("/com/mss/tuess/views/Transcript.fxml");
     }
     
+    @FXML public void showTimetable() throws Exception
+    {
+        ViewManager.changeView("/com/mss/tuess/views/TimeTable.fxml");
+    }
+    
     @FXML public void showMyProgram() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/DegreeRequirements.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/MyProgram.fxml");
     }
     
     @FXML public void logout() throws Exception 

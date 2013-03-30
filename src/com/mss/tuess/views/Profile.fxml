@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
-    <Label>Profile</Label>
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
+  <children>
+    <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
+    <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
+      <items>
+        <fx:include source="StudentSidebar.fxml" />
+        <!-- start of content -->
+        <AnchorPane minWidth="570.0" prefHeight="333.0" prefWidth="570.0">
+          <children>
+            <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
+            <Button layoutX="232.0" layoutY="234.0" mnemonicParsing="false" text="Waive Prerequisite" />
+            <Label layoutX="53.0" layoutY="47.0" prefHeight="43.0" prefWidth="477.0" text="Enter a student ID to add a student to your course and allow him or her to take the course without having prerequisites" wrapText="true" />
+            <ComboBox layoutX="261.0" layoutY="138.0" prefWidth="167.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <TextField layoutX="261.0" layoutY="175.0" prefWidth="167.0" />
+            <Label layoutX="187.0" layoutY="141.0" text="Course" />
+            <Label layoutX="187.0" layoutY="178.0" text="Student ID" />
+          </children>
+        </AnchorPane>
+        <!-- end of content -->
+      </items>
+    </SplitPane>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
 </AnchorPane>

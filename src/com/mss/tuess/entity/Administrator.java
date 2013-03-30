@@ -1,4 +1,8 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
+
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Administrator {
 
@@ -12,75 +16,194 @@ public class Administrator {
     private String phone;
     private String password;
 
-    public int getAdminID() {;
-        return this.adminID;
+    /**
+     * @return the adminID
+     */
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setAdminID(int adminID) {;
+    /**
+     * @param adminID the adminID to set
+     */
+    public void setAdminID(int adminID) {
         this.adminID = adminID;
     }
 
-    public String getFirstName() {;
-        return this.firstName;
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstName(String firstName) {;
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {;
-        return this.lastName;
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastName(String lastName) {;
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getAddress() {;
-        return this.address;
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddress(String address) {;
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getCity() {;
-        return this.city;
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
     }
 
-    public void setCity(String city) {;
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getCountry() {;
-        return this.country;
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountry(String country) {;
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public String getZipcode() {;
-        return this.zipcode;
+    /**
+     * @return the zipcode
+     */
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setZipcode(String zipcode) {;
+    /**
+     * @param zipcode the zipcode to set
+     */
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
-    public String getPhone() {;
-        return this.phone;
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone(String phone) {;
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getPassword() {;
-        return this.password;
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassword(String password) {;
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Loads Administrator with the given adminID from the database
+     * @param adminId adminID for the Administrator to fetch
+     * @throws SQLException 
+     */
+    public void fetch(int adminId) throws SQLException {
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery("SELECT * FROM administrator WHERE adminID = " + adminId);
+        if (rs.next()) {
+            this.adminID = rs.getInt("adminID");
+            this.firstName = rs.getString("firstName");
+            this.lastName = rs.getString("lastName");
+            this.address = rs.getString("address");
+            this.city = rs.getString("city");
+            this.country = rs.getString("country");
+            this.zipcode = rs.getString("zipcode");
+            this.phone = rs.getString("phone");
+            this.password = rs.getString("password");
+        }
+
+    }
+
+    /**
+     * Updates the current record in the database
+     * @throws SQLException 
+     */
+    public void update() throws SQLException {
+        DatabaseConnector.updateQuery("UPDATE administrator SET "
+                + "firstName='" + this.firstName + "', " 
+                + "lastName='" + this.lastName + "', " 
+                + "address='" + this.address + "', "
+                + "city='" + this.city + "', "
+                + "country='" + this.country + "', "
+                + "zipcode='" + this.zipcode + "', " 
+                + "phone='" + this.phone + "', " 
+                + "password='" + this.password + "'"
+                + "WHERE adminID=" + this.adminID);
+    }
+
+    public void delete() throws SQLException {
+        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.adminID);
+    }
+
+    /**
+     * Creates a new record with the database with the properties of this Administrator
+     * @throws SQLException 
+     */
+    public void insert() throws SQLException {
+        String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, country, "
+                + "zipcode, phone, password) values " + "(" 
+                + this.adminID + ", '" 
+                + this.firstName + "', '" 
+                + this.lastName + "', '" 
+                + this.address + "', '" 
+                + this.city + "', '" 
+                + this.country + "', '" 
+                + this.zipcode + "', '" 
+                + this.phone + "', '" 
+                + this.password
+                + "')";
+        
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
     }
 }
