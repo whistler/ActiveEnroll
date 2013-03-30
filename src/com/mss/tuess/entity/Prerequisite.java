@@ -1,4 +1,4 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
 
 public class Prerequisite {
 
