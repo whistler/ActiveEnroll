@@ -28,22 +28,32 @@
             <TableView layoutX="30.0" layoutY="52.0" prefHeight="323.0" prefWidth="331.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn prefWidth="90.0" text="Course" />
-                <TableColumn text="Term" />
                 <TableColumn prefWidth="75.0" text="Credits" />
+                <TableColumn text="Term" />
                 <TableColumn text="Grade" />
               </columns>
               <effect>
                 <DropShadow color="#bfbfbf" spread="0.3253968253968254" />
               </effect>
             </TableView>
-            <HBox alignment="CENTER" layoutX="95.0" layoutY="391.0" prefHeight="35.0" prefWidth="205.0">
+            <HBox alignment="CENTER" layoutX="203.0" layoutY="394.0" prefHeight="35.0" prefWidth="150.0">
               <children>
                 <Label prefHeight="26.0" prefWidth="61.0" text="My GPA :" textFill="#606060">
                   <font>
-                    <Font name="System Bold Italic" size="12.0" />
+                    <Font name="System Bold Italic" size="12.0" fx:id="x1" />
                   </font>
                 </Label>
                 <TextField editable="false" prefWidth="61.0">
+                  <effect>
+                    <DropShadow />
+                  </effect>
+                </TextField>
+              </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="394.0" prefHeight="35.0" prefWidth="165.0" spacing="5.0">
+              <children>
+                <Label font="$x1" prefHeight="26.0" prefWidth="84.0" text="Total Credits :" textFill="#606060" />
+                <TextField alignment="CENTER_RIGHT" editable="false" prefWidth="61.0">
                   <effect>
                     <DropShadow />
                   </effect>

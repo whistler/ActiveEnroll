@@ -8,6 +8,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.9998779296875" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.AuthenticationController">
@@ -38,10 +39,13 @@
             </TableView>
             <HBox alignment="CENTER" layoutX="203.0" layoutY="394.0" prefHeight="35.0" prefWidth="150.0">
               <children>
-                <Label prefHeight="26.0" prefWidth="61.0" text="My GPA :" textFill="#606060">
+                <Label prefHeight="26.0" prefWidth="61.0" text="My GPA :">
                   <font>
                     <Font name="System Bold Italic" size="12.0" fx:id="x1" />
                   </font>
+                  <textFill>
+                    <Color blue="0.376" green="0.376" red="0.376" fx:id="x2" />
+                  </textFill>
                 </Label>
                 <TextField editable="false" prefWidth="61.0">
                   <effect>
@@ -52,7 +56,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="30.0" layoutY="394.0" prefHeight="35.0" prefWidth="165.0" spacing="5.0">
               <children>
-                <Label font="$x1" prefHeight="26.0" prefWidth="84.0" text="Total Credits :" textFill="#606060" />
+                <Label font="$x1" prefHeight="26.0" prefWidth="84.0" text="Total Credits :" textFill="$x2" />
                 <TextField alignment="CENTER_RIGHT" editable="false" prefWidth="61.0">
                   <effect>
                     <DropShadow />
