@@ -32,7 +32,7 @@ public class Administrator {
     public String getFirstName() {
         return firstName;
     }
-
+ 
     /**
      * @param firstName the firstName to set
      */
