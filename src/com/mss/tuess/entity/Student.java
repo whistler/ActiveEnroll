@@ -1,3 +1,7 @@
+/**
+ *
+ * @author wwh
+ */
 package com.mss.tuess.entity;
 
 import com.mss.tuess.start.TUESS;
@@ -20,142 +24,215 @@ public class Student {
     private String status;
     private String password;
 
-    public int getStudentID() {;
-        return this.studentID;
+ 
+    /**
+     * @return the studentID
+     */
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudentID(int studentID) {;
+    /**
+     * @param studentID the studentID to set
+     */
+    public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
 
-    public String getFirstName() {;
-        return this.firstName;
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstName(String firstName) {;
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {;
-        return this.lastName;
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastName(String lastName) {;
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getAddress() {;
-        return this.address;
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddress(String address) {;
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getCity() {;
-        return this.city;
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
     }
 
-    public void setCity(String city) {;
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getCountry() {;
-        return this.country;
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountry(String country) {;
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public String getZipcode() {;
-        return this.zipcode;
+    /**
+     * @return the zipcode
+     */
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setZipcode(String zipcode) {;
+    /**
+     * @param zipcode the zipcode to set
+     */
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
-    public String getPhone() {;
-        return this.phone;
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone(String phone) {;
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getProgramID() {;
-        return this.programID;
+    /**
+     * @return the programID
+     */
+    public String getProgramID() {
+        return programID;
     }
 
-    public void setProgramID(String programID) {;
+    /**
+     * @param programID the programID to set
+     */
+    public void setProgramID(String programID) {
         this.programID = programID;
     }
 
-    public String getRegisteredSince() {;
-        return this.registeredSince;
+    /**
+     * @return the registeredSince
+     */
+    public String getRegisteredSince() {
+        return registeredSince;
     }
 
-    public void setRegisteredSince(String registeredSince) {;
+    /**
+     * @param registeredSince the registeredSince to set
+     */
+    public void setRegisteredSince(String registeredSince) {
         this.registeredSince = registeredSince;
     }
 
-    public String getStatus() {;
-        return this.status;
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatus(String status) {;
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getPassword() {;
-        return this.password;
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassword(String password) {;
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
         this.password = password;
     }
-
     public void fetch(int stuId) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM student stu WHERE stu.studentID = " + stuId);
         if (rs.next()) {
-            this.studentID = rs.getInt("studentID");
-            this.firstName = rs.getString("firstName");
-            this.lastName = rs.getString("lastName");
-            this.address = rs.getString("address");
-            this.city = rs.getString("city");
-            this.country = rs.getString("country");
-            this.zipcode = rs.getString("zipcode");
-            this.phone = rs.getString("phone");
-            this.programID = rs.getString("programID");
-            this.registeredSince = rs.getString("registeredSince");
-            this.status = rs.getString("status");
-            this.password = rs.getString("password");
+            this.setStudentID(rs.getInt("studentID"));
+            this.setFirstName(rs.getString("firstName"));
+            this.setLastName(rs.getString("lastName"));
+            this.setAddress(rs.getString("address"));
+            this.setCity(rs.getString("city"));
+            this.setCountry(rs.getString("country"));
+            this.setZipcode(rs.getString("zipcode"));
+            this.setPhone(rs.getString("phone"));
+            this.setProgramID(rs.getString("programID"));
+            this.setRegisteredSince(rs.getString("registeredSince"));
+            this.setStatus(rs.getString("status"));
+            this.setPassword(rs.getString("password"));
         }
 
     }
 
     public void update() throws SQLException {
-        DatabaseConnector.updateQuery("UPDATE student SET firstName=" + this.firstName
-                + ", lastName=" + this.lastName + ", address=" + this.address
-                + ", city=" + this.city + ", country=" + this.country
-                + ", zipcode=" + this.zipcode + ", phone=" + this.phone
-                + ", programID=" + this.programID + ", registeredSince=" + this.registeredSince
-                + ", status=" + this.status + ", password=" + this.password
-                + "WHERE studentID=" + this.studentID);
+        DatabaseConnector.updateQuery("UPDATE student SET firstName=" + this.getFirstName()
+                + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
+                + ", city=" + this.getCity() + ", country=" + this.getCountry()
+                + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
+                + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
+                + ", status=" + this.getStatus() + ", password=" + this.getPassword()
+                + "WHERE studentID=" + this.getStudentID());
     }
 
     public void delete() throws SQLException {
-        DatabaseConnector.updateQuery("DELETE FROM student WHERE studentID=" + this.studentID);
+        DatabaseConnector.updateQuery("DELETE FROM student WHERE studentID=" + this.getStudentID());
     }
     public void insert() throws SQLException {
         String sql="INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, programID, registeredSince, status, password) values "
-                + "("+ this.studentID+", '"+ this.firstName+"', '" + this.lastName+"', '" +  this.address +"', '"+ this.city+"', '" + this.country
-                +"', '"+ this.zipcode+"', '" + this.phone +"', '"+ this.programID +"', '"+ this.registeredSince+"', '" + this.status +"', '" + this.password
+                + "("+ this.getStudentID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
+                +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getProgramID() +"', '"+ this.getRegisteredSince()+"', '" + this.getStatus() +"', '" + this.getPassword()
                 +  "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
+
 }
