@@ -14,16 +14,16 @@ import static java.lang.System.out;
  */
 public class DatabaseConnector {
 
-    private Connection conn;
-    private String url = "jdbc:mysql://198.71.87.177:3306/TUESS";
-    private String user = "user";
-    private String password = "cheese";
+    private static Connection conn;
+    private static final String url = "jdbc:mysql://198.71.87.177:3306/TUESS";
+    private static final String user = "user";
+    private static final String password = "cheese";
 
     /**
      *
      * @throws ClassNotFoundException
      */
-    public DatabaseConnector() {
+    public static void Connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
@@ -43,7 +43,7 @@ public class DatabaseConnector {
     /**
      * @param conn
      */
-    public void close(Connection conn) {
+    public static void close(Connection conn) {
         try {
             if (conn != null) {
                 conn.close();
@@ -54,18 +54,18 @@ public class DatabaseConnector {
         }
     }
 
-    public Connection getConn() {
+    public static Connection getConn() {
         return conn;
     }
 
-    public void exeSQL(String sql) throws SQLException {
+    public static void updateQuery(String sql) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute(sql);
         stmt.close();
     }
 
-    public ResultSet exeResultSet(String sql) throws SQLException {
-                    System.out.println(sql);
+    public static ResultSet returnQuery(String sql) throws SQLException {
+        System.out.println(sql);
         Statement stmt = conn.createStatement();
         stmt.execute(sql);
         ResultSet rs = stmt.getResultSet();

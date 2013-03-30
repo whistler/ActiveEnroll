@@ -1,4 +1,9 @@
-package com.mss.entity;
+/**
+ *
+ * @author wwh
+ */
+
+package com.mss.tuess.entity;
 
 public class Enrollcourse {
 
@@ -7,35 +12,61 @@ public class Enrollcourse {
     private String grade;
     private String type;
 
-    public int getStudentID() {;
-        return this.studentID;
+    /**
+     * @return the studentID
+     */
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudentID(int studentID) {;
+    /**
+     * @param studentID the studentID to set
+     */
+    public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
 
-    public String getSectionID() {;
-        return this.sectionID;
+    /**
+     * @return the sectionID
+     */
+    public String getSectionID() {
+        return sectionID;
     }
 
-    public void setSectionID(String sectionID) {;
+    /**
+     * @param sectionID the sectionID to set
+     */
+    public void setSectionID(String sectionID) {
         this.sectionID = sectionID;
     }
 
-    public String getGrade() {;
-        return this.grade;
+    /**
+     * @return the grade
+     */
+    public String getGrade() {
+        return grade;
     }
 
-    public void setGrade(String grade) {;
+    /**
+     * @param grade the grade to set
+     */
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
-    public String getType() {;
-        return this.type;
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
     }
 
-    public void setType(String type) {;
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
         this.type = type;
     }
+
+    
 }

@@ -1,4 +1,8 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
+
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Instructor {
 
@@ -13,83 +17,207 @@ public class Instructor {
     private String deptID;
     private String password;
 
-    public int getInstructorID() {;
-        return this.instructorID;
+    /**
+     * @return the instructorID
+     */
+    public int getInstructorID() {
+        return instructorID;
     }
 
-    public void setInstructorID(int instructorID) {;
+    /**
+     * @param instructorID the instructorID to set
+     */
+    public void setInstructorID(int instructorID) {
         this.instructorID = instructorID;
     }
 
-    public String getFirstName() {;
-        return this.firstName;
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstName(String firstName) {;
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {;
-        return this.lastName;
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastName(String lastName) {;
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getAddress() {;
-        return this.address;
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddress(String address) {;
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getCity() {;
-        return this.city;
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
     }
 
-    public void setCity(String city) {;
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getCountry() {;
-        return this.country;
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountry(String country) {;
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public String getZipcode() {;
-        return this.zipcode;
+    /**
+     * @return the zipcode
+     */
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setZipcode(String zipcode) {;
+    /**
+     * @param zipcode the zipcode to set
+     */
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
-    public String getPhone() {;
-        return this.phone;
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone(String phone) {;
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getDeptID() {;
-        return this.deptID;
+    /**
+     * @return the deptID
+     */
+    public String getDeptID() {
+        return deptID;
     }
 
-    public void setDeptID(String deptID) {;
+    /**
+     * @param deptID the deptID to set
+     */
+    public void setDeptID(String deptID) {
         this.deptID = deptID;
     }
 
-    public String getPassword() {;
-        return this.password;
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassword(String password) {;
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Loads the Instructor by the instructorID from the database and encapsulates
+     * into this Instructor objects
+     *
+     * @throws SQLException
+     */
+   public void fetch(int InstructorID) throws SQLException {
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
+        if (rs.next()) {
+            this.setInstructorID(rs.getInt("instructorID"));
+            this.setFirstName(rs.getString("firstName"));
+            this.setLastName(rs.getString("lastName"));
+            this.setAddress(rs.getString("address"));
+            this.setCity(rs.getString("city"));      
+            this.setZipcode(rs.getString("zipcode"));
+            this.setCountry(rs.getString("country"));
+            this.setPhone(rs.getString("phone"));
+            this.setDeptID(rs.getString("deptID"));
+            this.setPassword(rs.getString("password"));
+        }
+
+    }
+
+    /**
+     * Uses the information of this Instructor to update the record in the
+     * database.
+     *
+     * @throws SQLException
+     */
+    public void update() throws SQLException {
+        DatabaseConnector.updateQuery("UPDATE instructor SET firstName=" + this.getFirstName()
+                + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
+                + ", city=" + this.getCity() + ", country=" + this.getCountry()
+                + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
+                + ", deptID=" + this.getDeptID()
+                + ", password=" + this.getPassword()
+                + "WHERE instructorID=" + this.getInstructorID());
+    }
+    
+    /**
+     * Delete this Instructor record in the database.
+     *
+     * @throws SQLException
+     */
+    public void delete() throws SQLException {
+        DatabaseConnector.updateQuery("DELETE FROM instructor WHERE instructorID=" + this.getInstructorID());
+    }
+    
+    /**
+     * Insert this Instructor into the database.
+     *
+     * @throws SQLException
+     */
+    public void insert() throws SQLException {
+        String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
+                + "zipcode, phone, deptID, password) values "
+                + "("+ this.getInstructorID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
+                +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '" + this.getPassword()
+                +  "')";
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
     }
 }

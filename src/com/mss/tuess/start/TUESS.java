@@ -5,8 +5,10 @@
 package com.mss.tuess.start;
 
 import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.entity.*;
 import com.mss.tuess.util.ViewManager;
 import javafx.application.Application;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -15,9 +17,24 @@ import javafx.stage.Stage;
  */
 public class TUESS extends Application {
     
+    private Stage stage;
+    private static TUESS instance;
+    static AnchorPane Login;
+    public static String g="000000000000000000";
+    public TUESS() {
+        instance = this;
+    }
+
+    public static TUESS getInstance() {
+        return instance;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-        DatabaseConnector db = new DatabaseConnector();
+        DatabaseConnector.Connect();
+        
+        instance = this;
+        this.stage = stage;
         ViewManager.setStage(stage);
         ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
     }
@@ -34,4 +51,5 @@ public class TUESS extends Application {
         launch(args);
         
     }
+
 }

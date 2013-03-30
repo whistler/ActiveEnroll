@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
-    
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
+  <children>
+    <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
+    <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
+      <items>
+        <fx:include source="StudentSidebar.fxml" />
+        <!-- start of content -->
+        <AnchorPane minWidth="570.0" prefHeight="333.0" prefWidth="570.0">
+          <children>
+            <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
+            <Button layoutX="252.0" layoutY="213.0" mnemonicParsing="false" text="Mail Grades" />
+            <Label layoutX="78.0" layoutY="55.0" text="Use the button below to send grades to students for this semester" />
+          </children>
+        </AnchorPane>
+        <!-- end of content -->
+      </items>
+    </SplitPane>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
 </AnchorPane>
