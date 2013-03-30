@@ -157,6 +157,12 @@ public class Instructor {
         this.password = password;
     }
 
+    /**
+     * Loads the Instructor by the instructorID from the database and encapsulates
+     * into this Instructor objects
+     *
+     * @throws SQLException
+     */
    public void fetch(int InstructorID) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
@@ -175,6 +181,12 @@ public class Instructor {
 
     }
 
+    /**
+     * Uses the information of this Instructor to update the record in the
+     * database.
+     *
+     * @throws SQLException
+     */
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE instructor SET firstName=" + this.getFirstName()
                 + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
@@ -184,10 +196,21 @@ public class Instructor {
                 + ", password=" + this.getPassword()
                 + "WHERE instructorID=" + this.getInstructorID());
     }
-
+    
+    /**
+     * Delete this Instructor record in the database.
+     *
+     * @throws SQLException
+     */
     public void delete() throws SQLException {
         DatabaseConnector.updateQuery("DELETE FROM instructor WHERE instructorID=" + this.getInstructorID());
     }
+    
+    /**
+     * Insert this Instructor into the database.
+     *
+     * @throws SQLException
+     */
     public void insert() throws SQLException {
         String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, deptID, password) values "
