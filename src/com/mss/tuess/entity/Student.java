@@ -24,7 +24,6 @@ public class Student {
     private String status;
     private String password;
 
- 
     /**
      * @return the studentID
      */
@@ -192,9 +191,17 @@ public class Student {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /**
+     * Loads the Student by the studentID from the database and encapsulates
+     * into this Student objects
+     *
+     * @throws SQLException
+     */
     public void fetch(int stuId) throws SQLException {
         ResultSet rs;
-        rs = DatabaseConnector.returnQuery("SELECT * FROM student stu WHERE stu.studentID = " + stuId);
+        String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;
+        rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
             this.setStudentID(rs.getInt("studentID"));
             this.setFirstName(rs.getString("firstName"));
@@ -212,27 +219,45 @@ public class Student {
 
     }
 
+    /**
+     * Uses the information of this Student to update the record in the
+     * database.
+     *
+     * @throws SQLException
+     */
     public void update() throws SQLException {
-        DatabaseConnector.updateQuery("UPDATE student SET firstName=" + this.getFirstName()
+        String sql = "UPDATE student SET firstName=" + this.getFirstName()
                 + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
                 + ", city=" + this.getCity() + ", country=" + this.getCountry()
                 + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
                 + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
                 + ", status=" + this.getStatus() + ", password=" + this.getPassword()
-                + "WHERE studentID=" + this.getStudentID());
-    }
-
-    public void delete() throws SQLException {
-        DatabaseConnector.updateQuery("DELETE FROM student WHERE studentID=" + this.getStudentID());
-    }
-    public void insert() throws SQLException {
-        String sql="INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
-                + "zipcode, phone, programID, registeredSince, status, password) values "
-                + "("+ this.getStudentID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
-                +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getProgramID() +"', '"+ this.getRegisteredSince()+"', '" + this.getStatus() +"', '" + this.getPassword()
-                +  "')";
-        System.out.println(sql);
+                + "WHERE studentID=" + this.getStudentID();
         DatabaseConnector.updateQuery(sql);
     }
 
+    /**
+     * Delete this Student record in the database.
+     *
+     * @throws SQLException
+     */
+    public void delete() throws SQLException {
+        String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID();
+        DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * Insert this Student into the database.
+     *
+     * @throws SQLException
+     */
+    public void insert() throws SQLException {
+        String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
+                + "zipcode, phone, programID, registeredSince, status, password) values "
+                + "(" + this.getStudentID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
+                + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword()
+                + "')";
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
+    }
 }

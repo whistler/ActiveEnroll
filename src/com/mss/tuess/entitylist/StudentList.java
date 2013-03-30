@@ -15,18 +15,20 @@ import java.util.ArrayList;
  * @author wwh
  */
 public class StudentList {
+
     private static ArrayList<Student> students = new ArrayList();
-    
+
     /**
-     * Loads all Student records from the database in to a list of Student objects
-     * @throws SQLException 
+     * Loads all Student records from the database in to a list of Student
+     * objects
+     *
+     * @throws SQLException
      */
-    public static void fetch() throws SQLException
-    {
+    public static void fetch() throws SQLException {
         ResultSet rs;
-        rs = DatabaseConnector.returnQuery("SELECT * FROM student");
-        while(rs.next())
-        {
+        String sql = "SELECT * FROM student";
+        rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
             Student student = new Student();
             student.setStudentID(rs.getInt("studentID"));
             student.setFirstName(rs.getString("firstName"));
@@ -39,19 +41,18 @@ public class StudentList {
             student.setProgramID(rs.getString("programID"));
             student.setRegisteredSince(rs.getString("registeredSince"));
             student.setPassword(rs.getString("password"));
-            
+
             students.add(student);
         }
     }
-    
+
     /**
      * Returns the student stored at the given index
+     *
      * @param index index of the student to return
      * @return Student object at position index
      */
-    public static Student get(int index)
-    {
+    public static Student get(int index) {
         return students.get(index);
     }
-    
 }
