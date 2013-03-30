@@ -157,7 +157,7 @@ public class Instructor {
         this.password = password;
     }
 
-   public void fetch(String InstructorID) throws SQLException {
+   public void fetch(int InstructorID) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
         if (rs.next()) {
