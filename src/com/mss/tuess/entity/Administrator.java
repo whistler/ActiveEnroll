@@ -170,14 +170,14 @@ public class Administrator {
      */
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE administrator SET "
-                + "firstName=" + this.firstName + ", " 
-                + "lastName=" + this.lastName + ", " 
-                + "address=" + this.address + ", "
-                + "city=" + this.city + ", "
-                + "country=" + this.country + ", "
-                + "zipcode=" + this.zipcode + ", " 
-                + "phone=" + this.phone + ", " 
-                + "password=" + this.password
+                + "firstName='" + this.firstName + "', " 
+                + "lastName='" + this.lastName + "', " 
+                + "address='" + this.address + "', "
+                + "city='" + this.city + "', "
+                + "country='" + this.country + "', "
+                + "zipcode='" + this.zipcode + "', " 
+                + "phone='" + this.phone + "', " 
+                + "password='" + this.password + "'"
                 + "WHERE adminID=" + this.adminID);
     }
 
