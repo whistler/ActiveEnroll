@@ -32,13 +32,7 @@ public class TUESS extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         DatabaseConnector.Connect();
-        Student stu = new Student ();
-        stu.fetch(12345678);
-        stu.setStudentID(88888888);
-        stu.setAddress("ppppppppppppppppppp");
         
-        stu.insert();
-        System.out.println("---------------"+stu.getAddress());
         instance = this;
         this.stage = stage;
         ViewManager.setStage(stage);
