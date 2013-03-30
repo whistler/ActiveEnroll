@@ -4,11 +4,17 @@ public class Faculty {
 
     private String facultyName;
 
-    public String getFacultyName() {;
-        return this.facultyName;
+    /**
+     * @return the facultyName
+     */
+    public String getFacultyName() {
+        return facultyName;
     }
 
-    public void setFacultyName(String facultyName) {;
+    /**
+     * @param facultyName the facultyName to set
+     */
+    public void setFacultyName(String facultyName) {
         this.facultyName = facultyName;
     }
 }
