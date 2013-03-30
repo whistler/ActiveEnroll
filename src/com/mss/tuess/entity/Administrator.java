@@ -190,7 +190,7 @@ public class Administrator {
      * @throws SQLException 
      */
     public void insert() throws SQLException {
-        String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
+        String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, password) values " + "(" 
                 + this.adminID + ", '" 
                 + this.firstName + "', '" 

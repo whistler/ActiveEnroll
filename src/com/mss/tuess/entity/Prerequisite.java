@@ -1,4 +1,4 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
 
 public class Prerequisite {
 
@@ -7,35 +7,61 @@ public class Prerequisite {
     private String prereqDept;
     private String prereqNum;
 
-    public String getCourseDept() {;
-        return this.courseDept;
+    /**
+     * @return the courseDept
+     */
+    public String getCourseDept() {
+        return courseDept;
     }
 
-    public void setCourseDept(String courseDept) {;
+    /**
+     * @param courseDept the courseDept to set
+     */
+    public void setCourseDept(String courseDept) {
         this.courseDept = courseDept;
     }
 
-    public String getCourseNum() {;
-        return this.courseNum;
+    /**
+     * @return the courseNum
+     */
+    public String getCourseNum() {
+        return courseNum;
     }
 
-    public void setCourseNum(String courseNum) {;
+    /**
+     * @param courseNum the courseNum to set
+     */
+    public void setCourseNum(String courseNum) {
         this.courseNum = courseNum;
     }
 
-    public String getPrereqDept() {;
-        return this.prereqDept;
+    /**
+     * @return the prereqDept
+     */
+    public String getPrereqDept() {
+        return prereqDept;
     }
 
-    public void setPrereqDept(String prereqDept) {;
+    /**
+     * @param prereqDept the prereqDept to set
+     */
+    public void setPrereqDept(String prereqDept) {
         this.prereqDept = prereqDept;
     }
 
-    public String getPrereqNum() {;
-        return this.prereqNum;
+    /**
+     * @return the prereqNum
+     */
+    public String getPrereqNum() {
+        return prereqNum;
     }
 
-    public void setPrereqNum(String prereqNum) {;
+    /**
+     * @param prereqNum the prereqNum to set
+     */
+    public void setPrereqNum(String prereqNum) {
         this.prereqNum = prereqNum;
     }
+
+   
 }
