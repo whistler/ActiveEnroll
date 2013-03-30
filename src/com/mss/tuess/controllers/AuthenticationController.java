@@ -6,6 +6,7 @@ package com.mss.tuess.controllers;
 
 import Login.MyLogin;
 import Login.UserLoginModel;
+import com.mss.tuess.util.DatabaseConnector;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -49,7 +50,7 @@ public class AuthenticationController implements Initializable {
             errorLabel.setText("Username and password is mandatory!!!");
         } else {
             
-            ResultSet rs = com.mss.tuess.views.Tuess.db_con.exeResultSet("SELECT * FROM student stu WHERE stu.studentID = " + userId.getText());
+            ResultSet rs = DatabaseConnector.returnQuery("SELECT * FROM student stu WHERE stu.studentID = " + userId.getText());
             String temp = "";
             while (rs.next()) {
                 temp = rs.getString("password");

@@ -1,4 +1,9 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
+
+import com.mss.tuess.start.TUESS;
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Student {
 
@@ -13,7 +18,6 @@ public class Student {
     private String programID;
     private String registeredSince;
     private String status;
-    private String degree;
     private String password;
 
     public int getStudentID() {;
@@ -104,19 +108,54 @@ public class Student {
         this.status = status;
     }
 
-    public String getDegree() {;
-        return this.degree;
-    }
-
-    public void setDegree(String degree) {;
-        this.degree = degree;
-    }
-
     public String getPassword() {;
         return this.password;
     }
 
     public void setPassword(String password) {;
         this.password = password;
+    }
+
+    public void fetch(int stuId) throws SQLException {
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery("SELECT * FROM student stu WHERE stu.studentID = " + stuId);
+        if (rs.next()) {
+            this.studentID = rs.getInt("studentID");
+            this.firstName = rs.getString("firstName");
+            this.lastName = rs.getString("lastName");
+            this.address = rs.getString("address");
+            this.city = rs.getString("city");
+            this.country = rs.getString("country");
+            this.zipcode = rs.getString("zipcode");
+            this.phone = rs.getString("phone");
+            this.programID = rs.getString("programID");
+            this.registeredSince = rs.getString("registeredSince");
+            this.status = rs.getString("status");
+            this.password = rs.getString("password");
+        }
+
+    }
+
+    public void update() throws SQLException {
+        DatabaseConnector.updateQuery("UPDATE student SET firstName=" + this.firstName
+                + ", lastName=" + this.lastName + ", address=" + this.address
+                + ", city=" + this.city + ", country=" + this.country
+                + ", zipcode=" + this.zipcode + ", phone=" + this.phone
+                + ", programID=" + this.programID + ", registeredSince=" + this.registeredSince
+                + ", status=" + this.status + ", password=" + this.password
+                + "WHERE studentID=" + this.studentID);
+    }
+
+    public void delete() throws SQLException {
+        DatabaseConnector.updateQuery("DELETE FROM student WHERE studentID=" + this.studentID);
+    }
+    public void insert() throws SQLException {
+        String sql="INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
+                + "zipcode, phone, programID, registeredSince, status, password) values "
+                + "("+ this.studentID+", '"+ this.firstName+"', '" + this.lastName+"', '" +  this.address +"', '"+ this.city+"', '" + this.country
+                +"', '"+ this.zipcode+"', '" + this.phone +"', '"+ this.programID +"', '"+ this.registeredSince+"', '" + this.status +"', '" + this.password
+                +  "')";
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
     }
 }
