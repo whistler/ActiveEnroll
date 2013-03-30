@@ -142,6 +142,11 @@ public class Administrator {
         this.password = password;
     }
 
+    /**
+     * Loads Administrator with the given adminID from the database
+     * @param adminId adminID for the Administrator to fetch
+     * @throws SQLException 
+     */
     public void fetch(int adminId) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM administrator WHERE adminID = " + adminId);
@@ -159,6 +164,10 @@ public class Administrator {
 
     }
 
+    /**
+     * Updates the current record in the database
+     * @throws SQLException 
+     */
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE administrator SET "
                 + "firstName=" + this.firstName + ", " 
@@ -176,6 +185,10 @@ public class Administrator {
         DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.adminID);
     }
 
+    /**
+     * Creates a new record with the database with the properties of this Administrator
+     * @throws SQLException 
+     */
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, password) values " + "(" 
