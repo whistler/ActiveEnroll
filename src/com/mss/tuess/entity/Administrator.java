@@ -1,5 +1,9 @@
 package com.mss.tuess.entity;
 
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Administrator {
 
     private int adminID;
@@ -32,7 +36,7 @@ public class Administrator {
     public String getFirstName() {
         return firstName;
     }
- 
+
     /**
      * @param firstName the firstName to set
      */
@@ -138,5 +142,68 @@ public class Administrator {
         this.password = password;
     }
 
-  
+    /**
+     * Loads Administrator with the given adminID from the database
+     * @param adminId adminID for the Administrator to fetch
+     * @throws SQLException 
+     */
+    public void fetch(int adminId) throws SQLException {
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery("SELECT * FROM administrator WHERE adminID = " + adminId);
+        if (rs.next()) {
+            this.adminID = rs.getInt("adminID");
+            this.firstName = rs.getString("firstName");
+            this.lastName = rs.getString("lastName");
+            this.address = rs.getString("address");
+            this.city = rs.getString("city");
+            this.country = rs.getString("country");
+            this.zipcode = rs.getString("zipcode");
+            this.phone = rs.getString("phone");
+            this.password = rs.getString("password");
+        }
+
+    }
+
+    /**
+     * Updates the current record in the database
+     * @throws SQLException 
+     */
+    public void update() throws SQLException {
+        DatabaseConnector.updateQuery("UPDATE administrator SET "
+                + "firstName='" + this.firstName + "', " 
+                + "lastName='" + this.lastName + "', " 
+                + "address='" + this.address + "', "
+                + "city='" + this.city + "', "
+                + "country='" + this.country + "', "
+                + "zipcode='" + this.zipcode + "', " 
+                + "phone='" + this.phone + "', " 
+                + "password='" + this.password + "'"
+                + "WHERE adminID=" + this.adminID);
+    }
+
+    public void delete() throws SQLException {
+        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.adminID);
+    }
+
+    /**
+     * Creates a new record with the database with the properties of this Administrator
+     * @throws SQLException 
+     */
+    public void insert() throws SQLException {
+        String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
+                + "zipcode, phone, password) values " + "(" 
+                + this.adminID + ", '" 
+                + this.firstName + "', '" 
+                + this.lastName + "', '" 
+                + this.address + "', '" 
+                + this.city + "', '" 
+                + this.country + "', '" 
+                + this.zipcode + "', '" 
+                + this.phone + "', '" 
+                + this.password
+                + "')";
+        
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
+    }
 }
