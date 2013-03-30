@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class Faculty {
 
     private String facultyName;
-
     /**
      * @return the facultyName
      */
