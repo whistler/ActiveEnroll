@@ -10,37 +10,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.WaivePrerequisiteController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
   <children>
-    <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
+    <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="778.0" />
     <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
       <items>
-        <fx:include source="StudentSidebar.fxml" />
+        <Pane fx:id="sidebar"/>
         <!-- start of content -->
         <AnchorPane minWidth="570.0" prefHeight="333.0" prefWidth="570.0">
           <children>
             <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-            <Button layoutX="253.0" layoutY="316.0" mnemonicParsing="false" text="Save" />
-            <Label layoutX="151.0" layoutY="36.0" text="Student ID" />
-            <Label layoutX="287.0" layoutY="35.0" text="000000000" />
-            <Label layoutX="151.0" layoutY="58.0" text="First Name" />
-            <Label layoutX="151.0" layoutY="79.0" text="Last Name" />
-            <Label layoutX="151.0" layoutY="101.0" text="Address" />
-            <Label layoutX="152.0" layoutY="151.0" text="Phone" />
-            <Label layoutX="152.0" layoutY="174.0" text="Program" />
-            <Label layoutX="152.0" layoutY="195.0" text="Registered Since" />
-            <Label layoutX="152.0" layoutY="217.0" text="Status" />
-            <Label layoutX="152.0" layoutY="237.0" text="New Password" />
-            <Label layoutX="152.0" layoutY="259.0" text="Confirm Password" />
-            <TextField layoutX="287.0" layoutY="54.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="76.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="148.0" prefWidth="200.0" />
-            <Label layoutX="288.0" layoutY="174.0" text="ProgramName" />
-            <Label layoutX="288.0" layoutY="195.0" text="Date" />
-            <Label layoutX="288.0" layoutY="217.0" text="Part-time/Full-time" />
-            <TextField layoutX="287.0" layoutY="234.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="256.0" prefWidth="200.0" />
-            <TextArea layoutX="287.0" layoutY="98.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
+            <Button layoutX="232.0" layoutY="234.0" mnemonicParsing="false" text="Waive Prerequisite" />
+            <Label layoutX="53.0" layoutY="47.0" prefHeight="43.0" prefWidth="477.0" text="Enter a student ID to add a student to your course and allow him or her to take the course without having prerequisites" wrapText="true" />
+            <ComboBox layoutX="261.0" layoutY="138.0" prefWidth="167.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <TextField layoutX="261.0" layoutY="175.0" prefWidth="167.0" />
+            <Label layoutX="187.0" layoutY="141.0" text="Course" />
+            <Label layoutX="187.0" layoutY="178.0" text="Student ID" />
           </children>
         </AnchorPane>
         <!-- end of content -->

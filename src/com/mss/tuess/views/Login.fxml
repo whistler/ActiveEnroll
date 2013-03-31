@@ -12,10 +12,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.LoginController">
   <children>
-    <fx:include source="header.fxml" prefHeight="67.0" prefWidth="778.0" />
+    <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="778.0" />
     <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
       <items>
-        <fx:include source="StudentSidebar.fxml" />
         <!-- start of content -->
         <AnchorPane minWidth="570.0" prefHeight="333.0" prefWidth="570.0">
           <children>

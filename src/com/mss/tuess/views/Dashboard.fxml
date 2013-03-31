@@ -14,11 +14,10 @@
             <URL value="@style.css" />
     </stylesheets>
   <children>
-    <fx:include source="header.fxml" />
+    <fx:include source="Header.fxml" />
     <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="335.0">
       <items>
-          <Pane fx:id="sidebar"/> 
-        <!-- <fx:include source="StudentSidebar.fxml" /> -->
+        <Pane fx:id="sidebar"/> 
         
         <!-- start of content -->
         <AnchorPane minWidth="590.0" prefHeight="333.0" prefWidth="599.0">
