@@ -1,8 +1,3 @@
-/**
- *
- * @author wwh
- */
-
 package com.mss.tuess.entity;
 
 public class Enrollcourse {

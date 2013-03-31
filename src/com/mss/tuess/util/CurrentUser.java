@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
 import com.mss.tuess.entity.User;
 
-/**
- *
- * @author ibrahim
- */
 public class CurrentUser {
     private static User user;
     

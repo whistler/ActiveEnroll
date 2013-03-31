@@ -1,10 +1,5 @@
-/**
- *
- * @author wwh
- */
 package com.mss.tuess.entity;
 
-import com.mss.tuess.start.TUESS;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -198,6 +193,7 @@ public class Student extends User {
      *
      * @throws SQLException
      */
+    @Override
     public void fetch(int stuId) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;

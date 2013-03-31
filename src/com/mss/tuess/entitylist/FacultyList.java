@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.entitylist;
 
 import com.mss.tuess.entity.Faculty;
@@ -10,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Prabal
- */
 public class FacultyList {
 
     private static ArrayList<Faculty> faculties = new ArrayList();

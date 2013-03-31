@@ -1,11 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.entity;
 
-import com.mss.tuess.util.DatabaseConnector;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.entitylist;
 
 import com.mss.tuess.entity.Administrator;
@@ -9,10 +5,7 @@ import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-/**
- *
- * @author x
- */
+
 public class AdministratorList {
     
     private static ArrayList<Administrator> administrators = new ArrayList();
