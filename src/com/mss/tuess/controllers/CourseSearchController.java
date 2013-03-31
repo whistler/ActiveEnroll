@@ -4,7 +4,9 @@
  */
 package com.mss.tuess.controllers;
 
+import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -24,6 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CourseSearchController implements Initializable {
 
+    @FXML
+    Pane sidebar;
     @FXML
     private TextField filterText;
     @FXML
@@ -45,7 +49,9 @@ public class CourseSearchController implements Initializable {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
         int courseCounter = 0;
-        while (courseSize != courseCounter) {
+        tableContent.clear();
+        System.out.println("courseSize=" + courseSize + "___courseCounter=" + courseCounter);
+        while (courseSize - 1 != courseCounter) {
             System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa-------" + CourseList.get(courseCounter).getCourseName());
             tableContent.add(CourseList.get(courseCounter));
             courseCounter++;
@@ -58,6 +64,12 @@ public class CourseSearchController implements Initializable {
                 filterRefresh();
             }
         });
+    }
+
+    private void tableOrderAct() {
+        ArrayList<TableColumn<Course, ?>> sortOrder = new ArrayList(courseTable.getSortOrder());
+        courseTable.getSortOrder().clear();
+        courseTable.getSortOrder().addAll(sortOrder);
     }
 
     private void filterRefresh() {
@@ -85,17 +97,12 @@ public class CourseSearchController implements Initializable {
         return false;
     }
 
-    private void tableOrderAct() {
-        ArrayList<TableColumn<Course, ?>> sortOrder = new ArrayList(courseTable.getSortOrder());
-        courseTable.getSortOrder().clear();
-        courseTable.getSortOrder().addAll(sortOrder);
-    }
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ViewManager.loadSidebar(sidebar);
         courseNum.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNum"));
         courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
         courseDept.setCellValueFactory(new PropertyValueFactory<Course, String>("courseDept"));
