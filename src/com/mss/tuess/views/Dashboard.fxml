@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.DashboardController">
     <stylesheets>
             <URL value="@style.css" />
     </stylesheets>
@@ -17,7 +17,8 @@
     <fx:include source="header.fxml" />
     <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="335.0">
       <items>
-        <fx:include source="StudentSidebar.fxml" />
+          <Pane fx:id="sidebar"/> 
+        <!-- <fx:include source="StudentSidebar.fxml" /> -->
         
         <!-- start of content -->
         <AnchorPane minWidth="590.0" prefHeight="333.0" prefWidth="599.0">

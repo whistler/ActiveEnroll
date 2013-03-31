@@ -5,6 +5,7 @@
 package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.*;
+import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
@@ -27,16 +28,11 @@ import javafx.scene.control.ChoiceBox;
  */
 public class LoginController implements Initializable {
 
-    @FXML
-    ChoiceBox userType;
-    @FXML
-    TextField userId;
-    @FXML
-    PasswordField userPassword;
-    @FXML
-    Button login;
-    @FXML
-    Label errorLabel;
+    @FXML ChoiceBox userType;
+    @FXML TextField userId;
+    @FXML PasswordField userPassword;
+    @FXML Button login;
+    @FXML Label errorLabel;
 
     /**
      * Initializes the controller class.
@@ -52,34 +48,21 @@ public class LoginController implements Initializable {
             errorLabel.setText("Username and password are required");
         } else {
 
-            String dashboard = "";
             String type = (String) userType.getValue();
             Integer loginId = Integer.parseInt(userId.getText());
             String password = userPassword.getText();
+            User user;
 
             try{
-            User user = User.login(loginId, password, type);
+                user = User.login(loginId, password, type);
             } catch(NullPointerException e)
             {
-                errorLabel.setText("Useranme/Password invalid!!!!");
+                errorLabel.setText("Username and Password do not match");
                 return;
             }
-
-            switch (type) {
-                case "Student":
-                    dashboard = "/com/mss/tuess/views/StudentDashboard.fxml";
-                    break;
-                case "Instructor":
-                    dashboard = "/com/mss/tuess/views/InstructorDashboard.fxml";
-                    break;
-                case "Administrator":
-                    dashboard = "/com/mss/tuess/views/AdminDashboard.fxml";
-                    break;
-            }
             
-            System.out.println(type);
-            System.out.println(dashboard);
-            ViewManager.changeView(dashboard);
+            CurrentUser.setUser(user);
+            ViewManager.changeView("/com/mss/tuess/views/Dashboard.fxml");
         }
     }
 }
