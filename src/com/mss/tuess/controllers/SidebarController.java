@@ -25,10 +25,32 @@ public class SidebarController implements Initializable {
         // TODO
     }
     
-    @FXML public void showMyProfile() throws Exception
+    
+    
+    /* Admin Navigation */
+    
+    @FXML public void showMailGrades() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/Profile.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/MailGrades.fxml");
     }
+    
+    @FXML public void showMailInstructions() throws Exception
+    {
+        ViewManager.changeView("/com/mss/tuess/views/MailInstructions.fxml");
+    }
+    
+    
+    
+    /* Instructor Navigation */
+    
+    @FXML public void showWaivePrerequisite() throws Exception
+    {
+        ViewManager.changeView("/com/mss/tuess/views/WaivePrerequisite.fxml");
+    }
+    
+    
+    
+    /* Student Navigation */
     
     @FXML public void showCourseSearch() throws Exception
     {
@@ -55,9 +77,18 @@ public class SidebarController implements Initializable {
         ViewManager.changeView("/com/mss/tuess/views/MyProgram.fxml");
     }
     
+    
+    
+    /* Reuseable Navigation */
+    
     @FXML public void logout() throws Exception 
     {
         ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
+    }
+    
+    @FXML public void showMyProfile() throws Exception
+    {
+        ViewManager.changeView("/com/mss/tuess/views/Profile.fxml");
     }
     
 }

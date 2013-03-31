@@ -6,10 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
   <children>
-    <Hyperlink layoutX="39.0" layoutY="37.0" text="My Profile" />
-    <Hyperlink layoutX="39.0" layoutY="59.0" text="Waive Prerequisite" />
-    <Hyperlink layoutX="38.0" layoutY="300.0" text="Logout" />
+    <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
+    <Hyperlink layoutX="39.0" layoutY="59.0" onAction="#showWaivePrerequisite" text="Waive Prerequisite" />
+    <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
   </children>
 </AnchorPane>
