@@ -156,14 +156,14 @@ public class Instructor {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /**
      * Loads the Instructor by the instructorID from the database and encapsulates
      * into this Instructor objects
      *
      * @throws SQLException
      */
-   public void fetch(String InstructorID) throws SQLException {
+   public void fetch(int InstructorID) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
         if (rs.next()) {
