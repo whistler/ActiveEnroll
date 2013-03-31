@@ -1,4 +1,8 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
+
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Program {
 
@@ -8,43 +12,135 @@ public class Program {
     private int minCredit;
     private int maxLength;
 
-    public String getProgramID() {;
-        return this.programID;
+    /**
+     * @return the programID
+     */
+    public String getProgramID() {
+        return programID;
     }
 
-    public void setProgramID(String programID) {;
+    /**
+     * @param programID the programID to set
+     */
+    public void setProgramID(String programID) {
         this.programID = programID;
     }
 
-    public String getDeptID() {;
-        return this.deptID;
+    /**
+     * @return the deptID
+     */
+    public String getDeptID() {
+        return deptID;
     }
 
-    public void setDeptID(String deptID) {;
+    /**
+     * @param deptID the deptID to set
+     */
+    public void setDeptID(String deptID) {
         this.deptID = deptID;
     }
 
-    public String getDegree() {;
-        return this.degree;
+    /**
+     * @return the degree
+     */
+    public String getDegree() {
+        return degree;
     }
 
-    public void setDegree(String degree) {;
+    /**
+     * @param degree the degree to set
+     */
+    public void setDegree(String degree) {
         this.degree = degree;
     }
 
-    public int getMinCredit() {;
-        return this.minCredit;
+    /**
+     * @return the minCredit
+     */
+    public int getMinCredit() {
+        return minCredit;
     }
 
-    public void setMinCredit(int minCredit) {;
+    /**
+     * @param minCredit the minCredit to set
+     */
+    public void setMinCredit(int minCredit) {
         this.minCredit = minCredit;
     }
 
-    public int getMaxLength() {;
-        return this.maxLength;
+    /**
+     * @return the maxLength
+     */
+    public int getMaxLength() {
+        return maxLength;
     }
 
-    public void setMaxLength(int maxLength) {;
+    /**
+     * @param maxLength the maxLength to set
+     */
+    public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;
     }
+
+
+  /**
+     * Loads the Program by the programID from the database and encapsulates
+     * into this Program objects
+     *
+     * @throws SQLException
+     */
+    public void fetch(String programID) throws SQLException {
+        ResultSet rs;
+        String sql = "SELECT * FROM program WHERE programID = " + programID;
+        rs = DatabaseConnector.returnQuery(sql);
+        if (rs.next()) {
+            this.setProgramID(rs.getString("programID"));
+            this.setDeptID(rs.getString("deptID"));
+            this.setDegree(rs.getString("degreeTitle"));
+            this.setMinCredit(rs.getInt(minCredit));
+            this.setMaxLength(rs.getInt(maxLength));
+        }
+
+    }
+
+    /**
+     * Uses the information of this Program to update the record in the
+     * database.
+     *
+     * @throws SQLException
+     */
+    public void update() throws SQLException {
+        String sql = "UPDATE program SET programID=" + this.getProgramID()
+                + ", deptID=" + this.getDeptID() 
+                + ", degreeTitle=" + this.getDegree()
+                + ", minCredit=" + this.getMinCredit()
+                + ", maxLength=" + this.getMaxLength()
+                + "WHERE programID=" + this.getProgramID();
+        DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * Delete this Program record in the database.
+     *
+     * @throws SQLException
+     */
+    public void delete() throws SQLException {
+        String sql = "DELETE FROM program WHERE programID=" + this.getProgramID();
+        DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * Insert this Program into the database.
+     *
+     * @throws SQLException
+     */
+    public void insert() throws SQLException {
+        String sql = "INSERT INTO student  (programID,deptID,degreeTitle,minCredit,maxLength) values "
+                + "(" + this.getProgramID() + ", " + this.getDeptID()+ ", " + this.getDegree()+","
+                + this.getMinCredit() + ", " + this.getMaxLength()
+                + ")";
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
+    }
+
 }

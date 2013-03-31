@@ -1,5 +1,9 @@
 package com.mss.tuess.entity;
 
+import com.mss.tuess.util.DatabaseConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Section {
 
     private String sectionID;
@@ -197,6 +201,77 @@ public class Section {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    /**
+     * Loads the Section by the sectionID from the database and encapsulates
+     * into this Section objects
+     *
+     * @throws SQLException
+     */
+    public void fetch(String sectionID) throws SQLException {
+        ResultSet rs;
+        String sql = "SELECT * FROM section  WHERE sectionID = " + sectionID;
+        rs = DatabaseConnector.returnQuery(sql);
+        if (rs.next()) {
+            this.setSectionID(rs.getString("sectionID"));
+            this.setCourseDept(rs.getString("courseDept"));
+            this.setCourseNum(rs.getString("courseNum"));
+            this.setInstructorID(rs.getInt("instructorID"));
+            this.setType(rs.getString("type"));
+            this.setTextbook(rs.getString("textbook"));
+            this.setTerm(rs.getString("term"));
+            this.setTime(rs.getString("time"));
+            this.setDay(rs.getString("day"));
+            this.setCapacity(rs.getInt("capacity"));
+            this.setRegistered(rs.getInt("registered"));
+            this.setLocation(rs.getString("location"));
+            this.setStatus(rs.getString("status"));
+        }
+
+    }
+
+    /**
+     * Uses the information of this Section to update the record in the
+     * database.
+     *
+     * @throws SQLException
+     */
+    public void update() throws SQLException {
+        String sql = "UPDATE section SET courseDept=" + this.getCourseDept()
+                + ", courseNum=" + this.getCourseNum()+ ", instructorId=" + this.getInstructorID()
+                + ", type=" + this.getType()+ ", textbook=" + this.getTextbook()
+                + ", term=" + this.getTerm()+ ", time=" + this.getTime()
+                + ", day=" + this.getDay()+ ", capacity=" + this.getCapacity()
+                + ", registered=" + this.getRegistered()+ ", location=" + this.getLocation()+ ", status=" + this.getStatus()
+                + "WHERE sectionID=" + this.getSectionID();
+        DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * Delete this Section record in the database.
+     *
+     * @throws SQLException
+     */
+    public void delete() throws SQLException {
+        String sql = "DELETE FROM section WHERE sectionID=" + this.getSectionID();
+        DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * Insert this Section into the database.
+     *
+     * @throws SQLException
+     */
+    public void insert() throws SQLException {
+        String sql = "INSERT INTO section  (sectionID, courseDept, courseNum, instructorID, type, textbook, "
+                + "term, time, day, capacity, registered, location, status) values "
+                + "(" + this.getSectionID()+ ", '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getInstructorID() + "', '" + this.getType() + "', '" + this.getTextbook()
+                + "', '" + this.getTerm() + "', '" + this.getTime() + "', '" + this.getDay() + "', '" + this.getCapacity() + "', '" + this.getRegistered() + "', '" + this.getLocation()+ "', '" + this.getStatus()
+                + "')";
+        System.out.println(sql);
+        DatabaseConnector.updateQuery(sql);
+    }
+
 
 
 }
