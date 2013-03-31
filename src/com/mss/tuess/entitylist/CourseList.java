@@ -17,6 +17,7 @@ public class CourseList {
      * @throws SQLException
      */
     public static void fetch() throws SQLException {
+        courses.clear();
         ResultSet rs;
         String sql = "SELECT * FROM course";
         rs = DatabaseConnector.returnQuery(sql);
