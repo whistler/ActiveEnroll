@@ -40,6 +40,15 @@ public class CourseList {
      */
     public static Course get(int index) {
         return courses.get(index);
+    } 
+    /**
+     * Returns the course List
+     *
+     * @return ArrayList<Course> Course ArrayList
+     */
+    public static ArrayList<Course> getAll() {
+        System.out.println(courses.get(1).getCourseName());
+        return courses;
     }
 }
 
