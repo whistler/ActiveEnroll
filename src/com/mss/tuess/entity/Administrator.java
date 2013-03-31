@@ -4,7 +4,7 @@ import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Administrator {
+public class Administrator extends User{
 
     private int adminID;
     private String firstName;

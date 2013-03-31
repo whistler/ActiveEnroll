@@ -4,7 +4,7 @@ import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Instructor {
+public class Instructor extends User{
 
     private int instructorID;
     private String firstName;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+            <URL value="@style.css" />
+    </stylesheets>
+  <children>
+    <fx:include source="header.fxml" />
+    <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="335.0">
+      <items>
+        <fx:include source="AdminSidebar.fxml" />
+        
+        <!-- start of content -->
+        <AnchorPane minWidth="590.0" prefHeight="333.0" prefWidth="599.0">
+            <Label>You are logged in. Please select one of the options on the left.</Label>
+        </AnchorPane>
+        <!-- end of content -->
+        
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
