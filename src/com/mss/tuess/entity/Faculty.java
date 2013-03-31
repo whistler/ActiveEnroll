@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class Faculty {
 
     private String facultyName;
+
     /**
      * @return the facultyName
      */
@@ -22,8 +23,8 @@ public class Faculty {
     }
 
     /**
-     * Loads the Student by the studentID from the database and encapsulates
-     * into this Student objects
+     * Loads the Faculty by the facultyName from the database and encapsulates
+     * into this Faculty objects
      *
      * @throws SQLException
      */
@@ -39,7 +40,7 @@ public class Faculty {
     }
 
     /**
-     * Uses the information of this Student to update the record in the
+     * Uses the information of this Faculty to update the record in the
      * database.
      *
      * @throws SQLException
@@ -51,7 +52,7 @@ public class Faculty {
     }
 
     /**
-     * Delete this Student record in the database.
+     * Delete this Faculty record in the database.
      *
      * @throws SQLException
      */
@@ -61,7 +62,7 @@ public class Faculty {
     }
 
     /**
-     * Insert this Student into the database.
+     * Insert this Faculty into the database.
      *
      * @throws SQLException
      */

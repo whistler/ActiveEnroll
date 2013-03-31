@@ -35,7 +35,7 @@ public class SectionList {
             section.setInstructorID(rs.getInt("instructorID"));
             section.setType(rs.getString("type"));
             section.setTextbook(rs.getString("textbook"));
-           section.setTerm(rs.getString("term"));
+            section.setTerm(rs.getString("term"));
             section.setTime(rs.getString("time"));
             section.setDay(rs.getString("day"));
             section.setCapacity(rs.getInt("capacity"));
