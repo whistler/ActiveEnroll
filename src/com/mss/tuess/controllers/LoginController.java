@@ -15,11 +15,6 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import javafx.scene.control.ChoiceBox;
 
-/**
- * FXML Controller class
- *
- * @author ibrahim
- */
 public class LoginController implements Initializable {
 
     @FXML ChoiceBox userType;

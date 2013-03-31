@@ -1,16 +1,12 @@
 package com.mss.tuess.controllers;
 
+import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author ibrahim
- */
 public class SidebarController implements Initializable {
 
     /**
@@ -65,7 +61,7 @@ public class SidebarController implements Initializable {
     
     @FXML public void showTimetable() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/TimeTable.fxml");
+        ViewManager.changeView("/com/mss/tuess/views/Timetable.fxml");
     }
     
     @FXML public void showMyProgram() throws Exception
@@ -79,6 +75,7 @@ public class SidebarController implements Initializable {
     
     @FXML public void logout() throws Exception 
     {
+        CurrentUser.setUser(null);
         ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
     }
     
