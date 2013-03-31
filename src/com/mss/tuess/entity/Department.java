@@ -10,46 +10,64 @@ public class Department {
     private String deptName;
     private String facultyName;
 
-    public String getDeptID() {;
-        return this.deptID;
+    /**
+     * @return the deptID
+     */
+    public String getDeptID() {
+        return deptID;
     }
 
-    public void setDeptID(String deptID) {;
+    /**
+     * @param deptID the deptID to set
+     */
+    public void setDeptID(String deptID) {
         this.deptID = deptID;
     }
 
-    public String getDeptName() {;
-        return this.deptName;
+    /**
+     * @return the deptName
+     */
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setDeptName(String deptName) {;
+    /**
+     * @param deptName the deptName to set
+     */
+    public void setDeptName(String deptName) {
         this.deptName = deptName;
     }
 
-    public String getFacultyName() {;
-        return this.facultyName;
+    /**
+     * @return the facultyName
+     */
+    public String getFacultyName() {
+        return facultyName;
     }
 
-    public void setFacultyName(String facultyName) {;
+    /**
+     * @param facultyName the facultyName to set
+     */
+    public void setFacultyName(String facultyName) {
         this.facultyName = facultyName;
     }
-    
+
     /**
      * Loads Department with the given department number from the database
      *
-     * @param deptID id of the department to load from 
+     * @param deptID id of the department to load from
      * @throws SQLException
      */
-    public void fetch(int deptID) throws SQLException {
+    public void fetch(String deptID) throws SQLException {
         String query = "SELECT * FROM department WHERE deptID = " + deptID;
-        
+
         ResultSet rs;
         rs = DatabaseConnector.returnQuery(query);
-        
+
         if (rs.next()) {
-            this.deptID = rs.getString("deptID");
-            this.deptName = rs.getString("courseName");
-            this.facultyName = rs.getString("facultyName");
+            this.setDeptID(rs.getString("deptID"));
+            this.setDeptName(rs.getString("courseName"));
+            this.setFacultyName(rs.getString("facultyName"));
         }
 
     }
@@ -61,31 +79,33 @@ public class Department {
      */
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE department SET "
-                + "deptID='" + this.deptID + "', "
-                + "deptName='" + this.deptName + "', "
-                + "facultyName='" + this.facultyName + "'");
+                + "deptID='" + this.getDeptID() + "', "
+                + "deptName='" + this.getDeptName() + "', "
+                + "facultyName='" + this.getFacultyName() + "'");
     }
 
     /**
      * Deletes the record from the database
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public void delete() throws SQLException {
         DatabaseConnector.updateQuery("DELETE FROM department "
-                + "WHERE deptID='" + this.deptID);
+                + "WHERE deptID='" + this.getDeptID());
     }
-    
+
     /**
      * Creates a new record with the database with the properties of this
      * Department
+     *
      * @throws SQLException
      */
     public void insert() throws SQLException {
         String sql = "INSERT INTO department (deptID, deptName, facultyName) "
                 + " values ('"
-                + this.deptID + "', '"
-                + this.deptName + "', '"
-                + this.facultyName + "')";
+                + this.getDeptID() + "', '"
+                + this.getDeptName() + "', '"
+                + this.getFacultyName() + "')";
 
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
