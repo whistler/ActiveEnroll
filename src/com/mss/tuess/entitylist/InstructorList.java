@@ -6,15 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author chenliang
- */
 public class InstructorList {
     
     private static ArrayList<Instructor> instructors = new ArrayList();

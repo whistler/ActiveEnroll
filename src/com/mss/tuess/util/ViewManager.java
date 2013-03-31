@@ -24,22 +24,33 @@ public class ViewManager {
     
     private static Stage stage;
     
+    /**
+     * Sets the window(Stage) that should be used to display Views
+     * @param newStage stage to use
+     */
     public static void setStage(Stage newStage)
     {
         stage = newStage;
+        stage.setResizable(false);
+        stage.show();
     }
     
-    public static Parent changeView(String fxml) throws Exception {
-        
+    /**
+     * Change the View to the View defined in the given FXML path
+     * @param fxml the path of the view to load
+     * @throws Exception 
+     */
+    public static void changeView(String fxml) throws Exception {
         Parent page = FXMLLoader.load(TUESS.class.getResource(fxml));
         Scene scene = new Scene(page);
-        stage.setResizable(false);
         stage.setScene(scene);
-        stage.show();
-   
-        return page;
     }
     
+    /**
+     * Loads the side bar in to the given Pane depending on the type of user that
+     * is logged in
+     * @param sidebar Pane that should hold the side bar
+     */
     public static void loadSidebar(Pane sidebar)
     {
         String path = CurrentUser.getSidebarPath();
