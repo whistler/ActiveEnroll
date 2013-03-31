@@ -51,31 +51,35 @@ public class LoginController implements Initializable {
         if (userId.getText().isEmpty() || userPassword.getText().isEmpty()) {
             errorLabel.setText("Username and password are required");
         } else {
-            
+
+            String dashboard = "";
             String type = (String) userType.getValue();
             Integer loginId = Integer.parseInt(userId.getText());
             String password = userPassword.getText();
-            
-            if (type.equals("Student")) {
-                Student student = new Student();
-                student.fetch(loginId);
-                if(student.getPassword().equals(password))
-                {
-                    ViewManager.changeView("/com/mss/tuess/views/Dashboard.fxml");
-                    return;
-                } 
-            } else if (type.equals("Instructor")) {
-                Instructor instructor = new Instructor();
-                instructor.fetch(loginId);
-                if(instructor.getPassword().equals(password))
-                {
-                    ViewManager.changeView("/com/mss/tuess/views/Dashboard.fxml");
-                    return;
-                } 
-            } else {
-                Administrator admin;
+
+            try{
+            User user = User.login(loginId, password, type);
+            } catch(NullPointerException e)
+            {
+                errorLabel.setText("Useranme/Password invalid!!!!");
+                return;
             }
-            errorLabel.setText("Useranme/Password invalid!!!!");
+
+            switch (type) {
+                case "Student":
+                    dashboard = "/com/mss/tuess/views/StudentDashboard.fxml";
+                    break;
+                case "Instructor":
+                    dashboard = "/com/mss/tuess/views/InstructorDashboard.fxml";
+                    break;
+                case "Administrator":
+                    dashboard = "/com/mss/tuess/views/AdminDashboard.fxml";
+                    break;
+            }
+            
+            System.out.println(type);
+            System.out.println(dashboard);
+            ViewManager.changeView(dashboard);
         }
     }
 }
