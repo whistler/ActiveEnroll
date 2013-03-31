@@ -1,4 +1,4 @@
-package com.mss.entity;
+package com.mss.tuess.entity;
 
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
