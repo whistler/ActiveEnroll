@@ -4,22 +4,25 @@ import java.sql.SQLException;
 
 public abstract class User {
 
-    
     protected String firstName;
     protected String lastName;
     protected String address;
     protected String city;
+    protected String email;
     protected String country;
     protected String zipcode;
     protected String phone;
     protected String password;
-    
+
     public abstract void fetch(int id) throws SQLException;
+
     public abstract void insert() throws SQLException;
+
     public abstract void delete() throws SQLException;
+
     public abstract void update() throws SQLException;
-    
-        /**
+
+    /**
      * @return the firstName
      */
     public String getFirstName() {
@@ -90,6 +93,20 @@ public abstract class User {
     }
 
     /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
      * @return the zipcode
      */
     public String getZipcode() {
@@ -102,15 +119,17 @@ public abstract class User {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
-    
+
     /**
      * Returns password for the user
+     *
      * @return password
      */
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.password;
-    };
+    }
+
+    ;
     
     /**
     * @param password the password to set
@@ -118,8 +137,8 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-        /**
+
+    /**
      * @return the phone
      */
     public String getPhone() {
@@ -132,30 +151,31 @@ public abstract class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
     /**
      * Returns Student if login and password match
+     *
      * @param userID id of the user
      * @param password password of the user
      * @param userType type of the user
      * @return User with that matches id and password
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static User login(int userID, String password, String userType) throws SQLException
-    {
+    public static User login(int userID, String password, String userType) throws SQLException {
         User user;
-        if(userType.equals("Student"))
-        {
+        if (userType.equals("Student")) {
             user = new Student();
-        } else if (userType.equals("Instructor"))
-        {
+        } else if (userType.equals("Instructor")) {
             user = new Instructor();
         } else {
             user = new Administrator();
         }
-                
+
         user.fetch(userID);
-        if(user.getPassword().equals(password)) return user;
-        else return null;
+        if (user.getPassword().equals(password)) {
+            return user;
+        } else {
+            return null;
+        }
     }
 }
