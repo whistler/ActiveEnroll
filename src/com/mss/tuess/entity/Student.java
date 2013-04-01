@@ -18,6 +18,7 @@ public class Student extends User {
     private String registeredSince;
     private String status;
     private String password;
+    private String email;
 
     /**
      * @return the studentID
@@ -211,6 +212,7 @@ public class Student extends User {
             this.setRegisteredSince(rs.getString("registeredSince"));
             this.setStatus(rs.getString("status"));
             this.setPassword(rs.getString("password"));
+            this.setEmail(rs.getString("email"));
         }
 
     }
@@ -227,7 +229,7 @@ public class Student extends User {
                 + ", city=" + this.getCity() + ", country=" + this.getCountry()
                 + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
                 + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
-                + ", status=" + this.getStatus() + ", password=" + this.getPassword()
+                + ", status=" + this.getStatus() + ", password=" + this.getPassword() + ", email=" + this.getEmail()
                 + "WHERE studentID=" + this.getStudentID();
         DatabaseConnector.updateQuery(sql);
     }
@@ -249,11 +251,25 @@ public class Student extends User {
      */
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
-                + "zipcode, phone, programID, registeredSince, status, password) values "
+                + "zipcode, phone, programID, registeredSince, status, password, email) values "
                 + "(" + this.getStudentID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
-                + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword()
+                + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword() + "', '" + this.getEmail()
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

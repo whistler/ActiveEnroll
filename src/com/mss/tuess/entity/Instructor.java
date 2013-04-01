@@ -16,6 +16,7 @@ public class Instructor extends User{
     private String phone;
     private String deptID;
     private String password;
+    private String email;
 
     /**
      * @return the instructorID
@@ -176,6 +177,7 @@ public class Instructor extends User{
             this.setCountry(rs.getString("country"));
             this.setPhone(rs.getString("phone"));
             this.setDeptID(rs.getString("deptID"));
+            this.setEmail(rs.getString("email"));
             this.setPassword(rs.getString("password"));
         }
 
@@ -193,6 +195,7 @@ public class Instructor extends User{
                 + ", city=" + this.getCity() + ", country=" + this.getCountry()
                 + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
                 + ", deptID=" + this.getDeptID()
+                + ", email=" + this.getEmail()
                 + ", password=" + this.getPassword()
                 + "WHERE instructorID=" + this.getInstructorID());
     }
@@ -213,11 +216,25 @@ public class Instructor extends User{
      */
     public void insert() throws SQLException {
         String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
-                + "zipcode, phone, deptID, password) values "
+                + "zipcode, phone, deptID, email, password) values "
                 + "("+ this.getInstructorID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
-                +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '" + this.getPassword()
+                +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '"+ this.getEmail()+"', '" + this.getPassword()
                 +  "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
