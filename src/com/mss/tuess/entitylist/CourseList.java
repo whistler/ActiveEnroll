@@ -17,6 +17,7 @@ public class CourseList {
      * @throws SQLException
      */
     public static void fetch() throws SQLException {
+        courses.clear();
         ResultSet rs;
         String sql = "SELECT * FROM course";
         rs = DatabaseConnector.returnQuery(sql);
@@ -40,6 +41,15 @@ public class CourseList {
      */
     public static Course get(int index) {
         return courses.get(index);
+    } 
+    /**
+     * Returns the course List
+     *
+     * @return ArrayList<Course> Course ArrayList
+     */
+    public static ArrayList<Course> getAll() {
+        System.out.println(courses.get(1).getCourseName());
+        return courses;
     }
 }
 
