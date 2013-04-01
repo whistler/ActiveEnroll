@@ -45,6 +45,11 @@ public class CourseSearchController implements Initializable {
     private ObservableList<Course> tableContent = FXCollections.observableArrayList();
     private ObservableList<Course> filterContent = FXCollections.observableArrayList();
 
+    /**
+     * Constructor of CourseSearchController
+     *
+     * @throws SQLException
+     */
     public CourseSearchController() throws SQLException {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
@@ -64,15 +69,20 @@ public class CourseSearchController implements Initializable {
         });
     }
 
+    /**
+     * Handle the order for each column
+     */
     private void tableOrderAct() {
         ArrayList<TableColumn<Course, ?>> sortOrder = new ArrayList(courseTable.getSortOrder());
         courseTable.getSortOrder().clear();
         courseTable.getSortOrder().addAll(sortOrder);
     }
 
+    /**
+     * Refresh the content of the filter
+     */
     private void filterRefresh() {
         filterContent.clear();
-
         for (Course course : tableContent) {
             if (filterChecker(course)) {
                 filterContent.add(course);
@@ -81,6 +91,11 @@ public class CourseSearchController implements Initializable {
         tableOrderAct();
     }
 
+    /**
+     * Control the filter
+     *
+     * @param course the course obj
+     */
     private boolean filterChecker(Course course) {
         String filterString = filterText.getText();
         if (filterString == null || filterString.isEmpty()) {
