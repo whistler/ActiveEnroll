@@ -7,15 +7,7 @@ import java.sql.SQLException;
 public class Instructor extends User{
 
     private int instructorID;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String country;
-    private String zipcode;
-    private String phone;
     private String deptID;
-    private String password;
 
     /**
      * @return the instructorID
@@ -29,104 +21,6 @@ public class Instructor extends User{
      */
     public void setInstructorID(int instructorID) {
         this.instructorID = instructorID;
-    }
-
-    /**
-     * @return the firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
-     * @return the city
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * @param city the city to set
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     * @return the country
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * @param country the country to set
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    /**
-     * @return the zipcode
-     */
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    /**
-     * @param zipcode the zipcode to set
-     */
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    /**
-     * @return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     /**
@@ -144,25 +38,12 @@ public class Instructor extends User{
     }
 
     /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
      * Loads the Instructor by the instructorID from the database and encapsulates
      * into this Instructor objects
      *
      * @throws SQLException
      */
+    @Override
    public void fetch(int InstructorID) throws SQLException {
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
@@ -187,6 +68,7 @@ public class Instructor extends User{
      *
      * @throws SQLException
      */
+    @Override
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE instructor SET firstName=" + this.getFirstName()
                 + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
@@ -202,6 +84,7 @@ public class Instructor extends User{
      *
      * @throws SQLException
      */
+    @Override
     public void delete() throws SQLException {
         DatabaseConnector.updateQuery("DELETE FROM instructor WHERE instructorID=" + this.getInstructorID());
     }
@@ -211,6 +94,7 @@ public class Instructor extends User{
      *
      * @throws SQLException
      */
+    @Override
     public void insert() throws SQLException {
         String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, deptID, password) values "
