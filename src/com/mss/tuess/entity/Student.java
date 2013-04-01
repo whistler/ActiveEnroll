@@ -7,128 +7,24 @@ import java.sql.SQLException;
 public class Student extends User {
 
     private int studentID;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String country;
-    private String zipcode;
-    private String phone;
     private String programID;
     private String registeredSince;
     private String status;
-    private String password;
 
     /**
      * @return the studentID
      */
-    public int getStudentID() {
+    @Override
+    public int getID() {
         return studentID;
     }
 
     /**
      * @param studentID the studentID to set
      */
-    public void setStudentID(int studentID) {
+    @Override
+    public void setID(int studentID) {
         this.studentID = studentID;
-    }
-
-    /**
-     * @return the firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
-     * @return the city
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * @param city the city to set
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     * @return the country
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * @param country the country to set
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    /**
-     * @return the zipcode
-     */
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    /**
-     * @param zipcode the zipcode to set
-     */
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    /**
-     * @return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     /**
@@ -174,20 +70,6 @@ public class Student extends User {
     }
 
     /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
      * Loads the Student by the studentID from the database and encapsulates
      * into this Student objects
      *
@@ -199,7 +81,7 @@ public class Student extends User {
         String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;
         rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
-            this.setStudentID(rs.getInt("studentID"));
+            this.setID(rs.getInt("studentID"));
             this.setFirstName(rs.getString("firstName"));
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
@@ -211,9 +93,11 @@ public class Student extends User {
             this.setRegisteredSince(rs.getString("registeredSince"));
             this.setStatus(rs.getString("status"));
             this.setPassword(rs.getString("password"));
+            this.setEmail(rs.getString("email"));
         }
 
     }
+
 
     /**
      * Uses the information of this Student to update the record in the
@@ -221,14 +105,15 @@ public class Student extends User {
      *
      * @throws SQLException
      */
+    @Override
     public void update() throws SQLException {
         String sql = "UPDATE student SET firstName=" + this.getFirstName()
                 + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
                 + ", city=" + this.getCity() + ", country=" + this.getCountry()
                 + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
                 + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
-                + ", status=" + this.getStatus() + ", password=" + this.getPassword()
-                + "WHERE studentID=" + this.getStudentID();
+                + ", status=" + this.getStatus() + ", password=" + this.getPassword() + ", email=" + this.getEmail()
+                + "WHERE studentID=" + this.getID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -237,8 +122,9 @@ public class Student extends User {
      *
      * @throws SQLException
      */
+    @Override
     public void delete() throws SQLException {
-        String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID();
+        String sql = "DELETE FROM student WHERE studentID=" + this.getID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -247,11 +133,12 @@ public class Student extends User {
      *
      * @throws SQLException
      */
+    @Override
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
-                + "zipcode, phone, programID, registeredSince, status, password) values "
-                + "(" + this.getStudentID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
-                + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword()
+                + "zipcode, phone, programID, registeredSince, status, password, email) values "
+                + "(" + this.getID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
+                + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword() + "', '" + this.getEmail()
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
