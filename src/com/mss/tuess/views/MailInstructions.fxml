@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailInstructionsController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailInstructionsController">
   <children>
-    <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="778.0" />
+    <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="778.0" />
     <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="374.0">
       <items>
         <Pane fx:id="sidebar" />

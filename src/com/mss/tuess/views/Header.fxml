@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="67.0" prefWidth="808.0" xmlns:fx="http://javafx.com/fxml">
+<Pane prefHeight="50.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <Label layoutX="348.0" layoutY="20.0" text="TUESS" textFill="#808080">
+    <Label layoutX="368.0" layoutY="13.0" text="TUESS" textFill="GREY">
       <font>
         <Font name="System Bold" size="20.0" />
       </font>

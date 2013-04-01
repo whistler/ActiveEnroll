@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.9998779296875" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.CourseController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.CourseController">
   <children>
-    <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.23270440251572327" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+    <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
+    <SplitPane dividerPositions="0.25" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
       <items>
         <Pane fx:id="sidebar"/>
         <!-- start of content -->
