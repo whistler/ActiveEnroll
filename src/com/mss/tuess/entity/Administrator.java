@@ -11,14 +11,15 @@ public class Administrator extends User{
     /**
      * @return the adminID
      */
-    public int getAdminID() {
+    @Override
+    public int getID() {
         return adminID;
     }
 
     /**
      * @param adminID the adminID to set
      */
-    public void setAdminID(int adminID) {
+    public void setID(int adminID) {
         this.adminID = adminID;
     }
 
