@@ -22,7 +22,7 @@ public class StudentList {
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Student student = new Student();
-            student.setStudentID(rs.getInt("studentID"));
+            student.setID(rs.getInt("studentID"));
             student.setFirstName(rs.getString("firstName"));
             student.setLastName(rs.getString("lastName"));
             student.setAddress(rs.getString("address"));
