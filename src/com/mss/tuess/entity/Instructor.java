@@ -12,14 +12,16 @@ public class Instructor extends User{
     /**
      * @return the instructorID
      */
-    public int getInstructorID() {
+    @Override
+    public int getID() {
         return instructorID;
     }
 
     /**
      * @param instructorID the instructorID to set
      */
-    public void setInstructorID(int instructorID) {
+    @Override
+    public void setID(int instructorID) {
         this.instructorID = instructorID;
     }
 
@@ -48,7 +50,7 @@ public class Instructor extends User{
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM instructor WHERE instructorID = " + InstructorID);
         if (rs.next()) {
-            this.setInstructorID(rs.getInt("instructorID"));
+            this.setID(rs.getInt("instructorID"));
             this.setFirstName(rs.getString("firstName"));
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
@@ -78,7 +80,7 @@ public class Instructor extends User{
                 + ", deptID=" + this.getDeptID()
                 + ", email=" + this.getEmail()
                 + ", password=" + this.getPassword()
-                + "WHERE instructorID=" + this.getInstructorID());
+                + "WHERE instructorID=" + this.getID());
     }
     
     /**
@@ -88,7 +90,7 @@ public class Instructor extends User{
      */
     @Override
     public void delete() throws SQLException {
-        DatabaseConnector.updateQuery("DELETE FROM instructor WHERE instructorID=" + this.getInstructorID());
+        DatabaseConnector.updateQuery("DELETE FROM instructor WHERE instructorID=" + this.getID());
     }
     
     /**
@@ -100,7 +102,7 @@ public class Instructor extends User{
     public void insert() throws SQLException {
         String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, deptID, email, password) values "
-                + "("+ this.getInstructorID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
+                + "("+ this.getID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
                 +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '"+ this.getEmail()+"', '" + this.getPassword()
                 +  "')";
         System.out.println(sql);

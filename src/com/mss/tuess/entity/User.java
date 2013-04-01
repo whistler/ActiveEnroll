@@ -21,6 +21,10 @@ public abstract class User {
     public abstract void delete() throws SQLException;
 
     public abstract void update() throws SQLException;
+    
+    public abstract void setID(int id);
+    
+    public abstract int getID();
 
     /**
      * @return the firstName
