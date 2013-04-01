@@ -50,9 +50,7 @@ public class CourseSearchController implements Initializable {
         int courseSize = CourseList.getAll().size();
         int courseCounter = 0;
         tableContent.clear();
-        System.out.println("courseSize=" + courseSize + "___courseCounter=" + courseCounter);
         while (courseSize - 1 != courseCounter) {
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa-------" + CourseList.get(courseCounter).getCourseName());
             tableContent.add(CourseList.get(courseCounter));
             courseCounter++;
         }
