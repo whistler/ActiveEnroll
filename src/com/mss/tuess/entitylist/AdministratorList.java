@@ -31,6 +31,7 @@ public class AdministratorList {
             administrator.setZipcode(rs.getString("zipcode"));
             administrator.setPhone(rs.getString("phone"));
             administrator.setPassword(rs.getString("password"));
+            administrator.setPassword(rs.getString("email"));
 
             administrators.add(administrator);
         }

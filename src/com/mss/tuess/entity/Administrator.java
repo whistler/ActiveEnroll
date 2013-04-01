@@ -14,6 +14,7 @@ public class Administrator extends User{
     private String country;
     private String zipcode;
     private String phone;
+    private String email;
     private String password;
 
     /**
@@ -160,6 +161,7 @@ public class Administrator extends User{
             this.zipcode = rs.getString("zipcode");
             this.phone = rs.getString("phone");
             this.password = rs.getString("password");
+            this.email = rs.getString("email");
         }
 
     }
@@ -178,6 +180,7 @@ public class Administrator extends User{
                 + "zipcode='" + this.zipcode + "', " 
                 + "phone='" + this.phone + "', " 
                 + "password='" + this.password + "'"
+                + "email='" + this.email + "'"
                 + "WHERE adminID=" + this.adminID);
     }
 
@@ -205,5 +208,19 @@ public class Administrator extends User{
         
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
