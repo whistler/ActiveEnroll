@@ -16,37 +16,54 @@ import javafx.scene.layout.Pane;
 
 public class ProfileController implements Initializable {
 
-    @FXML Pane sidebar;
-    
-    @FXML Label ID;
-    
-    @FXML Label status;
-    @FXML Label program;
-    @FXML Label registeredSince;
-    @FXML Label statusLabel;
-    @FXML Label programLabel;
-    @FXML Label registeredSinceLabel;
-    @FXML Label IDLabel;
-    @FXML Label errorLabel;
-    
-    @FXML TextField firstName;
-    @FXML TextField lastName;
-    @FXML TextField email;
-    @FXML TextArea address;
-    @FXML TextField city;
-    @FXML TextField zipCode;
-    @FXML TextField country;
-    @FXML TextField phone;
-    @FXML PasswordField newPassword;
-    @FXML PasswordField confirmPassword;
-    
+    @FXML
+    Pane sidebar;
+    @FXML
+    Label ID;
+    @FXML
+    Label status;
+    @FXML
+    Label program;
+    @FXML
+    Label registeredSince;
+    @FXML
+    Label statusLabel;
+    @FXML
+    Label programLabel;
+    @FXML
+    Label registeredSinceLabel;
+    @FXML
+    Label IDLabel;
+    @FXML
+    Label errorLabel;
+    @FXML
+    TextField firstName;
+    @FXML
+    TextField lastName;
+    @FXML
+    TextField email;
+    @FXML
+    TextArea address;
+    @FXML
+    TextField city;
+    @FXML
+    TextField zipCode;
+    @FXML
+    TextField country;
+    @FXML
+    TextField phone;
+    @FXML
+    PasswordField newPassword;
+    @FXML
+    PasswordField confirmPassword;
+
     /**
      * Initializes the controller class. Shows the current user in the view
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ViewManager.loadSidebar(sidebar);
-        
+
         User user = CurrentUser.getUser();
         ID.setText(Integer.toString(user.getID()));
         firstName.setText(user.getFirstName());
@@ -57,29 +74,28 @@ public class ProfileController implements Initializable {
         zipCode.setText(user.getZipcode());
         country.setText(user.getCountry());
         phone.setText(user.getPhone());
- 
+
         IDLabel.setText(user.getClass().getSimpleName() + " ID");
-        
-        if(user.getClass()==Student.class)
-        {
+
+        if (user.getClass() == Student.class) {
             status.setVisible(true);
             registeredSince.setVisible(true);
             program.setVisible(true);
             statusLabel.setVisible(true);
             registeredSinceLabel.setVisible(true);
             programLabel.setVisible(true);
-            
+
             Student student = (Student) user;
             status.setText(student.getStatus());
             registeredSince.setText(student.getRegisteredSince());
             program.setText(student.getProgramID());
         }
     }
-    
-    @FXML public void update() throws SQLException
-    {
+
+    @FXML
+    public void update() throws SQLException {
         User user = CurrentUser.getUser();
-        
+
         user.setAddress(address.getText());
         user.setCity(city.getText());
         user.setCountry(country.getText());
@@ -89,28 +105,24 @@ public class ProfileController implements Initializable {
         user.setLastName(lastName.getText());
         user.setPhone(phone.getText());
         user.setZipcode(zipCode.getText());
-        
-        if(!newPassword.getText().isEmpty()) 
-        {
-            if(newPassword.getText().equals(confirmPassword.getText()))
+
+        if (!newPassword.getText().isEmpty()) {
+            if (newPassword.getText().equals(confirmPassword.getText())) {
                 user.setPassword(newPassword.getText());
-            else
-            {
+            } else {
                 errorLabel.setText("New password and password confimation do not match");
                 return;
             }
         }
-        
-        if(user.getClass()==Student.class)
-        {
+
+        if (user.getClass() == Student.class) {
             Student student = (Student) user;
             status.setText(student.getStatus());
             registeredSince.setText(student.getRegisteredSince());
             program.setText(student.getProgramID());
         }
-        
+
         user.update();
         errorLabel.setText("Saved!");
     }
-    
 }
