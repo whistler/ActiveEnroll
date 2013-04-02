@@ -11,14 +11,15 @@ public class Administrator extends User{
     /**
      * @return the adminID
      */
-    public int getAdminID() {
+    @Override
+    public int getID() {
         return adminID;
     }
 
     /**
      * @param adminID the adminID to set
      */
-    public void setAdminID(int adminID) {
+    public void setID(int adminID) {
         this.adminID = adminID;
     }
 
@@ -32,7 +33,7 @@ public class Administrator extends User{
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM administrator WHERE adminID = " + adminId);
         if (rs.next()) {
-            this.setAdminID( rs.getInt("adminID"));
+            this.setID( rs.getInt("adminID"));
             this.setFirstName(rs.getString("firstName"));
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
@@ -62,12 +63,12 @@ public class Administrator extends User{
                 + "phone='" + this.getPhone() + "', " 
                 + "password='" + this.getPassword() + "'"
                 + "email='" + this.getEmail ()+ "'"
-                + "WHERE adminID=" + this.getAdminID());
+                + "WHERE adminID=" + this.getID());
     }
 
     @Override
     public void delete() throws SQLException {
-        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.getAdminID());
+        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.getID());
     }
 
     /**
@@ -78,7 +79,7 @@ public class Administrator extends User{
     public void insert() throws SQLException {
         String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, password) values " + "(" 
-                + this.getAdminID() + ", '" 
+                + this.getID() + ", '" 
                 + this.getFirstName() + "', '" 
                 + this.getLastName() + "', '" 
                 + this.getAddress() + "', '" 
