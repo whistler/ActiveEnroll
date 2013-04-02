@@ -191,7 +191,7 @@ public class EnrollSection {
                 + "courseDept='" + section.getCourseDept() + "' AND "
                 + "courseNum='" + section.getCourseNum() + "' AND "
                 + "type='" + section.getType() + "' AND "
-                + "term='" + section.getTerm() + "' ";
+                + "term='" + section.getTermID() + "' ";
         ResultSet rs = DatabaseConnector.returnQuery(sql);
         if(rs.next()) return true;
         else return false;
