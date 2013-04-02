@@ -19,6 +19,7 @@ public class Administrator extends User{
     /**
      * @param adminID the adminID to set
      */
+    @Override
     public void setID(int adminID) {
         this.adminID = adminID;
     }
@@ -92,19 +93,5 @@ public class Administrator extends User{
         
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
