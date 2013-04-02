@@ -106,12 +106,19 @@ public class Student extends User {
      */
     @Override
     public void update() throws SQLException {
-        String sql = "UPDATE student SET firstName=" + this.getFirstName()
-                + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
-                + ", city=" + this.getCity() + ", country=" + this.getCountry()
-                + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
-                + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
-                + ", status=" + this.getStatus() + ", password=" + this.getPassword() + ", email=" + this.getEmail()
+        String sql = "UPDATE student SET "
+                + "firstName='" + this.getFirstName() + "', "
+                + "lastName='" + this.getLastName() + "', "
+                + "address='" + this.getAddress() + "', "
+                + "city='" + this.getCity() + "', "
+                + "country='" + this.getCountry() + "', "
+                + "zipcode='" + this.getZipcode() + "', "
+                + "phone='" + this.getPhone() + "', "
+                + "programID='" + this.getProgramID() + "', "
+                + "registeredSince='" + this.getRegisteredSince() + "', "
+                + "status='" + this.getStatus() + "', "
+                + "password='" + this.getPassword() + "', "
+                + "email='" + this.getEmail() + "' "
                 + "WHERE studentID=" + this.getID();
         DatabaseConnector.updateQuery(sql);
     }
