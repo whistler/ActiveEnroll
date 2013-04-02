@@ -34,16 +34,16 @@ public class Administrator extends User{
         ResultSet rs;
         rs = DatabaseConnector.returnQuery("SELECT * FROM administrator WHERE adminID = " + adminId);
         if (rs.next()) {
-            this.adminID = rs.getInt("adminID");
-            this.firstName = rs.getString("firstName");
-            this.lastName = rs.getString("lastName");
-            this.address = rs.getString("address");
-            this.city = rs.getString("city");
-            this.country = rs.getString("country");
-            this.zipcode = rs.getString("zipcode");
-            this.phone = rs.getString("phone");
-            this.password = rs.getString("password");
-            this.email = rs.getString("email");
+            this.setID( rs.getInt("adminID"));
+            this.setFirstName(rs.getString("firstName"));
+            this.setLastName(rs.getString("lastName"));
+            this.setAddress(rs.getString("address"));
+            this.setCity(rs.getString("city"));
+            this.setCountry(rs.getString("country"));
+            this.setZipcode(rs.getString("zipcode"));
+            this.setPhone(rs.getString("phone"));
+            this.setPassword(rs.getString("password"));
+            this.setEmail (rs.getString("email"));
         }
 
     }
@@ -55,21 +55,21 @@ public class Administrator extends User{
     @Override
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE administrator SET "
-                + "firstName='" + this.firstName + "', " 
-                + "lastName='" + this.lastName + "', " 
-                + "address='" + this.address + "', "
-                + "city='" + this.city + "', "
-                + "country='" + this.country + "', "
-                + "zipcode='" + this.zipcode + "', " 
-                + "phone='" + this.phone + "', " 
-                + "password='" + this.password + "'"
-                + "email='" + this.email + "'"
-                + "WHERE adminID=" + this.adminID);
+                + "firstName='" + this.getFirstName() + "', " 
+                + "lastName='" + this.getLastName() + "', " 
+                + "address='" + this.getAddress() + "', "
+                + "city='" + this.getCity() + "', "
+                + "country='" + this.getCountry() + "', "
+                + "zipcode='" + this.getZipcode() + "', " 
+                + "phone='" + this.getPhone() + "', " 
+                + "password='" + this.getPassword() + "'"
+                + "email='" + this.getEmail ()+ "'"
+                + "WHERE adminID=" + this.getID());
     }
 
     @Override
     public void delete() throws SQLException {
-        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.adminID);
+        DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.getID());
     }
 
     /**
@@ -80,15 +80,15 @@ public class Administrator extends User{
     public void insert() throws SQLException {
         String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, password) values " + "(" 
-                + this.adminID + ", '" 
-                + this.firstName + "', '" 
-                + this.lastName + "', '" 
-                + this.address + "', '" 
-                + this.city + "', '" 
-                + this.country + "', '" 
-                + this.zipcode + "', '" 
-                + this.phone + "', '" 
-                + this.password
+                + this.getID() + ", '" 
+                + this.getFirstName() + "', '" 
+                + this.getLastName() + "', '" 
+                + this.getAddress() + "', '" 
+                + this.getCity() + "', '" 
+                + this.getCountry() + "', '" 
+                + this.getZipcode() + "', '" 
+                + this.getPhone() + "', '" 
+                + this.getPassword()
                 + "')";
         
         System.out.println(sql);
