@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author chen0910
  */
 public class Term {
-    private String term;
+    private String termID;
     private Date start;
     private Timestamp registrationStart;
     private Timestamp registrationEnd;
@@ -20,17 +20,17 @@ public class Term {
     private Date end;
 
     /**
-     * @return the term
+     * @return the termID
      */
-    public String getTerm() {
-        return term;
+    public String getTermID() {
+        return termID;
     }
 
     /**
-     * @param term the term to set
+     * @param termID the termID to set
      */
-    public void setTerm(String term) {
-        this.term = term;
+    public void setTermID(String term) {
+        this.termID = term;
     }
 
     /**
@@ -118,9 +118,9 @@ public class Term {
     }
     
     /**
-     * Loads Term with the given term from the database
+     * Loads Term with the given termID from the database
      *
-     * @param term term which the course belongs to
+     * @param termID termID which the course belongs to
      * @throws SQLException
      */
     public void fetch(String term) throws SQLException {
@@ -130,7 +130,7 @@ public class Term {
         rs = DatabaseConnector.returnQuery(query);
         
         if (rs.next()) {
-            this.term = rs.getString("term");
+            this.termID = rs.getString("termID");
             this.start = rs.getDate("start");
             this.registrationStart = rs.getTimestamp("registrationStart");
             this.registrationEnd = rs.getTimestamp("registrationEnd");
@@ -148,7 +148,7 @@ public class Term {
      */
     public void update() throws SQLException {
         DatabaseConnector.updateQuery("UPDATE term SET "
-                + "term='" + this.term + "', "
+                + "termID='" + this.termID + "', "
                 + "start='" + this.start + "', "
                 + "registrationStart='" + this.registrationStart + "', "
                 + "registrationEnd='" + this.registrationEnd + "', "
@@ -163,19 +163,19 @@ public class Term {
      */
     public void delete() throws SQLException {
         DatabaseConnector.updateQuery("DELETE FROM term "
-                + "WHERE term='" + this.term);
+                + "WHERE termID='" + this.termID);
     }
     
     /**
      * Creates a new record with the database with the properties of this
-     * term
+     * termID
      *
      * @throws SQLException
      */
     public void insert() throws SQLException {
-        String sql = "INSERT INTO term (term, start, registrationStart, registrationEnd, dropWithoutW,dropWithW,end) "
+        String sql = "INSERT INTO term (termID, start, registrationStart, registrationEnd, dropWithoutW,dropWithW,end) "
                 + " values ('"
-                + this.term + "', '"
+                + this.termID + "', '"
                 + this.start + "', '"
                 + this.registrationStart + "', "
                 + this.registrationEnd + ", '"
