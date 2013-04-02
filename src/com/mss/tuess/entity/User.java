@@ -4,15 +4,15 @@ import java.sql.SQLException;
 
 public abstract class User {
 
-    protected String firstName;
-    protected String lastName;
-    protected String address;
-    protected String city;
-    protected String email;
-    protected String country;
-    protected String zipcode;
-    protected String phone;
-    protected String password;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String email;
+    private String country;
+    private String zipcode;
+    private String phone;
+    private String password;
 
     public abstract void fetch(int id) throws SQLException;
 

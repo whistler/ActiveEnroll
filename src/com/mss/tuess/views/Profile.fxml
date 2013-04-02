@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.WaivePrerequisiteController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
   <children>
     <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="778.0" />
     <SplitPane dividerPositions="0.005208333333333333" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
@@ -32,16 +32,16 @@
             <Label layoutX="154.0" layoutY="242.0" text="Status" />
             <Label layoutX="154.0" layoutY="262.0" text="New Password" />
             <Label layoutX="154.0" layoutY="284.0" text="Confirm Password" />
-            <TextField layoutX="287.0" layoutY="54.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="76.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="173.0" prefWidth="200.0" />
+            <TextField fx:id="firstName" layoutX="288.0" layoutY="54.0" prefWidth="200.0" />
+            <TextField fx:id="lastName" layoutX="287.0" layoutY="76.0" prefWidth="200.0" />
+            <TextField fx:id="phone" layoutX="287.0" layoutY="173.0" prefWidth="200.0" />
             <Label layoutX="288.0" layoutY="199.0" text="ProgramName" />
             <Label layoutX="288.0" layoutY="220.0" text="Date" />
             <Label layoutX="288.0" layoutY="242.0" text="Part-time/Full-time" />
-            <TextField layoutX="287.0" layoutY="259.0" prefWidth="200.0" />
-            <TextField layoutX="287.0" layoutY="281.0" prefWidth="200.0" />
-            <TextArea layoutX="287.0" layoutY="123.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
-            <TextField layoutX="287.0" layoutY="98.0" prefWidth="200.0" />
+            <TextField fx:id="newPassWord" layoutX="287.0" layoutY="259.0" prefWidth="200.0" />
+            <TextField fx:id="confirmPassWord" layoutX="287.0" layoutY="281.0" prefWidth="200.0" />
+            <TextArea fx:id="address" layoutX="287.0" layoutY="123.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
+            <TextField fx:id="email" layoutX="287.0" layoutY="98.0" prefWidth="200.0" />
             <Label layoutX="151.0" layoutY="101.0" text="Email" />
           </children>
         </AnchorPane>
