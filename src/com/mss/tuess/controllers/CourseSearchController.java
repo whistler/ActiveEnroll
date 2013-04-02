@@ -6,7 +6,7 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
-import com.mss.tuess.entity.SelectedCourse;
+import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
 import java.net.URL;
@@ -150,7 +150,7 @@ public class CourseSearchController implements Initializable {
                     public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
                         int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
                         System.out.println("Index : "+selectedIndex);
-                        SelectedCourse.selectedCourse = filterContent.get(selectedIndex);
+                        State.selectedCourse = filterContent.get(selectedIndex);
 
                         try {
                             ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
