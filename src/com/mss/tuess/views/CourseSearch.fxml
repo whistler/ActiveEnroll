@@ -14,7 +14,7 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.CourseSearchController">
   <children>
     <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.25" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+    <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
       <items>
         <fx:include fx:id="sidebar" source="StudentSidebar.fxml" prefHeight="475.0" prefWidth="186.0" />
         <!-- start of content -->
@@ -26,13 +26,13 @@
                 <Font name="System Bold" size="12.0" />
               </font>
             </Label>
-            <TableView fx:id="courseTable" layoutY="193.0" prefHeight="282.0" prefWidth="607.0">
+            <TableView fx:id="courseTable" layoutX="59.0" layoutY="190.0" prefHeight="282.0" prefWidth="463.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn prefWidth="75.0" text="Course Num" fx:id="courseNum" />
-                <TableColumn prefWidth="75.0" text="Course Name" fx:id="courseName" />
+                <TableColumn text="Course Code" fx:id="courseNum" />
+                <TableColumn prefWidth="90.0" text="Course Name" fx:id="courseName" />
                 <TableColumn prefWidth="75.0" text="Department" fx:id="courseDept" />
                 <TableColumn prefWidth="130.0" text="Course Info" fx:id="info" />
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credit" fx:id="credit" />
+                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" fx:id="credit" />
               </columns>
             </TableView>
             <Pane layoutX="28.0" layoutY="27.0" prefHeight="112.0" prefWidth="551.0">
@@ -61,7 +61,7 @@
               </tooltip>
             </TextField>
             <Label layoutX="57.0" layoutY="166.0" prefWidth="87.0" text="Search Filter:" />
-            <Label layoutX="374.0" layoutY="170.0" prefHeight="20.0" prefWidth="194.0" text="Click on a row to view the course" textFill="#606060">
+            <Label layoutX="328.0" layoutY="166.0" prefHeight="20.0" prefWidth="194.0" text="Click on a row to view the course" textFill="#606060">
               <font>
                 <Font name="System Bold Italic" size="12.0" />
               </font>
