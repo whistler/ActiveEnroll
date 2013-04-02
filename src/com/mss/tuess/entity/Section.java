@@ -23,7 +23,7 @@ public class Section {
     private String status;
     
     private Course course;
-    //private Term term;
+    private Term term;
     private Instructor instructor;
 
     /**
@@ -321,6 +321,7 @@ public class Section {
     {
         course.fetch(courseDept, courseNum);
         instructor.fetch(instructorID);
+        term.fetch(termID);
     }
     
     /**
@@ -343,5 +344,16 @@ public class Section {
     public Course getCourse()
     {
         return course;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Term getTerm()
+    {
+        return term;
     }
 }
