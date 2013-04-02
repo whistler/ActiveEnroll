@@ -154,7 +154,7 @@ public class ViewAllCoursesController implements Initializable {
                     public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
                         int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
                         System.out.println("Index : "+selectedIndex);
-                        State.selectedCourse = filterContent.get(selectedIndex);
+                        State.setCurrentCourse(filterContent.get(selectedIndex));
 
                         try {
                             ViewManager.changeView("/com/mss/tuess/views/Course.fxml");

@@ -5,6 +5,7 @@
 package com.mss.tuess.util;
 
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.entity.Section;
 
 /**
  *
@@ -12,14 +13,25 @@ import com.mss.tuess.entity.Course;
  */
 public class State {
     
-    public static Course selectedCourse = new Course();
+    private static Course currentCourse = new Course();
+    private static Section currentSection = new Section();
     
-    public void setCurrentCourse(Course course){
-        State.selectedCourse = course;
+    public static void setCurrentCourse(Course course){
+        State.currentCourse = course;
     }
     
-    public Course getCurrentCourse(){
-        return State.selectedCourse;
+    public static Course getCurrentCourse(){
+        return State.currentCourse;
+    }
+    
+    public static void setCurrentSection(Section section)
+    {
+        currentSection = section;
+    }
+    
+    public static Section getCurrentSection()
+    {
+        return currentSection;
     }
     
 }
