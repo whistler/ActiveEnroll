@@ -49,6 +49,11 @@ public class SidebarController implements Initializable {
         ViewManager.changeView("/com/mss/tuess/views/CourseSearch.fxml");
     }
     
+    @FXML public void showAllCourses() throws Exception
+    {
+        ViewManager.changeView("/com/mss/tuess/views/ViewAllCourses.fxml");
+    }
+    
     @FXML public void showRegisteredCourses() throws Exception
     {
         ViewManager.changeView("/com/mss/tuess/views/RegisteredCourses.fxml");
