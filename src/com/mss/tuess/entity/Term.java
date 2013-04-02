@@ -186,5 +186,5 @@ public class Term {
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
-    
+   
 }
