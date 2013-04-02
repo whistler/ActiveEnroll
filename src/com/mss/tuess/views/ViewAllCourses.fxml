@@ -18,7 +18,7 @@
       <items>
         <fx:include fx:id="sidebar" source="StudentSidebar.fxml" prefHeight="475.0" prefWidth="186.0" />
         <!-- start of content -->
-        <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="374.0" prefWidth="592.0">
+        <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="553.0" prefHeight="475.0" prefWidth="553.0">
           <children>
             <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
             <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses:" textFill="GREY">
@@ -26,13 +26,13 @@
                 <Font name="System Bold" size="12.0" />
               </font>
             </Label>
-            <TableView fx:id="courseTable" layoutX="67.0" layoutY="88.0" prefHeight="321.0" prefWidth="460.0" tableMenuButtonVisible="true">
+            <TableView fx:id="courseTable" layoutX="30.0" layoutY="88.0" prefHeight="321.0" prefWidth="497.0000999999975" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn text="Course Code" fx:id="courseNum" />
-                <TableColumn prefWidth="90.0" text="Course Name" fx:id="courseName" />
-                <TableColumn prefWidth="75.0" text="Department" fx:id="courseDept" />
-                <TableColumn prefWidth="130.0" text="Course Info" fx:id="info" />
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" fx:id="credit" />
+                <TableColumn minWidth="80.0" resizable="false" text="Course Code" fx:id="courseNum" />
+                <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="Course Name" fx:id="courseName" />
+                <TableColumn minWidth="75.0" prefWidth="75.0" text="Department" fx:id="courseDept" />
+                <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="Course Info" fx:id="info" />
+                <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
               </columns>
             </TableView>
             <TextField fx:id="filterText" layoutX="161.0" layoutY="50.0" prefWidth="99.0">
@@ -40,7 +40,7 @@
                 <Tooltip text="Type any course parameter to filter table" />
               </tooltip>
             </TextField>
-            <Label layoutX="68.0" layoutY="53.0" prefWidth="87.0" text="Search Filter:" textFill="#808080">
+            <Label layoutX="68.0" layoutY="53.0" prefWidth="87.0" text="Search Filter:" textFill="GREY">
               <font>
                 <Font name="System Bold Italic" size="12.0" fx:id="x1" />
               </font>
