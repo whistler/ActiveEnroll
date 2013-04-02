@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 public class RegisteredCoursesController implements Initializable {
 
     @FXML Pane sidebar;
-    
+     
     @FXML TextField courseNum;
     @FXML TextField courseName;
     @FXML TextField courseDept;
