@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -14,6 +15,7 @@ public class ProfileController implements Initializable {
 
     @FXML Pane sidebar;
     
+    @FXML Label studentID;
     @FXML TextField firstName;
     @FXML TextField lastName;
     @FXML TextField email;
@@ -27,9 +29,9 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        CurrentUser.getUser();
-        
+        User user = CurrentUser.getUser();
+        studentID.setText(Integer.toString(user.getID()));
         ViewManager.loadSidebar(sidebar);
-        firstName.setText("Wen Han");
+        //firstName.setText("Wen Han");
     }    
 }
