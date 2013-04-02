@@ -10,10 +10,11 @@
   <children>
     <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
     <Hyperlink layoutX="38.0" layoutY="59.0" onAction="#showCourseSearch" text="Search Courses" />
-    <Hyperlink layoutX="38.0" layoutY="81.0" onAction="#showRegisteredCourses" text="Registered Courses" />
-    <Hyperlink layoutX="38.0" layoutY="125.0" onAction="#showTranscript" text="Transcript" />
-    <Hyperlink layoutX="38.0" layoutY="147.0" onAction="#showMyProgram" text="My Program" />
+    <Hyperlink layoutX="39.0" layoutY="103.0" onAction="#showRegisteredCourses" text="Registered Courses" />
+    <Hyperlink layoutX="39.0" layoutY="147.0" onAction="#showTranscript" text="Transcript" />
+    <Hyperlink layoutX="40.0" layoutY="169.0" onAction="#showMyProgram" text="My Program" />
     <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
-    <Hyperlink layoutX="37.0" layoutY="103.0" onAction="#showTimetable" text="Timetable" />
+    <Hyperlink layoutX="39.0" layoutY="125.0" onAction="#showTimetable" text="Timetable" />
+    <Hyperlink layoutX="39.0" layoutY="81.0" text="View All Courses" />
   </children>
 </AnchorPane>

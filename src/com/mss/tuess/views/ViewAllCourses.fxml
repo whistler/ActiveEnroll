@@ -8,47 +8,44 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.CourseSearchController">
   <children>
     <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.25" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+    <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
       <items>
-        <Pane fx:id="sidebar" />
+        <fx:include fx:id="sidebar" source="StudentSidebar.fxml" prefHeight="475.0" prefWidth="186.0" />
         <!-- start of content -->
         <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="374.0" prefWidth="592.0">
           <children>
             <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-            <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses:" textFill="#404040">
+            <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses:" textFill="GREY">
               <font>
                 <Font name="System Bold" size="12.0" />
               </font>
             </Label>
-            <TableView layoutY="88.0" prefHeight="387.0" prefWidth="607.0">
+            <TableView fx:id="courseTable" layoutX="67.0" layoutY="88.0" prefHeight="321.0" prefWidth="460.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn prefWidth="75.0" text="Course ID" />
-                <TableColumn prefWidth="155.0" text="Name" />
-                <TableColumn editable="false" prefWidth="50.0" sortable="false" text="Credits" />
-                <TableColumn prefWidth="75.0" text="Start Date" />
-                <TableColumn prefWidth="130.0" text="Enrolment Deadline" />
-                <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Instructor" />
+                <TableColumn text="Course Code" fx:id="courseNum" />
+                <TableColumn prefWidth="90.0" text="Course Name" fx:id="courseName" />
+                <TableColumn prefWidth="75.0" text="Department" fx:id="courseDept" />
+                <TableColumn prefWidth="130.0" text="Course Info" fx:id="info" />
+                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" fx:id="credit" />
               </columns>
             </TableView>
-            <TextField layoutX="113.0" layoutY="51.0" prefWidth="170.0">
-              <effect>
-                <InnerShadow height="14.928571428571429" radius="7.470238095238095" width="16.952380952380953" />
-              </effect>
+            <TextField fx:id="filterText" layoutX="161.0" layoutY="50.0" prefWidth="99.0">
               <tooltip>
                 <Tooltip text="Type any course parameter to filter table" />
               </tooltip>
             </TextField>
-            <Label layoutX="26.0" layoutY="54.0" prefWidth="76.0" text="Filter Results:" textFill="#606060">
+            <Label layoutX="68.0" layoutY="53.0" prefWidth="87.0" text="Search Filter:" textFill="#808080">
               <font>
                 <Font name="System Bold Italic" size="12.0" fx:id="x1" />
               </font>
             </Label>
-            <Label font="$x1" layoutX="409.0" layoutY="55.0" prefHeight="20.0" prefWidth="170.0" text="Click on a row to view course" textFill="#606060" />
+            <Label font="$x1" layoutX="333.0" layoutY="57.0" prefHeight="20.0" prefWidth="194.0" text="Click on a row to view the course" textFill="#606060" />
           </children>
         </AnchorPane>
         <!-- end of content -->
