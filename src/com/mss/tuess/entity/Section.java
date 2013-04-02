@@ -21,6 +21,10 @@ public class Section {
     private int registered;
     private String location;
     private String status;
+    
+    private Course course;
+    //private Term term;
+    private Instructor instructor;
 
     /**
      * @return the sectionID
@@ -306,5 +310,38 @@ public class Section {
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+    
+    /**
+     * Fetches related entities ie. course, instructor and term from the database
+     * into the object
+     * @throws SQLException 
+     */
+    public void fetchAssociations() throws SQLException
+    {
+        course.fetch(courseDept, courseNum);
+        instructor.fetch(instructorID);
+    }
+    
+    /**
+     * Returns instructor
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return instructor for this section
+     */
+    public Instructor getInstructor()
+    {
+        return instructor;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Course getCourse()
+    {
+        return course;
     }
 }

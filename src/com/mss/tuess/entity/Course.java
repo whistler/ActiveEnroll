@@ -59,9 +59,9 @@ public class Course {
      * @param courseNumer number for the course to load
      * @throws SQLException
      */
-    public void fetch(String department, String courseNumber) throws SQLException {
+    public void fetch(String courseDepartment, String courseNumber) throws SQLException {
         String query = "SELECT * FROM course WHERE courseDept = '" 
-                + department + "' AND courseNum = '" + courseNumber + "'";
+                + courseDepartment + "' AND courseNum = '" + courseNumber + "'";
         
         ResultSet rs;
         rs = DatabaseConnector.returnQuery(query);
