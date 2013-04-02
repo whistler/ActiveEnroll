@@ -177,7 +177,25 @@ public class EnrollSection {
         DatabaseConnector.updateQuery(sql);
     }
 
-
+    /**
+     * Checks whether the student is enrolled in the section or not
+     * @param student student to check
+     * @param section section to check
+     * @return whether the student is enrolled in the section or not
+     */
+    public static boolean isEnrolled(Student student, Section section) throws SQLException
+    {
+        String sql = "SELECT * FROM enrollSection WHERE "
+                + "studentID=" + student.getID() + " AND "
+                + "sectionID='" + section.getSectionID() + "' AND "
+                + "courseDept='" + section.getCourseDept() + "' AND "
+                + "courseNum='" + section.getCourseNum() + "' AND "
+                + "type='" + section.getType() + "' AND "
+                + "term='" + section.getTerm() + "' ";
+        ResultSet rs = DatabaseConnector.returnQuery(sql);
+        if(rs.next()) return true;
+        else return false;
+    }
 
  
 }
