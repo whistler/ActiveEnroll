@@ -95,7 +95,6 @@ public class Student extends User {
             this.setPassword(rs.getString("password"));
             this.setEmail(rs.getString("email"));
         }
-
     }
 
 
