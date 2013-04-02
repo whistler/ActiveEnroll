@@ -124,7 +124,7 @@ public class Term {
      * @throws SQLException
      */
     public void fetch(String term) throws SQLException {
-        String query = "SELECT * FROM term WHERE term = " + term;
+        String query = "SELECT * FROM term WHERE termID = " + term;
         
         ResultSet rs;
         rs = DatabaseConnector.returnQuery(query);
