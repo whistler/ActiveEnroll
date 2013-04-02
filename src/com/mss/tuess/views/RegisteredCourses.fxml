@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.CourseController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.RegisteredCoursesController">
   <children>
     <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
     <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
@@ -29,7 +29,7 @@
               <columns>
                 <TableColumn fx:id = "courseDept" maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Dept" />
                 <TableColumn fx:id = "courseNum" maxWidth="5000.0" minWidth="10.0" prefWidth="44.0" text="No." />
-                <TableColumn fx:id = "section"maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Section" />
+                <TableColumn fx:id = "section" maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Section" />
                 <TableColumn fx:id = "type" maxWidth="5000.0" minWidth="10.0" prefWidth="57.0" text="Type" />
                 <TableColumn fx:id = "termID" editable="false" prefWidth="75.0" sortable="false" text="Term" />
                 <TableColumn fx:id = "days" editable="false" prefWidth="75.0" sortable="false" text="Days" />
