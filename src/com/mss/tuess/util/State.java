@@ -6,6 +6,7 @@ package com.mss.tuess.util;
 
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.Section;
+import java.sql.SQLException;
 
 /**
  *
@@ -24,9 +25,10 @@ public class State {
         return State.currentCourse;
     }
     
-    public static void setCurrentSection(Section section)
+    public static void setCurrentSection(Section section) throws SQLException
     {
         currentSection = section;
+        currentSection.fetchAssociations();
     }
     
     public static Section getCurrentSection()
