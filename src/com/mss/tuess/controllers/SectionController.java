@@ -14,7 +14,7 @@ import com.mss.tuess.util.State;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class CourseController implements Initializable {
+public class SectionController implements Initializable {
 
     @FXML Pane sidebar;
     
