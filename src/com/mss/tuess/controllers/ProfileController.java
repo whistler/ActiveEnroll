@@ -4,10 +4,12 @@ import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -25,6 +27,7 @@ public class ProfileController implements Initializable {
     @FXML Label programLabel;
     @FXML Label registeredSinceLabel;
     @FXML Label IDLabel;
+    @FXML Label errorLabel;
     
     @FXML TextField firstName;
     @FXML TextField lastName;
@@ -34,8 +37,8 @@ public class ProfileController implements Initializable {
     @FXML TextField zipCode;
     @FXML TextField country;
     @FXML TextField phone;
-    @FXML TextField newPassWord;
-    @FXML TextField confirmPassWord;
+    @FXML PasswordField newPassword;
+    @FXML PasswordField confirmPassword;
     
     /**
      * Initializes the controller class. Shows the current user in the view
@@ -71,5 +74,43 @@ public class ProfileController implements Initializable {
             registeredSince.setText(student.getRegisteredSince());
             program.setText(student.getProgramID());
         }
-    }    
+    }
+    
+    @FXML public void update() throws SQLException
+    {
+        User user = CurrentUser.getUser();
+        
+        user.setAddress(address.getText());
+        user.setCity(city.getText());
+        user.setCountry(country.getText());
+        user.setEmail(email.getText());
+        user.setFirstName(firstName.getText());
+        user.setID(Integer.parseInt(ID.getText()));
+        user.setLastName(lastName.getText());
+        user.setPhone(phone.getText());
+        user.setZipcode(zipCode.getText());
+        
+        if(!newPassword.getText().isEmpty()) 
+        {
+            if(newPassword.getText().equals(confirmPassword.getText()))
+                user.setPassword(newPassword.getText());
+            else
+            {
+                errorLabel.setText("New password and password confimation do not match");
+                return;
+            }
+        }
+        
+        if(user.getClass()==Student.class)
+        {
+            Student student = (Student) user;
+            status.setText(student.getStatus());
+            registeredSince.setText(student.getRegisteredSince());
+            program.setText(student.getProgramID());
+        }
+        
+        user.update();
+        errorLabel.setText("Saved!");
+    }
+    
 }
