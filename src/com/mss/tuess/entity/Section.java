@@ -13,7 +13,7 @@ public class Section {
     private int instructorID;
     private String type;
     private String textbook;
-    private String term;
+    private String termID;
     private Date startTime;
     private Date endTime;
     private String day;
@@ -21,6 +21,10 @@ public class Section {
     private int registered;
     private String location;
     private String status;
+    
+    private Course course;
+    private Term term;
+    private Instructor instructor;
 
     /**
      * @return the sectionID
@@ -107,17 +111,17 @@ public class Section {
     }
 
     /**
-     * @return the term
+     * @return the termID
      */
-    public String getTerm() {
-        return term;
+    public String getTermID() {
+        return termID;
     }
 
     /**
-     * @param term the term to set
+     * @param termID the termID to set
      */
-    public void setTerm(String term) {
-        this.term = term;
+    public void setTermID(String term) {
+        this.termID = term;
     }
 
     /**
@@ -235,7 +239,7 @@ public class Section {
             this.setInstructorID(rs.getInt("instructorID"));
             this.setType(rs.getString("type"));
             this.setTextbook(rs.getString("textbook"));
-            this.setTerm(rs.getString("term"));
+            this.setTermID(rs.getString("termID"));
             this.setStartTime(rs.getTime("time"));
             this.setDay(rs.getString("day"));
             this.setCapacity(rs.getInt("capacity"));
@@ -256,10 +260,10 @@ public class Section {
         String sql = "UPDATE section SET "
                 + "courseDept=" + this.getCourseDept() + ", "
                 + "courseNum=" + this.getCourseNum() + ", "
-                + "instructorId=" + this.getInstructorID() + ", "
+                + "instructorID=" + this.getInstructorID() + ", "
                 + "type=" + this.getType() + ", "
                 + "textbook=" + this.getTextbook() + ", "
-                + "term=" + this.getTerm() + ", "
+                + "termID=" + this.getTermID() + ", "
                 + "startTime=" + this.getStartTime() + ", "
                 + "endTime=" + this.getEndTime() + ", "
                 + "day=" + this.getDay() + ", "
@@ -288,14 +292,14 @@ public class Section {
      */
     public void insert() throws SQLException {
         String sql = "INSERT INTO section  (sectionID, courseDept, courseNum, instructorID, type, textbook, "
-                + "term, startTime, endTime, day, capacity, registered, location, status) values "
+                + "termID, startTime, endTime, day, capacity, registered, location, status) values "
                 + "(" + this.getSectionID() + ", '"
                 + this.getCourseDept() + "', '"
                 + this.getCourseNum() + "', '"
                 + this.getInstructorID() + "', '"
                 + this.getType() + "', '"
                 + this.getTextbook() + "', '"
-                + this.getTerm() + "', '"
+                + this.getTermID() + "', '"
                 + this.getStartTime() + "', '"
                 + this.getEndTime() + "', '"
                 + this.getDay() + "', '"
@@ -306,5 +310,50 @@ public class Section {
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+    
+    /**
+     * Fetches related entities ie. course, instructor and term from the database
+     * into the object
+     * @throws SQLException 
+     */
+    public void fetchAssociations() throws SQLException
+    {
+        course.fetch(courseDept, courseNum);
+        instructor.fetch(instructorID);
+        term.fetch(termID);
+    }
+    
+    /**
+     * Returns instructor
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return instructor for this section
+     */
+    public Instructor getInstructor()
+    {
+        return instructor;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Course getCourse()
+    {
+        return course;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Term getTerm()
+    {
+        return term;
     }
 }
