@@ -104,8 +104,10 @@ public class ViewAllCoursesController implements Initializable {
         String filterString = filterText.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
-        }
+        }  
+        
         String lowerCaseFilterString = filterString.toLowerCase();
+
         if (course.getCourseName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
         } else if (course.getCourseDept().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
@@ -114,7 +116,7 @@ public class ViewAllCoursesController implements Initializable {
             return true;
         } else if(course.getInfo().toLowerCase().indexOf(lowerCaseFilterString) != -1){
             return true;
-        } else if(Integer.toString(course.getCredit()).toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if(Integer.toString(course.getCredit()).trim().toLowerCase().indexOf(lowerCaseFilterString) != -1){
             return true;
         }  
         return false;
