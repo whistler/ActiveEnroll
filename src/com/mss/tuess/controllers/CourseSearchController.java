@@ -6,12 +6,15 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.entity.SelectedCourse;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -42,6 +45,7 @@ public class CourseSearchController implements Initializable {
     private TableColumn<Course, String> info;
     @FXML
     private TableColumn<Course, Integer> credit;
+    
     private ObservableList<Course> tableContent = FXCollections.observableArrayList();
     private ObservableList<Course> filterContent = FXCollections.observableArrayList();
 
@@ -106,6 +110,10 @@ public class CourseSearchController implements Initializable {
             return true;
         } else if (course.getCourseDept().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
+        } else if (course.getCourseNum().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
+        } else if(course.getInfo().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
         }
         return false;
     }
@@ -123,6 +131,7 @@ public class CourseSearchController implements Initializable {
         credit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("credit"));
 
         courseTable.setItems(filterContent);
+        
         filterText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
@@ -130,5 +139,25 @@ public class CourseSearchController implements Initializable {
                 filterRefresh();
             }
         });
+        
+        /*
+         * Event Handler to capture the selected row
+         * 
+         */
+         courseTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Course>() {
+
+                    @Override
+                    public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
+                        int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
+                        System.out.println("Index : "+selectedIndex);
+                        SelectedCourse.selectedCourse = filterContent.get(selectedIndex);
+
+                        try {
+                            ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
+                        } catch (Exception ex) {
+                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
     }
 }

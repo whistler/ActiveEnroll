@@ -22,7 +22,7 @@ public class AdministratorList {
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Administrator administrator = new Administrator();
-            administrator.setAdminID(rs.getInt("adminID"));
+            administrator.setID(rs.getInt("adminID"));
             administrator.setFirstName(rs.getString("firstName"));
             administrator.setLastName(rs.getString("lastName"));
             administrator.setAddress(rs.getString("address"));

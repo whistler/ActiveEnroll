@@ -14,14 +14,16 @@ public class Student extends User {
     /**
      * @return the studentID
      */
-    public int getStudentID() {
+    @Override
+    public int getID() {
         return studentID;
     }
 
     /**
      * @param studentID the studentID to set
      */
-    public void setStudentID(int studentID) {
+    @Override
+    public void setID(int studentID) {
         this.studentID = studentID;
     }
 
@@ -79,7 +81,7 @@ public class Student extends User {
         String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;
         rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
-            this.setStudentID(rs.getInt("studentID"));
+            this.setID(rs.getInt("studentID"));
             this.setFirstName(rs.getString("firstName"));
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
@@ -96,6 +98,7 @@ public class Student extends User {
 
     }
 
+
     /**
      * Uses the information of this Student to update the record in the
      * database.
@@ -110,7 +113,7 @@ public class Student extends User {
                 + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
                 + ", programID=" + this.getProgramID() + ", registeredSince=" + this.getRegisteredSince()
                 + ", status=" + this.getStatus() + ", password=" + this.getPassword() + ", email=" + this.getEmail()
-                + "WHERE studentID=" + this.getStudentID();
+                + "WHERE studentID=" + this.getID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -121,7 +124,7 @@ public class Student extends User {
      */
     @Override
     public void delete() throws SQLException {
-        String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID();
+        String sql = "DELETE FROM student WHERE studentID=" + this.getID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -134,7 +137,7 @@ public class Student extends User {
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
                 + "zipcode, phone, programID, registeredSince, status, password, email) values "
-                + "(" + this.getStudentID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
+                + "(" + this.getID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
                 + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword() + "', '" + this.getEmail()
                 + "')";
         System.out.println(sql);

@@ -9,18 +9,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="778.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
   <children>
-    <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="778.0" />
-    <SplitPane dividerPositions="0.22809278350515463" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
+    <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="778.0" />
+    <SplitPane dividerPositions="0.25" layoutY="67.0" minHeight="335.0" prefHeight="374.0">
       <items>
-        <Pane fx:id="sidebar"/>
+        <Pane fx:id="sidebar" />
         <!-- start of content -->
         <AnchorPane minWidth="570.0" prefHeight="333.0" prefWidth="570.0">
           <children>
-            <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-            <Button layoutX="252.0" layoutY="213.0" mnemonicParsing="false" text="Mail Grades" />
-            <Label layoutX="78.0" layoutY="55.0" text="Use the button below to send grades to students for this semester" />
+            <Label fx:id="mailGradesStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="257.0" prefWidth="223.0" textFill="#00993d">
+              <font>
+                <Font name="System Bold" size="12.0" />
+              </font>
+            </Label>
+            <Button layoutX="258.0" layoutY="219.0" mnemonicParsing="false" onAction="#mailInstructions" text="Mail Grades" />
+            <Label layoutX="119.0" layoutY="82.0" text="Use the button below to send grades to students for this semester" />
+            <ProgressIndicator fx:id="mailGradeProgress" layoutX="280.0" layoutY="133.0" progress="-0.59" />
+            <Label fx:id="mailProgressLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="186.0" prefWidth="252.0" textFill="#0083cc" />
           </children>
         </AnchorPane>
         <!-- end of content -->
