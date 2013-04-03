@@ -9,7 +9,7 @@ package com.mss.tuess.entity;
  *
  * @author chenliang
  */
-public class RegisteredCourses {
+public class RegisteredCourse {
     
     private String courseDept;
     private String courseNum;

@@ -4,7 +4,7 @@
  */
 package com.mss.tuess.entitylist;
 
-import com.mss.tuess.entity.RegisteredCourses;
+import com.mss.tuess.entity.RegisteredCourse;
 import com.mss.tuess.entity.Term;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class RegisteredCoursesList {
     
-    private static ArrayList<RegisteredCourses> registeredCoursesList = new ArrayList();
+    private static ArrayList<RegisteredCourse> registeredCoursesList = new ArrayList();
     private static int totalCredits=0;
     
     
@@ -37,7 +37,7 @@ public class RegisteredCoursesList {
         
         
         while (rs.next()) {
-            RegisteredCourses registeredCourses = new RegisteredCourses();
+            RegisteredCourse registeredCourses = new RegisteredCourse();
             registeredCourses.setCourseDept(rs.getString("courseDept"));
             registeredCourses.setCourseNum(rs.getString("courseNum"));
             registeredCourses.setSectionID(rs.getString("sectionID"));
@@ -75,7 +75,7 @@ public class RegisteredCoursesList {
      * @param index the index of registered course list
      * @return one registered course of index in the list
      */
-    public static RegisteredCourses getRegisteredCourse(int index) 
+    public static RegisteredCourse getRegisteredCourse(int index) 
     {
         return registeredCoursesList.get(index);
     }
@@ -85,8 +85,8 @@ public class RegisteredCoursesList {
      *
      * @return ArrayList<RegisteredCourses> Course ArrayList
      */
-    public static ArrayList<RegisteredCourses> getAll() {
-        System.out.println(registeredCoursesList.get(1).getCourseName());
+    public static ArrayList<RegisteredCourse> getAll() {
+        //System.out.println(registeredCoursesList.get(1).getCourseName());
         return registeredCoursesList;
     }
     
