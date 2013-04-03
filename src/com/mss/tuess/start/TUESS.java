@@ -1,6 +1,8 @@
 package com.mss.tuess.start;
 
+import com.mss.tuess.entity.Term;
 import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -18,9 +20,9 @@ public class TUESS extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        DatabaseConnector.Connect();
-        
         instance = this;
+        DatabaseConnector.Connect();
+        State.setCurrentTerm(Term.getCurrentTerm());
         ViewManager.setStage(stage);
         ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
     }

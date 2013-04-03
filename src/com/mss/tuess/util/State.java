@@ -6,6 +6,7 @@ package com.mss.tuess.util;
 
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.Term;
 import java.sql.SQLException;
 
 /**
@@ -14,15 +15,15 @@ import java.sql.SQLException;
  */
 public class State {
     
-    private static Course currentCourse = new Course();
+    private static Term currentTerm = new Term();
     private static Section currentSection = new Section();
     
-    public static void setCurrentCourse(Course course){
-        State.currentCourse = course;
+    public static void setCurrentTerm(Term course){
+        currentTerm = course;
     }
     
-    public static Course getCurrentCourse(){
-        return State.currentCourse;
+    public static Term getCurrentTerm(){
+        return currentTerm;
     }
     
     public static void setCurrentSection(Section section) throws SQLException

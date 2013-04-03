@@ -22,9 +22,9 @@ public class Section {
     private String location;
     private String status;
     
-    private Course course;
-    private Term term;
-    private Instructor instructor;
+    private Course course = new Course();
+    private Term term = new Term();
+    private Instructor instructor = new Instructor();
 
     /**
      * @return the sectionID
@@ -228,9 +228,15 @@ public class Section {
      *
      * @throws SQLException
      */
-    public void fetch(String sectionID) throws SQLException {
+    public void fetch(String sectionID, String courseDept, String courseNum, String type, String termID) throws SQLException {
         ResultSet rs;
-        String sql = "SELECT * FROM section  WHERE sectionID = " + sectionID;
+        String sql = "SELECT * FROM section  WHERE "
+                + "sectionID = '" + sectionID + "' AND "
+                + "courseDept = '" + courseDept + "' AND "
+                + "courseNum = '" + courseNum + "' AND "
+                + "type = '" + type + "' AND "
+                + "termID = '" + termID + "'" ;
+        
         rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
             this.setSectionID(rs.getString("sectionID"));
@@ -240,7 +246,8 @@ public class Section {
             this.setType(rs.getString("type"));
             this.setTextbook(rs.getString("textbook"));
             this.setTermID(rs.getString("termID"));
-            this.setStartTime(rs.getTime("time"));
+            this.setStartTime(rs.getTime("startTime"));
+            this.setEndTime(rs.getTime("endTime"));
             this.setDay(rs.getString("day"));
             this.setCapacity(rs.getInt("capacity"));
             this.setRegistered(rs.getInt("registered"));
