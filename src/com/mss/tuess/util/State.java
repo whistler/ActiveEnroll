@@ -5,6 +5,9 @@
 package com.mss.tuess.util;
 
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.Term;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,14 +15,26 @@ import com.mss.tuess.entity.Course;
  */
 public class State {
     
-    public static Course selectedCourse = new Course();
+    private static Term currentTerm = new Term();
+    private static Section currentSection = new Section();
     
-    public void setCurrentCourse(Course course){
-        State.selectedCourse = course;
+    public static void setCurrentTerm(Term course){
+        currentTerm = course;
     }
     
-    public Course getCurrentCourse(){
-        return State.selectedCourse;
+    public static Term getCurrentTerm(){
+        return currentTerm;
+    }
+    
+    public static void setCurrentSection(Section section) throws SQLException
+    {
+        currentSection = section;
+        currentSection.fetchAssociations();
+    }
+    
+    public static Section getCurrentSection()
+    {
+        return currentSection;
     }
     
 }

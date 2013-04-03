@@ -150,10 +150,9 @@ public class CourseSearchController implements Initializable {
                     public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
                         int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
                         System.out.println("Index : "+selectedIndex);
-                        State.selectedCourse = filterContent.get(selectedIndex);
 
                         try {
-                            ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
+                            ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
                         }
