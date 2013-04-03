@@ -3,6 +3,8 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EnrollSection {
 
@@ -183,7 +185,7 @@ public class EnrollSection {
      * @param section section to check
      * @return whether the student is enrolled in the section or not
      */
-    public static boolean isEnrolled(Student student, Section section) throws SQLException
+    public static boolean isEnrolled(Student student, Section section)
     {
         String sql = "SELECT * FROM enrollSection WHERE "
                 + "studentID=" + student.getID() + " AND "
@@ -191,10 +193,17 @@ public class EnrollSection {
                 + "courseDept='" + section.getCourseDept() + "' AND "
                 + "courseNum='" + section.getCourseNum() + "' AND "
                 + "type='" + section.getType() + "' AND "
-                + "term='" + section.getTermID() + "' ";
-        ResultSet rs = DatabaseConnector.returnQuery(sql);
-        if(rs.next()) return true;
-        else return false;
+                + "termID='" + section.getTermID() + "' ";
+        
+        ResultSet rs;
+        try {
+            rs = DatabaseConnector.returnQuery(sql);
+            if(rs.next()) return true;
+            else return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollSection.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
  
