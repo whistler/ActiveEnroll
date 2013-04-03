@@ -30,6 +30,7 @@ public class RegisteredCoursesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ViewManager.loadSidebar(sidebar);
+        /*
         if(State.getCurrentCourse() != null && !State.getCurrentCourse().getCourseNum().isEmpty()){
             //set course fields
             courseNum.setText(State.getCurrentCourse().getCourseNum());
@@ -38,5 +39,6 @@ public class RegisteredCoursesController implements Initializable {
             courseDept.setText(State.getCurrentCourse().getCourseDept());
             courseCredits.setText(Integer.toString(State.getCurrentCourse().getCredit()));
         }
+        */
     }    
 }
