@@ -58,7 +58,8 @@ public class SectionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ViewManager.loadSidebar(sidebar);
         Section section = State.getCurrentSection();
-        if (section != null && !section.getCourseNum().isEmpty()) {
+        System.out.println(section.getCourseNum());
+        if (section != null) {
             //set course fields
             courseNum.setText(section.getCourse().getCourseNum());
             courseName.setText(section.getCourse().getCourseName());

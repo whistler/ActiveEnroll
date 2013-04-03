@@ -208,6 +208,26 @@ public class ViewAllCoursesController implements Initializable {
                         }
                     }
                 });
+         
+        /*
+         * Event Handler to capture the selected course
+         */
+         sectionTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Section>() {
+
+                    @Override
+                    public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
+                        int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
+                        System.out.println("Index : "+selectedIndex);
+
+                        try {
+                            State.setCurrentSection(sectionFilterContent.get(selectedIndex));
+                            ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
+                        } catch (Exception ex) {
+                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+         
         
          /**
           * map the section table attributes
