@@ -6,6 +6,7 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.entity.Section;
 import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
@@ -31,8 +32,12 @@ public class ViewAllCoursesController implements Initializable {
 
     @FXML
     Pane sidebar;
+    
     @FXML
-    private TextField filterText;
+    private TextField courseFilter;
+    @FXML
+    private TextField sectionFilter;
+    
     @FXML
     private TableView<Course> courseTable;
     @FXML
@@ -46,8 +51,26 @@ public class ViewAllCoursesController implements Initializable {
     @FXML
     private TableColumn<Course, Integer> credit;
     
-    private ObservableList<Course> tableContent = FXCollections.observableArrayList();
-    private ObservableList<Course> filterContent = FXCollections.observableArrayList();
+    @FXML
+    private TableView<Section> sectionTable;
+    @FXML
+    private TableColumn<Section, String> sectionID;
+    @FXML
+    private TableColumn<Section, String> type;
+    @FXML
+    private TableColumn<Section, String> days;
+    @FXML
+    private TableColumn<Section, String> startTime;
+    @FXML
+    private TableColumn<Section, String> endTime;
+    @FXML
+    private TableColumn<Section, Integer> instructor;
+    
+    private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
+    private ObservableList<Course> courseFilterContent = FXCollections.observableArrayList();
+    
+    private ObservableList<Section> sectionTableContent = FXCollections.observableArrayList();
+    private ObservableList<Section> sectionFilterContent = FXCollections.observableArrayList();
 
     /**
      * Constructor of CourseSearchController
@@ -57,18 +80,28 @@ public class ViewAllCoursesController implements Initializable {
     public ViewAllCoursesController() throws SQLException {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
-        int courseCounter = 0;
-        tableContent.clear();
+        //int courseCounter = 0;
+        courseTableContent.clear();
+        
+        /*
+         * This block has to be removed!
         while (courseSize - 1 != courseCounter) {
-            tableContent.add(CourseList.get(courseCounter));
+            courseTableContent.add(CourseList.get(courseCounter));
             courseCounter++;
+        }*/
+        //the above block is replaced by this block!!! - Karthik
+        if(courseSize > 0){
+        courseTableContent.addAll(CourseList.getAll());
         }
-        filterContent.addAll(tableContent);
-
-        tableContent.addListener(new ListChangeListener<Course>() {
+        
+        courseFilterContent.addAll(courseTableContent);
+        
+        //event listener for course filter 
+        
+        courseTableContent.addListener(new ListChangeListener<Course>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends Course> change) {
-                filterRefresh();
+                courseFilterRefresh();
             }
         });
     }
@@ -85,11 +118,11 @@ public class ViewAllCoursesController implements Initializable {
     /**
      * Refresh the content of the filter
      */
-    private void filterRefresh() {
-        filterContent.clear();
-        for (Course course : tableContent) {
+    private void courseFilterRefresh() {
+        courseFilterContent.clear();
+        for (Course course : courseTableContent) {
             if (filterChecker(course)) {
-                filterContent.add(course);
+                courseFilterContent.add(course);
             }
         }
         tableOrderAct();
@@ -101,7 +134,7 @@ public class ViewAllCoursesController implements Initializable {
      * @param course the course obj
      */
     private boolean filterChecker(Course course) {
-        String filterString = filterText.getText();
+        String filterString = courseFilter.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
         }  
@@ -127,26 +160,33 @@ public class ViewAllCoursesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         ViewManager.loadSidebar(sidebar);
+        
+        /**
+         * map the course table attributes
+         */
         courseNum.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNum"));
         courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
         courseDept.setCellValueFactory(new PropertyValueFactory<Course, String>("courseDept"));
         info.setCellValueFactory(new PropertyValueFactory<Course, String>("info"));
         credit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("credit"));
 
-        courseTable.setItems(filterContent);
+        courseTable.setItems(courseFilterContent);
         
-        filterText.textProperty().addListener(new ChangeListener<String>() {
+        /**
+         * course filter event listener
+         */
+        courseFilter.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
                     String oldValue, String newValue) {
-                filterRefresh();
+                courseFilterRefresh();
             }
         });
         
         /*
-         * Event Handler to capture the selected row
-         * 
+         * Event Handler to capture the selected course
          */
          courseTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Course>() {
 
@@ -154,14 +194,31 @@ public class ViewAllCoursesController implements Initializable {
                     public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
                         int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
                         System.out.println("Index : "+selectedIndex);
-                        State.setCurrentCourse(filterContent.get(selectedIndex));
 
                         try {
-                            ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
+                            //ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
+                            String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
+                            SectionList.fetch(courseNum);
+                            sectionFilterContent.clear();
+                            sectionTableContent.clear();
+                            sectionTableContent.addAll(SectionList.getAll());
+                            sectionFilterContent.addAll(SectionList.getAll());
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
+        
+         /**
+          * map the section table attributes
+          */
+        sectionID.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionID"));
+        type.setCellValueFactory(new PropertyValueFactory<Section, String>("type"));
+        days.setCellValueFactory(new PropertyValueFactory<Section, String>("days"));
+        startTime.setCellValueFactory(new PropertyValueFactory<Section, String>("startTime"));
+        endTime.setCellValueFactory(new PropertyValueFactory<Section, String>("endTime"));
+        instructor.setCellValueFactory(new PropertyValueFactory<Section, Integer>("instructor"));
+
+        sectionTable.setItems(sectionFilterContent);
     }
 }
