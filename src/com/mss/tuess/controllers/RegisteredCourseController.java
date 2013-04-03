@@ -21,31 +21,20 @@ public class RegisteredCourseController implements Initializable
 
     @FXML Pane sidebar;
    
-    @FXML
-    private TextField filterText;
+    @FXML TextField filterText;
     
-    @FXML private TableView<RegisteredCourse> registeredCoursesTable;
+    @FXML TableView<RegisteredCourse> registeredCoursesTable;
+    @FXML  TableColumn<RegisteredCourse, String> courseDept;
+    @FXML  TableColumn<RegisteredCourse, String> courseNum;    
+    @FXML  TableColumn<RegisteredCourse, String> sectionID;
+    @FXML  TableColumn<RegisteredCourse, String> courseName;
+    @FXML  TableColumn<RegisteredCourse, String> termID;
+    @FXML  TableColumn<RegisteredCourse, String> day;
+    @FXML  TableColumn<RegisteredCourse, String> type;
+    @FXML  TableColumn<RegisteredCourse, Integer> credit;
     
-    @FXML 
-    private TableColumn<RegisteredCourse, String> courseDept;
-    @FXML 
-    private TableColumn<RegisteredCourse, String> courseNum;    
-    @FXML 
-    private TableColumn<RegisteredCourse, String> sectionID;
-    @FXML 
-    private TableColumn<RegisteredCourse, String> courseName;
-    @FXML 
-    private TableColumn<RegisteredCourse, String> termID;
-    @FXML 
-    private TableColumn<RegisteredCourse, String> day;
-    @FXML 
-    private TableColumn<RegisteredCourse, String> type;
-    @FXML 
-    private TableColumn<RegisteredCourse, Integer> credit;
-    
-    @FXML 
-    private TextField totalCredit;
-
+    @FXML Label currentTerm;
+    @FXML Label totalCredits;
     
     private ObservableList<RegisteredCourse> tableContent = FXCollections.observableArrayList();
     private ObservableList<RegisteredCourse> filterContent = FXCollections.observableArrayList();
@@ -58,10 +47,12 @@ public class RegisteredCourseController implements Initializable
      */
     public RegisteredCourseController() throws SQLException
     {
+        tableContent.clear();
         RegisteredCoursesList.fetch();
         int registeredCoursesSize = RegisteredCoursesList.getAll().size();
         tableContent.clear();
-       if(registeredCoursesSize > 0){
+        
+        if(registeredCoursesSize > 0){
         tableContent.addAll(RegisteredCoursesList.getAll());
         }
         filterContent.addAll(tableContent);
@@ -74,7 +65,7 @@ public class RegisteredCourseController implements Initializable
         });
     }
     
-        /**
+     /**
      * Handle the order for each column
      */
     private void tableOrderAct() {
@@ -96,7 +87,7 @@ public class RegisteredCourseController implements Initializable
         tableOrderAct();
     }
 
-    private boolean filterChecker(RegisteredCourse registeredCourses) {
+    private boolean filterChecker(RegisteredCourse registeredCourse) {
         String filterString = filterText.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
@@ -116,6 +107,9 @@ public class RegisteredCourseController implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
         ViewManager.loadSidebar(sidebar);
         
+        Term ct=State.getCurrentTerm();
+        currentTerm.setText(ct.getTermID());
+        
         courseDept.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("courseDept"));
         courseNum.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("courseNum"));
         sectionID.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("sectionID"));
@@ -126,11 +120,13 @@ public class RegisteredCourseController implements Initializable
         courseNum.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("courseNum"));
         credit.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, Integer>("credit"));
 
+       
+        totalCredits.setText(Integer.toString(RegisteredCoursesList.getTotalCredits()));
+
         
+        registeredCoursesTable.setItems(filterContent);
        
-       registeredCoursesTable.setItems(filterContent);
-       
-       filterText.textProperty().addListener(new ChangeListener<String>() {
+        filterText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
                     String oldValue, String newValue) {
@@ -138,10 +134,7 @@ public class RegisteredCourseController implements Initializable
             }
         });
     }
-    
-    
-    
-    
+   
     
     
 }
