@@ -4,6 +4,7 @@
  */
 package com.mss.tuess.entitylist;
 
+import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.Section;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
@@ -25,29 +26,41 @@ public class SectionList {
      * @throws SQLException
      */
     public static void fetch() throws SQLException {
-        ResultSet rs;
-        String sql = "SELECT * FROM section";
-        rs = DatabaseConnector.returnQuery(sql);
-        while (rs.next()) {
-            Section section = new Section();
-            section.setSectionID(rs.getString("sectionID"));
-            section.setCourseDept(rs.getString("courseDept"));
-            section.setInstructorID(rs.getInt("instructorID"));
-            section.setType(rs.getString("type"));
-            section.setTextbook(rs.getString("textbook"));
-            section.setTermID(rs.getString("term"));
-            section.setStartTime(rs.getTime("startTime"));
-            section.setEndTime(rs.getTime("endTime"));
-            section.setDay(rs.getString("day"));
-            section.setCapacity(rs.getInt("capacity"));
-            section.setRegistered(rs.getInt("registered"));
-            section.setLocation(rs.getString("location"));
-            section.setStatus(rs.getString("status"));
-
-            sections.add(section);
-        }
+ 
+        String selectAll = "SELECT * FROM section";
+        executeFetch(selectAll);
     }
+    
+    public static void fetch(String courseNum) throws SQLException {
+ 
+        String selectSectionsByCourse = "SELECT * FROM section where courseNum = "+courseNum;
+        executeFetch(selectSectionsByCourse);
+    }
+        
+    private static void executeFetch(String sql) throws SQLException {
+            
+            sections.clear();
+            ResultSet rs = DatabaseConnector.returnQuery(sql);
+            
+            while (rs.next()) {
+                Section section = new Section();
+                section.setSectionID(rs.getString("sectionID"));
+                section.setCourseDept(rs.getString("courseDept"));
+                section.setInstructorID(rs.getInt("instructorID"));
+                section.setType(rs.getString("type"));
+                section.setTextbook(rs.getString("textbook"));
+                section.setTermID(rs.getString("termID"));
+                section.setStartTime(rs.getTime("startTime"));
+                section.setEndTime(rs.getTime("endTime"));
+                section.setDay(rs.getString("day"));
+                section.setCapacity(rs.getInt("capacity"));
+                section.setRegistered(rs.getInt("registered"));
+                section.setLocation(rs.getString("location"));
+                section.setStatus(rs.getString("status"));
 
+                sections.add(section);
+            }
+    }
     /**
      * Returns the section stored at the given index
      *
@@ -56,5 +69,14 @@ public class SectionList {
      */
     public static Section get(int index) {
         return sections.get(index);
+    }
+    
+        /**
+     * Returns the sections List
+     *
+     * @return ArrayList<Section> sections ArrayList
+     */
+    public static ArrayList<Section> getAll() {
+        return sections;
     }
 }
