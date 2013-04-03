@@ -4,7 +4,7 @@
  */
 package com.mss.tuess.entitylist;
 
-import com.mss.tuess.entity.Enrollsection;
+import com.mss.tuess.entity.EnrollSection;
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.Transcriptrecord;
 import com.mss.tuess.util.CurrentUser;
