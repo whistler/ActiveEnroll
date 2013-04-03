@@ -4,10 +4,10 @@
  */
 package com.mss.tuess.controllers;
 
-import com.mss.tuess.entity.EnrollSection;
-import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import com.mss.tuess.util.State;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,5 +81,31 @@ public class SectionController implements Initializable {
                 dropButton.setVisible(false);
             }
         }
+    }
+
+    public static ResultSet fetchEnrolledCourses(int studentID) throws SQLException {
+        ResultSet rs;
+        String sql = "select courseDept, courseNum from enrollSection where studentID="+studentID;
+        rs = DatabaseConnector.returnQuery(sql);
+        return rs;
+    }
+    public static ResultSet fetchPrereqCourses(Section section) throws SQLException {
+        //CurrentUser.getUser().getID();
+        ResultSet rs;
+        String sql = "select prereqNum, prereqDept from prerequisite where courseNum='"+section.getCourseNum()+"' and courseDept='"+section.getCourseDept()+"'";
+        rs = DatabaseConnector.returnQuery(sql);
+        return rs;
+    }
+    public static boolean isAlreadyRegistered(Section section){
+    return true;
+    }
+    public static boolean canEnroll(Section section){
+    return true;
+    }
+    public static boolean registrationEndNotPass(Section section){
+    return true;
+    }
+    public static boolean notFull(Section section){
+    return true;
     }
 }
