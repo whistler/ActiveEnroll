@@ -65,7 +65,6 @@ public class SectionController implements Initializable {
             courseInfo.setText(section.getCourse().getInfo());
             courseDept.setText(section.getCourse().getCourseDept());
             courseCredits.setText(Integer.toString(section.getCourse().getCredit()));
-            //set
             String name = section.getInstructor().getFirstName() + " "
                     + section.getInstructor().getLastName();
             instructor.setText(name);
