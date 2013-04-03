@@ -31,7 +31,7 @@ public class RegisteredCoursesList {
         ResultSet rs;
         String sql = "select e.courseDept,e.courseNum,e.sectionID,c.courseName,e.termID,s.day,e.type,c.credit " +
 "from enrollSection as e natural join course as c natural join section as s " +
-"where e.studentID="+currentID+ "and e.termID=20131";//+currentTerm.getTermID();
+"where e.studentID="+currentID+ " and e.termID=20131";//+currentTerm.getTermID();
         rs = DatabaseConnector.returnQuery(sql);
 
         
@@ -85,7 +85,7 @@ public class RegisteredCoursesList {
      *
      * @return ArrayList<RegisteredCourses> Course ArrayList
      */
-    public static ArrayList<RegisteredCourses> getRegisteredCoursesList() {
+    public static ArrayList<RegisteredCourses> getAll() {
         System.out.println(registeredCoursesList.get(1).getCourseName());
         return registeredCoursesList;
     }
