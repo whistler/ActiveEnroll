@@ -1,10 +1,13 @@
 package com.mss.tuess.entity;
 
-public class Enrollcourse {
+public class Enrollsection {
 
     private int studentID;
     private String sectionID;
+    private String courseDept;
+    private String courseNum;
     private String grade;
+    private String term;
     private String type;
 
     /**
