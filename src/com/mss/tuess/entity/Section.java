@@ -3,6 +3,7 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Section {
 
@@ -12,13 +13,18 @@ public class Section {
     private int instructorID;
     private String type;
     private String textbook;
-    private String term;
-    private String time;
+    private String termID;
+    private Date startTime;
+    private Date endTime;
     private String day;
     private int capacity;
     private int registered;
     private String location;
     private String status;
+    
+    private Course course = new Course();
+    private Term term = new Term();
+    private Instructor instructor = new Instructor();
 
     /**
      * @return the sectionID
@@ -105,31 +111,45 @@ public class Section {
     }
 
     /**
-     * @return the term
+     * @return the termID
      */
-    public String getTerm() {
-        return term;
+    public String getTermID() {
+        return termID;
     }
 
     /**
-     * @param term the term to set
+     * @param termID the termID to set
      */
-    public void setTerm(String term) {
-        this.term = term;
+    public void setTermID(String term) {
+        this.termID = term;
     }
 
     /**
      * @return the time
      */
-    public String getTime() {
-        return time;
+    public Date getStartTime() {
+        return startTime;
     }
 
     /**
      * @param time the time to set
      */
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(Date time) {
+        this.startTime = time;
+    }
+
+    /**
+     * @return the time
+     */
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setEndTime(Date time) {
+        this.endTime = time;
     }
 
     /**
@@ -208,9 +228,15 @@ public class Section {
      *
      * @throws SQLException
      */
-    public void fetch(String sectionID) throws SQLException {
+    public void fetch(String sectionID, String courseDept, String courseNum, String type, String termID) throws SQLException {
         ResultSet rs;
-        String sql = "SELECT * FROM section  WHERE sectionID = " + sectionID;
+        String sql = "SELECT * FROM section  WHERE "
+                + "sectionID = '" + sectionID + "' AND "
+                + "courseDept = '" + courseDept + "' AND "
+                + "courseNum = '" + courseNum + "' AND "
+                + "type = '" + type + "' AND "
+                + "termID = '" + termID + "'" ;
+        
         rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
             this.setSectionID(rs.getString("sectionID"));
@@ -219,8 +245,9 @@ public class Section {
             this.setInstructorID(rs.getInt("instructorID"));
             this.setType(rs.getString("type"));
             this.setTextbook(rs.getString("textbook"));
-            this.setTerm(rs.getString("term"));
-            this.setTime(rs.getString("time"));
+            this.setTermID(rs.getString("termID"));
+            this.setStartTime(rs.getTime("startTime"));
+            this.setEndTime(rs.getTime("endTime"));
             this.setDay(rs.getString("day"));
             this.setCapacity(rs.getInt("capacity"));
             this.setRegistered(rs.getInt("registered"));
@@ -237,12 +264,20 @@ public class Section {
      * @throws SQLException
      */
     public void update() throws SQLException {
-        String sql = "UPDATE section SET courseDept=" + this.getCourseDept()
-                + ", courseNum=" + this.getCourseNum()+ ", instructorId=" + this.getInstructorID()
-                + ", type=" + this.getType()+ ", textbook=" + this.getTextbook()
-                + ", term=" + this.getTerm()+ ", time=" + this.getTime()
-                + ", day=" + this.getDay()+ ", capacity=" + this.getCapacity()
-                + ", registered=" + this.getRegistered()+ ", location=" + this.getLocation()+ ", status=" + this.getStatus()
+        String sql = "UPDATE section SET "
+                + "courseDept=" + this.getCourseDept() + ", "
+                + "courseNum=" + this.getCourseNum() + ", "
+                + "instructorID=" + this.getInstructorID() + ", "
+                + "type=" + this.getType() + ", "
+                + "textbook=" + this.getTextbook() + ", "
+                + "termID=" + this.getTermID() + ", "
+                + "startTime=" + this.getStartTime() + ", "
+                + "endTime=" + this.getEndTime() + ", "
+                + "day=" + this.getDay() + ", "
+                + "capacity=" + this.getCapacity() + ", "
+                + "registered=" + this.getRegistered() + ", "
+                + "location=" + this.getLocation() + ", "
+                + "status=" + this.getStatus()
                 + "WHERE sectionID=" + this.getSectionID();
         DatabaseConnector.updateQuery(sql);
     }
@@ -264,14 +299,68 @@ public class Section {
      */
     public void insert() throws SQLException {
         String sql = "INSERT INTO section  (sectionID, courseDept, courseNum, instructorID, type, textbook, "
-                + "term, time, day, capacity, registered, location, status) values "
-                + "(" + this.getSectionID()+ ", '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getInstructorID() + "', '" + this.getType() + "', '" + this.getTextbook()
-                + "', '" + this.getTerm() + "', '" + this.getTime() + "', '" + this.getDay() + "', '" + this.getCapacity() + "', '" + this.getRegistered() + "', '" + this.getLocation()+ "', '" + this.getStatus()
+                + "termID, startTime, endTime, day, capacity, registered, location, status) values "
+                + "(" + this.getSectionID() + ", '"
+                + this.getCourseDept() + "', '"
+                + this.getCourseNum() + "', '"
+                + this.getInstructorID() + "', '"
+                + this.getType() + "', '"
+                + this.getTextbook() + "', '"
+                + this.getTermID() + "', '"
+                + this.getStartTime() + "', '"
+                + this.getEndTime() + "', '"
+                + this.getDay() + "', '"
+                + this.getCapacity() + "', '"
+                + this.getRegistered() + "', '"
+                + this.getLocation() + "', '"
+                + this.getStatus()
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
-
-
-
+    
+    /**
+     * Fetches related entities ie. course, instructor and term from the database
+     * into the object
+     * @throws SQLException 
+     */
+    public void fetchAssociations() throws SQLException
+    {
+        course.fetch(courseDept, courseNum);
+        instructor.fetch(instructorID);
+        term.fetch(termID);
+    }
+    
+    /**
+     * Returns instructor
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return instructor for this section
+     */
+    public Instructor getInstructor()
+    {
+        return instructor;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Course getCourse()
+    {
+        return course;
+    }
+    
+     /**
+     * Returns course
+     * precondition: fetchAssociations() should be called before this method can
+     * be used
+     * @return course for this section
+     */
+    public Term getTerm()
+    {
+        return term;
+    }
 }

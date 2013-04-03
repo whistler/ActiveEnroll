@@ -14,10 +14,10 @@ import com.mss.tuess.util.State;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class CourseController implements Initializable {
+public class RegisteredCoursesController implements Initializable {
 
     @FXML Pane sidebar;
-    
+     
     @FXML TextField courseNum;
     @FXML TextField courseName;
     @FXML TextField courseDept;
@@ -30,13 +30,13 @@ public class CourseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ViewManager.loadSidebar(sidebar);
-        if(State.selectedCourse != null && !State.selectedCourse.getCourseNum().isEmpty()){
+        if(State.getCurrentCourse() != null && !State.getCurrentCourse().getCourseNum().isEmpty()){
             //set course fields
-            courseNum.setText(State.selectedCourse.getCourseNum());
-            courseName.setText(State.selectedCourse.getCourseName());
-            courseInfo.setText(State.selectedCourse.getInfo());
-            courseDept.setText(State.selectedCourse.getCourseDept());
-            courseCredits.setText(Integer.toString(State.selectedCourse.getCredit()));
+            courseNum.setText(State.getCurrentCourse().getCourseNum());
+            courseName.setText(State.getCurrentCourse().getCourseName());
+            courseInfo.setText(State.getCurrentCourse().getInfo());
+            courseDept.setText(State.getCurrentCourse().getCourseDept());
+            courseCredits.setText(Integer.toString(State.getCurrentCourse().getCredit()));
         }
     }    
 }
