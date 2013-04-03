@@ -186,5 +186,34 @@ public class Term {
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
+    
+    /**
+     * Returns the current Term from the database
+     * @return current term
+     * @throws SQLException 
+     */
+    public static Term getCurrentTerm() throws SQLException
+    {
+        String query = "SELECT * FROM term WHERE start < NOW() AND end > NOW();";
+        
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery(query);
+        
+        if (rs.next()) {
+            Term term = new Term();
+            term.termID = rs.getString("termID");
+            term.start = rs.getDate("start");
+            term.registrationStart = rs.getTimestamp("registrationStart");
+            term.registrationEnd = rs.getTimestamp("registrationEnd");
+            term.dropWithoutW = rs.getTimestamp("dropWithoutW");
+            term.dropWithW = rs.getTimestamp("dropWithW");
+            term.end = rs.getDate("end");
+            return term;
+        }
+        else
+        {
+            throw new RuntimeException("No valid term available");
+        }
+    }
    
 }
