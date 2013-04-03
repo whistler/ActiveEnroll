@@ -25,13 +25,15 @@ public class RegisteredCoursesList {
     
     
     public static void fetch() throws SQLException {
+        totalCredits=0;
+        registeredCoursesList.clear();
         int currentID;
         Term currentTerm=State.getCurrentTerm();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
         String sql = "select e.courseDept,e.courseNum,e.sectionID,c.courseName,e.termID,s.day,e.type,c.credit " +
 "from enrollSection as e natural join course as c natural join section as s " +
-"where e.studentID="+currentID+ " and e.termID=20131";//+currentTerm.getTermID();
+"where e.studentID="+currentID+ " and e.termID="+currentTerm.getTermID();
         rs = DatabaseConnector.returnQuery(sql);
 
         
@@ -49,12 +51,9 @@ public class RegisteredCoursesList {
             String lecture = "lecture";
             if(lecture.equals(rs.getString("type")))
             {
-                registeredCourses.setCredit(0);
-            }
-            else
-            {
                 registeredCourses.setCredit(rs.getInt("credit"));
                 addTotalCredits(rs.getInt("credit"));
+                
             }
             
 
