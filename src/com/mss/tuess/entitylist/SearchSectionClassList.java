@@ -49,6 +49,7 @@ public class SearchSectionClassList {
             ResultSet rs = DatabaseConnector.returnQuery(sql);
             
             while (rs.next()) {
+                
                 SectionClass sectionClass = new SectionClass();
                 sectionClass.setSectionID(rs.getString("sectionID"));
                 sectionClass.setCourseDept(rs.getString("courseDept"));
@@ -61,7 +62,6 @@ public class SearchSectionClassList {
                 sectionClass.setEndTime(rs.getTimestamp("endTime"));
                 sectionClass.setLocation(rs.getString("location"));
                     
-
                 sectionClassList.add(sectionClass);
             }
     }
