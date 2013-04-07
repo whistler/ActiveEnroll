@@ -7,6 +7,7 @@ package com.mss.tuess.controllers;
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.SectionClass;
 import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
@@ -52,25 +53,25 @@ public class ViewAllCoursesController implements Initializable {
     private TableColumn<Course, Integer> credit;
     
     @FXML
-    private TableView<Section> sectionTable;
+    private TableView<SectionClass> sectionClassTable;
     @FXML
     private TableColumn<Section, String> sectionID;
     @FXML
     private TableColumn<Section, String> type;
     @FXML
-    private TableColumn<Section, String> days;
+    private TableColumn<Section, String> day;
     @FXML
     private TableColumn<Section, String> startTime;
     @FXML
     private TableColumn<Section, String> endTime;
     @FXML
-    private TableColumn<Section, Integer> instructor;
+    private TableColumn<Section, Integer> location;
     
     private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
     private ObservableList<Course> courseFilterContent = FXCollections.observableArrayList();
     
-    private ObservableList<Section> sectionTableContent = FXCollections.observableArrayList();
-    private ObservableList<Section> sectionFilterContent = FXCollections.observableArrayList();
+    private ObservableList<SectionClass> sectionClassTableContent = FXCollections.observableArrayList();
+    private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
 
     /**
      * Constructor of CourseSearchController
@@ -80,18 +81,11 @@ public class ViewAllCoursesController implements Initializable {
     public ViewAllCoursesController() throws SQLException {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
-        //int courseCounter = 0;
+        
         courseTableContent.clear();
         
-        /*
-         * This block has to be removed!
-        while (courseSize - 1 != courseCounter) {
-            courseTableContent.add(CourseList.get(courseCounter));
-            courseCounter++;
-        }*/
-        //the above block is replaced by this block!!! - Karthik
         if(courseSize > 0){
-        courseTableContent.addAll(CourseList.getAll());
+            courseTableContent.addAll(CourseList.getAll());
         }
         
         courseFilterContent.addAll(courseTableContent);
@@ -198,11 +192,14 @@ public class ViewAllCoursesController implements Initializable {
                         try {
                             //ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
                             String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
-                            SectionList.fetch(courseNum);
-                            sectionFilterContent.clear();
-                            sectionTableContent.clear();
-                            sectionTableContent.addAll(SectionList.getAll());
-                            sectionFilterContent.addAll(SectionList.getAll());
+                            String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
+                            String currentTerm = State.getCurrentTerm().getTermID();
+                            SearchSectionClassList.fetch(courseDept, courseNum, currentTerm);
+                            
+                            sectionClassFilterContent.clear();
+                            sectionClassTableContent.clear();
+                            sectionClassTableContent.addAll(SearchSectionClassList.getAll());
+                            sectionClassFilterContent.addAll(SearchSectionClassList.getAll());
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -212,15 +209,15 @@ public class ViewAllCoursesController implements Initializable {
         /*
          * Event Handler to capture the selected course
          */
-         sectionTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Section>() {
+         sectionClassTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SectionClass>() {
 
                     @Override
-                    public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
-                        int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
+                    public void changed(ObservableValue<? extends SectionClass> ov, SectionClass t, SectionClass t1) {
+                        int selectedIndex = sectionClassTable.getSelectionModel().getSelectedIndex();
                         System.out.println("Index : "+selectedIndex);
 
                         try {
-                            State.setCurrentSection(sectionFilterContent.get(selectedIndex));
+                            State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,11 +231,11 @@ public class ViewAllCoursesController implements Initializable {
           */
         sectionID.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionID"));
         type.setCellValueFactory(new PropertyValueFactory<Section, String>("type"));
-        days.setCellValueFactory(new PropertyValueFactory<Section, String>("days"));
+        day.setCellValueFactory(new PropertyValueFactory<Section, String>("day"));
         startTime.setCellValueFactory(new PropertyValueFactory<Section, String>("startTime"));
         endTime.setCellValueFactory(new PropertyValueFactory<Section, String>("endTime"));
-        instructor.setCellValueFactory(new PropertyValueFactory<Section, Integer>("instructor"));
+        location.setCellValueFactory(new PropertyValueFactory<Section, Integer>("location"));
 
-        sectionTable.setItems(sectionFilterContent);
+        sectionClassTable.setItems(sectionClassFilterContent);
     }
 }

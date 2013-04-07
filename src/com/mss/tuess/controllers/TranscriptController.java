@@ -59,10 +59,13 @@ public class TranscriptController implements Initializable {
         int transcriptSize = TranscriptList.getAll().size();
         int courseCounter = 0;
         tableContent.clear();
-        while (transcriptSize - 1 != courseCounter) {
+        if (transcriptSize > 0) {
+            tableContent.addAll(TranscriptList.getAll());
+        }
+        /**while (transcriptSize - 1 != courseCounter) {
             tableContent.add(TranscriptList.get(courseCounter));
             courseCounter++;
-        }
+        }*/
         filterContent.addAll(tableContent);
 
         tableContent.addListener(new ListChangeListener<Transcriptrecord>() {
