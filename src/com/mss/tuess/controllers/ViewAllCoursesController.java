@@ -30,15 +30,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ViewAllCoursesController implements Initializable {
-
+    
+    //side bar
     @FXML
     Pane sidebar;
     
+    //filter fields
     @FXML
     private TextField courseFilter;
     @FXML
     private TextField sectionFilter;
     
+    //Course Table and fields
     @FXML
     private TableView<Course> courseTable;
     @FXML
@@ -52,24 +55,27 @@ public class ViewAllCoursesController implements Initializable {
     @FXML
     private TableColumn<Course, Integer> credit;
     
+    //Section Table and fields
     @FXML
     private TableView<SectionClass> sectionClassTable;
     @FXML
-    private TableColumn<Section, String> sectionID;
+    private TableColumn<SectionClass, String> sectionID;
     @FXML
-    private TableColumn<Section, String> type;
+    private TableColumn<SectionClass, String> type;
     @FXML
-    private TableColumn<Section, String> day;
+    private TableColumn<SectionClass, String> day;
     @FXML
-    private TableColumn<Section, String> startTime;
+    private TableColumn<SectionClass, String> displayStartTime;
     @FXML
-    private TableColumn<Section, String> endTime;
+    private TableColumn<SectionClass, String> displayEndTime;
     @FXML
-    private TableColumn<Section, Integer> location;
+    private TableColumn<SectionClass, String> location;
     
+    //Course list
     private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
     private ObservableList<Course> courseFilterContent = FXCollections.observableArrayList();
     
+    //Section list
     private ObservableList<SectionClass> sectionClassTableContent = FXCollections.observableArrayList();
     private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
 
@@ -91,22 +97,38 @@ public class ViewAllCoursesController implements Initializable {
         courseFilterContent.addAll(courseTableContent);
         
         //event listener for course filter 
-        
         courseTableContent.addListener(new ListChangeListener<Course>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends Course> change) {
                 courseFilterRefresh();
             }
         });
+        
+        //event listener for course filter 
+        sectionClassTableContent.addListener(new ListChangeListener<SectionClass>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends SectionClass> change) {
+                sectionClassFilterRefresh();
+            }
+        });
     }
 
     /**
-     * Handle the order for each column
+     * Handle the order for each course column
      */
     private void tableOrderAct() {
         ArrayList<TableColumn<Course, ?>> sortOrder = new ArrayList(courseTable.getSortOrder());
         courseTable.getSortOrder().clear();
         courseTable.getSortOrder().addAll(sortOrder);
+    }
+    
+    /**
+     * Handle the order for each section column
+     */
+    private void sectionClassTableOrderAct() {
+        ArrayList<TableColumn<SectionClass, ?>> sectionSortOrder = new ArrayList(sectionClassTable.getSortOrder());
+        sectionClassTable.getSortOrder().clear();
+        sectionClassTable.getSortOrder().addAll(sectionSortOrder);
     }
 
     /**
@@ -115,19 +137,32 @@ public class ViewAllCoursesController implements Initializable {
     private void courseFilterRefresh() {
         courseFilterContent.clear();
         for (Course course : courseTableContent) {
-            if (filterChecker(course)) {
+            if (courseFilterChecker(course)) {
                 courseFilterContent.add(course);
             }
         }
         tableOrderAct();
     }
+    
+    /**
+     * Refresh the content of the filter
+     */
+    private void sectionClassFilterRefresh() {
+        sectionClassFilterContent.clear();
+        for (SectionClass sectionClass : sectionClassTableContent) {
+            if (sectionClassFilterChecker(sectionClass)) {
+                sectionClassFilterContent.add(sectionClass);
+            }
+        }
+        sectionClassTableOrderAct();
+    }    
 
     /**
-     * Control the filter
+     * Control the course filter
      *
-     * @param course the course obj
+     * @param course the course object
      */
-    private boolean filterChecker(Course course) {
+    private boolean courseFilterChecker(Course course) {
         String filterString = courseFilter.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
@@ -149,6 +184,37 @@ public class ViewAllCoursesController implements Initializable {
         return false;
     }
 
+    
+    /**
+     * Control the section class filter
+     *
+     * @param SectionClass the course object
+     */
+    private boolean sectionClassFilterChecker(SectionClass sectionClass) {
+        String filterString = sectionFilter.getText();
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }  
+        
+        String lowerCaseFilterString = filterString.toLowerCase();
+
+        if (sectionClass.getSectionID().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+        } else if (sectionClass.getType().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+        } else if (sectionClass.getDay().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
+        } else if(sectionClass.getLocation().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
+        } else if (sectionClass.getDisplayStartTime().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
+        } else if(sectionClass.getDisplayEndTime().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+            return true;
+        }  
+        return false;
+    }
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -178,7 +244,18 @@ public class ViewAllCoursesController implements Initializable {
                 courseFilterRefresh();
             }
         });
+
         
+        /**
+         * section filter event listener
+         */
+        sectionFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                sectionClassFilterRefresh();
+            }
+        });        
         /*
          * Event Handler to capture the selected course
          */
@@ -229,12 +306,12 @@ public class ViewAllCoursesController implements Initializable {
          /**
           * map the section table attributes
           */
-        sectionID.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionID"));
-        type.setCellValueFactory(new PropertyValueFactory<Section, String>("type"));
-        day.setCellValueFactory(new PropertyValueFactory<Section, String>("day"));
-        startTime.setCellValueFactory(new PropertyValueFactory<Section, String>("startTime"));
-        endTime.setCellValueFactory(new PropertyValueFactory<Section, String>("endTime"));
-        location.setCellValueFactory(new PropertyValueFactory<Section, Integer>("location"));
+        sectionID.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("sectionID"));
+        type.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("type"));
+        day.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("day"));
+        displayStartTime.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("displayStartTime"));
+        displayEndTime.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("displayEndTime"));
+        location.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("location"));
 
         sectionClassTable.setItems(sectionClassFilterContent);
     }
