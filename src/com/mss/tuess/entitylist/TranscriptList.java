@@ -28,6 +28,7 @@ public class TranscriptList {
         int gradeNum;
         setAddCredit(0);
         setAddCreditMultipleGrade(0);
+        transcriptrecords.clear();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
         String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.type='lecture' AND enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
