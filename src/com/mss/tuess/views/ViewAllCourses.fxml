@@ -15,7 +15,7 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ViewAllCoursesController">
   <children>
     <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.30062893081761005" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+    <SplitPane dividerPositions="0.2389937106918239" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
       <items>
         <fx:include fx:id="sidebar" source="StudentSidebar.fxml" prefHeight="475.0" prefWidth="186.0" />
         <!-- start of content -->
@@ -79,7 +79,7 @@
               </tooltip>
             </TextField>
             <Label font="$x1" layoutX="93.0" layoutY="291.0" prefWidth="87.0" text="Filter Section:" textFill="GREY" />
-            <Label font="$x1" layoutX="344.0" layoutY="282.0" prefHeight="34.0" prefWidth="181.0" text="Click on a section to view" textFill="$x3" wrapText="true" />
+            <Label font="$x1" layoutX="344.0" layoutY="275.0" prefHeight="41.0" prefWidth="181.0" text="Click on a section to view, enroll/drop" textFill="$x3" wrapText="true" />
           </children>
         </AnchorPane>
         <!-- end of content -->
