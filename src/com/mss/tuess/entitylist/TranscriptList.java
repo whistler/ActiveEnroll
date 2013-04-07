@@ -33,7 +33,7 @@ public class TranscriptList {
         ResultSet rs;
         String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.type='lecture' AND enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
         rs = DatabaseConnector.returnQuery(sql);
-
+        System.out.println(rs);//test!
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
             Transcriptrecord.setCourseName(rs.getString("courseName"));
@@ -55,8 +55,6 @@ public class TranscriptList {
 
             setAddCredit(getAddCredit() + rs.getInt("credit"));
             TranscriptList.addCreditMultipleGrade+= (rs.getInt("credit") * gradeNum);
-            System.out.println("getAddCredit_inloop  "+TranscriptList.getAddCredit());
-            System.out.println("getAddCreditMultiple_inloop  "+TranscriptList.getAddCreditMultipleGrade());
             transcriptrecords.add(Transcriptrecord);
         }
 
