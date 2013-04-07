@@ -31,9 +31,14 @@ public class RegisteredCoursesList {
         Term currentTerm=State.getCurrentTerm();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select e.courseDept,e.courseNum,e.sectionID,c.courseName,e.termID,s.day,e.type,c.credit " +
-"from enrollSection as e natural join course as c natural join section as s " +
-"where e.studentID="+currentID+ " and e.termID="+currentTerm.getTermID();
+        
+        
+        String sql = "es.courseDept,es.courseNum,c.courseName,es.sectionID,es.termID,c.credit " +
+                     "from enrollSection es natural join course c " +
+                     "where es.studentID="+currentID+ " and es.termID="+currentTerm.getTermID();
+       
+
+        
         rs = DatabaseConnector.returnQuery(sql);
 
         
