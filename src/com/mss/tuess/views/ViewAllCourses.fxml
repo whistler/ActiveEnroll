@@ -29,8 +29,8 @@
             </Label>
             <TableView fx:id="courseTable" layoutX="27.0" layoutY="73.0" prefHeight="166.0" prefWidth="498.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn minWidth="80.0" resizable="false" text="Course Code" fx:id="courseNum" />
-                <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="Course Name" fx:id="courseName" />
+                <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
+                <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
                 <TableColumn minWidth="75.0" prefWidth="75.0" text="Department" fx:id="courseDept" />
                 <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="Course Info" fx:id="info" />
                 <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
@@ -59,14 +59,14 @@
                 <DropShadow color="#606060" />
               </effect>
             </Separator>
-            <TableView fx:id="sectionTable" layoutX="27.0" layoutY="316.0" prefHeight="146.0" prefWidth="498.0" tableMenuButtonVisible="true">
+            <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="27.0" layoutY="316.0" prefHeight="146.0" prefWidth="498.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
                 <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
-                <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="days" />
+                <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="day" />
                 <TableColumn prefWidth="75.0" text="Start Time" fx:id="startTime" />
                 <TableColumn prefWidth="75.0" text="End Time" fx:id="endTime" />
-                <TableColumn minWidth="84.0" prefWidth="84.0" text="Instructor" fx:id="instructor" />
+                <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
               </columns>
             </TableView>
             <Label font="$x2" layoutX="14.0" layoutY="263.0" prefHeight="25.0" prefWidth="87.0" text="Sections:" textFill="GREY" />
