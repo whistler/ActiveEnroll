@@ -172,7 +172,8 @@ public class Student extends User {
                             "es.courseDept = s.courseDept AND " +
                             "es.courseNum = s.courseNum AND " +
                             "es.termID = s.termID AND " +
-                            "grade NOT IN ('W','F') " +
+                            "grade NOT IN ('W','F') AND " +
+                            "es.studentID = '" + this.studentID + "'" +
                          ") AS T;";
             rs = DatabaseConnector.returnQuery(sql);
             if (rs.next()) {
