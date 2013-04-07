@@ -48,8 +48,10 @@ public class TranscriptList {
                 gradeNum = 2;
             } else if (rs.getString("grade").equalsIgnoreCase("D")) {
                 gradeNum = 1;
+            } else if (rs.getString("grade").equalsIgnoreCase("F")) {
+                gradeNum = 1;
             } else {
-                gradeNum = 0; //test!
+                gradeNum = 4; //does not affect the GPA calculation if the course is not finished
             }
 
             setAddCredit(getAddCredit() + rs.getInt("credit"));
