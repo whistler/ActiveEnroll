@@ -155,4 +155,32 @@ public class Student extends User {
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
+    
+    /**
+     * Returns number of credits completed by the Student
+     * @return number of credits completed
+     */
+    public int getCreditsCompleted()
+    {
+        try {
+            ResultSet rs;
+            String sql = "SELECT SUM(credit) AS credits FROM " +
+                            "(SELECT DISTINCT c.courseDept, c.courseNum, c.credit " +
+                            "FROM enrollSection es, section s, course c " +
+                            "WHERE c.courseDept = s.courseDept AND " +
+                            "c.courseNum = s.courseNum AND " +
+                            "es.courseDept = s.courseDept AND " +
+                            "es.courseNum = s.courseNum AND " +
+                            "es.termID = s.termID AND " +
+                            "grade NOT IN ('W','F') " +
+                         ") AS T;";
+            rs = DatabaseConnector.returnQuery(sql);
+            if (rs.next()) {
+                return rs.getInt("credits");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }
