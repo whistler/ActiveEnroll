@@ -74,7 +74,7 @@
                 <Insets top="10.0" />
               </padding>
             </VBox>
-            <Separator layoutX="445.0" layoutY="14.0" orientation="VERTICAL" prefHeight="278.0000999999975">
+            <Separator layoutX="437.0" layoutY="14.0" orientation="VERTICAL" prefHeight="278.0000999999975">
               <effect>
                 <DropShadow color="#404040" />
               </effect>
