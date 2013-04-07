@@ -19,7 +19,7 @@ public class CourseList {
     public static void fetch() throws SQLException {
         courses.clear();
         ResultSet rs;
-        String sql = "SELECT * FROM course";
+        String sql = "SELECT * FROM course order by courseNum";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Course course = new Course();
