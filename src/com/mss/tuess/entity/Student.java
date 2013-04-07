@@ -3,6 +3,8 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Student extends User {
 
@@ -76,24 +78,28 @@ public class Student extends User {
      * @throws SQLException
      */
     @Override
-    public void fetch(int stuId) throws SQLException {
-        ResultSet rs;
-        String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;
-        rs = DatabaseConnector.returnQuery(sql);
-        if (rs.next()) {
-            this.setID(rs.getInt("studentID"));
-            this.setFirstName(rs.getString("firstName"));
-            this.setLastName(rs.getString("lastName"));
-            this.setAddress(rs.getString("address"));
-            this.setCity(rs.getString("city"));
-            this.setCountry(rs.getString("country"));
-            this.setZipcode(rs.getString("zipcode"));
-            this.setPhone(rs.getString("phone"));
-            this.setProgramID(rs.getString("programID"));
-            this.setRegisteredSince(rs.getString("registeredSince"));
-            this.setStatus(rs.getString("status"));
-            this.setPassword(rs.getString("password"));
-            this.setEmail(rs.getString("email"));
+    public void fetch(int stuId){
+        try {
+            ResultSet rs;
+            String sql = "SELECT * FROM student stu WHERE stu.studentID = " + stuId;
+            rs = DatabaseConnector.returnQuery(sql);
+            if (rs.next()) {
+                this.setID(rs.getInt("studentID"));
+                this.setFirstName(rs.getString("firstName"));
+                this.setLastName(rs.getString("lastName"));
+                this.setAddress(rs.getString("address"));
+                this.setCity(rs.getString("city"));
+                this.setCountry(rs.getString("country"));
+                this.setZipcode(rs.getString("zipcode"));
+                this.setPhone(rs.getString("phone"));
+                this.setProgramID(rs.getString("programID"));
+                this.setRegisteredSince(rs.getString("registeredSince"));
+                this.setStatus(rs.getString("status"));
+                this.setPassword(rs.getString("password"));
+                this.setEmail(rs.getString("email"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

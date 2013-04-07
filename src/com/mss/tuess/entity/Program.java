@@ -3,12 +3,14 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Program {
 
     private String programID;
     private String deptID;
-    private String degree;
+    private String degreeTitle;
     private int minCredit;
     private int maxLength;
 
@@ -43,15 +45,15 @@ public class Program {
     /**
      * @return the degree
      */
-    public String getDegree() {
-        return degree;
+    public String getDegreeTitle() {
+        return degreeTitle;
     }
 
     /**
      * @param degree the degree to set
      */
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setDegreeTitle(String degreeTitle) {
+        this.degreeTitle = degreeTitle;
     }
 
     /**
@@ -89,18 +91,21 @@ public class Program {
      *
      * @throws SQLException
      */
-    public void fetch(String programID) throws SQLException {
-        ResultSet rs;
-        String sql = "SELECT * FROM program WHERE programID = " + programID;
-        rs = DatabaseConnector.returnQuery(sql);
-        if (rs.next()) {
-            this.setProgramID(rs.getString("programID"));
-            this.setDeptID(rs.getString("deptID"));
-            this.setDegree(rs.getString("degreeTitle"));
-            this.setMinCredit(rs.getInt(minCredit));
-            this.setMaxLength(rs.getInt(maxLength));
+    public void fetch(String programID) {
+        try {
+            ResultSet rs;
+            String sql = "SELECT * FROM program WHERE programID = '" + programID + "'";
+            rs = DatabaseConnector.returnQuery(sql);
+            if (rs.next()) {
+                this.setProgramID(rs.getString("programID"));
+                this.setDeptID(rs.getString("deptID"));
+                this.setDegreeTitle(rs.getString("degreeTitle"));
+                this.setMinCredit(rs.getInt("minCredit"));
+                this.setMaxLength(rs.getInt("maxLength"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -112,7 +117,7 @@ public class Program {
     public void update() throws SQLException {
         String sql = "UPDATE program SET programID=" + this.getProgramID()
                 + ", deptID=" + this.getDeptID() 
-                + ", degreeTitle=" + this.getDegree()
+                + ", degreeTitle=" + this.getDegreeTitle()
                 + ", minCredit=" + this.getMinCredit()
                 + ", maxLength=" + this.getMaxLength()
                 + "WHERE programID=" + this.getProgramID();
@@ -136,7 +141,7 @@ public class Program {
      */
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (programID,deptID,degreeTitle,minCredit,maxLength) values "
-                + "(" + this.getProgramID() + ", " + this.getDeptID()+ ", " + this.getDegree()+","
+                + "(" + this.getProgramID() + ", " + this.getDeptID()+ ", " + this.getDegreeTitle()+","
                 + this.getMinCredit() + ", " + this.getMaxLength()
                 + ")";
         System.out.println(sql);
