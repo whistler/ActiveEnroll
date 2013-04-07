@@ -14,15 +14,9 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.9998779296875" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TranscriptController">
   <children>
     <fx:include source="Header.fxml" prefHeight="67.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.2238993710691824" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+    <SplitPane dividerPositions="0.21761006289308177" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
       <items>
-        <Pane fx:id="sidebar"/> 
-            <TextField fx:id="filterText" layoutX="150.0" layoutY="163.0" prefWidth="99.0">
-              <tooltip>
-                <Tooltip text="Type any course parameter to filter table" />
-              </tooltip>
-            </TextField>
-
+        <Pane fx:id="sidebar" />
         <!-- start of content -->
         <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="475.0" prefWidth="594.0">
           <children>
@@ -34,10 +28,10 @@
             </Label>
             <TableView fx:id="transcriptTable" layoutX="30.0" layoutY="52.0" prefHeight="323.0" prefWidth="331.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn prefWidth="90.0" text="Course" fx:id="courseName"/>
-                <TableColumn prefWidth="75.0" text="Credit" fx:id="credit"/>
-                <TableColumn prefWidth="90.0" text="TermID" fx:id="termID"/>
-                <TableColumn prefWidth="90.0" text="Grade" fx:id="grade"/>
+                <TableColumn prefWidth="90.0" text="Course" fx:id="courseName" />
+                <TableColumn prefWidth="75.0" text="Credit" fx:id="credit" />
+                <TableColumn prefWidth="90.0" text="TermID" fx:id="termID" />
+                <TableColumn prefWidth="90.0" text="Grade" fx:id="grade" />
               </columns>
               <effect>
                 <DropShadow color="#bfbfbf" spread="0.3253968253968254" />
@@ -45,15 +39,12 @@
             </TableView>
             <HBox alignment="CENTER" layoutX="203.0" layoutY="394.0" prefHeight="35.0" prefWidth="150.0">
               <children>
-                <Label prefHeight="26.0" prefWidth="61.0" text="My GPA :">
+                <Label prefHeight="26.0" prefWidth="61.0" text="My GPA :" textFill="#606060">
                   <font>
                     <Font name="System Bold Italic" size="12.0" fx:id="x1" />
                   </font>
-                  <textFill>
-                    <Color blue="0.376" green="0.376" red="0.376" />
-                  </textFill>
                 </Label>
-                <TextField editable="false" prefWidth="61.0"  fx:id="GPA">
+                <TextField fx:id="GPA" editable="false" prefWidth="61.0">
                   <effect>
                     <DropShadow />
                   </effect>
@@ -62,8 +53,8 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="30.0" layoutY="394.0" prefHeight="35.0" prefWidth="165.0" spacing="5.0">
               <children>
-                <Label font="$x1" prefHeight="26.0" prefWidth="84.0" text="Total Credits :" textFill="$x2" />
-                <TextField alignment="CENTER_RIGHT" editable="false" prefWidth="61.0" fx:id="totalCredit" >
+                <Label font="$x1" prefHeight="26.0" prefWidth="84.0" text="Total Credits :" />
+                <TextField fx:id="totalCredit" alignment="CENTER_RIGHT" editable="false" prefWidth="61.0">
                   <effect>
                     <DropShadow />
                   </effect>
