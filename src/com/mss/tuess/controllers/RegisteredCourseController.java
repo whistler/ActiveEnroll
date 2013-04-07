@@ -29,8 +29,6 @@ public class RegisteredCourseController implements Initializable
     @FXML  TableColumn<RegisteredCourse, String> sectionID;
     @FXML  TableColumn<RegisteredCourse, String> courseName;
     @FXML  TableColumn<RegisteredCourse, String> termID;
-    @FXML  TableColumn<RegisteredCourse, String> day;
-    @FXML  TableColumn<RegisteredCourse, String> type;
     @FXML  TableColumn<RegisteredCourse, Integer> credit;
     
     @FXML Label currentTerm;
@@ -115,9 +113,6 @@ public class RegisteredCourseController implements Initializable
         sectionID.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("sectionID"));
         courseName.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("courseName"));
         termID.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("termID"));
-        day.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("day"));
-        type.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("type"));
-        courseNum.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("courseNum"));
         credit.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, Integer>("credit"));
 
        
