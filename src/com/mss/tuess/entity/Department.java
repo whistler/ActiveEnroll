@@ -3,6 +3,8 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Department {
 
@@ -58,16 +60,20 @@ public class Department {
      * @param deptID id of the department to load from
      * @throws SQLException
      */
-    public void fetch(String deptID) throws SQLException {
-        String query = "SELECT * FROM department WHERE deptID = " + deptID;
+    public void fetch(String deptID) {
+        try {
+            String query = "SELECT * FROM department WHERE deptID = '" + deptID + "'";
 
-        ResultSet rs;
-        rs = DatabaseConnector.returnQuery(query);
+            ResultSet rs;
+            rs = DatabaseConnector.returnQuery(query);
 
-        if (rs.next()) {
-            this.setDeptID(rs.getString("deptID"));
-            this.setDeptName(rs.getString("courseName"));
-            this.setFacultyName(rs.getString("facultyName"));
+            if (rs.next()) {
+                this.setDeptID(rs.getString("deptID"));
+                this.setDeptName(rs.getString("deptName"));
+                this.setFacultyName(rs.getString("facultyName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Department.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
