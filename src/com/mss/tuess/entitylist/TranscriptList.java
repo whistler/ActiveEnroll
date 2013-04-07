@@ -31,7 +31,7 @@ public class TranscriptList {
         transcriptrecords.clear();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.type='lecture' AND enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
+        String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
