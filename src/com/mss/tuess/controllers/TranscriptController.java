@@ -113,7 +113,9 @@ public class TranscriptController implements Initializable {
         termID.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("termID"));
         grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
         credit.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, Integer>("credit"));
-        System.out.println(TranscriptList.getAddCredit()+"___"+TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit());
+        System.out.println(TranscriptList.getAddCredit()+"___in initilize___"+TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit());
+        System.out.println(TranscriptList.getAddCreditMultipleGrade());
+        System.out.println(TranscriptList.getAddCredit());
         totalCredit.setText(Integer.toString(TranscriptList.getAddCredit()));
         GPA.setText(Double.toString(TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit()));
         
