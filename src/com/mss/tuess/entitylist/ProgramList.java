@@ -24,7 +24,7 @@ public class ProgramList {
             Program program = new Program();
             program.setProgramID(rs.getString("programID"));
             program.setDeptID(rs.getString("deptID"));
-            program.setDegree(rs.getString("degree"));
+            program.setDegreeTitle(rs.getString("degree"));
             program.setMinCredit(rs.getInt("minCredit"));
             program.setMaxLength(rs.getInt("maxLength"));
 
