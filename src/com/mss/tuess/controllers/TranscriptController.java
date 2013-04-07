@@ -118,13 +118,7 @@ public class TranscriptController implements Initializable {
         GPA.setText(Double.toString(TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit()));
         
         transcriptTable.setItems(filterContent);
-        filterText.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                filterRefresh();
-            }
-        });
+
     }
 }
 
