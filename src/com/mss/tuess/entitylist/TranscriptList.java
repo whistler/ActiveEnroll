@@ -40,21 +40,22 @@ public class TranscriptList {
             Transcriptrecord.setTerm(rs.getString("termID"));
             Transcriptrecord.setGrade(rs.getString("grade"));
 
-            if (rs.getString("grade") == "A") {
+            if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
-            } else if (rs.getString("grade") == "B") {
+            } else if (rs.getString("grade").equalsIgnoreCase("B")) {
                 gradeNum = 3;
-            } else if (rs.getString("grade") == "C") {
+            } else if (rs.getString("grade").equalsIgnoreCase("C")) {
                 gradeNum = 2;
-            } else if (rs.getString("grade") == "D") {
+            } else if (rs.getString("grade").equalsIgnoreCase("D")) {
                 gradeNum = 1;
             } else {
-                gradeNum = 0;
+                gradeNum = 0; //test!
             }
 
             setAddCredit(getAddCredit() + rs.getInt("credit"));
             TranscriptList.addCreditMultipleGrade+= (rs.getInt("credit") * gradeNum);
-
+            System.out.println("getAddCredit_inloop  "+TranscriptList.getAddCredit());
+            System.out.println("getAddCreditMultiple_inloop  "+TranscriptList.getAddCreditMultipleGrade());
             transcriptrecords.add(Transcriptrecord);
         }
 
