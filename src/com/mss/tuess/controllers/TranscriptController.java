@@ -59,10 +59,13 @@ public class TranscriptController implements Initializable {
         int transcriptSize = TranscriptList.getAll().size();
         int courseCounter = 0;
         tableContent.clear();
-        while (transcriptSize - 1 != courseCounter) {
+        if (transcriptSize > 0) {
+            tableContent.addAll(TranscriptList.getAll());
+        }
+        /**while (transcriptSize - 1 != courseCounter) {
             tableContent.add(TranscriptList.get(courseCounter));
             courseCounter++;
-        }
+        }*/
         filterContent.addAll(tableContent);
 
         tableContent.addListener(new ListChangeListener<Transcriptrecord>() {
@@ -113,18 +116,11 @@ public class TranscriptController implements Initializable {
         termID.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("termID"));
         grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
         credit.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, Integer>("credit"));
-        System.out.println(TranscriptList.getAddCredit()+"___"+TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit());
         totalCredit.setText(Integer.toString(TranscriptList.getAddCredit()));
         GPA.setText(Double.toString(TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit()));
         
         transcriptTable.setItems(filterContent);
-        filterText.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                filterRefresh();
-            }
-        });
+
     }
 }
 

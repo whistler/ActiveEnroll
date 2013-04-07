@@ -28,33 +28,34 @@ public class TranscriptList {
         int gradeNum;
         setAddCredit(0);
         setAddCreditMultipleGrade(0);
+        transcriptrecords.clear();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.type='lecture' AND enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
+        String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
         rs = DatabaseConnector.returnQuery(sql);
-
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
             Transcriptrecord.setCourseName(rs.getString("courseName"));
             Transcriptrecord.setCredit(rs.getInt("credit"));
             Transcriptrecord.setTerm(rs.getString("termID"));
             Transcriptrecord.setGrade(rs.getString("grade"));
-
-            if (rs.getString("grade") == "A") {
+            System.out.println(Transcriptrecord.getCourseName()+" inloop"); //test!
+            if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
-            } else if (rs.getString("grade") == "B") {
+            } else if (rs.getString("grade").equalsIgnoreCase("B")) {
                 gradeNum = 3;
-            } else if (rs.getString("grade") == "C") {
+            } else if (rs.getString("grade").equalsIgnoreCase("C")) {
                 gradeNum = 2;
-            } else if (rs.getString("grade") == "D") {
+            } else if (rs.getString("grade").equalsIgnoreCase("D")) {
+                gradeNum = 1;
+            } else if (rs.getString("grade").equalsIgnoreCase("F")) {
                 gradeNum = 1;
             } else {
-                gradeNum = 0;
+                gradeNum = 4; //does not affect the GPA calculation if the course is not finished
             }
 
             setAddCredit(getAddCredit() + rs.getInt("credit"));
             TranscriptList.addCreditMultipleGrade+= (rs.getInt("credit") * gradeNum);
-
             transcriptrecords.add(Transcriptrecord);
         }
 
