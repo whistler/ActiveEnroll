@@ -11,14 +11,26 @@ package com.mss.tuess.entity;
  */
 public class RegisteredCourse {
     
+    private String sectionID;
     private String courseDept;
     private String courseNum;
-    private String sectionID;
     private String courseName;
     private String termID;
-    private String day;
-    private String type;
     private int credit;
+
+    /**
+     * @return the sectionID
+     */
+    public String getSectionID() {
+        return sectionID;
+    }
+
+    /**
+     * @param sectionID the sectionID to set
+     */
+    public void setSectionID(String sectionID) {
+        this.sectionID = sectionID;
+    }
 
     /**
      * @return the courseDept
@@ -46,20 +58,6 @@ public class RegisteredCourse {
      */
     public void setCourseNum(String courseNum) {
         this.courseNum = courseNum;
-    }
-
-    /**
-     * @return the section
-     */
-    public String getSectionID() {
-        return sectionID;
-    }
-
-    /**
-     * @param section the section to set
-     */
-    public void setSectionID(String sectionID) {
-        this.sectionID = sectionID;
     }
 
     /**
@@ -91,34 +89,6 @@ public class RegisteredCourse {
     }
 
     /**
-     * @return the days
-     */
-    public String getDay() {
-        return day;
-    }
-
-    /**
-     * @param days the days to set
-     */
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
      * @return the credit
      */
     public int getCredit() {
@@ -131,4 +101,5 @@ public class RegisteredCourse {
     public void setCredit(int credit) {
         this.credit = credit;
     }
+  
 }
