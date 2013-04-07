@@ -33,14 +33,13 @@ public class TranscriptList {
         ResultSet rs;
         String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.type='lecture' AND enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
         rs = DatabaseConnector.returnQuery(sql);
-        System.out.println(rs);//test!
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
             Transcriptrecord.setCourseName(rs.getString("courseName"));
             Transcriptrecord.setCredit(rs.getInt("credit"));
             Transcriptrecord.setTerm(rs.getString("termID"));
             Transcriptrecord.setGrade(rs.getString("grade"));
-
+            System.out.println(Transcriptrecord.getCourseName()+" inloop"); //test!
             if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
             } else if (rs.getString("grade").equalsIgnoreCase("B")) {
