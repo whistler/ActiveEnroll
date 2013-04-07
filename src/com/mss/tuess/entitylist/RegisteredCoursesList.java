@@ -45,16 +45,9 @@ public class RegisteredCoursesList {
             registeredCourses.setSectionID(rs.getString("sectionID"));
             registeredCourses.setCourseName(rs.getString("courseName"));
             registeredCourses.setTermID(rs.getString("termID"));
-            registeredCourses.setDay(rs.getString("day"));
-            registeredCourses.setType(rs.getString("type"));
+            registeredCourses.setCredit(rs.getInt("credit"));
            
-            String lecture = "lecture";
-            if(lecture.equals(rs.getString("type")))
-            {
-                registeredCourses.setCredit(rs.getInt("credit"));
-                addTotalCredits(rs.getInt("credit"));
-                
-            }
+            addTotalCredits(rs.getInt("credit"));
             
 
             registeredCoursesList.add(registeredCourses);
