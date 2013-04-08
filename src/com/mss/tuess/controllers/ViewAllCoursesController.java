@@ -6,6 +6,7 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
+import com.mss.tuess.entity.Section;
 import com.mss.tuess.entity.SectionClass;
 import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
@@ -296,6 +297,8 @@ public class ViewAllCoursesController implements Initializable {
 
                         try {
                             State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
+                            Section currentSection = new Section();
+                            State.setCurrentSection(currentSection);
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
