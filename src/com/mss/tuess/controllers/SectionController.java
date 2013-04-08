@@ -85,13 +85,13 @@ public class SectionController implements Initializable {
 
         if (canEnroll(section, studentID)) {
             String sql = "INSERT INTO enrollSection VALUES ("
-                    + studentID + ", "
-                    + section.getSectionID() + ", "
-                    + section.getCourseDept() + ", "
-                    + section.getCourseNum() + ", "
-                    + section.getTermID()
+                    + studentID + ", '"
+                    + section.getSectionID() + "', '"
+                    + section.getCourseDept() + "', '"
+                    + section.getCourseNum() + "', '"
+                    + section.getTermID()+"', ''"
                     + ")";
-            //DatabaseConnector.updateQuery(sql);
+            DatabaseConnector.updateQuery(sql);
             System.out.println("\nCan!!!!!!!!   " + sql);
         } else {
             System.out.println("\nCannot be added!!!!!!!!!");
