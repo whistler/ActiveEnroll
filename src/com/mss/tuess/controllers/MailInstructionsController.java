@@ -28,13 +28,7 @@ public class MailInstructionsController implements Initializable {
     private void mailInstructions()throws MessagingException{
         
         //These hardcodings are to be removed and replaced by data from the database
-        String[] toEmails = {"karthik.gt90@gmail.com",
-                            "ibmmmm@gmail.com",
-                            "renxin.zju@gmail.com",
-                            "prabalsharma39@gmail.com",
-                            "jasonchenliang@gmail.com",
-                            "wenhcn@gmail.com",
-                            };
+        String toEmails = " ";
         String emailSubject = "Pre enrolment Activities - TUESS Team";
         String emailBody = "Test Mail <BR><BR><BR>cheers!!!<BR><b>TUESS Team</b>";
         //End of hardcoding

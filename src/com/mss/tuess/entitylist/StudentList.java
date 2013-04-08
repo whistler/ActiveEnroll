@@ -37,7 +37,16 @@ public class StudentList {
             students.add(student);
         }
     }
-
+    public static ResultSet fetchCurrentTerm() throws SQLException {  // this function is for the mailgrade module
+        ResultSet rs;
+        String sql = "SELECT * FROM enrollSection where termID=20131"; // termID should be changed
+        rs = DatabaseConnector.returnQuery(sql);
+        return rs;
+    }
+    public static ArrayList<Student> getAll() {
+    return students;
+    }
+    
     /**
      * Returns the student stored at the given index
      *
