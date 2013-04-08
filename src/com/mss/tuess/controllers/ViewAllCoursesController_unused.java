@@ -29,7 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ViewAllCoursesController implements Initializable {
+public class ViewAllCoursesController_unused implements Initializable {
     
     //filter fields
     @FXML private TextField courseFilter;
@@ -61,11 +61,11 @@ public class ViewAllCoursesController implements Initializable {
     private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
 
     /**
-     * Constructor of CourseSearchController
+     * Constructor of CourseSearchController_unused
      *
      * @throws SQLException
      */
-    public ViewAllCoursesController() throws SQLException {
+    public ViewAllCoursesController_unused() throws SQLException {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
         
@@ -259,7 +259,7 @@ public class ViewAllCoursesController implements Initializable {
                             sectionClassFilterContent.clear();
                             sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CourseSearchController_unused.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
@@ -285,7 +285,7 @@ public class ViewAllCoursesController implements Initializable {
                             State.setCurrentSection(currentSection);
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CourseSearchController_unused.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });

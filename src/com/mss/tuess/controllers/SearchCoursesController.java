@@ -99,7 +99,7 @@ public class SearchCoursesController implements Initializable {
     private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
 
     /**
-     * Constructor of CourseSearchController
+     * Constructor of CourseSearchController_unused
      *
      * @throws SQLException
      */
@@ -308,7 +308,7 @@ public class SearchCoursesController implements Initializable {
                             sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
                             System.out.println("gotcha array out of bound 1");
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CourseSearchController_unused.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
@@ -334,7 +334,7 @@ public class SearchCoursesController implements Initializable {
                             State.setCurrentSection(currentSection);
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CourseSearchController_unused.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });

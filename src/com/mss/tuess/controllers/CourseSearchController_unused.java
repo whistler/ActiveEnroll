@@ -26,7 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CourseSearchController implements Initializable {
+public class CourseSearchController_unused implements Initializable {
 
     @FXML private TextField filterText;
     @FXML private TableView<Course> courseTable;
@@ -40,11 +40,11 @@ public class CourseSearchController implements Initializable {
     private ObservableList<Course> filterContent = FXCollections.observableArrayList();
 
     /**
-     * Constructor of CourseSearchController
+     * Constructor of CourseSearchController_unused
      *
      * @throws SQLException
      */
-    public CourseSearchController() throws SQLException {
+    public CourseSearchController_unused() throws SQLException {
         CourseList.fetch();
         int courseSize = CourseList.getAll().size();
         int courseCounter = 0;
@@ -143,7 +143,7 @@ public class CourseSearchController implements Initializable {
                         try {
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CourseSearchController_unused.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
