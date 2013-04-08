@@ -3,6 +3,7 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -183,5 +184,86 @@ public class Student extends User {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public ArrayList<Course> getRequiredCourses()
+    {
+        ArrayList list = new ArrayList();
+        try {
+            ResultSet rs;
+            String sql = "SELECT courseNum, courseDept "
+                        + "FROM degreeCourse, student\n"
+                        + "WHERE student.studentID = '" + this.studentID + "' AND "
+                        + "student.programID = degreeCourse.programID";
+            rs = DatabaseConnector.returnQuery(sql);
+            while (rs.next()) {
+                Course course = new Course();
+                course.setCourseDept(rs.getString("courseDept"));
+                course.setCourseNum(rs.getString("courseNum"));
+                list.add(course);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public ArrayList<Course> getCompletedRequiredCourses()
+    {
+        ArrayList list = new ArrayList();
+        try {
+            ResultSet rs;
+            String sql = "SELECT degreeCourse.courseDept, degreeCourse.courseNum "
+                    + "FROM degreeCourse, student, enrollSection "
+                    + "WHERE student.studentID = " + this.studentID + " AND " 
+                    + "student.programID = degreeCourse.programID AND " 
+                    + "enrollSection.studentID = student.studentID AND " 
+                    + "degreeCourse.courseDept = enrollSection.courseDept AND " 
+                    + "degreeCourse.courseNum = enrollSection.courseNum AND "
+                    + "enrollSection.grade IN ('A', 'B', 'C', 'D', 'E');";
+            rs = DatabaseConnector.returnQuery(sql);
+            while (rs.next()) {
+                Course course = new Course();
+                course.setCourseDept(rs.getString("courseDept"));
+                course.setCourseNum(rs.getString("courseNum"));
+                list.add(course);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;        
+    }
+    
+    public ArrayList<Course> getIncompleteRequiredCourses()
+    {
+        ArrayList list = new ArrayList();
+        try {
+            ResultSet rs;
+            String sql = "SELECT T1.courseNum, T1.courseDept FROM" +
+                         "(SELECT courseNum, courseDept FROM degreeCourse, student " +
+                         "WHERE student.studentID = '12345678' AND " +
+                         "student.programID = degreeCourse.programID) T1 " +
+                         "LEFT JOIN " +
+                         "(SELECT degreeCourse.courseDept, degreeCourse.courseNum " + 
+                         "FROM degreeCourse, student, enrollSection " +
+                         "WHERE student.studentID = '12345678' AND " +
+                         "student.programID = degreeCourse.programID AND " +
+                         "enrollSection.studentID = student.studentID AND " +
+                         "degreeCourse.courseDept = enrollSection.courseDept AND " +
+                         "degreeCourse.courseNum = enrollSection.courseNum AND " +
+                         "enrollSection.grade IN ('A', 'B', 'C', 'D', 'E')) T2 " +
+                         "ON T1.courseNum = T2.courseNum AND T1.courseDept = T2.courseDept " +
+                         "WHERE T2.courseNum IS NULL AND T2.courseDept IS NULL";
+            rs = DatabaseConnector.returnQuery(sql);
+            while (rs.next()) {
+                Course course = new Course();
+                course.setCourseDept(rs.getString("courseDept"));
+                course.setCourseNum(rs.getString("courseNum"));
+                list.add(course);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;    
     }
 }
