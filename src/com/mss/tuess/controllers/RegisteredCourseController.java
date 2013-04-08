@@ -18,9 +18,6 @@ import javafx.scene.layout.*;
 
 public class RegisteredCourseController implements Initializable 
 {
-
-    @FXML Pane sidebar;
-   
     @FXML TextField filterText;
     
     @FXML TableView<RegisteredCourse> registeredCoursesTable;
@@ -103,7 +100,6 @@ public class RegisteredCourseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         
         Term ct=State.getCurrentTerm();
         currentTerm.setText(ct.getTermID());

@@ -1,6 +1,5 @@
 package com.mss.tuess.controllers;
 
-import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
 import java.net.URL;
@@ -12,57 +11,34 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 public class ProfileController implements Initializable {
-
-    @FXML
-    Pane sidebar;
-    @FXML
-    Label ID;
-    @FXML
-    Label status;
-    @FXML
-    Label program;
-    @FXML
-    Label registeredSince;
-    @FXML
-    Label statusLabel;
-    @FXML
-    Label programLabel;
-    @FXML
-    Label registeredSinceLabel;
-    @FXML
-    Label IDLabel;
-    @FXML
-    Label errorLabel;
-    @FXML
-    TextField firstName;
-    @FXML
-    TextField lastName;
-    @FXML
-    TextField email;
-    @FXML
-    TextArea address;
-    @FXML
-    TextField city;
-    @FXML
-    TextField zipCode;
-    @FXML
-    TextField country;
-    @FXML
-    TextField phone;
-    @FXML
-    PasswordField newPassword;
-    @FXML
-    PasswordField confirmPassword;
+    
+    @FXML Label ID;
+    @FXML Label status;
+    @FXML Label program;
+    @FXML Label registeredSince;
+    @FXML Label statusLabel;
+    @FXML Label programLabel;
+    @FXML Label registeredSinceLabel;
+    @FXML Label IDLabel;
+    @FXML Label errorLabel;
+    @FXML TextField firstName;
+    @FXML TextField lastName;
+    @FXML TextField email;
+    @FXML TextArea address;
+    @FXML TextField city;
+    @FXML TextField zipCode;
+    @FXML TextField country;
+    @FXML TextField phone;
+    @FXML PasswordField newPassword;
+    @FXML PasswordField confirmPassword;
 
     /**
      * Initializes the controller class. Shows the current user in the view
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
 
         User user = CurrentUser.getUser();
         ID.setText(Integer.toString(user.getID()));

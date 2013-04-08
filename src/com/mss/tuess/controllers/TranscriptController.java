@@ -1,8 +1,6 @@
 package com.mss.tuess.controllers;
 
-import com.mss.tuess.util.ViewManager;
 import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
@@ -12,8 +10,6 @@ import com.mss.tuess.entitylist.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -25,24 +21,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class TranscriptController implements Initializable {
 
     
-    @FXML
-    Pane sidebar;
-    @FXML
-    private TextField filterText;
-    @FXML
-    private TableView<Transcriptrecord> transcriptTable;
-    @FXML
-    private TableColumn<Transcriptrecord, String> courseName;;
-    @FXML
-    private TableColumn<Transcriptrecord, Integer> credit;
-    @FXML
-    private TableColumn<Transcriptrecord, String> termID;
-    @FXML
-    private TableColumn<Transcriptrecord, String> grade;
-    @FXML
-    private TextField totalCredit;
-    @FXML
-    private TextField GPA;
+    @FXML private TextField filterText;
+    @FXML private TableView<Transcriptrecord> transcriptTable;
+    @FXML private TableColumn<Transcriptrecord, String> courseName;;
+    @FXML private TableColumn<Transcriptrecord, Integer> credit;
+    @FXML private TableColumn<Transcriptrecord, String> termID;
+    @FXML private TableColumn<Transcriptrecord, String> grade;
+    @FXML private TextField totalCredit;
+    @FXML private TextField GPA;
 
     private ObservableList<Transcriptrecord> tableContent = FXCollections.observableArrayList();
     private ObservableList<Transcriptrecord> filterContent = FXCollections.observableArrayList();
@@ -111,7 +97,6 @@ public class TranscriptController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         courseName.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("courseName"));
         termID.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("termID"));
         grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
