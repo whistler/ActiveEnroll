@@ -31,6 +31,7 @@ public class ViewManager {
     public static void setStage(Stage newStage)
     {
         stage = newStage;
+        stage.centerOnScreen();
         stage.setResizable(false);
         stage.show();
     }
