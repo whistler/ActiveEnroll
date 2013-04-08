@@ -6,7 +6,6 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
-import com.mss.tuess.entity.Section;
 import com.mss.tuess.entity.SectionClass;
 import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
@@ -89,6 +88,7 @@ public class ViewAllCoursesController implements Initializable {
         int courseSize = CourseList.getAll().size();
         
         courseTableContent.clear();
+        sectionClassTableContent.clear();
         
         if(courseSize > 0){
             courseTableContent.addAll(CourseList.getAll());
@@ -273,10 +273,11 @@ public class ViewAllCoursesController implements Initializable {
                             String currentTerm = State.getCurrentTerm().getTermID();
                             SearchSectionClassList.fetch(courseDept, courseNum, currentTerm);
                             
-                            sectionClassFilterContent.clear();
+                            //sectionClassFilterContent.clear();
                             sectionClassTableContent.clear();
                             sectionClassTableContent.addAll(SearchSectionClassList.getAll());
-                            sectionClassFilterContent.addAll(SearchSectionClassList.getAll());
+                            sectionClassFilterContent.clear();
+                            sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
                         }
