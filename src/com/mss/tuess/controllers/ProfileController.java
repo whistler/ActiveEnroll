@@ -49,6 +49,8 @@ public class ProfileController implements Initializable {
     @FXML
     TextField zipCode;
     @FXML
+    TextField state;
+    @FXML
     TextField country;
     @FXML
     TextField phone;
@@ -72,6 +74,9 @@ public class ProfileController implements Initializable {
         address.setText(user.getAddress());
         city.setText(user.getCity());
         zipCode.setText(user.getZipcode());
+        System.out.println("THERE");
+        System.out.println(user.getState());
+        state.setText(user.getState());
         country.setText(user.getCountry());
         phone.setText(user.getPhone());
 
@@ -98,6 +103,7 @@ public class ProfileController implements Initializable {
 
         user.setAddress(address.getText());
         user.setCity(city.getText());
+        user.setState(state.getText());
         user.setCountry(country.getText());
         user.setEmail(email.getText());
         user.setFirstName(firstName.getText());

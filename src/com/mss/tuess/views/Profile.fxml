@@ -11,55 +11,57 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
-  <children>
-    <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="778.0" />
-    <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
-      <items>
-        <Pane fx:id="sidebar" />
-        <!-- start of content -->
-        <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="475.0" prefWidth="594.0">
-          <children>
-            <Button layoutX="251.0" layoutY="403.0" mnemonicParsing="false" onAction="#update" text="Save" />
-            <Label id="IDlabel" fx:id="IDLabel" layoutX="151.0" layoutY="36.0" text="Student ID">
-              <font>
-                <Font name="System Bold" size="12.0" fx:id="x1" />
-              </font>
-            </Label>
-            <Label fx:id="ID" font="$x1" layoutX="287.0" layoutY="35.0" text="11111111" />
-            <Label layoutX="152.0" layoutY="118.0" text="First Name" />
-            <Label layoutX="150.0" layoutY="140.0" text="Last Name" />
-            <Label layoutX="150.0" layoutY="205.0" text="Address" />
-            <Label layoutX="150.0" layoutY="307.0" text="Phone" />
-            <Label fx:id="programLabel" layoutX="152.0" layoutY="55.0" text="Program" visible="false" />
-            <Label id="registeredLabel" fx:id="registeredSinceLabel" layoutX="151.0" layoutY="74.0" text="Registered Since" visible="false" />
-            <Label fx:id="statusLabel" layoutX="151.0" layoutY="93.0" text="Status" visible="false" />
-            <Label layoutX="149.0" layoutY="340.0" text="New Password" />
-            <Label layoutX="149.0" layoutY="359.0" text="Confirm Password" />
-            <TextField fx:id="firstName" layoutX="287.0" layoutY="115.0" prefWidth="200.0" />
-            <TextField fx:id="lastName" layoutX="287.0" layoutY="137.0" prefWidth="200.0" />
-            <TextField fx:id="phone" layoutX="287.0" layoutY="304.0" prefWidth="200.0" />
-            <Label fx:id="program" layoutX="287.0" layoutY="52.0" text="ProgramName" visible="false" />
-            <Label fx:id="registeredSince" layoutX="287.0" layoutY="74.0" text="Date" visible="false" />
-            <Label fx:id="status" layoutX="286.0" layoutY="93.0" text="Part-time/Full-time" visible="false" />
-            <PasswordField fx:id="newPassword" layoutX="287.0" layoutY="334.0" prefWidth="200.0" />
-            <PasswordField fx:id="confirmPassword" layoutX="287.0" layoutY="356.0" prefWidth="200.0" />
-            <TextArea fx:id="address" layoutX="287.0" layoutY="188.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
-            <TextField id="eMail" fx:id="email" layoutX="287.0" layoutY="159.0" prefWidth="200.0" />
-            <Label layoutX="150.0" layoutY="162.0" text="Email" />
-            <Label layoutX="150.0" layoutY="241.0" text="City" />
-            <Label layoutX="150.0" layoutY="263.0" text="Zip Code" />
-            <Label layoutX="150.0" layoutY="285.0" text="Country" />
-            <TextField fx:id="city" layoutX="287.0" layoutY="238.0" prefWidth="200.0" />
-            <TextField fx:id="zipCode" layoutX="287.0" layoutY="260.0" prefWidth="200.0" />
-            <TextField fx:id="country" layoutX="287.0" layoutY="282.0" prefWidth="200.0" />
-            <Label id="error" fx:id="errorLabel" font="$x1" layoutX="354.0" layoutY="426.0" prefHeight="35.0" prefWidth="204.0" text="Label" wrapText="true" />
-          </children>
-        </AnchorPane>
-        <!-- end of content -->
-      </items>
-    </SplitPane>
-  </children>
-  <stylesheets>
-    <URL value="@style.css" />
-  </stylesheets>
+    <children>
+        <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="778.0" />
+        <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
+            <items>
+                <Pane fx:id="sidebar" />
+                <!-- start of content -->
+                <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="475.0" prefWidth="594.0">
+                    <children>
+                        <Button layoutX="251.0" layoutY="423.0" mnemonicParsing="false" onAction="#update" text="Save" />
+                        <Label id="IDlabel" fx:id="IDLabel" layoutX="151.0" layoutY="36.0" text="Student ID">
+                            <font>
+                                <Font name="System Bold" size="12.0" fx:id="x1" />
+                            </font>
+                        </Label>
+                        <Label fx:id="ID" font="$x1" layoutX="287.0" layoutY="35.0" text="11111111" />
+                        <Label layoutX="152.0" layoutY="118.0" text="First Name" />
+                        <Label layoutX="150.0" layoutY="140.0" text="Last Name" />
+                        <Label layoutX="150.0" layoutY="205.0" text="Address" />
+                        <Label layoutX="151.0" layoutY="334.0" text="Phone" />
+                        <Label fx:id="programLabel" layoutX="152.0" layoutY="55.0" text="Program" visible="false" />
+                        <Label id="registeredLabel" fx:id="registeredSinceLabel" layoutX="151.0" layoutY="74.0" text="Registered Since" visible="false" />
+                        <Label fx:id="statusLabel" layoutX="151.0" layoutY="93.0" text="Status" visible="false" />
+                        <Label layoutX="149.0" layoutY="359.0" text="New Password" />
+                        <Label layoutX="149.0" layoutY="387.0" text="Confirm Password" />
+                        <TextField fx:id="firstName" layoutX="287.0" layoutY="115.0" prefWidth="200.0" />
+                        <TextField fx:id="lastName" layoutX="287.0" layoutY="137.0" prefWidth="200.0" />
+                        <TextField fx:id="phone" layoutX="287.0" layoutY="334.0" prefWidth="200.0" />
+                        <Label fx:id="program" layoutX="287.0" layoutY="52.0" text="ProgramName" visible="false" />
+                        <Label fx:id="registeredSince" layoutX="287.0" layoutY="74.0" text="Date" visible="false" />
+                        <Label fx:id="status" layoutX="286.0" layoutY="93.0" text="Part-time/Full-time" visible="false" />
+                        <PasswordField fx:id="newPassword" layoutX="287.0" layoutY="364.0" prefWidth="200.0" />
+                        <PasswordField fx:id="confirmPassword" layoutX="287.0" layoutY="387.0" prefWidth="200.0" />
+                        <TextArea fx:id="address" layoutX="287.0" layoutY="188.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
+                        <TextField id="eMail" fx:id="email" layoutX="287.0" layoutY="159.0" prefWidth="200.0" />
+                        <Label layoutX="150.0" layoutY="162.0" text="Email" />
+                        <Label layoutX="150.0" layoutY="241.0" text="City" />
+                        <Label layoutX="150.0" layoutY="263.0" text="Zip Code" />
+                        <Label layoutX="150.0" layoutY="309.0" text="Country" />
+                        <TextField fx:id="city" layoutX="287.0" layoutY="238.0" prefWidth="200.0" />
+                        <TextField fx:id="zipCode" layoutX="287.0" layoutY="260.0" prefWidth="200.0" />
+                        <TextField fx:id="country" layoutX="287.0" layoutY="309.0" prefWidth="200.0" />
+                        <Label id="error" fx:id="errorLabel" font="$x1" layoutX="354.0" layoutY="426.0" prefHeight="35.0" prefWidth="204.0" text="Label" wrapText="true" />
+                        <Label layoutX="151.0" layoutY="285.0" text="State" />
+                        <TextField fx:id="state" layoutX="287.0" layoutY="285.0" prefWidth="200.0" />
+                    </children>
+                </AnchorPane>
+                <!-- end of content -->
+            </items>
+        </SplitPane>
+    </children>
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
 </AnchorPane>
