@@ -34,6 +34,43 @@ public class CourseList {
     }
 
     /**
+     * Parameterized Search
+     * objects
+     *
+     * @throws SQLException
+     */
+    public static void fetch(String searchParam) throws SQLException {
+        
+        String parameterizedSQL = "SELECT * FROM course where"
+                                        +searchParam
+                                        +"order by courseNum;";
+        executeSQL(parameterizedSQL);
+    }   
+    
+    /**
+     * 
+     * @param sqlString
+     * @throws SQLException 
+     */
+    private static void executeSQL(String sqlString) throws SQLException{
+        
+        courses.clear();
+        ResultSet rs;
+        rs = DatabaseConnector.returnQuery(sqlString);
+        
+        while (rs.next()) {
+            Course course = new Course();
+            course.setCourseDept(rs.getString("courseDept"));
+            course.setCourseNum(rs.getString("courseNum"));
+            course.setCourseName(rs.getString("courseName"));
+            course.setInfo(rs.getString("info"));
+            course.setCredit(rs.getInt("credit"));
+
+            courses.add(course);
+        }
+    }
+    
+    /**
      * Returns the course stored at the given index
      *
      * @param index index of the course to return
