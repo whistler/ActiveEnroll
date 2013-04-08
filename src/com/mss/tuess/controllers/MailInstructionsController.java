@@ -12,22 +12,15 @@ import javafx.scene.layout.Pane;
 import javax.mail.MessagingException;
 
 public class MailInstructionsController implements Initializable {
-
-    @FXML 
-    Pane sidebar;
     
-    @FXML 
-    Button sendInstructions;
-    
-    @FXML
-    Label sendEmailStatus;
+    @FXML Button sendInstructions;
+    @FXML Label sendEmailStatus;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         sendEmailStatus.setText("");
     }   
     
