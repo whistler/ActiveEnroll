@@ -125,9 +125,11 @@ public class SectionController implements Initializable {
         rs_enrolled.beforeFirst();
         while (rs_enrolled.next()) {
             if (courseDept.compareTo(rs_enrolled.getString("courseDept")) == 0 && courseNum.compareTo(rs_enrolled.getString("courseNum")) == 0) {
+                System.out.println(courseDept + courseNum + "___is IN");
                 return true;
             }
         }
+        System.out.println(courseDept + courseNum + "___is NOT IN");
         return false;
     }
 
@@ -161,24 +163,24 @@ public class SectionController implements Initializable {
         int flag = 0;
         int change = 0;
         while (rs_pre.next()) {
-            if (change == 0) {
-                flag = 0;
-            }
+            flag = 0;
             if (isInSet(rs_enrolled, rs_pre.getString("prereqDept"), rs_pre.getString("prereqNum"))) {
                 flag = 1;
             }
             String now = rs_pre.getString("prereqGroup");
-            while (!isInSet(rs_enrolled, rs_pre.getString("prereqDept"), rs_pre.getString("prereqNum"))) {
-                rs_pre.next();
-                if (now.compareTo(rs_pre.getString("prereqGroup")) != 0) {
-                    change = 0;
-                    if (flag == 0) {
-                        return false;
+            while (rs_pre.next()) {
+                if (now.compareTo(rs_pre.getString("prereqGroup")) == 0) {
+                    if (isInSet(rs_enrolled, rs_pre.getString("prereqDept"), rs_pre.getString("prereqNum"))) {
+                        flag = 1;
                     }
+                } else {
+                    break;
                 }
             }
-            flag = 1;
-            change = 1;
+            if (flag == 0) {
+                return false;
+            }
+            rs_pre.previous();
         }
         if (flag == 1) {
             return true;
@@ -202,24 +204,6 @@ public class SectionController implements Initializable {
         return false;
     }
 
-    public static boolean canEnroll(Section section, int studentID) throws SQLException {
-//        if (!registrationEndNotPass(section)) {
-//            return false;
-//        }
-//        if (isAlreadyRegistered(section, studentID)) {
-//            return false;
-//        }
-//        if (notFull(section)) {
-//            return false;
-//
-//        }
-        if (checkPrerequisite(section, studentID) == false) {
-            System.out.println("\ncheckPrerequisite: false");
-            return false;
-        }
-        System.out.println("\ncheckPrerequisite: true");
-        return true;
-    }
 
     public static boolean registrationEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
@@ -242,5 +226,23 @@ public class SectionController implements Initializable {
             System.out.println("\nnotFull returns: false");
             return false;
         }
+    }
+    public static boolean canEnroll(Section section, int studentID) throws SQLException {
+//        if (!registrationEndNotPass(section)) {
+//            return false;
+//        }
+//        if (isAlreadyRegistered(section, studentID)) {
+//            return false;
+//        }
+//        if (notFull(section)) {
+//            return false;
+//
+//        }
+        if (checkPrerequisite(section, studentID) == false) {
+            System.out.println("\ncheckPrerequisite: false");
+            return false;
+        }
+        System.out.println("\ncheckPrerequisite: true");
+        return true;
     }
 }
