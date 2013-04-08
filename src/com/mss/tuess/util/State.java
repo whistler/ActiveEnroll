@@ -18,7 +18,7 @@ public class State {
     private static Term currentTerm = new Term();
     private static Section currentSection = new Section();
     private static SectionClass currentSectionClass = new SectionClass();
-    
+    private static String currentSearchView;
     
     /**
      * 
@@ -55,5 +55,13 @@ public class State {
         {
             return currentSectionClass;
         }
+    
+    public static void setCurrentSearchView(String searchView){
+        currentSearchView = searchView;
+    }
+    
+    public static String getCurrentSearchView(){
+        return currentSearchView;
+    }
     
 }

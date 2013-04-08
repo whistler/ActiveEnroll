@@ -24,33 +24,67 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ViewAllCoursesController implements Initializable {
+public class SearchCoursesController implements Initializable {
+    
+    //advanced search fields
+    @FXML
+    private TextField searchCode;
+    @FXML
+    private TextField searchName;
+    @FXML
+    private TextField searchDepartment;
+    @FXML
+    private TextField searchInfo;
+    @FXML
+    private TextField searchCredit;
+    @FXML
+    private Button searchCourseButton;
+    @FXML
+    private Label searchErrorLabel;
     
     //filter fields
-    @FXML private TextField courseFilter;
-    @FXML private TextField sectionFilter;
+    @FXML
+    private TextField courseFilter;
+    @FXML
+    private TextField sectionFilter;
     
     //Course Table and fields
-    @FXML private TableView<Course> courseTable;
-    @FXML private TableColumn<Course, String> courseNum;
-    @FXML private TableColumn<Course, String> courseName;
-    @FXML private TableColumn<Course, String> courseDept;
-    @FXML private TableColumn<Course, String> info;
-    @FXML private TableColumn<Course, Integer> credit;
+    @FXML
+    private TableView<Course> courseTable;
+    @FXML
+    private TableColumn<Course, String> courseNum;
+    @FXML
+    private TableColumn<Course, String> courseName;
+    @FXML
+    private TableColumn<Course, String> courseDept;
+    @FXML
+    private TableColumn<Course, String> info;
+    @FXML
+    private TableColumn<Course, Integer> credit;
+    
     
     //Section Table and fields
-    @FXML private TableView<SectionClass> sectionClassTable;
-    @FXML private TableColumn<SectionClass, String> sectionID;
-    @FXML private TableColumn<SectionClass, String> type;
-    @FXML private TableColumn<SectionClass, String> day;
-    @FXML private TableColumn<SectionClass, String> displayStartTime;
-    @FXML private TableColumn<SectionClass, String> displayEndTime;
-    @FXML private TableColumn<SectionClass, String> location;
+    @FXML
+    private TableView<SectionClass> sectionClassTable;
+    @FXML
+    private TableColumn<SectionClass, String> sectionID;
+    @FXML
+    private TableColumn<SectionClass, String> type;
+    @FXML
+    private TableColumn<SectionClass, String> day;
+    @FXML
+    private TableColumn<SectionClass, String> displayStartTime;
+    @FXML
+    private TableColumn<SectionClass, String> displayEndTime;
+    @FXML
+    private TableColumn<SectionClass, String> location;
     
     //Course list
     private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
@@ -61,22 +95,27 @@ public class ViewAllCoursesController implements Initializable {
     private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
 
     /**
-     * Constructor of CourseSearchController
+     * Constructor of CourseSearchController_unused
      *
      * @throws SQLException
      */
-    public ViewAllCoursesController() throws SQLException {
-        CourseList.fetch();
-        int courseSize = CourseList.getAll().size();
+    public SearchCoursesController() throws SQLException {
+        int courseSize;
         
         courseTableContent.clear();
         sectionClassTableContent.clear();
         
-        if(courseSize > 0){
-            courseTableContent.addAll(CourseList.getAll());
-        }
+        //if flag is search all courses
+        if(State.getCurrentSearchView().equalsIgnoreCase("AllCourses")){
+            CourseList.fetch();
+            courseSize = CourseList.getAll().size();
+            
+            if(courseSize > 0){
+                courseTableContent.addAll(CourseList.getAll());
+            }
+            courseFilterContent.addAll(courseTableContent);
+        }   
         
-        courseFilterContent.addAll(courseTableContent);
         
         //event listener for course filter 
         courseTableContent.addListener(new ListChangeListener<Course>() {
@@ -95,6 +134,11 @@ public class ViewAllCoursesController implements Initializable {
         });
     }
 
+    @FXML
+    private void advancedCourseSearch() throws SQLException{
+        searchCourseByParam();
+    }
+    
     /**
      * Handle the order for each course column
      */
@@ -203,6 +247,7 @@ public class ViewAllCoursesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        //searchErrorLabel.setText("");
         /**
          * map the course table attributes
          */
@@ -247,19 +292,18 @@ public class ViewAllCoursesController implements Initializable {
                         System.out.println("Index : "+selectedIndex);
 
                         try {
-                            //ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
                             String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
                             String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
                             String currentTerm = State.getCurrentTerm().getTermID();
                             SearchSectionClassList.fetch(courseDept, courseNum, currentTerm);
                             
-                            //sectionClassFilterContent.clear();
                             sectionClassTableContent.clear();
                             sectionClassTableContent.addAll(SearchSectionClassList.getAll());
                             sectionClassFilterContent.clear();
                             sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("gotcha array out of bound 1");
+                            Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
@@ -285,7 +329,7 @@ public class ViewAllCoursesController implements Initializable {
                             State.setCurrentSection(currentSection);
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
-                            Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
@@ -303,4 +347,84 @@ public class ViewAllCoursesController implements Initializable {
 
         sectionClassTable.setItems(sectionClassFilterContent);
     }
+    
+    
+    
+    private void searchCourseByParam() throws SQLException{
+            
+            searchErrorLabel.setText("");
+            String searchSQL = validateAndBuildSearchSQL();
+            if(searchSQL != null){
+                System.out.println("Search Sql :"+searchSQL);
+                courseTableContent.clear();
+                sectionClassTableContent.clear();
+
+                CourseList.fetch(searchSQL);
+                int courseSize = CourseList.getAll().size();
+
+                if(courseSize > 0){
+                    courseTableContent.addAll(CourseList.getAll());    
+                }
+                
+                courseFilterContent.clear();
+                courseFilterContent.addAll(courseTableContent);
+            }else{
+                searchErrorLabel.setText("Atleast one field should be entered!");
+            }
+
+
+    }
+    
+    private String validateAndBuildSearchSQL(){
+        
+        ArrayList<String> searchParamList = new ArrayList();
+        String searchSQL="";
+        String addParam;
+        String searchField;
+        
+        searchField = searchCode.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseNum like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+
+        searchField = searchDepartment.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseDept like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchName.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseName like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchInfo.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " info like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchCredit.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " credit like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }  
+        
+        if(searchParamList.size() > 0){
+            for(int i=0;i<searchParamList.size();i++){
+                if(i!=0){
+                    searchSQL+=" and" + searchParamList.get(i);
+                }else{
+                    searchSQL+=searchParamList.get(i);
+                }
+            }   
+        }else {
+            searchSQL = null;
+        }
+        
+        return searchSQL;
+    }
+    
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="553.0" prefHeight="475.0" prefWidth="564.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ViewAllCoursesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SearchCoursesController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
     <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses:" textFill="GREY">
