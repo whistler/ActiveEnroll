@@ -10,6 +10,7 @@ public abstract class User {
     private String city;
     private String email;
     private String country;
+    private String state;
     private String zipcode;
     private String phone;
     private String password;
@@ -21,9 +22,9 @@ public abstract class User {
     public abstract void delete() throws SQLException;
 
     public abstract void update() throws SQLException;
-    
+
     public abstract void setID(int id);
-    
+
     public abstract int getID();
 
     /**
@@ -81,6 +82,20 @@ public abstract class User {
     public void setCity(String city) {
         this.city = city;
     }
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+        /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+
 
     /**
      * @return the country
