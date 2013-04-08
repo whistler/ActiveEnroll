@@ -18,48 +18,30 @@ import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SectionController implements Initializable {
 
-    @FXML
-    Pane sidebar;
-    @FXML
-    TextField courseNum;
-    @FXML
-    TextField courseName;
-    @FXML
-    TextField courseDept;
-    @FXML
-    TextArea courseInfo;
-    @FXML
-    TextField courseCredits;
-    @FXML
-    TextField instructor;
-    @FXML
-    TextField startDate;
-    @FXML
-    TextField endDate;
-    @FXML
-    TextField lastDayToEnroll;
-    @FXML
-    TextField lastDayToWithdraw;
-    @FXML
-    Button dropButton;
-    @FXML
-    Button enrollButton;
+    @FXML TextField courseNum;
+    @FXML TextField courseName;
+    @FXML TextField courseDept;
+    @FXML TextArea courseInfo;
+    @FXML TextField courseCredits;
+    @FXML TextField instructor;
+    @FXML TextField startDate;
+    @FXML TextField endDate;
+    @FXML TextField lastDayToEnroll;
+    @FXML TextField lastDayToWithdraw;
+    @FXML Button dropButton;
+    @FXML Button enrollButton;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         Section section = State.getCurrentSection();
         System.out.println(section.getCourseNum());
         if (section != null) {

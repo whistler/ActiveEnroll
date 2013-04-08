@@ -81,7 +81,7 @@ public class SidebarController implements Initializable {
     @FXML public void logout() throws Exception 
     {
         CurrentUser.setUser(null);
-        ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
+        ViewManager.changeScene("/com/mss/tuess/views/Login.fxml");
     }
     
     @FXML public void showMyProfile() throws Exception
