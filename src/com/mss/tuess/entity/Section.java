@@ -11,15 +11,9 @@ public class Section {
     private String courseDept;
     private String courseNum;
     private int instructorID;
-    private String type;
-    private String textbook;
     private String termID;
-    private Date startTime;
-    private Date endTime;
-    private String day;
     private int capacity;
     private int registered;
-    private String location;
     private String status;
     
     private Course course = new Course();
@@ -83,34 +77,6 @@ public class Section {
     }
 
     /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @return the textbook
-     */
-    public String getTextbook() {
-        return textbook;
-    }
-
-    /**
-     * @param textbook the textbook to set
-     */
-    public void setTextbook(String textbook) {
-        this.textbook = textbook;
-    }
-
-    /**
      * @return the termID
      */
     public String getTermID() {
@@ -122,48 +88,6 @@ public class Section {
      */
     public void setTermID(String term) {
         this.termID = term;
-    }
-
-    /**
-     * @return the time
-     */
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    /**
-     * @param time the time to set
-     */
-    public void setStartTime(Date time) {
-        this.startTime = time;
-    }
-
-    /**
-     * @return the time
-     */
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    /**
-     * @param time the time to set
-     */
-    public void setEndTime(Date time) {
-        this.endTime = time;
-    }
-
-    /**
-     * @return the day
-     */
-    public String getDay() {
-        return day;
-    }
-
-    /**
-     * @param day the day to set
-     */
-    public void setDay(String day) {
-        this.day = day;
     }
 
     /**
@@ -195,20 +119,6 @@ public class Section {
     }
 
     /**
-     * @return the location
-     */
-    public String getLocation() {
-        return location;
-    }
-
-    /**
-     * @param location the location to set
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
      * @return the status
      */
     public String getStatus() {
@@ -228,13 +138,12 @@ public class Section {
      *
      * @throws SQLException
      */
-    public void fetch(String sectionID, String courseDept, String courseNum, String type, String termID) throws SQLException {
+    public void fetch(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM section  WHERE "
                 + "sectionID = '" + sectionID + "' AND "
                 + "courseDept = '" + courseDept + "' AND "
                 + "courseNum = '" + courseNum + "' AND "
-                + "type = '" + type + "' AND "
                 + "termID = '" + termID + "'" ;
         
         rs = DatabaseConnector.returnQuery(sql);
@@ -243,15 +152,9 @@ public class Section {
             this.setCourseDept(rs.getString("courseDept"));
             this.setCourseNum(rs.getString("courseNum"));
             this.setInstructorID(rs.getInt("instructorID"));
-            this.setType(rs.getString("type"));
-            this.setTextbook(rs.getString("textbook"));
             this.setTermID(rs.getString("termID"));
-            this.setStartTime(rs.getTime("startTime"));
-            this.setEndTime(rs.getTime("endTime"));
-            this.setDay(rs.getString("day"));
             this.setCapacity(rs.getInt("capacity"));
             this.setRegistered(rs.getInt("registered"));
-            this.setLocation(rs.getString("location"));
             this.setStatus(rs.getString("status"));
         }
 
@@ -268,15 +171,9 @@ public class Section {
                 + "courseDept=" + this.getCourseDept() + ", "
                 + "courseNum=" + this.getCourseNum() + ", "
                 + "instructorID=" + this.getInstructorID() + ", "
-                + "type=" + this.getType() + ", "
-                + "textbook=" + this.getTextbook() + ", "
                 + "termID=" + this.getTermID() + ", "
-                + "startTime=" + this.getStartTime() + ", "
-                + "endTime=" + this.getEndTime() + ", "
-                + "day=" + this.getDay() + ", "
                 + "capacity=" + this.getCapacity() + ", "
                 + "registered=" + this.getRegistered() + ", "
-                + "location=" + this.getLocation() + ", "
                 + "status=" + this.getStatus()
                 + "WHERE sectionID=" + this.getSectionID();
         DatabaseConnector.updateQuery(sql);
@@ -298,21 +195,15 @@ public class Section {
      * @throws SQLException
      */
     public void insert() throws SQLException {
-        String sql = "INSERT INTO section  (sectionID, courseDept, courseNum, instructorID, type, textbook, "
-                + "termID, startTime, endTime, day, capacity, registered, location, status) values "
+        String sql = "INSERT INTO section  (sectionID, courseDept, courseNum, instructorID, "
+                + "termID, capacity, registered, status) values "
                 + "(" + this.getSectionID() + ", '"
                 + this.getCourseDept() + "', '"
                 + this.getCourseNum() + "', '"
                 + this.getInstructorID() + "', '"
-                + this.getType() + "', '"
-                + this.getTextbook() + "', '"
                 + this.getTermID() + "', '"
-                + this.getStartTime() + "', '"
-                + this.getEndTime() + "', '"
-                + this.getDay() + "', '"
                 + this.getCapacity() + "', '"
                 + this.getRegistered() + "', '"
-                + this.getLocation() + "', '"
                 + this.getStatus()
                 + "')";
         System.out.println(sql);

@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * @author chenliang
  */
 public class SectionClass {
+    
     private String sectionID;
     private String courseDept;
     private String courseNum;
@@ -21,7 +22,9 @@ public class SectionClass {
     
     private String day;
     private Timestamp startTime;
+    private String displayStartTime;
     private Timestamp endTime;
+    private String displayEndTime;
     
     private String location;
 
@@ -135,6 +138,8 @@ public class SectionClass {
      */
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
+        //set the start time to be displayed
+        this.displayStartTime = this.startTime.toString().substring(11, 16);
     }
 
     /**
@@ -149,6 +154,8 @@ public class SectionClass {
      */
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+        //set the end time to be displayed
+        this.displayEndTime = this.endTime.toString().substring(11, 16);        
     }
 
     /**
@@ -164,4 +171,32 @@ public class SectionClass {
     public void setLocation(String location) {
         this.location = location;
     }
+    
+    /**
+     * @param startTime the display start time to set
+     */
+    public void setDisplayStartTime(String startTime) {
+        this.displayStartTime = startTime;
+    }
+
+    /**
+     * @return the startTime
+     */
+    public String getDisplayStartTime() {
+        return this.displayStartTime;
+    }    
+    
+    /**
+     * @param endTime the display start time to set
+     */
+    public void setDisplayEndTime(String endTime) {
+        this.displayEndTime = endTime;
+    }
+
+    /**
+     * @return the Display End Time
+     */
+    public String getDisplayEndTime() {
+        return this.displayEndTime;
+    }     
 }
