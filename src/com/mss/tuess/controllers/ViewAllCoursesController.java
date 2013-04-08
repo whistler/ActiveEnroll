@@ -293,11 +293,16 @@ public class ViewAllCoursesController implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends SectionClass> ov, SectionClass t, SectionClass t1) {
                         int selectedIndex = sectionClassTable.getSelectionModel().getSelectedIndex();
+                        Section currentSection = new Section();
+                        
                         System.out.println("Index : "+selectedIndex);
 
                         try {
                             State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
-                            Section currentSection = new Section();
+                            currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
+                                sectionClassFilterContent.get(selectedIndex).getCourseDept(),
+                                sectionClassFilterContent.get(selectedIndex).getCourseNum(),
+                                sectionClassFilterContent.get(selectedIndex).getTermID());
                             State.setCurrentSection(currentSection);
                             ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
                         } catch (Exception ex) {
