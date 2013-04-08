@@ -24,7 +24,7 @@ public class TUESS extends Application {
         DatabaseConnector.Connect();
         State.setCurrentTerm(Term.getCurrentTerm());
         ViewManager.setStage(stage);
-        ViewManager.changeView("/com/mss/tuess/views/Login.fxml");
+        ViewManager.changeScene("/com/mss/tuess/views/Login.fxml");
     }
 
     /**

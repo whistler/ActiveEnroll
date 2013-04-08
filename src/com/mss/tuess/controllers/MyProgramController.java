@@ -5,7 +5,6 @@ import com.mss.tuess.entity.Department;
 import com.mss.tuess.entity.Program;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
-import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -15,11 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 public class MyProgramController implements Initializable {
 
-    @FXML Pane sidebar;
     @FXML TextField programID;
     @FXML TextField degreeTitle;
     @FXML TextField facultyName;
@@ -34,7 +31,6 @@ public class MyProgramController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         Student student = (Student) CurrentUser.getUser();
         Program program = new Program();
         program.fetch(student.getProgramID());

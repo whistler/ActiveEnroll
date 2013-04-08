@@ -31,45 +31,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ViewAllCoursesController implements Initializable {
     
-    //side bar
-    @FXML
-    Pane sidebar;
-    
     //filter fields
-    @FXML
-    private TextField courseFilter;
-    @FXML
-    private TextField sectionFilter;
+    @FXML private TextField courseFilter;
+    @FXML private TextField sectionFilter;
     
     //Course Table and fields
-    @FXML
-    private TableView<Course> courseTable;
-    @FXML
-    private TableColumn<Course, String> courseNum;
-    @FXML
-    private TableColumn<Course, String> courseName;
-    @FXML
-    private TableColumn<Course, String> courseDept;
-    @FXML
-    private TableColumn<Course, String> info;
-    @FXML
-    private TableColumn<Course, Integer> credit;
+    @FXML private TableView<Course> courseTable;
+    @FXML private TableColumn<Course, String> courseNum;
+    @FXML private TableColumn<Course, String> courseName;
+    @FXML private TableColumn<Course, String> courseDept;
+    @FXML private TableColumn<Course, String> info;
+    @FXML private TableColumn<Course, Integer> credit;
     
     //Section Table and fields
-    @FXML
-    private TableView<SectionClass> sectionClassTable;
-    @FXML
-    private TableColumn<SectionClass, String> sectionID;
-    @FXML
-    private TableColumn<SectionClass, String> type;
-    @FXML
-    private TableColumn<SectionClass, String> day;
-    @FXML
-    private TableColumn<SectionClass, String> displayStartTime;
-    @FXML
-    private TableColumn<SectionClass, String> displayEndTime;
-    @FXML
-    private TableColumn<SectionClass, String> location;
+    @FXML private TableView<SectionClass> sectionClassTable;
+    @FXML private TableColumn<SectionClass, String> sectionID;
+    @FXML private TableColumn<SectionClass, String> type;
+    @FXML private TableColumn<SectionClass, String> day;
+    @FXML private TableColumn<SectionClass, String> displayStartTime;
+    @FXML private TableColumn<SectionClass, String> displayEndTime;
+    @FXML private TableColumn<SectionClass, String> location;
     
     //Course list
     private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
@@ -221,8 +202,6 @@ public class ViewAllCoursesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        ViewManager.loadSidebar(sidebar);
         
         /**
          * map the course table attributes

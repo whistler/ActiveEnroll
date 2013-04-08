@@ -6,7 +6,6 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
-import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.entitylist.*;
 import java.net.URL;
@@ -29,22 +28,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CourseSearchController implements Initializable {
 
-    @FXML
-    Pane sidebar;
-    @FXML
-    private TextField filterText;
-    @FXML
-    private TableView<Course> courseTable;
-    @FXML
-    private TableColumn<Course, String> courseNum;
-    @FXML
-    private TableColumn<Course, String> courseName;
-    @FXML
-    private TableColumn<Course, String> courseDept;
-    @FXML
-    private TableColumn<Course, String> info;
-    @FXML
-    private TableColumn<Course, Integer> credit;
+    @FXML private TextField filterText;
+    @FXML private TableView<Course> courseTable;
+    @FXML private TableColumn<Course, String> courseNum;
+    @FXML private TableColumn<Course, String> courseName;
+    @FXML private TableColumn<Course, String> courseDept;
+    @FXML private TableColumn<Course, String> info;
+    @FXML private TableColumn<Course, Integer> credit;
     
     private ObservableList<Course> tableContent = FXCollections.observableArrayList();
     private ObservableList<Course> filterContent = FXCollections.observableArrayList();
@@ -123,7 +113,6 @@ public class CourseSearchController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         courseNum.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNum"));
         courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
         courseDept.setCellValueFactory(new PropertyValueFactory<Course, String>("courseDept"));

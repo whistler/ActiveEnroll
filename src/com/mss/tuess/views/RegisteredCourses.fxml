@@ -10,50 +10,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="808.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.RegisteredCourseController">
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.RegisteredCourseController">
   <children>
-    <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
-    <SplitPane dividerPositions="0.25031446540880503" layoutX="3.0" layoutY="69.0" minHeight="335.0" prefHeight="477.0" prefWidth="797.0">
-      <items>
-        <Pane fx:id="sidebar" />
-        <!-- start of content -->
-        <AnchorPane maxHeight="550.0" minHeight="374.0" minWidth="570.0" prefHeight="475.0" prefWidth="594.0">
-          <children>
-            <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-            <Label layoutX="25.0" layoutY="7.0" prefHeight="25.0" prefWidth="247.0" text="Registered courses in current term:" textFill="GREY">
-              <font>
-                <Font name="System Bold" size="12.0" fx:id="x1" />
-              </font>
-            </Label>
-            <Label fx:id="currentTerm" font="$x1" layoutX="249.0" layoutY="7.0" prefHeight="25.0" prefWidth="51.0" text="" textFill="GREY" />
-            <TextField fx:id="filterText" layoutX="150.0" layoutY="163.0" prefWidth="99.0">
-              <tooltip>
-                <Tooltip text="Type any course parameter to filter table" />
-              </tooltip>
-            </TextField>
-            <TableView fx:id="registeredCoursesTable" layoutX="25.0" layoutY="43.0" prefHeight="282.0" prefWidth="551.0">
-              <columns>
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="45.0" text="Dept" fx:id="courseDept" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="35.0" text="No." fx:id="courseNum" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="31.0" text="Sec." fx:id="sectionID" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="330.0" text="CourseName" fx:id="courseName" />
-                <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" sortable="false" text="Term" fx:id="termID" />
-                <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="58.0" sortable="false" text="Credit" fx:id="credit" />
-              </columns>
-            </TableView>
-            <HBox alignment="CENTER" layoutX="258.0" layoutY="339.0" prefHeight="35.0" prefWidth="318.0">
-              <children>
-                <Label prefHeight="26.0" prefWidth="228.0" text="Registered credits in current term:" />
-                <Label fx:id="totalCredits" prefWidth="51.0" text="Label" />
-              </children>
-            </HBox>
-          </children>
-        </AnchorPane>
-        <!-- end of content -->
-      </items>
-    </SplitPane>
+    <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
+    <Label layoutX="25.0" layoutY="7.0" prefHeight="25.0" prefWidth="247.0" text="Registered courses in current term:" textFill="GREY">
+      <font>
+        <Font name="System Bold" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="currentTerm" font="$x1" layoutX="249.0" layoutY="7.0" prefHeight="25.0" prefWidth="51.0" text="" textFill="GREY" />
+    <TextField fx:id="filterText" layoutX="150.0" layoutY="163.0" prefWidth="99.0">
+      <tooltip>
+        <Tooltip text="Type any course parameter to filter table" />
+      </tooltip>
+    </TextField>
+    <TableView fx:id="registeredCoursesTable" layoutX="25.0" layoutY="43.0" prefHeight="282.0" prefWidth="551.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="45.0" text="Dept" fx:id="courseDept" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="35.0" text="No." fx:id="courseNum" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="31.0" text="Sec." fx:id="sectionID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="330.0" text="CourseName" fx:id="courseName" />
+        <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" sortable="false" text="Term" fx:id="termID" />
+        <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="58.0" sortable="false" text="Credit" fx:id="credit" />
+      </columns>
+    </TableView>
+    <HBox alignment="CENTER" layoutX="258.0" layoutY="339.0" prefHeight="35.0" prefWidth="318.0">
+      <children>
+        <Label prefHeight="26.0" prefWidth="228.0" text="Registered credits in current term:" />
+        <Label fx:id="totalCredits" prefWidth="51.0" text="Label" />
+      </children>
+    </HBox>
   </children>
-  <stylesheets>
-    <URL value="@style.css" />
-  </stylesheets>
 </AnchorPane>
