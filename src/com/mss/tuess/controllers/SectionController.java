@@ -18,17 +18,12 @@ import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SectionController implements Initializable {
 
-    @FXML
-    Pane sidebar;
     @FXML
     TextField courseNum;
     @FXML
@@ -59,7 +54,6 @@ public class SectionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         Section section = State.getCurrentSection();
         System.out.println(section.getCourseNum());
         if (section != null) {
@@ -97,98 +91,51 @@ public class SectionController implements Initializable {
                     + section.getCourseNum() + ", "
                     + section.getTermID()
                     + ")";
-            DatabaseConnector.updateQuery(sql);
+            //DatabaseConnector.updateQuery(sql);
+            System.out.println("\nCan!!!!!!!!   " + sql);
         } else {
             System.out.println("\nCannot be added!!!!!!!!!");
         }
     }
 
-    public static ResultSet fetchEnrolledCourses(int studentID) throws SQLException {
-        ResultSet rs;
-        String sql = "select sectionID, courseDept, courseNum, termID from enrollSection where studentID=" + studentID;
-        rs = DatabaseConnector.returnQuery(sql);
-        return rs;
-    }
-
-    public static ResultSet fetchPrereqCourses(Course course) throws SQLException {
-        //CurrentUser.getUser().getID();
-        ResultSet rs;
-        String sql = "select prereqNum, prereqDept from prerequisite where courseNum='" + course.getCourseNum() + "' and courseDept='" + course.getCourseDept() + "'";
-        rs = DatabaseConnector.returnQuery(sql);
-        return rs;
-    }
-
-    public static ResultSet checkPrerequisite(Section section, int studentID) throws SQLException {
-        ResultSet rs;
-        String sql = " SELECT prereqDept, prereqNum FROM prerequisite pr"
-                + "	WHERE courseDept=" + section.getCourseDept()
-                + "		AND courseNum=" + section.getCourseNum()
-                + "		AND NOT EXISTS"
-                + "			( SELECT * FROM enrollSection e"
-                + "			WHERE  e.studentID=" + studentID
-                + "				AND e.courseDept=pr.prereqDept"
-                + "				AND e.courseNum=pr.prereqNum"
-                + "				AND (e.grade='A' OR e.grade='B' OR e.grade='C' OR e.grade='D')"
-                + "                )";
-
-        rs = DatabaseConnector.returnQuery(sql);
-        return rs;
-    }
-
-    public static boolean isAlreadyRegistered(Section section, int studentID) throws SQLException {
-
-        ResultSet rs_stu_reg = fetchEnrolledCourses(CurrentUser.getUser().getID());
-        while (rs_stu_reg.next()) {
-            if (rs_stu_reg.getString("sectionID").compareTo(section.getSectionID()) == 0
-                    && rs_stu_reg.getString("courseDept").compareTo(section.getCourseDept()) == 0
-                    && rs_stu_reg.getString("courseNum").compareTo(section.getCourseNum()) == 0) {
-        System.out.println("\nisAlreadyRegistered returns: true");
-                return true;
-            }
-        }
-        System.out.println("\nisAlreadyRegistered returns: false");
-        return false;
-    }
-
     public static boolean canEnroll(Section section, int studentID) throws SQLException {
-        if (!registrationEndNotPass(section)) {
+//        if (!registrationEndNotPass(section)) {
+//            return false;
+//        }
+        if (EnrollSection.isAlreadyRegistered(section, studentID)) {
             return false;
         }
-        if (isAlreadyRegistered(section, studentID)) {
-            return false;
-        }
-        if (notFull(section)) {
+        if (EnrollSection.isFull(section)) {
             return false;
 
         }
-        if (checkPrerequisite(section, studentID).getRow() == 0) {
-        System.out.println("\ncheckPrerequisite: false");
+        if (EnrollSection.checkPrerequisite(section, studentID) == false) {
+            System.out.println("\ncheckPrerequisite: false");
             return false;
         }
         System.out.println("\ncheckPrerequisite: true");
         return true;
     }
 
-    public static boolean registrationEndNotPass(Section section) {
-        Term currentTerm = State.getCurrentTerm();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
-        System.out.println(now+"___"+currentTerm.getRegistrationEnd());
-        System.out.println("\nregistrationEndNotPass returns: true");
-            return true;
+    public static void processDrop() throws SQLException {
+        Section section = State.getCurrentSection();
+        int studentID = CurrentUser.getUser().getID();
+
+        if (canDrop(section, studentID)) {
+            String sql = "DELETE FROM enrollSection WHERE "
+                    + "studentID=" + studentID + " AND "
+                    + "sectionID='" + section.getSectionID() + "' AND "
+                    + "courseDept='" + section.getCourseDept() + "' AND "
+                    + "courseNum='" + section.getCourseNum() + "' AND "
+                    + "termID='" + section.getTermID() + "' ";
+            //DatabaseConnector.updateQuery(sql);
+            System.out.println("\nCan!!!!!!!!   " + sql);
         } else {
-        System.out.println("\nregistrationEndNotPass returns: false");
-            return false;
+            System.out.println("\nCannot be del!!!!!!!!!");
         }
     }
 
-    public static boolean notFull(Section section) {
-        if (section.getStatus().compareTo("open") == 0) {
-        System.out.println("\nnotFull returns: true");
-            return true;
-        } else {
-        System.out.println("\nnotFull returns: false");
-            return false;
-        }
+    public static boolean canDrop(Section section, int studentID) throws SQLException {
+        return true;
     }
 }

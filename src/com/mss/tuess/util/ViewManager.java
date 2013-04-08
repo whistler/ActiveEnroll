@@ -36,14 +36,31 @@ public class ViewManager {
     }
     
     /**
-     * Change the View to the View defined in the given FXML path
+     * Changes the Scene (whole screen) to the View defined in the given FXML path
      * @param fxml the path of the view to load
      * @throws Exception 
      */
-    public static void changeView(String fxml) throws Exception {
+    public static void changeScene(String fxml) throws Exception {
         Parent page = FXMLLoader.load(TUESS.class.getResource(fxml));
         Scene scene = new Scene(page);
         stage.setScene(scene);
+    }
+    
+    /**
+     * Changes the main content of the screen to the specified View
+     * @param fxml path of the view to load
+     */
+    public static void changeView(String fxml)
+    {
+        Pane pane = (Pane) stage.getScene().lookup("#content");
+        Object load = "";
+        try {
+            load = FXMLLoader.load(TUESS.class.getResource(fxml));
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pane.getChildren().clear();
+        pane.getChildren().add((Node) load);
     }
     
     /**
@@ -53,6 +70,7 @@ public class ViewManager {
      */
     public static void loadSidebar(Pane sidebar)
     {
+        System.out.println(stage.getScene());
         String path = CurrentUser.getSidebarPath();
         Object load = "";
         try {
