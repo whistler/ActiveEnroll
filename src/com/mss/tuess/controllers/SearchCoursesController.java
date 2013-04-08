@@ -24,6 +24,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -34,6 +36,22 @@ public class SearchCoursesController implements Initializable {
     //side bar
     @FXML
     Pane sidebar;
+    
+    //advanced search fields
+    @FXML
+    private TextField searchCode;
+    @FXML
+    private TextField searchName;
+    @FXML
+    private TextField searchDepartment;
+    @FXML
+    private TextField searchInfo;
+    @FXML
+    private TextField searchCredit;
+    @FXML
+    private Button searchCourseButton;
+    @FXML
+    private Label searchErrorLabel;
     
     //filter fields
     @FXML
@@ -54,6 +72,7 @@ public class SearchCoursesController implements Initializable {
     private TableColumn<Course, String> info;
     @FXML
     private TableColumn<Course, Integer> credit;
+    
     
     //Section Table and fields
     @FXML
@@ -119,6 +138,11 @@ public class SearchCoursesController implements Initializable {
         });
     }
 
+    @FXML
+    private void advancedCourseSearch() throws SQLException{
+        searchCourseByParam();
+    }
+    
     /**
      * Handle the order for each course column
      */
@@ -228,7 +252,7 @@ public class SearchCoursesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         ViewManager.loadSidebar(sidebar);
-        
+        //searchErrorLabel.setText("");
         /**
          * map the course table attributes
          */
@@ -273,18 +297,17 @@ public class SearchCoursesController implements Initializable {
                         System.out.println("Index : "+selectedIndex);
 
                         try {
-                            //ViewManager.changeView("/com/mss/tuess/views/Course.fxml");
                             String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
                             String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
                             String currentTerm = State.getCurrentTerm().getTermID();
                             SearchSectionClassList.fetch(courseDept, courseNum, currentTerm);
                             
-                            //sectionClassFilterContent.clear();
                             sectionClassTableContent.clear();
                             sectionClassTableContent.addAll(SearchSectionClassList.getAll());
                             sectionClassFilterContent.clear();
                             sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
+                            System.out.println("gotcha array out of bound 1");
                             Logger.getLogger(CourseSearchController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
@@ -329,4 +352,84 @@ public class SearchCoursesController implements Initializable {
 
         sectionClassTable.setItems(sectionClassFilterContent);
     }
+    
+    
+    
+    private void searchCourseByParam() throws SQLException{
+            
+            searchErrorLabel.setText("");
+            String searchSQL = validateAndBuildSearchSQL();
+            if(searchSQL != null){
+                System.out.println("Search Sql :"+searchSQL);
+                courseTableContent.clear();
+                sectionClassTableContent.clear();
+
+                CourseList.fetch(searchSQL);
+                int courseSize = CourseList.getAll().size();
+
+                if(courseSize > 0){
+                    courseTableContent.addAll(CourseList.getAll());    
+                }
+                
+                courseFilterContent.clear();
+                courseFilterContent.addAll(courseTableContent);
+            }else{
+                searchErrorLabel.setText("Atleast one field should be entered!");
+            }
+
+
+    }
+    
+    private String validateAndBuildSearchSQL(){
+        
+        ArrayList<String> searchParamList = new ArrayList();
+        String searchSQL="";
+        String addParam;
+        String searchField;
+        
+        searchField = searchCode.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseNum like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+
+        searchField = searchDepartment.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseDept like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchName.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " courseName like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchInfo.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " info like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }
+        
+        searchField = searchCredit.getText().trim();
+        if(!searchField.isEmpty()){
+            addParam = " credit like '%"+searchField+"%'";
+            searchParamList.add(addParam);
+        }  
+        
+        if(searchParamList.size() > 0){
+            for(int i=0;i<searchParamList.size();i++){
+                if(i!=0){
+                    searchSQL+=" and" + searchParamList.get(i);
+                }else{
+                    searchSQL+=searchParamList.get(i);
+                }
+            }   
+        }else {
+            searchSQL = null;
+        }
+        
+        return searchSQL;
+    }
+    
 }
