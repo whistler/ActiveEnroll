@@ -15,14 +15,14 @@
     </stylesheets>
   <children>
     <fx:include source="Header.fxml" />
-    <SplitPane layoutY="67.0" minHeight="335.0" prefHeight="335.0">
+    <SplitPane prefHeight="550.0">
       <items>
-        <Pane fx:id="sidebar"/> 
+        <Pane id="sidebar" fx:id="sidebar"/> 
         
         <!-- start of content -->
-        <AnchorPane minWidth="590.0" prefHeight="333.0" prefWidth="599.0">
+        <Pane id="content" fx:id="content" minWidth="600.0" prefHeight="550.0" prefWidth="600.0">
             <Label>You are logged in. Please select one of the options on the left.</Label>
-        </AnchorPane>
+        </Pane>
         <!-- end of content -->
         
       </items>
