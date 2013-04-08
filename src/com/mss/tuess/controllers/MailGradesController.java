@@ -1,7 +1,6 @@
 package com.mss.tuess.controllers;
 
 import com.mss.tuess.util.SendEmail;
-import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -9,13 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.layout.Pane;
 import javax.mail.MessagingException;
 
 public class MailGradesController implements Initializable {
-
-    @FXML 
-    Pane sidebar;
     
     @FXML 
     Button mailGrades;
@@ -34,7 +29,6 @@ public class MailGradesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ViewManager.loadSidebar(sidebar);
         mailGradesStatus.setText("");
         mailGradeProgress.setVisible(false);
         mailProgressLabel.setText("");
