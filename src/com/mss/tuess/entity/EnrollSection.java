@@ -1,8 +1,11 @@
 package com.mss.tuess.entity;
 
+import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,8 +74,8 @@ public class EnrollSection {
     public void setType(String type) {
         this.type = type;
     }
-    
-        /**
+
+    /**
      * @return the courseDept
      */
     public String getCourseDept() {
@@ -115,18 +118,18 @@ public class EnrollSection {
     }
 
     /**
-     * Loads the EnrollSection by the studentID from the database and encapsulates
-     * into this EnrollSection objects
+     * Loads the EnrollSection by the studentID from the database and
+     * encapsulates into this EnrollSection objects
      *
      * @throws SQLException
      */
-    public void fetch(int studentId, String sectionID, String courseDept, String courseNum, String term, String type ) throws SQLException {
+    public void fetch(int studentId, String sectionID, String courseDept, String courseNum, String term, String type) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM enrollSection "
                 + "WHERE studentID = " + studentId
-                + "AND sectionID = " + sectionID + "AND courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND term = " + term+ "AND type = " + type;
+                + "AND sectionID = " + sectionID + "AND courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND term = " + term + "AND type = " + type;
         rs = DatabaseConnector.returnQuery(sql);
-        
+
         if (rs.next()) {
             this.setID(rs.getInt("studentID"));
             this.setSectionID(rs.getString("sectionID"));
@@ -147,9 +150,9 @@ public class EnrollSection {
      */
     public void update() throws SQLException {
         String sql = "UPDATE enrollSection SET "
-                + " grade= ' " + this.getGrade()+"'"
-                + "WHERE studentID=" + this.getID()+ ", sectionID=" + this.getSectionID()+ ", courseDept=" + this.getCourseDept()+ ", courseNum=" + this.getCourseNum()
-                + ", type=" + this.getType()+ ", term=" + this.getTerm();
+                + " grade= ' " + this.getGrade() + "'"
+                + "WHERE studentID=" + this.getID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
+                + ", type=" + this.getType() + ", term=" + this.getTerm();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -159,8 +162,8 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void delete() throws SQLException {
-        String sql = "DELETE FROM student WHERE studentID=" + this.getID()+ ", sectionID=" + this.getSectionID()+ ", courseDept=" + this.getCourseDept()+ ", courseNum=" + this.getCourseNum()
-                + ", type=" + this.getType()+ ", term=" + this.getTerm();
+        String sql = "DELETE FROM student WHERE studentID=" + this.getID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
+                + ", type=" + this.getType() + ", term=" + this.getTerm();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -172,7 +175,7 @@ public class EnrollSection {
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, sectionID, courseDept, courseNum, type, term, "
                 + "grade) values "
-                + "(" + this.getID() + ", '" + this.getSectionID()+ "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getType() + "', '" + this.getTerm()
+                + "(" + this.getID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getType() + "', '" + this.getTerm()
                 + "', '" + this.getGrade()
                 + "')";
         System.out.println(sql);
@@ -181,29 +184,165 @@ public class EnrollSection {
 
     /**
      * Checks whether the student is enrolled in the section or not
+     *
      * @param student student to check
      * @param section section to check
      * @return whether the student is enrolled in the section or not
      */
-    public static boolean isEnrolled(Student student, Section section)
-    {
+    public static boolean isEnrolled(Student student, Section section) {
         String sql = "SELECT * FROM enrollSection WHERE "
                 + "studentID=" + student.getID() + " AND "
                 + "sectionID='" + section.getSectionID() + "' AND "
                 + "courseDept='" + section.getCourseDept() + "' AND "
                 + "courseNum='" + section.getCourseNum() + "' AND "
                 + "termID='" + section.getTermID() + "' ";
-        
+
         ResultSet rs;
         try {
             rs = DatabaseConnector.returnQuery(sql);
-            if(rs.next()) return true;
-            else return false;
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(EnrollSection.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
 
- 
+    public static ResultSet fetchEnrolledCourses(int studentID) throws SQLException {
+        ResultSet rs;
+        String sql = "select * from enrollSection where studentID=" + studentID;
+        rs = DatabaseConnector.returnQuery(sql);
+        return rs;
+    }
+
+    public static ResultSet fetchPrereqCourses(Section section) throws SQLException {
+        //CurrentUser.getUser().getID();
+        ResultSet rs;
+        String sql = "select * from prerequisite where courseNum='"
+                + section.getCourseNum() + "' and courseDept='" + section.getCourseDept() + "'"
+                + "ORDER by prereqGroup";
+        rs = DatabaseConnector.returnQuery(sql);
+        return rs;
+    }
+
+    public static boolean isInSet(ResultSet rs_enrolled, String courseDept, String courseNum) throws SQLException {
+        rs_enrolled.beforeFirst();
+        while (rs_enrolled.next()) {
+            if (courseDept.compareTo(rs_enrolled.getString("courseDept")) == 0
+                    && courseNum.compareTo(rs_enrolled.getString("courseNum")) == 0
+                    && (rs_enrolled.getString("grade").compareTo("A")==0
+                    || rs_enrolled.getString("grade").compareTo("B")==0
+                    || rs_enrolled.getString("grade").compareTo("C")==0
+                    || rs_enrolled.getString("grade").compareTo("D")==0)) {
+                System.out.println(courseDept + courseNum + "___is IN");
+                return true;
+            }
+        }
+        System.out.println(courseDept + courseNum + "___is NOT IN");
+        return false;
+    }
+
+    public static boolean checkPrerequisite(Section section, int studentID) throws SQLException {
+//        ResultSet rs;
+//        String sql = " SELECT prereqDept, prereqNum FROM prerequisite pr"
+//                + "	WHERE courseDept=" + section.getCourseDept()
+//                + "		AND courseNum=" + section.getCourseNum()
+//                + "		AND NOT EXISTS"
+//                + "			( SELECT * FROM enrollSection e"
+//                + "			WHERE  e.studentID=" + studentID
+//                + "				AND e.courseDept=pr.prereqDept"
+//                + "				AND e.courseNum=pr.prereqNum"
+//                + "				AND (e.grade='A' OR e.grade='B' OR e.grade='C' OR e.grade='D')"
+//                + "                )";
+//        rs = DatabaseConnector.returnQuery(sql);
+//        return rs;
+        ResultSet rs_enrolled = fetchEnrolledCourses(studentID);
+        ResultSet rs_pre = fetchPrereqCourses(section);
+        rs_pre.last();
+        int rowCount = rs_pre.getRow();
+        rs_pre.beforeFirst();
+        if (rowCount==0) {
+            System.out.println("No prerequisite!!!!...!!!!");
+            return true;
+        }
+        System.out.println("+------------------" + rowCount + "-------------------+");
+        while (rs_enrolled.next()) {
+            System.out.println(rs_enrolled.getString("courseDept") + "__" + rs_enrolled.getString("courseNum"));
+        }
+        System.out.println("=========");
+        while (rs_pre.next()) {
+            System.out.println(rs_pre.getString("prereqDept") + "__" + rs_pre.getString("prereqNum") + "__" + rs_pre.getString("prereqGroup"));
+        }
+        System.out.println("+-------------------------------------+");
+        rs_enrolled.beforeFirst();
+        rs_pre.beforeFirst();
+        int flag = 0;
+        int change = 0;
+        while (rs_pre.next()) {
+            flag = 0;
+            if (isInSet(rs_enrolled, rs_pre.getString("prereqDept"), rs_pre.getString("prereqNum"))) {
+                flag = 1;
+            }
+            String now = rs_pre.getString("prereqGroup");
+            while (rs_pre.next()) {
+                if (now.compareTo(rs_pre.getString("prereqGroup")) == 0) {
+                    if (isInSet(rs_enrolled, rs_pre.getString("prereqDept"), rs_pre.getString("prereqNum"))) {
+                        flag = 1;
+                    }
+                } else {
+                    break;
+                }
+            }
+            if (flag == 0) {
+                return false;
+            }
+            rs_pre.previous();
+        }
+        if (flag == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isAlreadyRegistered(Section section, int studentID) throws SQLException {
+
+        ResultSet rs_stu_reg = fetchEnrolledCourses(CurrentUser.getUser().getID());
+        while (rs_stu_reg.next()) {
+            if (rs_stu_reg.getString("sectionID").compareTo(section.getSectionID()) == 0
+                    && rs_stu_reg.getString("courseDept").compareTo(section.getCourseDept()) == 0
+                    && rs_stu_reg.getString("courseNum").compareTo(section.getCourseNum()) == 0) {
+                System.out.println("\nisAlreadyRegistered returns: true");
+                return true;
+            }
+        }
+        System.out.println("\nisAlreadyRegistered returns: false");
+        return false;
+    }
+
+    public static boolean registrationEndNotPass(Section section) {
+        Term currentTerm = State.getCurrentTerm();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        System.out.println(now + "___" + currentTerm.getRegistrationEnd());
+        if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
+            System.out.println("\nregistrationEndNotPass returns: true");
+            return true;
+        } else {
+            System.out.println("\nregistrationEndNotPass returns: false");
+            return false;
+        }
+    }
+
+    public static boolean isFull(Section section) {
+        if (section.getStatus().compareTo("full") == 0) {
+            System.out.println("\nisFull returns: true");
+            return true;
+        } else {
+            System.out.println("\nisFull returns: false");
+            return false;
+        }
+    }
 }
