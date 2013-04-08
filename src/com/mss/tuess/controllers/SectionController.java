@@ -113,7 +113,9 @@ public class SectionController implements Initializable {
     public static ResultSet fetchPrereqCourses(Course course) throws SQLException {
         //CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select prereqNum, prereqDept from prerequisite where courseNum='" + course.getCourseNum() + "' and courseDept='" + course.getCourseDept() + "'";
+        String sql = "select prereqNum, prereqDept from prerequisite where courseNum='" +
+                course.getCourseNum() + "' and courseDept='" + course.getCourseDept() + "'"
+                + "ORDER by prereqGroup";
         rs = DatabaseConnector.returnQuery(sql);
         return rs;
     }
