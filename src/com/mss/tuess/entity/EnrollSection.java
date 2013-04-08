@@ -192,7 +192,6 @@ public class EnrollSection {
                 + "sectionID='" + section.getSectionID() + "' AND "
                 + "courseDept='" + section.getCourseDept() + "' AND "
                 + "courseNum='" + section.getCourseNum() + "' AND "
-                + "type='" + section.getType() + "' AND "
                 + "termID='" + section.getTermID() + "' ";
         
         ResultSet rs;

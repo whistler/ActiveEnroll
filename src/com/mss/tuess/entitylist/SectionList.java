@@ -46,16 +46,11 @@ public class SectionList {
                 Section section = new Section();
                 section.setSectionID(rs.getString("sectionID"));
                 section.setCourseDept(rs.getString("courseDept"));
+                section.setCourseNum(rs.getString("courseNum"));
                 section.setInstructorID(rs.getInt("instructorID"));
-                section.setType(rs.getString("type"));
-                section.setTextbook(rs.getString("textbook"));
                 section.setTermID(rs.getString("termID"));
-                section.setStartTime(rs.getTime("startTime"));
-                section.setEndTime(rs.getTime("endTime"));
-                section.setDay(rs.getString("day"));
                 section.setCapacity(rs.getInt("capacity"));
                 section.setRegistered(rs.getInt("registered"));
-                section.setLocation(rs.getString("location"));
                 section.setStatus(rs.getString("status"));
 
                 sections.add(section);
