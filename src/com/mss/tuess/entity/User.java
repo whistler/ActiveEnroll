@@ -86,6 +86,8 @@ public abstract class User {
      * @return the state
      */
     public String getState() {
+        System.out.println("HHIII");
+        System.out.println(state);
         return state;
     }
         /**
