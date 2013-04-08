@@ -1,6 +1,7 @@
 package com.mss.tuess.controllers;
 
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,11 +47,13 @@ public class SidebarController implements Initializable {
     
     @FXML public void showCourseSearch() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/CourseSearch.fxml");
+        State.setCurrentSearchView("CourseSearch");
+        ViewManager.changeView("/com/mss/tuess/views/AdvancedCourseSearch.fxml");
     }
     
     @FXML public void showAllCourses() throws Exception
     {
+        State.setCurrentSearchView("AllCourses");
         ViewManager.changeView("/com/mss/tuess/views/ViewAllCourses.fxml");
     }
     
