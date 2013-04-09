@@ -14,22 +14,21 @@ public class EnrollSection {
     private int studentID;
     private String sectionID;
     private String grade;
-    private String type;
     private String courseDept;
     private String courseNum;
-    private String term;
+    private String termID;
 
     /**
      * @return the studentID
      */
-    public int getID() {
+    public int getStudentID() {
         return studentID;
     }
 
     /**
      * @param studentID the studentID to set
      */
-    public void setID(int studentID) {
+    public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
 
@@ -62,20 +61,6 @@ public class EnrollSection {
     }
 
     /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
      * @return the courseDept
      */
     public String getCourseDept() {
@@ -104,39 +89,38 @@ public class EnrollSection {
     }
 
     /**
-     * @return the term
+     * @return the termID
      */
-    public String getTerm() {
-        return term;
+    public String getTermID() {
+        return termID;
     }
 
     /**
-     * @param term the term to set
+     * @param termID the termID to set
      */
-    public void setTerm(String term) {
-        this.term = term;
+    public void setTermID(String termID) {
+        this.termID = termID;
     }
-
+    
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
      *
      * @throws SQLException
      */
-    public void fetch(int studentId, String sectionID, String courseDept, String courseNum, String term, String type) throws SQLException {
+    public void fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM enrollSection "
-                + "WHERE studentID = " + studentId
-                + "AND sectionID = " + sectionID + "AND courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND term = " + term + "AND type = " + type;
+                + "WHERE studentID = " + studentID
+                + "AND sectionID = " + sectionID + "AND courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND termID = " + termID;
         rs = DatabaseConnector.returnQuery(sql);
 
         if (rs.next()) {
-            this.setID(rs.getInt("studentID"));
+            this.setStudentID(rs.getInt("studentID"));
             this.setSectionID(rs.getString("sectionID"));
             this.setCourseDept(rs.getString("courseDept"));
             this.setCourseNum(rs.getString("courseNum"));
-            this.setType(rs.getString("type"));
-            this.setTerm(rs.getString("term"));
+            this.setTermID(rs.getString("termID"));
             this.setGrade(rs.getString("grade"));
         }
 
@@ -151,8 +135,9 @@ public class EnrollSection {
     public void update() throws SQLException {
         String sql = "UPDATE enrollSection SET "
                 + " grade= ' " + this.getGrade() + "'"
-                + "WHERE studentID=" + this.getID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
-                + ", type=" + this.getType() + ", term=" + this.getTerm();
+                + "WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID() + 
+                ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
+                + ", termID=" + this.getTermID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -162,8 +147,8 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void delete() throws SQLException {
-        String sql = "DELETE FROM student WHERE studentID=" + this.getID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
-                + ", type=" + this.getType() + ", term=" + this.getTerm();
+        String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
+                 + ", term=" + this.getTermID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -173,9 +158,9 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void insert() throws SQLException {
-        String sql = "INSERT INTO student  (studentID, sectionID, courseDept, courseNum, type, term, "
+        String sql = "INSERT INTO student  (studentID, sectionID, courseDept, courseNum, termID, "
                 + "grade) values "
-                + "(" + this.getID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getType() + "', '" + this.getTerm()
+                + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '"  + this.getTermID()
                 + "', '" + this.getGrade()
                 + "')";
         System.out.println(sql);
@@ -357,4 +342,6 @@ public class EnrollSection {
             return false;
         }
     }
+
+    
 }

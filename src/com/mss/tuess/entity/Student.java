@@ -90,6 +90,7 @@ public class Student extends User {
                 this.setLastName(rs.getString("lastName"));
                 this.setAddress(rs.getString("address"));
                 this.setCity(rs.getString("city"));
+                this.setState(rs.getString("state"));
                 this.setCountry(rs.getString("country"));
                 this.setZipcode(rs.getString("zipcode"));
                 this.setPhone(rs.getString("phone"));
@@ -119,6 +120,7 @@ public class Student extends User {
                 + "address='" + this.getAddress() + "', "
                 + "city='" + this.getCity() + "', "
                 + "country='" + this.getCountry() + "', "
+                + "state='" + this.getState() + "', "
                 + "zipcode='" + this.getZipcode() + "', "
                 + "phone='" + this.getPhone() + "', "
                 + "programID='" + this.getProgramID() + "', "
@@ -148,9 +150,9 @@ public class Student extends User {
      */
     @Override
     public void insert() throws SQLException {
-        String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, country, "
+        String sql = "INSERT INTO student  (studentID, firstName, lastName, address, city, state, country, "
                 + "zipcode, phone, programID, registeredSince, status, password, email) values "
-                + "(" + this.getID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getCountry()
+                + "(" + this.getID() + ", '" + this.getFirstName() + "', '" + this.getLastName() + "', '" + this.getAddress() + "', '" + this.getCity() + "', '" + this.getState()+ "' '" + this.getCountry()
                 + "', '" + this.getZipcode() + "', '" + this.getPhone() + "', '" + this.getProgramID() + "', '" + this.getRegisteredSince() + "', '" + this.getStatus() + "', '" + this.getPassword() + "', '" + this.getEmail()
                 + "')";
         System.out.println(sql);
