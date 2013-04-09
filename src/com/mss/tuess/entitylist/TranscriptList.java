@@ -4,9 +4,7 @@
  */
 package com.mss.tuess.entitylist;
 
-import com.mss.tuess.entity.EnrollSection;
-import com.mss.tuess.entity.Course;
-import com.mss.tuess.entity.Transcriptrecord;
+import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
@@ -31,14 +29,19 @@ public class TranscriptList {
         transcriptrecords.clear();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade from course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
+        Term term=new Term();
+        String currentTermID=term.getTermID();
+        String sql = "select es.courseDept,es.courseNum,c.courseName,es.termID,c.credit,es.grade enrollSection es natural join course c where es.studentID='" + currentID + "' and es.termID<>'"+currentTermID+"'";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
+            Transcriptrecord.setCourseName(rs.getString("courseDept"));
+            Transcriptrecord.setCourseName(rs.getString("courseNum"));
             Transcriptrecord.setCourseName(rs.getString("courseName"));
+            Transcriptrecord.setTermID(rs.getString("termID"));
             Transcriptrecord.setCredit(rs.getInt("credit"));
-            Transcriptrecord.setTerm(rs.getString("termID"));
             Transcriptrecord.setGrade(rs.getString("grade"));
+            
             System.out.println(Transcriptrecord.getCourseName()+" inloop"); //test!
             if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
