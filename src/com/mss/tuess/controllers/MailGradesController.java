@@ -57,7 +57,7 @@ public class MailGradesController implements Initializable {
             int currentID = mailrs.getInt("studentID");
             ResultSet rs;
             String sql;
-            sql = "select distinct course.coursenum, course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.email from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
+            sql = "select distinct course.coursenum, course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.email from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.studentID=student.studentID and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
 
             //sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.emaol from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID=12345678";
             rs = DatabaseConnector.returnQuery(sql);
@@ -124,7 +124,7 @@ public class MailGradesController implements Initializable {
             sendEmail.sendMail(toEmails, emailSubject, emailBody);
             
             studentnumber++;
-            System.out.println(studentnumber);
+            System.out.println(studentnumber+"th email is "+toEmails);
 
 
 
