@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,8 +30,8 @@ public class TranscriptController implements Initializable {
     @FXML private TableColumn<Transcriptrecord, String> termID;
     @FXML private TableColumn<Transcriptrecord, Integer>credit;
     @FXML private TableColumn<Transcriptrecord, String> grade;
-    @FXML private TextField totalCredit;
-    @FXML private TextField GPA;
+    @FXML private Label totalCredit;
+    @FXML private Label GPA;
 
     private ObservableList<Transcriptrecord> tableContent = FXCollections.observableArrayList();
     private ObservableList<Transcriptrecord> filterContent = FXCollections.observableArrayList();
