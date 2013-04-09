@@ -4,19 +4,47 @@
  */
 package com.mss.tuess.entity;
 
-import com.mss.tuess.util.DatabaseConnector;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
  * @author xinren
  */
 public class Transcriptrecord {
+    
+    private String courseDept;
+    private String courseNum;
     private String courseName;
+    private String termID;
     private int credit;
-    private String term;
     private String grade;
+
+    /**
+     * @return the courseDept
+     */
+    public String getCourseDept() {
+        return courseDept;
+    }
+
+    /**
+     * @param courseDept the courseDept to set
+     */
+    public void setCourseDept(String courseDept) {
+        this.courseDept = courseDept;
+    }
+
+    /**
+     * @return the courseNum
+     */
+    public String getCourseNum() {
+        return courseNum;
+    }
+
+    /**
+     * @param courseNum the courseNum to set
+     */
+    public void setCourseNum(String courseNum) {
+        this.courseNum = courseNum;
+    }
 
     /**
      * @return the courseName
@@ -30,6 +58,20 @@ public class Transcriptrecord {
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    /**
+     * @return the termID
+     */
+    public String getTermID() {
+        return termID;
+    }
+
+    /**
+     * @param termID the termID to set
+     */
+    public void setTermID(String termID) {
+        this.termID = termID;
     }
 
     /**
@@ -47,20 +89,6 @@ public class Transcriptrecord {
     }
 
     /**
-     * @return the term
-     */
-    public String getTerm() {
-        return term;
-    }
-
-    /**
-     * @param term the term to set
-     */
-    public void setTerm(String term) {
-        this.term = term;
-    }
-
-    /**
      * @return the grade
      */
     public String getGrade() {
@@ -72,7 +100,7 @@ public class Transcriptrecord {
      */
     public void setGrade(String grade) {
         this.grade = grade;
-    }  
-    
+    }
+
     
 }
