@@ -357,6 +357,56 @@ public class EnrollSection {
             return false;
         }
     }
+    
+    /**
+     * Determines whether enrolling a student in a new course section would have
+     * a time conflict with already enrolled courses
+     * @param student is the student to enroll in the new section
+     * @param newSection is the section student wants to enroll in
+     * @return whether there is a time conflict or not
+     */
+    public static boolean isTimeConflict(Student student, Section newSection)
+    {
+        try {
+            ResultSet rs;
+            String sql = "SELECT * FROM \n" +
+            "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
+                    + "sectionID='" + newSection.getSectionID() + "' AND "
+                    + "courseDept='" + newSection.getCourseDept() + "' AND "
+                    + "courseNum='" + newSection.getCourseNum() + "' AND "
+                    + "termID='" + newSection.getTermID() + "'\n" +
+            "	UNION ALL\n" +
+            "	SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
+                    + "FROM sectionClass sc, enrollSection es "
+                    + "WHERE es.termID='" + newSection.getTermID() + "' AND "
+                    + "es.studentID=" + student.getID() + ") AS T1 \n" +
+            "INNER JOIN \n" +
+            "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
+                    + "sectionID='" + newSection.getSectionID() + "' AND "
+                    + "courseDept='" + newSection.getCourseDept() + "' AND "
+                    + "courseNum='" + newSection.getCourseNum() + "' AND "
+                    + "termID='" + newSection.getTermID() + "'\n" +
+            "   UNION ALL\n" +
+            "   SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
+                    + "FROM sectionClass sc, enrollSection es "
+                    + "WHERE es.termID='" + newSection.getTermID() + "' AND "
+                    + "es.studentID=" + student.getID() + ") AS T2 \n" +
+            "WHERE T1.day = T2.day AND\n" +
+            "	T1.startTime <= T2.endTime AND\n" +
+            "	T1.endTime >= T2.endTime AND\n" +
+            "	NOT (T1.courseDept = T2.courseDept AND T1.courseNum = T2.courseNum);\n" +
+            "	";
+            rs = DatabaseConnector.returnQuery(sql);
+
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollSection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
 
     
 }
