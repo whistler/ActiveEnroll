@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+
+#sidebar, #header {
+    -fx-background-color: #c6dbdb;
+}
