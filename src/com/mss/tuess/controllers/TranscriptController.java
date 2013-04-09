@@ -23,9 +23,11 @@ public class TranscriptController implements Initializable {
     
     @FXML private TextField filterText;
     @FXML private TableView<Transcriptrecord> transcriptTable;
-    @FXML private TableColumn<Transcriptrecord, String> courseName;;
-    @FXML private TableColumn<Transcriptrecord, Integer> credit;
+    @FXML private TableColumn<Transcriptrecord, String> courseDept;
+    @FXML private TableColumn<Transcriptrecord, String> courseNum;
+    @FXML private TableColumn<Transcriptrecord, String> courseName;
     @FXML private TableColumn<Transcriptrecord, String> termID;
+    @FXML private TableColumn<Transcriptrecord, Integer>credit;
     @FXML private TableColumn<Transcriptrecord, String> grade;
     @FXML private TextField totalCredit;
     @FXML private TextField GPA;
@@ -97,10 +99,12 @@ public class TranscriptController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        courseDept.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("courseDept"));
+        courseNum.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("courseNum"));
         courseName.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("courseName"));
         termID.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("termID"));
-        grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
         credit.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, Integer>("credit"));
+        grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
         totalCredit.setText(Integer.toString(TranscriptList.getAddCredit()));
         GPA.setText(Double.toString(TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit()));
         
