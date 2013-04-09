@@ -9,23 +9,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.DashboardController">
-    <stylesheets>
-            <URL value="@style.css" />
-    </stylesheets>
-  <children>
-    <fx:include source="Header.fxml" />
-    <SplitPane prefHeight="550.0">
-      <items>
-        <Pane id="sidebar" fx:id="sidebar"/> 
-        
-        <!-- start of content -->
-        <Pane id="content" fx:id="content" minWidth="600.0" prefHeight="550.0" prefWidth="600.0">
-            <Label>You are logged in. Please select one of the options on the left.</Label>
-        </Pane>
-        <!-- end of content -->
-        
-      </items>
-    </SplitPane>
-  </children>
-</AnchorPane>
+<BorderPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.DashboardController">
+  <center>
+    <!-- start of content -->
+    <Pane fx:id="content" minWidth="600.0" prefHeight="550.0" prefWidth="600.0">
+      <Label text="You are logged in. Please select one of the options on the left.">
+      </Label>
+    </Pane>
+    <!-- end of content -->
+  </center>
+  <left>
+    <Pane fx:id="sidebar">
+    </Pane>
+  </left>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
+  <top>
+    <fx:include fx:id="header" source="Header.fxml" />
+  </top>
+</BorderPane>

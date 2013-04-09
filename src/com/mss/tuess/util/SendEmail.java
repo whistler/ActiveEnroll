@@ -24,7 +24,7 @@ public class SendEmail {
         setMailServerProperties();
     }
 
-    public void sendMail(String[] toList, String emailSubject, String emailBody) throws MessagingException{
+    public void sendMail(String toList, String emailSubject, String emailBody) throws MessagingException{
 
         createEmailMessage(toList,emailSubject,emailBody);
         sendEmail();
@@ -40,18 +40,13 @@ public class SendEmail {
           emailProperties.put("mail.smtp.starttls.enable", "true");
     }
  
-    private void createEmailMessage(String[] toEmails, String emailSubject, String emailBody) 
+    private void createEmailMessage(String toEmails, String emailSubject, String emailBody) 
             throws AddressException,MessagingException {
 
-        InternetAddress[] mailToList = new javax.mail.internet.InternetAddress[toEmails.length];
-
-        for (int i = 0; i < toEmails.length; i++){
-                mailToList[i] = new javax.mail.internet.InternetAddress(toEmails[i]);
-            }
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
-        emailMessage.setRecipients(Message.RecipientType.TO, mailToList);
+        emailMessage.setRecipients(Message.RecipientType.TO, toEmails);
         emailMessage.setSubject(emailSubject);
         emailMessage.setContent(emailBody, "text/html");
     }
