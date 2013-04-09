@@ -7,6 +7,7 @@ package com.mss.tuess.entitylist;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,20 +30,20 @@ public class TranscriptList {
         transcriptrecords.clear();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        Term term=new Term();
-        String currentTermID=term.getTermID();
-        String sql = "select es.courseDept,es.courseNum,c.courseName,es.termID,c.credit,es.grade enrollSection es natural join course c where es.studentID='" + currentID + "' and es.termID<>'"+currentTermID+"'";
+        Term ct=State.getCurrentTerm();
+        String sql = "select es.courseDept,es.courseNum,c.courseName,es.termID,c.credit,es.grade from enrollSection es natural join course c where es.studentID=" + currentID + " and es.termID<>'"+ct.getTermID()+"'";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Transcriptrecord Transcriptrecord = new Transcriptrecord();
-            Transcriptrecord.setCourseName(rs.getString("courseDept"));
-            Transcriptrecord.setCourseName(rs.getString("courseNum"));
+            Transcriptrecord.setCourseDept(rs.getString("courseDept"));
+            Transcriptrecord.setCourseNum(rs.getString("courseNum"));
             Transcriptrecord.setCourseName(rs.getString("courseName"));
             Transcriptrecord.setTermID(rs.getString("termID"));
             Transcriptrecord.setCredit(rs.getInt("credit"));
             Transcriptrecord.setGrade(rs.getString("grade"));
             
             System.out.println(Transcriptrecord.getCourseName()+" inloop"); //test!
+            
             if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
             } else if (rs.getString("grade").equalsIgnoreCase("B")) {
@@ -52,18 +53,22 @@ public class TranscriptList {
             } else if (rs.getString("grade").equalsIgnoreCase("D")) {
                 gradeNum = 1;
             } else if (rs.getString("grade").equalsIgnoreCase("F")) {
-                gradeNum = 1;
+                gradeNum = 0;
             }
-
+              else if (rs.getString("grade").equalsIgnoreCase("W")) {
+                gradeNum = 0;
+            }
+              
+            
             if(rs.getString("grade").equalsIgnoreCase("W"))
             {
-                //withdrawn courses not taken into credits.
+                //withdrawn course not counted into credit
             }
             else
             {
                 setAddCredit(getAddCredit() + rs.getInt("credit"));
             }
-            
+
             TranscriptList.addCreditMultipleGrade+= (rs.getInt("credit") * gradeNum);
             transcriptrecords.add(Transcriptrecord);
         }
