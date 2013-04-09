@@ -121,7 +121,7 @@ public class SectionController implements Initializable {
         Section section = State.getCurrentSection();
         int studentID = CurrentUser.getUser().getID();
 
-        if (canDrop(section, studentID)) {
+        if (canDropWithoutW(section, studentID)) {
             String sql = "DELETE FROM enrollSection WHERE "
                     + "studentID=" + studentID + " AND "
                     + "sectionID='" + section.getSectionID() + "' AND "
@@ -131,11 +131,16 @@ public class SectionController implements Initializable {
             //DatabaseConnector.updateQuery(sql);
             System.out.println("\nCan!!!!!!!!   " + sql);
         } else {
-            System.out.println("\nCannot be del!!!!!!!!!");
+            section.setStatus("W");
+            //section.update();
+            System.out.println("\nWill be add W!!!!!!!!!");
         }
     }
 
-    public static boolean canDrop(Section section, int studentID) throws SQLException {
-        return true;
+    public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
+        if (EnrollSection.registrationEndNotPass(section)) {
+            return true;
+        } 
+        return false;
     }
 }

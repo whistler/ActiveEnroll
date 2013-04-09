@@ -45,7 +45,7 @@ public class MailGradesController implements Initializable {
         mailProgressLabel.setText("Please wait. Mailing Grades...");
         mailGradeProgress.setVisible(true);
         mailGradeProgress.setProgress(-0.59F);
-
+        int studentnumber=0;
         ResultSet mailrs;
 
         mailrs = StudentList.fetchCurrentTerm();
@@ -57,7 +57,7 @@ public class MailGradesController implements Initializable {
             int currentID = mailrs.getInt("studentID");
             ResultSet rs;
             String sql;
-            sql = "select distinct course.coursenum, course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.email from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
+            sql = "select distinct course.coursenum, course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.email from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.studentID=student.studentID and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
 
             //sql = "select distinct course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.emaol from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.courseNum=course.coursenum and enrollSection.studentID=12345678";
             rs = DatabaseConnector.returnQuery(sql);
@@ -68,7 +68,7 @@ public class MailGradesController implements Initializable {
             //These hardcodings are to be removed and replaced by data from the database
             String toEmails = rs.getString("email");
             String emailSubject = "Term Grades - TUESS Team";
-            System.out.println("into_student_loop_resultset_after_passemail");
+            //System.out.println("into_student_loop_resultset_after_passemail");
             String emailBody1 = "<!DOCTYPE html>\n"
                     + "<html>\n"
                     + "<body>\n"
@@ -115,13 +115,16 @@ public class MailGradesController implements Initializable {
                     + "</body>\n"
                     + "</html>";
             //End of hardcoding
-            System.out.println(emailBody3);
-            System.out.println("outof_addcourse_loop");
+            //System.out.println(emailBody3);
+            //System.out.println("outof_addcourse_loop");
             
             String emailBody = emailBody1 + emailBody2 + emailBody3;
-            System.out.println(toEmails);
+            //System.out.println(toEmails);
             SendEmail sendEmail = new SendEmail();
             sendEmail.sendMail(toEmails, emailSubject, emailBody);
+            
+            studentnumber++;
+            System.out.println(studentnumber+"th email is "+toEmails);
 
 
 
