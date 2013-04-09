@@ -14,43 +14,28 @@
 <AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TranscriptController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="Transcript :" textFill="GREY">
+    <Label layoutX="25.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="Transcript" textFill="GREY">
       <font>
         <Font name="System Bold" size="12.0" />
       </font>
     </Label>
-    <TableView fx:id="transcriptTable" layoutX="25.0" layoutY="50.0" prefHeight="300.0" prefWidth="551.0">
+    <TableView fx:id="transcriptTable" layoutX="25.0" layoutY="50.0" prefHeight="300.0" prefWidth="555.0">
       <columns>
         <TableColumn prefWidth="45.0" text="Dept" fx:id="courseDept" />
-        <TableColumn prefWidth="35.0" text="No." fx:id="courseNum" />    
+        <TableColumn prefWidth="35.0" text="No." fx:id="courseNum" />
         <TableColumn prefWidth="320.0" text="Course" fx:id="courseName" />
         <TableColumn prefWidth="50.0" text="Term" fx:id="termID" />
         <TableColumn prefWidth="50.0" text="Credit" fx:id="credit" />
         <TableColumn prefWidth="50.0" text="Grade" fx:id="grade" />
-        
-
-        
       </columns>
-      <effect>
-        <DropShadow color="#bfbfbf" spread="0.3253968253968254" />
-      </effect>
     </TableView>
-    <HBox alignment="CENTER" layoutX="203.0" layoutY="394.0" prefHeight="35.0" prefWidth="150.0" />
-    <HBox alignment="CENTER" layoutX="45.0" layoutY="394.0" prefHeight="35.0" prefWidth="165.0" spacing="5.0" />
-    
-    <Label fx:id="totalCredit" alignment="CENTER_RIGHT"  layoutX="228.0" layoutY="496.0" prefWidth="61.0"/>
-    <Label font="$x1" layoutX="83.0" layoutY="494.0" prefHeight="26.0" prefWidth="111.0" text="Total Credits :" />
-    
-    <Label layoutX="361.0" layoutY="494.0" prefHeight="26.0" prefWidth="61.0" text="My GPA :" textFill="#606060">
-      <font>
-        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label fx:id="GPA"  layoutX="440.0" layoutY="496.0" prefWidth="61.0">
-       <font>
-        <Font name="System Bold Italic" size="12.0" />
-      </font>
-  </Label>
-
+    <HBox layoutX="25.0" layoutY="360.0" prefHeight="35.0" prefWidth="150.0">
+      <Label prefWidth="111.0" text="Total Credits :" />
+      <Label fx:id="totalCredit" prefWidth="60.0" />
+    </HBox>
+    <HBox layoutX="426.0" layoutY="360.0" prefHeight="35.0" prefWidth="150.0">
+      <Label prefWidth="61.0" text="GPA :" />
+      <Label fx:id="GPA" prefWidth="60.0" />
+    </HBox>
   </children>
 </AnchorPane>
