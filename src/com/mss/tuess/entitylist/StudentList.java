@@ -2,6 +2,7 @@ package com.mss.tuess.entitylist;
 
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class StudentList {
     }
     public static ResultSet fetchCurrentTerm() throws SQLException {  // this function is for the mailgrade module
         ResultSet rs;
-        String sql = "SELECT * FROM enrollSection where termID=20131"; // termID should be changed
+        String sql = "SELECT * FROM enrollSection where termID='"+State.getCurrentTerm().getTermID()+"'"; // termID should be changed
         rs = DatabaseConnector.returnQuery(sql);
         return rs;
     }
