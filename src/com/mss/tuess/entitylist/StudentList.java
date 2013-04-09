@@ -40,7 +40,16 @@ public class StudentList {
     }
     public static ResultSet fetchCurrentTerm() throws SQLException {  // this function is for the mailgrade module
         ResultSet rs;
-        String sql = "SELECT * FROM enrollSection where termID='"+State.getCurrentTerm().getTermID()+"'"; // termID should be changed
+        System.out.println("current term is "+State.getCurrentTerm().getTermID());
+        int currentTerm = Integer.valueOf(State.getCurrentTerm().getTermID());
+        if (currentTerm%10 != 1 ) {
+            currentTerm--;
+        }
+        else if (currentTerm%10 == 1){
+            currentTerm = currentTerm-10;
+        }
+        
+        String sql = "SELECT * FROM enrollSection where termID='"+currentTerm+"'"; // termID should be changed
         rs = DatabaseConnector.returnQuery(sql);
         return rs;
     }

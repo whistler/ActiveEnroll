@@ -1,7 +1,7 @@
 package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.User;
-import com.mss.tuess.entitylist.WaivePrerequisiteList;
+//import com.mss.tuess.entitylist.WaivePrerequisiteList;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
@@ -31,15 +31,15 @@ public class WaivePrerequisiteController implements Initializable {
      */
     public WaivePrerequisiteController() throws SQLException
     {
-        WaivePrerequisiteList.fetch();
-        int courseToTeachSize = WaivePrerequisiteList.getAll().size();
-        for(int i=0;i<courseToTeachSize;i++)
-        {
-            coursesToWaiveList.addAll(WaivePrerequisiteList.getCoursesToTeach(i).getCourseDept()
-                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseNum()+" "
-                    +WaivePrerequisiteList.getCoursesToTeach(i).getSectionID()+": "
-                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseName());
-        }
+//        WaivePrerequisiteList.fetch();
+//        int courseToTeachSize = WaivePrerequisiteList.getAll().size();
+//        for(int i=0;i<courseToTeachSize;i++)
+//        {
+//            coursesToWaiveList.addAll(WaivePrerequisiteList.getCoursesToTeach(i).getCourseDept()
+//                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseNum()+" "
+//                    +WaivePrerequisiteList.getCoursesToTeach(i).getSectionID()+": "
+//                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseName());
+//        }
 
 
     }
