@@ -36,7 +36,19 @@ public class SectionList {
         String selectSectionsByCourse = "SELECT * FROM section where courseNum = "+courseNum;
         executeFetch(selectSectionsByCourse);
     }
-        
+    
+    /**
+     * Fetch section info from the database of one instructor's section
+     * @param instructorID the ID of instructor
+     * @param termID the specific term to query
+     * @throws SQLException 
+     */
+    public static void fetchByInstructor(int instructorID,String termID) throws SQLException{
+        String selectSectionByInstructor="SELECT * FROM section where instructorID= "
+                                        +instructorID+" and termID='"+termID+"'";
+        executeFetch(selectSectionByInstructor);
+    }
+            
     private static void executeFetch(String sql) throws SQLException {
             
             sections.clear();
@@ -74,4 +86,9 @@ public class SectionList {
     public static ArrayList<Section> getAll() {
         return sections;
     }
+
+
+
+
+
 }
