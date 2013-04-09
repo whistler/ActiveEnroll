@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -16,14 +17,20 @@ import javafx.scene.control.Label;
  * @author ibrahim
  */
 public class TimetableController implements Initializable {
-    @FXML
-    private Label errorLabel;
 
+    @FXML Pane sidebar;
+
+    @FXML Label termID;
+    
+     
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    
+        
     }    
 }
