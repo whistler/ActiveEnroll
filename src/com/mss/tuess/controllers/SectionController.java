@@ -140,7 +140,7 @@ public class SectionController implements Initializable {
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
             return true;
-        }
+        } 
         return false;
     }
 }
