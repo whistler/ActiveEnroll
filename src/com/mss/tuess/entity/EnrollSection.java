@@ -166,7 +166,22 @@ public class EnrollSection {
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
-
+ /**
+     * Insert this EnrollSection into the database.
+     *
+     * @throws SQLException
+     */
+    public void insertBySecStu(Section section, int studentID) throws SQLException {
+        String sql = "INSERT INTO enrollSection VALUES ("
+                    + studentID + ", '"
+                    + section.getSectionID() + "', '"
+                    + section.getCourseDept() + "', '"
+                    + section.getCourseNum() + "', '"
+                    + section.getTermID()+"', ''"
+                    + ")";
+            DatabaseConnector.updateQuery(sql);
+            System.out.println("\nCan!!!!!!!!   " + sql);
+    }
     /**
      * Checks whether the student is enrolled in the section or not
      *

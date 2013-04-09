@@ -1,0 +1,531 @@
+package com.mss.tuess.timetable;
+
+/**
+ * Reference from http://sourceforge.net/projects/seyongj/
+ *
+ * @author seyongj
+ * @project TScheduler v0.2
+ * @last Update: 2013-03-19
+ * @reference date 2013-04-08
+ */
+/**
+ * TScheduler v0.2
+ */
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.awt.datatransfer.*;
+import java.io.*;
+
+/**
+ * html viewer frame provide save schedule to disk and copy to html source code
+ * function
+ */
+public class ShowFrame extends JFrame implements WindowListener, ActionListener, ClipboardOwner {
+
+    JButton jbSave = new JButton("Save as html file");
+    JButton jbCopy = new JButton("Copy html code to Clipboard");
+    ArrayList alData = new ArrayList();
+    String strMini1Sechedule = new String();
+    String strMini2Sechedule = new String();
+    String head;
+    String body;
+    String tail;
+    String output;
+    int row = 0;
+    int col = 0;
+    String startingTimeOfDay = new String();
+    String endingTimeOfDay = new String();
+    DataControl[] dcData;
+    String[] day = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    int[][] intScheduleTable1;
+    String[][] strScheduleTable1;
+    int[][] intScheduleTable2;
+    String[][] strScheduleTable2;
+    String[] strTimeList = new String[34];
+    int indexOfTimeList = 0;
+
+    /**
+     * default constructor
+     */
+    ShowFrame() {
+        setTitle("SchedulerView");
+        setSize(600, 800);
+    }
+
+    /**
+     * constructor
+     */
+    ShowFrame(ArrayList alData) {
+        setTitle("SchedulerView");
+        setSize(800, 800);
+        setTimeList();
+        this.alData = alData;
+        dcData = new DataControl[alData.size()];
+        //dcData = new DataControl[10];
+        for (int i = 0; i < alData.size(); i++) {
+            dcData[i] = new DataControl((String) alData.get(i));
+        }
+        start();
+        jbSave.addActionListener(this);
+        jbCopy.addActionListener(this);
+    }
+
+    /**
+     * initializes components and data
+     */
+    private void start() {
+        setStartingTime();
+        setEndingTime();
+
+        output = makeHead() + makeBody(checkMini()) + makeTail();
+        Container con = getContentPane();
+
+        JPanel jp1 = new JPanel(new GridLayout(1, 2));
+        jp1.add(jbSave);
+        jp1.add(jbCopy);
+
+        JEditorPane jep = new JEditorPane("text/html", output);
+        JScrollPane jsp = new JScrollPane(jep);
+
+        JPanel jp3 = new JPanel(new BorderLayout());
+        jp3.add("North", jp1);
+        jp3.add("Center", jsp);
+        con.add(jp3);
+    }
+
+    /**
+     * default make first part of html file which will show schedule
+     */
+    private String makeHead() {
+        String tempHead = new String("<HTML><BODY>");
+        String temp;
+        int mDay = 0;
+        for (int i = 0; i < dcData.length; i++) {
+            for (int j = 0; j < day.length; j++) {
+                if (dcData[i].getDay().trim().equals(day[j].trim())) {
+                    if (j > mDay) {
+                        mDay = j;
+                    }
+                }
+            }
+        }
+        col = mDay;
+        return tempHead;
+    }
+
+    /**
+     * finds the earliest starting time
+     */
+    private void setStartingTime() {
+        int sTime = strToInt(dcData[0].getStart());
+        int tTime = 0;
+        for (int i = 0; i < dcData.length; i++) {
+            tTime = strToInt(dcData[i].getStart());
+            if (sTime > tTime) {
+                sTime = tTime;
+            }
+        }
+        startingTimeOfDay = intToTimeStr(sTime);
+        for (int i = 0; i < strTimeList.length; i++) {
+            if (startingTimeOfDay.trim().equals(strTimeList[i].trim())) {
+                indexOfTimeList = i;
+                break;
+            }
+        }
+    }
+
+    /**
+     * finds the last ending time
+     */
+    private void setEndingTime() {
+        int eTime = 0;
+        int tTime = 0;
+        for (int i = 0; i < dcData.length; i++) {
+            tTime = strToInt(dcData[i].getEnd());
+            if (eTime < tTime) {
+                eTime = tTime;
+            }
+        }
+        endingTimeOfDay = intToTimeStr(eTime);
+    }
+
+    /**
+     * convert string format time to integer format time
+     */
+    private int strToInt(String time) {
+        String temp = new String();
+        temp = time.trim().substring(0, 2);
+        temp += time.trim().substring(3, 5);
+        return Integer.parseInt(temp);
+    }
+
+    /**
+     * convert string format time to integer format time
+     */
+    private String intToTimeStr(int time) {
+        String temp = "" + time;
+        if (time < 1000) {
+            return "0" + temp.substring(0, 1) + ":" + temp.substring(1);
+        } else {
+            return temp.substring(0, 2) + ":" + temp.substring(2);
+        }
+    }
+
+    /**
+     * make body of html file which will show schedule
+     */
+    private String makeBody(boolean miniFlag) {
+        //boolean sFlag = false;
+        row = getTimeDifference(startingTimeOfDay, endingTimeOfDay);
+        String tempBody = new String();
+
+        if (miniFlag) {
+
+            makeTableBody(miniFlag);
+
+            //For Mini 1
+            tempBody += "<h2>Mini 1 Semester</h2>\n";
+            tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
+            tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
+            for (int i = 0; i < col + 1; i++) {
+                tempBody += "<td width='15%' height='30'><strong>" + day[i] + "</strong></td>\n";
+            }
+            tempBody += "</tr>\n";
+            for (int i = 0; i < row; i++) {
+                tempBody += "<tr align='center' valign='middle'>\n";
+                if (indexOfTimeList + i == strTimeList.length - 1) {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C00'>" + strTimeList[indexOfTimeList + i]
+                            + " - 24:00</td>\n";
+                } else {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C00'>" + strTimeList[indexOfTimeList + i]
+                            + " - " + strTimeList[indexOfTimeList + i + 1] + "</td>\n";
+                }
+                for (int j = 0; j < col + 1; j++) {
+                    if (intScheduleTable1[i][j] == 0) {
+                        tempBody += "<td width='15%' height='30' bordercolor='#705C00'>&nbsp;</td>\n";
+                    } else if (intScheduleTable1[i][j] == -1) {
+                    } else {
+                        tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable1[i][j];
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += strScheduleTable1[i][j];
+                        tempBody += "</td>\n";
+                    }
+                }
+                tempBody += "</tr>\n";
+            }
+            tempBody += "</table>\n";
+
+            //For Mini 2
+            tempBody += "<h2>Mini 2 Semester</h2>\n";
+            tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
+            tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
+            for (int i = 0; i < col + 1; i++) {
+                tempBody += "<td width='15%' height='30'><strong>" + day[i] + "</strong></td>\n";
+            }
+            tempBody += "</tr>\n";
+            for (int i = 0; i < row; i++) {
+                tempBody += "<tr align='center' valign='middle'>\n";
+                if (indexOfTimeList + i == strTimeList.length - 1) {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C0''>" + strTimeList[indexOfTimeList + i]
+                            + " - 24:00</td>\n";
+                } else {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C0''>" + strTimeList[indexOfTimeList + i]
+                            + " - " + strTimeList[indexOfTimeList + i + 1] + "</td>\n";
+                }
+                for (int j = 0; j < col + 1; j++) {
+                    if (intScheduleTable2[i][j] == 0) {
+                        tempBody += "<td width='15%' height='30' bordercolor='#705C00'>&nbsp;</td>\n";
+                    } else if (intScheduleTable2[i][j] == -1) {
+                    } else {
+                        tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable2[i][j];
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += strScheduleTable2[i][j];
+                        tempBody += "</td>\n";
+                    }
+                }
+                tempBody += "</tr>\n";
+            }
+            tempBody += "</table>\n";
+        } else {
+            makeTableBody(miniFlag);
+            tempBody += "<h2>Full Semester</h2>\n";
+            tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
+            tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
+            for (int i = 0; i < col + 1; i++) {
+                tempBody += "<td width='15%' height='30'><strong>" + day[i] + "</strong></td>\n";
+            }
+            tempBody += "</tr>\n";
+            for (int i = 0; i < row; i++) {
+                tempBody += "<tr align='center' valign='middle'>\n";
+                if (indexOfTimeList + i == strTimeList.length - 1) {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C0''>" + strTimeList[indexOfTimeList + i]
+                            + " - 24:00</td>\n";
+                } else {
+                    tempBody += "<td width='15%' height='30' bordercolor='#705C0''>" + strTimeList[indexOfTimeList + i]
+                            + " - " + strTimeList[indexOfTimeList + i + 1] + "</td>\n";
+                }
+                for (int j = 0; j < col + 1; j++) {
+                    if (intScheduleTable1[i][j] == 0) {
+                        tempBody += "<td width='15%' height='30' bordercolor='#705C00'>&nbsp;</td>\n";
+                    } else if (intScheduleTable1[i][j] == -1) {
+                    } else {
+                        tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable1[i][j];
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += strScheduleTable1[i][j];
+                        tempBody += "</td>\n";
+                    }
+                }
+                tempBody += "</tr>\n";
+            }
+            tempBody += "</table>\n";
+        }
+
+        return tempBody;
+    }
+
+    /**
+     * make tail of html file which will show schedule
+     */
+    private String makeTail() {
+        return "</html>";
+    }
+
+    /**
+     * check whether there is mini semester true means that there is a mini
+     * semester false means that there is no mini semester
+     */
+    private boolean checkMini() {
+        for (int i = 0; i < dcData.length; i++) {
+            if (dcData[i].getSemester().trim().equals("Mini 1")
+                    || dcData[i].getSemester().trim().equals("Mini 2")) {
+                //System.out.println(dcData[i].getSemester());
+                //System.out.println("true");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * stores information about schedule to intScheduleTable1,
+     * intScheduleTable2, strScheduleTable1, strScheduleTable2
+     */
+    private void makeTableBody(boolean miniFlag) {
+
+        if (miniFlag) {
+            //For mini 1
+            intScheduleTable1 = new int[row + 1][col + 1];
+            strScheduleTable1 = new String[row + 1][col + 1];
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    intScheduleTable1[i][j] = 0;
+                    strScheduleTable1[i][j] = new String();
+                }
+            }
+
+            for (int i = 0; i < dcData.length; i++) {
+                if (dcData[i].getSemester().trim().equals("Full") || dcData[i].getSemester().trim().equals("Mini 1")) {
+                    int tableCol = getDayNum(dcData[i].getDay());
+                    int tableRow = getTimeDifference(startingTimeOfDay, dcData[i].getStart());
+                    int classTimeDifference = getTimeDifference(dcData[i].getStart(), dcData[i].getEnd());
+                    intScheduleTable1[tableRow][tableCol] = classTimeDifference;
+                    for (int k = 1; k < classTimeDifference; k++) {
+                        intScheduleTable1[tableRow + k][tableCol] = -1;
+                    }
+                    strScheduleTable1[tableRow][tableCol] = "<p><strong>" + dcData[i].getTitle().trim()
+                            + "</strong></p><p><strong>" + dcData[i].getRoom().trim() + "</strong></p>";
+                }
+            }
+
+            //For mini 2
+            intScheduleTable2 = new int[row + 1][col + 1];
+            strScheduleTable2 = new String[row + 1][col + 1];
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    intScheduleTable2[i][j] = 0;
+                    strScheduleTable2[i][j] = new String();
+                }
+            }
+
+            for (int i = 0; i < dcData.length; i++) {
+                if (dcData[i].getSemester().trim().equals("Full") || dcData[i].getSemester().trim().equals("Mini 2")) {
+                    int tableCol = getDayNum(dcData[i].getDay());
+                    int tableRow = getTimeDifference(startingTimeOfDay, dcData[i].getStart());
+                    int classTimeDifference = getTimeDifference(dcData[i].getStart(), dcData[i].getEnd());
+                    intScheduleTable2[tableRow][tableCol] = classTimeDifference;
+                    for (int k = 1; k < classTimeDifference; k++) {
+                        intScheduleTable2[tableRow + k][tableCol] = -1;
+                    }
+                    strScheduleTable2[tableRow][tableCol] = "<p><strong>" + dcData[i].getTitle().trim()
+                            + "</strong></p><p><strong>" + dcData[i].getRoom().trim() + "</strong></p>";
+                }
+            }
+        } else {
+            intScheduleTable1 = new int[row + 1][col + 1];
+            strScheduleTable1 = new String[row + 1][col + 1];
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    intScheduleTable1[i][j] = 0;
+                    strScheduleTable1[i][j] = new String();
+                }
+            }
+
+            for (int i = 0; i < dcData.length; i++) {
+                if (dcData[i].getSemester().trim().equals("Full")) {
+                    int tableCol = getDayNum(dcData[i].getDay());
+                    int tableRow = getTimeDifference(startingTimeOfDay, dcData[i].getStart());
+                    int classTimeDifference = getTimeDifference(dcData[i].getStart(), dcData[i].getEnd());
+                    intScheduleTable1[tableRow][tableCol] = classTimeDifference;
+                    for (int k = 1; k < classTimeDifference; k++) {
+                        intScheduleTable1[tableRow + k][tableCol] = -1;
+                    }
+                    strScheduleTable1[tableRow][tableCol] = "<p><strong>" + dcData[i].getTitle().trim()
+                            + "</strong></p><p><strong>" + dcData[i].getRoom().trim() + "</strong></p>";
+                }
+            }
+        }
+    }
+
+    /**
+     * return the difference between starting time of schedule and ending time
+     * of schedule return value is hour * 2 getTimeDifference("09:00", "10:00")
+     * will return 2 getTimeDifference("09:00", "11:30") will return 5
+     */
+    private int getTimeDifference(String start, String end) {
+        //all full semester
+        int difference = (Integer.parseInt(end.substring(0, 2))
+                - Integer.parseInt(start.substring(0, 2))) * 2;
+        int minute = Integer.parseInt(end.substring(3, 5))
+                - Integer.parseInt(start.substring(3, 5));
+
+        if (minute > 0) {
+            difference++;
+        } else if (minute < 0) {
+            difference--;
+        }
+
+        return difference;
+    }
+
+    /**
+     * return the index of day
+     */
+    private int getDayNum(String d) {
+        for (int j = 0; j < day.length; j++) {
+            if (d.trim().equals(day[j].trim())) {
+                return j;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * makes list of time range
+     */
+    public void setTimeList() {
+
+        for (int i = 0; i < 17; i++) {
+            strTimeList[i * 2] = new String();
+            if (i < 3) {
+                strTimeList[i * 2] = "0" + (i + 7) + ":00";
+            } else {
+                strTimeList[i * 2] = (i + 7) + ":00";
+            }
+        }
+        for (int i = 0; i < 17; i++) {
+            strTimeList[i * 2 + 1] = new String();
+            if (i < 3) {
+                strTimeList[i * 2 + 1] = "0" + (i + 7) + ":30";
+            } else {
+                strTimeList[i * 2 + 1] = (i + 7) + ":30";
+            }
+        }
+    }
+
+    public void windowClosed(WindowEvent e) {
+    }
+
+    public void windowOpened(WindowEvent e) {
+    }
+
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
+
+    public void windowActivated(WindowEvent e) {
+    }
+
+    public void windowDeactivated(WindowEvent e) {
+    }
+
+    public void windowIconified(WindowEvent e) {
+    }
+
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        /**
+         * save schedule to disk
+         */
+        if (e.getSource() == jbSave) {
+            JFileChooser fc = new JFileChooser();
+            fc.addChoosableFileFilter(new HtmlFilter());
+            fc.setAcceptAllFileFilterUsed(false);
+            fc.setDialogTitle("Save");
+            int returnVal = fc.showDialog(ShowFrame.this, "Save");
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File myFile = fc.getSelectedFile();
+                try {
+
+                    HtmlFilter df = new HtmlFilter();
+                    if (df.accept(myFile)) {
+                        PrintWriter myWriter = new PrintWriter(new BufferedWriter(new FileWriter(myFile.getAbsolutePath())));
+                        myWriter.write(output);
+                        myWriter.close();
+                    } else {
+                        PrintWriter myWriter = new PrintWriter(new BufferedWriter(new FileWriter(myFile.getAbsolutePath() + ".html")));
+                        myWriter.write(output);
+                        myWriter.close();
+                    }
+                } catch (Exception ee) {
+                }
+            }
+
+        }
+        /**
+         * copy html code to clipboard
+         */
+        if (e.getSource() == jbCopy) {
+            setClipboardContents(output);
+        }
+    }
+
+    public void lostOwnership(Clipboard aClipboard, Transferable aContents) {
+    }
+
+    public void setClipboardContents(String strClip) {
+        StringSelection stringSelection = new StringSelection(strClip);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, this);
+        String message = "HTML source code is copied to clipboard\n";
+        message += "You can paste and use it";
+        JOptionPane.showMessageDialog(null, message, "Notice", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public String getClipboardContents() {
+        return "";
+    }
+}

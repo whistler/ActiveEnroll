@@ -32,8 +32,8 @@ public class SectionClassList {
         
         
         String sql="select sc.sectionID,sc.courseDept,sc.courseNum,sc.termID,sc.type,sc.classID,sc.day,sc.startTime,"+
-                    "sc.endTime, sc.location from sectionClass sc natural join enrollSection es"+
-                    "where es.studentID="+currentID+ "and es.termID="+currentTerm.getTermID();
+                    "sc.endTime, sc.location from sectionClass sc natural join enrollSection es "+
+                    "where es.studentID="+currentID+ " and es.termID='"+currentTerm.getTermID()+"'";
         
         rs = DatabaseConnector.returnQuery(sql);
 
@@ -62,6 +62,8 @@ public class SectionClassList {
         }
 
     }
-    
+    public static ArrayList<SectionClass> getAll() {
+        return registeredSectionClassList;
+    }
     
 }
