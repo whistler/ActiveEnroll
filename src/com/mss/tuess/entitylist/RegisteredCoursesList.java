@@ -35,7 +35,7 @@ public class RegisteredCoursesList {
         
         String sql = "select es.courseDept,es.courseNum,c.courseName,es.sectionID,es.termID,c.credit " +
                      "from enrollSection es natural join course c " +
-                     "where es.studentID="+currentID+ " and es.termID="+currentTerm.getTermID();
+                     "where es.studentID="+currentID+ " and es.termID='"+currentTerm.getTermID()+"'";
        
 
         
