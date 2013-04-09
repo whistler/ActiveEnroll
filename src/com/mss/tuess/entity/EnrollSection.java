@@ -320,7 +320,19 @@ public class EnrollSection {
             return false;
         }
     }
-
+    public static boolean withdrawEndNotPass(Section section) {
+        Term currentTerm = State.getCurrentTerm();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        System.out.println(now + "___" + currentTerm.getDropWithoutW());
+        if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
+            System.out.println("\nwithdrawEndNotPass returns: true");
+            return true;
+        } else {
+            System.out.println("\nwithdrawEndNotPass returns: false");
+            return false;
+        }
+    }
+    
     public static boolean isFull(Section section) {
         if (section.getStatus().compareTo("full") == 0) {
             System.out.println("\nisFull returns: true");
