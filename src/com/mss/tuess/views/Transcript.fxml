@@ -13,13 +13,15 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TranscriptController">
   <children>
-    <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <Label layoutX="25.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="Transcript" textFill="GREY">
-      <font>
-        <Font name="System Bold" size="12.0" />
-      </font>
-    </Label>
-    <TableView fx:id="transcriptTable" layoutX="25.0" layoutY="50.0" prefHeight="300.0" prefWidth="555.0">
+        <HBox layoutX="25.0" layoutY="7.0">
+             <children>
+     
+              <Label text="Transcript"/>
+
+         </children>
+    </HBox>
+   
+    <TableView fx:id="transcriptTable" layoutX="25.0" layoutY="50.0" prefHeight="300.0">
       <columns>
         <TableColumn prefWidth="45.0" text="Dept" fx:id="courseDept" />
         <TableColumn prefWidth="35.0" text="No." fx:id="courseNum" />
@@ -29,13 +31,13 @@
         <TableColumn prefWidth="50.0" text="Grade" fx:id="grade" />
       </columns>
     </TableView>
-    <HBox layoutX="25.0" layoutY="360.0" prefHeight="35.0" prefWidth="150.0">
-      <Label prefWidth="111.0" text="Total Credits :" />
-      <Label fx:id="totalCredit" prefWidth="60.0" />
+    <HBox layoutX="25.0" layoutY="360.0" >
+      <Label text="Total Credits :" />
+      <Label fx:id="totalCredit" />
     </HBox>
-    <HBox layoutX="426.0" layoutY="360.0" prefHeight="35.0" prefWidth="150.0">
-      <Label prefWidth="61.0" text="GPA :" />
-      <Label fx:id="GPA" prefWidth="60.0" />
+    <HBox layoutX="426.0" layoutY="360.0"  >
+      <Label text="GPA :" />
+      <Label fx:id="GPA" />
     </HBox>
   </children>
 </AnchorPane>
