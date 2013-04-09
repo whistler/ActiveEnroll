@@ -1,8 +1,9 @@
 package com.mss.tuess.controllers;
 
-import com.mss.tuess.entity.User;
-//import com.mss.tuess.entitylist.WaivePrerequisiteList;
+import com.mss.tuess.entity.Term;
+import com.mss.tuess.entitylist.SectionList;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,15 +32,21 @@ public class WaivePrerequisiteController implements Initializable {
      */
     public WaivePrerequisiteController() throws SQLException
     {
-//        WaivePrerequisiteList.fetch();
-//        int courseToTeachSize = WaivePrerequisiteList.getAll().size();
-//        for(int i=0;i<courseToTeachSize;i++)
-//        {
-//            coursesToWaiveList.addAll(WaivePrerequisiteList.getCoursesToTeach(i).getCourseDept()
-//                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseNum()+" "
-//                    +WaivePrerequisiteList.getCoursesToTeach(i).getSectionID()+": "
-//                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseName());
-//        }
+        int instructorID;
+        instructorID = CurrentUser.getUser().getID();
+        Term currentTerm=State.getCurrentTerm();
+        
+        SectionList.fetchByInstructor(instructorID,currentTerm.getTermID());
+        
+        
+        int sectionListSize = SectionList.getAll().size();
+        for(int i=0;i<sectionListSize;i++)
+       {
+            coursesToWaiveList.addAll(SectionList.get(i).getTermID()+" "
+                                      +SectionList.get(i).getCourseDept()+" "
+                                      +SectionList.get(i).getCourseNum()+" "
+                                      +SectionList.get(i).getSectionID());
+        }
 
 
     }
