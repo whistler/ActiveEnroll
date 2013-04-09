@@ -14,7 +14,7 @@ public class WaivePrerequisiteController implements Initializable {
     
  @FXML ComboBox coursesToWaive;
    
-     private ObservableList<String> courseList = FXCollections.observableArrayList();
+     private ObservableList<String> courseToWaiveList = FXCollections.observableArrayList();
 
  
      /**
@@ -28,8 +28,10 @@ public class WaivePrerequisiteController implements Initializable {
         int courseToTeachSize = WaivePrerequisiteList.getAll().size();
         for(int i=0;i<courseToTeachSize;i++)
         {
-                  courseList.addAll(WaivePrerequisiteList.getCoursesToTeach(i).getCourseDept()+WaivePrerequisiteList.getCoursesToTeach(i).getCourseNum()+" "+WaivePrerequisiteList.getCoursesToTeach(i).getSectionID()+": "+WaivePrerequisiteList.getCoursesToTeach(i).getCourseName());
-
+            courseToWaiveList.addAll(WaivePrerequisiteList.getCoursesToTeach(i).getCourseDept()
+                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseNum()+" "
+                    +WaivePrerequisiteList.getCoursesToTeach(i).getSectionID()+": "
+                    +WaivePrerequisiteList.getCoursesToTeach(i).getCourseName());
         }
 
 
@@ -42,6 +44,6 @@ public class WaivePrerequisiteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        coursesToWaive.setItems(courseList);
+        coursesToWaive.setItems(courseToWaiveList);
     } 
 }
