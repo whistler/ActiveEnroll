@@ -38,7 +38,7 @@ public class MailInstructionsController implements Initializable {
         String emailSubject = "Pre enrolment Activities - TUESS Team";
         String emailBody = "Test Mail <BR><BR><BR>cheers!!!<BR><b>TUESS Team</b>";
         //End of hardcoding
-
+        int studentnumber=0;
 
         ResultSet mailrs;
         mailrs = StudentList.fetchCurrentTerm();
@@ -55,7 +55,10 @@ public class MailInstructionsController implements Initializable {
 
             SendEmail sendEmail = new SendEmail();
             sendEmail.sendMail(toEmails, emailSubject, emailBody);
-
+            
+            
+            studentnumber++;
+            System.out.println(studentnumber);
 
         }
     }
