@@ -15,8 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class RegisteredCourseController implements Initializable 
 {
-
-    @FXML TableView<RegisteredCourse> registeredCoursesTable;
+    @FXML  TextField filterText;
+    @FXML  TableView<RegisteredCourse> registeredCoursesTable;
     @FXML  TableColumn<RegisteredCourse, String> courseDept;
     @FXML  TableColumn<RegisteredCourse, String> courseNum;    
     @FXML  TableColumn<RegisteredCourse, String> sectionID;
@@ -47,6 +47,14 @@ public class RegisteredCourseController implements Initializable
         tableContent.addAll(RegisteredCoursesList.getAll());
         }
        
+         filterContent.addAll(tableContent);
+
+        tableContent.addListener(new ListChangeListener<RegisteredCourse>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends RegisteredCourse> change) {
+                filterRefresh();
+            }
+        });
     
     }
     
@@ -61,10 +69,26 @@ public class RegisteredCourseController implements Initializable
 
   
 
-    
-    
-    
-    
+     /**
+     * Refresh the content of the filter
+     */
+    private void filterRefresh() {
+        filterContent.clear();
+        for (RegisteredCourse registeredCourses : tableContent) {
+            if (filterChecker(registeredCourses)) {
+                filterContent.add(registeredCourses);
+            }
+        }
+        tableOrderAct();
+    }
+
+    private boolean filterChecker(RegisteredCourse registeredCourse) {
+        String filterString = filterText.getText();
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
     
     /**
      * Initializes the controller class.
@@ -87,7 +111,6 @@ public class RegisteredCourseController implements Initializable
 
         
         registeredCoursesTable.setItems(filterContent);
-       
   
     }
    
