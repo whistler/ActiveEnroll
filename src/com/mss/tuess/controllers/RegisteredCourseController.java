@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class RegisteredCourseController implements Initializable 
 {
-    @FXML  TextField filterText;
     @FXML  TableView<RegisteredCourse> registeredCoursesTable;
     @FXML  TableColumn<RegisteredCourse, String> courseDept;
     @FXML  TableColumn<RegisteredCourse, String> courseNum;    
@@ -28,7 +27,6 @@ public class RegisteredCourseController implements Initializable
     @FXML Label totalCredits;
     
     private ObservableList<RegisteredCourse> tableContent = FXCollections.observableArrayList();
-    private ObservableList<RegisteredCourse> filterContent = FXCollections.observableArrayList();
  
    
      /**
@@ -46,15 +44,6 @@ public class RegisteredCourseController implements Initializable
         if(registeredCoursesSize > 0){
         tableContent.addAll(RegisteredCoursesList.getAll());
         }
-       
-         filterContent.addAll(tableContent);
-
-        tableContent.addListener(new ListChangeListener<RegisteredCourse>() {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends RegisteredCourse> change) {
-                filterRefresh();
-            }
-        });
     
     }
     
@@ -68,27 +57,6 @@ public class RegisteredCourseController implements Initializable
     }
 
   
-
-     /**
-     * Refresh the content of the filter
-     */
-    private void filterRefresh() {
-        filterContent.clear();
-        for (RegisteredCourse registeredCourses : tableContent) {
-            if (filterChecker(registeredCourses)) {
-                filterContent.add(registeredCourses);
-            }
-        }
-        tableOrderAct();
-    }
-
-    private boolean filterChecker(RegisteredCourse registeredCourse) {
-        String filterString = filterText.getText();
-        if (filterString == null || filterString.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
     
     /**
      * Initializes the controller class.
@@ -110,7 +78,7 @@ public class RegisteredCourseController implements Initializable
         totalCredits.setText(Integer.toString(RegisteredCoursesList.getTotalCredits()));
 
         
-        registeredCoursesTable.setItems(filterContent);
+        registeredCoursesTable.setItems(tableContent);
   
     }
    
