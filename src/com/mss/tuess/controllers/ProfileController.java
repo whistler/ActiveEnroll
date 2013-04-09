@@ -11,13 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 
 public class ProfileController implements Initializable {
-    Label ID;
-    Label status;
-    Label program;
-    Label registeredSince;
+    @FXML Label ID;
+    @FXML Label status;
+    @FXML Label program;
+    @FXML Label registeredSince;
     @FXML Label statusLabel;
     @FXML Label programLabel;
     @FXML Label registeredSinceLabel;
@@ -34,8 +33,6 @@ public class ProfileController implements Initializable {
     @FXML TextField phone;
     @FXML PasswordField newPassword;
     @FXML PasswordField confirmPassword;
-    @FXML
-    private Font x1;
 
     /**
      * Initializes the controller class. Shows the current user in the view
