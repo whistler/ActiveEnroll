@@ -7,19 +7,15 @@ import com.mss.tuess.entitylist.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.*;
 
 public class RegisteredCourseController implements Initializable 
 {
-    @FXML TextField filterText;
-    
+
     @FXML TableView<RegisteredCourse> registeredCoursesTable;
     @FXML  TableColumn<RegisteredCourse, String> courseDept;
     @FXML  TableColumn<RegisteredCourse, String> courseNum;    
@@ -50,14 +46,8 @@ public class RegisteredCourseController implements Initializable
         if(registeredCoursesSize > 0){
         tableContent.addAll(RegisteredCoursesList.getAll());
         }
-        filterContent.addAll(tableContent);
-
-        tableContent.addListener(new ListChangeListener<RegisteredCourse>() {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends RegisteredCourse> change) {
-                filterRefresh();
-            }
-        });
+       
+    
     }
     
      /**
@@ -69,27 +59,8 @@ public class RegisteredCourseController implements Initializable
         registeredCoursesTable.getSortOrder().addAll(sortOrder);
     }
 
-    /**
-     * Refresh the content of the filter
-     */
-    private void filterRefresh() {
-        filterContent.clear();
-        for (RegisteredCourse registeredCourses : tableContent) {
-            if (filterChecker(registeredCourses)) {
-                filterContent.add(registeredCourses);
-            }
-        }
-        tableOrderAct();
-    }
+  
 
-    private boolean filterChecker(RegisteredCourse registeredCourse) {
-        String filterString = filterText.getText();
-        if (filterString == null || filterString.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-    
     
     
     
@@ -117,13 +88,7 @@ public class RegisteredCourseController implements Initializable
         
         registeredCoursesTable.setItems(filterContent);
        
-        filterText.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                filterRefresh();
-            }
-        });
+  
     }
    
     
