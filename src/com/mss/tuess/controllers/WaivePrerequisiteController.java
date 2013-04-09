@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 
 public class WaivePrerequisiteController implements Initializable {
     
- @FXML ChoiceBox coursesToWaive;
+ @FXML ComboBox coursesToWaive;
  @FXML Label errorLabel;
  @FXML TextField studentID;
  @FXML Button waiveButton;
@@ -65,13 +65,18 @@ public class WaivePrerequisiteController implements Initializable {
      * @throws SQLException
      * @throws Exception 
      */
-    public void processWaiveProrerequisite(ActionEvent event) throws SQLException, Exception {
+    public void processWaivePrerequisite(ActionEvent event) throws SQLException, Exception {
 
-        if (studentID.getText().isEmpty()||coursesToWaive.getItems().isEmpty()) {
+        if (studentID.getText().isEmpty()||coursesToWaive.getValue()==null){
             errorLabel.setText("Course and student ID are required");
-        } /*else {
-
-            String type = (String) userType.getValue();
+        } 
+        else {
+/*
+            String courseInfo = coursesToWaive.getValue().toString();
+            String courseDept=courseInfo.substring(0, 3);
+            String courseNum=courseInfo.substring(4, 6);
+            String sectionID=courseInfo.substring(8,9);
+            
             Integer loginId = Integer.parseInt(userId.getText());
             String password = userPassword.getText();
             User user;
@@ -86,7 +91,8 @@ public class WaivePrerequisiteController implements Initializable {
             
             CurrentUser.setUser(user);
             ViewManager.changeScene("/com/mss/tuess/views/Dashboard.fxml");
-        }*/
+            * */
+        }
     }
     
     
