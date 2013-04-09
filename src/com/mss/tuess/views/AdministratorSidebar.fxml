@@ -12,5 +12,6 @@
     <Hyperlink layoutX="39.0" layoutY="59.0" onAction="#showMailGrades" text="Mail Grades" />
     <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showMailInstructions" text="Mail Instructions" />
     <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
+    <Hyperlink layoutX="39.0" layoutY="103.0" onAction="#showAddStudent" text="Add Student" />
   </children>
 </AnchorPane>
