@@ -18,7 +18,10 @@ import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -44,11 +47,23 @@ public class SectionController implements Initializable {
     TextField lastDayToEnroll;
     @FXML
     TextField lastDayToWithdraw;
+    @FXML 
+    private ListView<String> preRequisiteList;
+    @FXML 
+    private ListView<String> coRequisiteList;
     @FXML
     Button dropButton;
     @FXML
     Button enrollButton;
 
+    
+    private ObservableList<String> preReqItems;
+    private ObservableList<String> coReqItems;
+    public SectionController() {
+        //hardcoded as of now. to be fetched from the db
+        this.preReqItems = FXCollections.observableArrayList("CICS-505","CICS-520","CICS-511","CICS-502");
+        this.coReqItems = FXCollections.observableArrayList("CICS-580 Lecture","CICS-580 Lab");
+    }
     /**
      * Initializes the controller class.
      */
@@ -57,6 +72,10 @@ public class SectionController implements Initializable {
         Section section = State.getCurrentSection();
         System.out.println(section.getCourseNum());
         if (section != null) {
+            //set prerequisities
+            preRequisiteList.setItems(preReqItems);
+            //set corequisites
+            coRequisiteList.setItems(coReqItems);
             //set course fields
             courseNum.setText(section.getCourse().getCourseNum());
             courseName.setText(section.getCourse().getCourseName());
@@ -71,6 +90,7 @@ public class SectionController implements Initializable {
             endDate.setText(section.getTerm().getEnd().toString());
             lastDayToEnroll.setText(section.getTerm().getRegistrationEnd().toString());
             lastDayToWithdraw.setText(section.getTerm().getDropWithoutW().toString());
+            
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
             } else {
