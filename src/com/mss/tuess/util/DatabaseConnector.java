@@ -17,6 +17,7 @@ public class DatabaseConnector {
 
     /**
      * Creates a connection to the database
+     *
      * @throws ClassNotFoundException
      */
     public static void Connect() {
@@ -48,6 +49,7 @@ public class DatabaseConnector {
 
     /**
      * Returns the database connection
+     *
      * @return database connection
      */
     public static Connection getConn() {
@@ -56,10 +58,13 @@ public class DatabaseConnector {
 
     /**
      * Runs a database query that does not return any records
+     *
      * @param sql query to be run
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static void updateQuery(String sql) throws SQLException {
+        System.out.println(sql);
+
         Statement stmt = conn.createStatement();
         stmt.execute(sql);
         stmt.close();
@@ -67,9 +72,10 @@ public class DatabaseConnector {
 
     /**
      * Runs a database query and returns results in a ResultSet
+     *
      * @param sql query to be run
      * @return ResultSet returned by the query
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static ResultSet returnQuery(String sql) throws SQLException {
         System.out.println(sql);
