@@ -4,6 +4,7 @@
  */
 package com.mss.tuess.controllers;
 
+import com.mss.tuess.timetable.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class TimetableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
-        
+   TScheduler ts=new TScheduler();
+        ts.update();
     }    
 }
