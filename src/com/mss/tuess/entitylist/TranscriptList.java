@@ -23,7 +23,7 @@ public class TranscriptList {
 
     public static void fetch() throws SQLException {
         int currentID;
-        int gradeNum;
+        int gradeNum = 0;
         setAddCredit(0);
         setAddCreditMultipleGrade(0);
         transcriptrecords.clear();
@@ -53,11 +53,17 @@ public class TranscriptList {
                 gradeNum = 1;
             } else if (rs.getString("grade").equalsIgnoreCase("F")) {
                 gradeNum = 1;
-            } else {
-                gradeNum = 4; //does not affect the GPA calculation if the course is not finished
             }
 
-            setAddCredit(getAddCredit() + rs.getInt("credit"));
+            if(rs.getString("grade").equalsIgnoreCase("W"))
+            {
+                //withdrawn courses not taken into credits.
+            }
+            else
+            {
+                setAddCredit(getAddCredit() + rs.getInt("credit"));
+            }
+            
             TranscriptList.addCreditMultipleGrade+= (rs.getInt("credit") * gradeNum);
             transcriptrecords.add(Transcriptrecord);
         }
