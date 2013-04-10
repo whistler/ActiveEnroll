@@ -65,13 +65,14 @@ public class SectionController implements Initializable {
             course.setCourseDept(section.getCourseDept());
             course.setCourseNum(section.getCourseNum());
             String prereqs = Prerequisite.getPrerequisitesString(Prerequisite.prerequisitesForCourse(course));
+            String coreqs = Corequisite.getCorequisitesString(Corequisite.corequisitesForCourse(course));
             //set prerequisities
             prerequisites.setText(prereqs);
             //set corequisites
-            corequisites.setText(prereqs);
+            corequisites.setText(coreqs);
             //set course fields
-            courseCode.setText(section.getCourse().getCourseNum() + " " 
-                    + section.getCourse().getCourseDept());
+            courseCode.setText(section.getCourse().getCourseDept() + "-" 
+                    + section.getCourse().getCourseNum());
             courseName.setText(section.getCourse().getCourseName());
             courseInfo.setText(section.getCourse().getInfo());
             courseCredits.setText(Integer.toString(section.getCourse().getCredit()));
