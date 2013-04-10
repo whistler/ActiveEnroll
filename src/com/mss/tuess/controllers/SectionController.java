@@ -25,11 +25,9 @@ import javafx.scene.control.TextField;
 public class SectionController implements Initializable {
 
     @FXML
-    TextField courseNum;
+    TextField courseCode;
     @FXML
     TextField courseName;
-    @FXML
-    TextField courseDept;
     @FXML
     TextArea courseInfo;
     @FXML
@@ -53,19 +51,18 @@ public class SectionController implements Initializable {
     @FXML
     Button enrollButton;
 
-    
-    private ObservableList<String> preReqItems;
-    private ObservableList<String> coReqItems;
-    public SectionController() {
-        //hardcoded as of now. to be fetched from the db
-        this.preReqItems = FXCollections.observableArrayList("CICS-505","CICS-520","CICS-511","CICS-502");
-        this.coReqItems = FXCollections.observableArrayList("CICS-580 Lecture","CICS-580 Lab");
-    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        ObservableList<String> preReqItems;
+        ObservableList<String> coReqItems;
+        preReqItems = FXCollections.observableArrayList("CICS-505","CICS-520","CICS-511","CICS-502");
+        coReqItems = FXCollections.observableArrayList("CICS-580 Lecture","CICS-580 Lab");
+        
+        
         Section section = State.getCurrentSection();
         System.out.println(section.getCourseNum());
         if (section != null) {
@@ -74,15 +71,14 @@ public class SectionController implements Initializable {
             //set corequisites
             coRequisiteList.setItems(coReqItems);
             //set course fields
-            courseNum.setText(section.getCourse().getCourseNum());
+            courseCode.setText(section.getCourse().getCourseNum() + " " 
+                    + section.getCourse().getCourseDept());
             courseName.setText(section.getCourse().getCourseName());
             courseInfo.setText(section.getCourse().getInfo());
-            courseDept.setText(section.getCourse().getCourseDept());
             courseCredits.setText(Integer.toString(section.getCourse().getCredit()));
             String name = section.getInstructor().getFirstName() + " "
                     + section.getInstructor().getLastName();
             instructor.setText(name);
-            courseDept.setText(section.getCourseDept());
             startDate.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getStart()));
             endDate.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getEnd()));
             lastDayToEnroll.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getRegistrationEnd()));
