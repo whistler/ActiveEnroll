@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import com.mss.tuess.util.State;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -23,7 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SectionController implements Initializable {
-
+    
     @FXML
     TextField courseCode;
     @FXML
@@ -42,9 +44,9 @@ public class SectionController implements Initializable {
     TextField lastDayToEnroll;
     @FXML
     TextField lastDayToWithdraw;
-    @FXML 
+    @FXML
     private ListView<String> preRequisiteList;
-    @FXML 
+    @FXML
     private ListView<String> coRequisiteList;
     @FXML
     Button dropButton;
@@ -91,27 +93,39 @@ public class SectionController implements Initializable {
             }
         }
     }
-
-    public static void processEnroll() throws SQLException {
+   /**
+    * 
+    */
+    public static void processEnroll()  {
+        
         Section section = State.getCurrentSection();
         int studentID = CurrentUser.getUser().getID();
-
-        if (canEnroll(section, studentID)) {
-            String sql = "INSERT INTO enrollSection VALUES ("
-                    + studentID + ", '"
-                    + section.getSectionID() + "', '"
-                    + section.getCourseDept() + "', '"
-                    + section.getCourseNum() + "', '"
-                    + section.getTermID()+"', ''"
-                    + ")";
-            DatabaseConnector.updateQuery(sql);
-            System.out.println("\nCan!!!!!!!!   " + sql);
-        } else {
-            System.out.println("\nCannot be added!!!!!!!!!");
+        EnrollSection es = new EnrollSection();
+        
+        es.setStudentID(studentID);
+        es.setSectionID(section.getSectionID());
+        es.setCourseDept(section.getCourseDept());
+        es.setCourseNum(section.getCourseNum());
+        es.setTermID(section.getTermID());
+        es.setGrade("");
+        try {
+            if (canEnroll(section, studentID)) {
+                es.insert();
+                section.setRegistered(section.getRegistered() + 1);
+                if (section.getRegistered() == section.getCapacity()) {
+                    section.setStatus("full");
+                }
+            } else {
+                System.out.println("\nCannot be added!!!!!!!!!");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static boolean canEnroll(Section section, int studentID) throws SQLException {
+        Student student=new Student();
+        student.fetch(CurrentUser.getUser().getID());
 //        if (!registrationEndNotPass(section)) {
 //            return false;
 //        }
@@ -120,40 +134,54 @@ public class SectionController implements Initializable {
         }
         if (EnrollSection.isFull(section)) {
             return false;
-
+            
         }
         if (EnrollSection.checkPrerequisite(section, studentID) == false) {
             System.out.println("\ncheckPrerequisite: false");
             return false;
         }
+        if(EnrollSection.isTimeConflict(student, section)){
+            System.out.println("\nisTimeConflict!!!!!!!!!!!");
+            return false;
+        }
         System.out.println("\ncheckPrerequisite: true");
         return true;
     }
-
-    public static void processDrop() throws SQLException {
-        Section section = State.getCurrentSection();
-        int studentID = CurrentUser.getUser().getID();
-
-        if (canDropWithoutW(section, studentID)) {
-            String sql = "DELETE FROM enrollSection WHERE "
-                    + "studentID=" + studentID + " AND "
-                    + "sectionID='" + section.getSectionID() + "' AND "
-                    + "courseDept='" + section.getCourseDept() + "' AND "
-                    + "courseNum='" + section.getCourseNum() + "' AND "
-                    + "termID='" + section.getTermID() + "' ";
-            //DatabaseConnector.updateQuery(sql);
-            System.out.println("\nCan!!!!!!!!   " + sql);
-        } else {
-            section.setStatus("W");
-            //section.update();
-            System.out.println("\nWill be add W!!!!!!!!!");
+    
+    public static int processDrop()  {
+        try {
+            Section section = State.getCurrentSection();
+            int studentID = CurrentUser.getUser().getID();
+            EnrollSection es = new EnrollSection();
+            int check = 0;
+            check = es.fetch(studentID, section.getSectionID(), section.getCourseDept(), section.getCourseNum(), section.getTermID());
+            
+            if (check == 1) {
+                if (canDropWithoutW(section, studentID)) {
+                    es.delete();
+                    if (section.getRegistered() > 0) {
+                        section.setRegistered(section.getRegistered() - 1);
+                        section.update();
+                    }
+                } else {
+                    es.setGrade("W");
+                    es.update();
+                    System.out.println("\nWill be add W!!!!!!!!!");
+                }
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
-
+    
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
             return true;
-        } 
+        }
         return false;
     }
 }

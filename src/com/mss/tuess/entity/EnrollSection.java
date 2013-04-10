@@ -108,11 +108,12 @@ public class EnrollSection {
      *
      * @throws SQLException
      */
-    public void fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+    public int fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM enrollSection "
                 + "WHERE studentID = " + studentID
-                + "AND sectionID = " + sectionID + "AND courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND termID = " + termID;
+                + " AND sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
+                + courseNum + "' AND termID = '" + termID+"'";
         rs = DatabaseConnector.returnQuery(sql);
 
         if (rs.next()) {
@@ -122,7 +123,9 @@ public class EnrollSection {
             this.setCourseNum(rs.getString("courseNum"));
             this.setTermID(rs.getString("termID"));
             this.setGrade(rs.getString("grade"));
+            return 1;
         }
+        else return 0;
 
     }
 
@@ -134,10 +137,10 @@ public class EnrollSection {
      */
     public void update() throws SQLException {
         String sql = "UPDATE enrollSection SET "
-                + " grade= ' " + this.getGrade() + "'"
-                + "WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID()
-                + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
-                + ", termID=" + this.getTermID();
+                + " grade= '" + this.getGrade() + "'"
+                + " WHERE studentID=" + this.getStudentID() + " AND sectionID='" + this.getSectionID()
+                + "' AND courseDept='" + this.getCourseDept() + "' AND courseNum='" + this.getCourseNum()
+                + "' AND termID='" + this.getTermID()+"'";
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -158,7 +161,7 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void insert() throws SQLException {
-        String sql = "INSERT INTO student  (studentID, sectionID, courseDept, courseNum, termID, "
+        String sql = "INSERT INTO enrollSection (studentID, sectionID, courseDept, courseNum, termID, "
                 + "grade) values "
                 + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getTermID()
                 + "', '" + this.getGrade()

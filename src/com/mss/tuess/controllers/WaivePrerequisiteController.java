@@ -120,7 +120,7 @@ public class WaivePrerequisiteController implements Initializable {
                         else
                         {
                             enrollToSection(selectedSection,studentToWaive);
-                            errorLabel.setText("Succeed: A confirmation email is sent to student.");        
+                            errorLabel.setText("Succeed: Student "+studentToWaive.getID()+" is enrolled to "+selectedSection.getCourseDept()+" "+selectedSection.getCourseNum());        
                         }    
                     }
                 }
