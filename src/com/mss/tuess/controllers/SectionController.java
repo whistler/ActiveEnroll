@@ -52,15 +52,6 @@ public class SectionController implements Initializable {
     Button dropButton;
     @FXML
     Button enrollButton;
-    
-    private ObservableList<String> preReqItems;
-    private ObservableList<String> coReqItems;
-    
-    public SectionController() {
-        //hardcoded as of now. to be fetched from the db
-        this.preReqItems = FXCollections.observableArrayList("CICS-505", "CICS-520", "CICS-511", "CICS-502");
-        this.coReqItems = FXCollections.observableArrayList("CICS-580 Lecture", "CICS-580 Lab");
-    } 
 
     /**
      * Initializes the controller class.
