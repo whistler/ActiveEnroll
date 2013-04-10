@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 import static java.lang.System.out;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DatabaseConnector {
 
@@ -25,11 +27,8 @@ public class DatabaseConnector {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
             out.println("success conn =" + (conn).toString());
-        } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            out.println("fail...");
-
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

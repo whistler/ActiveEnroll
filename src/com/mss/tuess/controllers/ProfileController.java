@@ -2,6 +2,7 @@ package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,7 +22,6 @@ public class ProfileController implements Initializable {
     @FXML Label programLabel;
     @FXML Label registeredSinceLabel;
     @FXML Label IDLabel;
-    @FXML Label errorLabel;
     @FXML TextField firstName;
     @FXML TextField lastName;
     @FXML TextField email;
@@ -88,7 +88,7 @@ public class ProfileController implements Initializable {
             if (newPassword.getText().equals(confirmPassword.getText())) {
                 user.setPassword(newPassword.getText());
             } else {
-                errorLabel.setText("New password and password confimation do not match");
+                ViewManager.setStatus("New password and password confimation do not match");
                 return;
             }
         }
@@ -101,6 +101,6 @@ public class ProfileController implements Initializable {
         }
 
         user.update();
-        errorLabel.setText("Saved!");
+        ViewManager.setStatus("Saved!");
     }
 }

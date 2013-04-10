@@ -8,16 +8,13 @@ import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
-import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
 import com.mss.tuess.util.State;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -86,10 +83,10 @@ public class SectionController implements Initializable {
                     + section.getInstructor().getLastName();
             instructor.setText(name);
             courseDept.setText(section.getCourseDept());
-            startDate.setText(section.getTerm().getStart().toString());
-            endDate.setText(section.getTerm().getEnd().toString());
-            lastDayToEnroll.setText(section.getTerm().getRegistrationEnd().toString());
-            lastDayToWithdraw.setText(section.getTerm().getDropWithoutW().toString());
+            startDate.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getStart()));
+            endDate.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getEnd()));
+            lastDayToEnroll.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getRegistrationEnd()));
+            lastDayToWithdraw.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getDropWithoutW()));
             
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
