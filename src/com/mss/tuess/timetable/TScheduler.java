@@ -77,7 +77,7 @@ public class TScheduler {
     /**
      * Update Schedule which the user inputs
      */
-    public void update() {
+    public String update() {
 
         {
             try {
@@ -86,6 +86,8 @@ public class TScheduler {
                 int total = registeredSectionClassList.size();
                 int num = 0;
                 System.out.println("\nTotal=" + total);
+                if (total==0)
+                    return "\nYou do not have any courses this term\n";
                 while (num < total) {
                     DataControl dc = new DataControl();
                     dc.setTitle((registeredSectionClassList.get(num).getCourseDept() + registeredSectionClassList.get(num).getCourseNum()).trim());
@@ -106,7 +108,7 @@ public class TScheduler {
             }
 
             ShowFrame sf = new ShowFrame(alData);
-            timeTable=sf.tableContent;
+            return sf.tableContent;
         }
     }
 
