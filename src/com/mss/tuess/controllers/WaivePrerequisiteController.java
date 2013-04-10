@@ -1,10 +1,13 @@
 package com.mss.tuess.controllers;
 
+import com.mss.tuess.entity.EnrollSection;
+import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.Student;
 import com.mss.tuess.entity.Term;
 import com.mss.tuess.entitylist.SectionList;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.State;
-import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,12 +24,12 @@ public class WaivePrerequisiteController implements Initializable {
  @FXML Label errorLabel;
  @FXML TextField studentID;
  @FXML Button waiveButton;
-      
-     private ObservableList<String> coursesToWaiveList = FXCollections.observableArrayList();
+
+ private ObservableList<String> coursesToWaiveList = FXCollections.observableArrayList();
 
  
      /**
-     * Constructor of RegisteredCourseController
+     * Constructor of WaivePrerequisiteController
      *
      * @throws SQLException
      */
@@ -60,15 +63,15 @@ public class WaivePrerequisiteController implements Initializable {
         coursesToWaive.setItems(coursesToWaiveList);
         errorLabel.setText("");
 
+
     } 
     
     
     
     
     /**
-     * Checks if the username and password entered are correct if so sets the 
-     * currently logged in user and displays the dashboard
-     * @param event the button click event that triggered login
+     * Checks if the course and student ID entered are correct and process waive prerequisite
+     * @param event the button click event that triggered waive prerequisite
      * @throws SQLException
      * @throws Exception 
      */
@@ -78,31 +81,79 @@ public class WaivePrerequisiteController implements Initializable {
             errorLabel.setText("Course and student ID are required");
         } 
         else {
-/*
-            String courseInfo = coursesToWaive.getValue().toString();
-            String courseDept=courseInfo.substring(0, 3);
-            String courseNum=courseInfo.substring(4, 6);
-            String sectionID=courseInfo.substring(8,9);
-            
-            Integer loginId = Integer.parseInt(userId.getText());
-            String password = userPassword.getText();
-            User user;
 
-            try{
-                user = User.login(loginId, password, type);
-            } catch(NullPointerException e)
+                String courseInfo = coursesToWaive.getValue().toString();
+                String termID=courseInfo.substring(0,5);
+                String courseDept=courseInfo.substring(6, 10);
+                String courseNum=courseInfo.substring(11, 14);
+                String sectionID=courseInfo.substring(15,16);
+            
+           // System.out.print(termID+":"+courseDept+":"+courseNum+":"+sectionID);
+          
+            
+            int sID=Integer.parseInt(studentID.getText());
+            Student studentToWaive=new Student();
+            studentToWaive.fetch(sID);
+           
+            if(studentToWaive.getID()>0)//student ID exists
             {
-                errorLabel.setText("Username and Password do not match");
-                return;
+                Section selectedSection=new Section();
+                selectedSection=SectionList.get(coursesToWaive.getSelectionModel().getSelectedIndex());
+                
+                if(EnrollSection.isAlreadyRegistered(selectedSection, sID))
+                {
+                            errorLabel.setText("ERROR: The student has already enrolled.");
+                }
+                else
+                {
+                    if(EnrollSection.isFull(selectedSection))
+                    {
+                        errorLabel.setText("ERROS: The selected section is full.");
+                    }
+
+                    else
+                    {
+                        if(EnrollSection.isTimeConflict(studentToWaive, selectedSection))
+                        {
+                                errorLabel.setText("ERROR: The student has time conflict.");            
+                        }
+                        else
+                        {
+                            enrollToSection(selectedSection,studentToWaive);
+                            errorLabel.setText("Succeed: A confirmation email is sent to student.");        
+                        }    
+                    }
+                }
             }
             
-            CurrentUser.setUser(user);
-            ViewManager.changeScene("/com/mss/tuess/views/Dashboard.fxml");
-            * */
+            else
+            {
+                errorLabel.setText("Student ID does not exist.");
+            }
+            
+          
         }
     }
     
-    
-    
+    /**
+     * Helper function to enroll a student waving the prerequisite
+     * @param section the section to enroll a student
+     * @param student the student to be waived prerequisite and get enrolled
+     * @throws SQLException 
+     */
+    private void enrollToSection(Section section, Student student)throws SQLException
+    {
+       
+            String sql = "INSERT INTO enrollSection VALUES ("
+                    + student.getID() + ", '"
+                    + section.getSectionID() + "', '"
+                    + section.getCourseDept() + "', '"
+                    + section.getCourseNum() + "', '"
+                    + section.getTermID()+"', ''"
+                    + ")";
+            DatabaseConnector.updateQuery(sql);
+            
+           
+    }
     
 }
