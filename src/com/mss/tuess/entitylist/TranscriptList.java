@@ -85,7 +85,7 @@ public class TranscriptList {
      * @return ArrayList<Course> Course ArrayList
      */
     public static ArrayList<Transcriptrecord> getAll() {
-        System.out.println(transcriptrecords.get(1).getCourseName());
+//        System.out.println(transcriptrecords.get(1).getCourseName());
         return transcriptrecords;
     }
 
