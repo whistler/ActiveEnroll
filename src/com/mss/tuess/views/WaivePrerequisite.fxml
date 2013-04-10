@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.WaivePrerequisiteController">
+<AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.WaivePrerequisiteController">
   <children>
     <Label layoutX="53.0" layoutY="47.0" prefHeight="43.0" prefWidth="477.0" text="Enter a student ID to add a student to your course and allow him or her to take the course without having prerequisites" wrapText="true" />
     <ComboBox  fx:id="coursesToWaive" layoutX="260.0" layoutY="140.0" prefWidth="167.0" >
