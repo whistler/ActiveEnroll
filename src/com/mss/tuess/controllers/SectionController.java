@@ -107,7 +107,7 @@ public class SectionController implements Initializable {
         es.setCourseDept(section.getCourseDept());
         es.setCourseNum(section.getCourseNum());
         es.setTermID(section.getTermID());
-        es.setGrade(null);
+        es.setGrade("");
         try {
             if (canEnroll(section, studentID)) {
                 es.insert();
