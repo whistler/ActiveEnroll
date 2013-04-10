@@ -23,7 +23,7 @@ public class TimetableController implements Initializable {
 
     @FXML Label termID;
     
-     
+    @FXML Label timeTable;
     
     
     /**
@@ -32,6 +32,8 @@ public class TimetableController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    TScheduler ts=new TScheduler();
-        ts.update();
+        ts.update();            
+                    timeTable.setText(ts.timeTable);
+
     }    
 }

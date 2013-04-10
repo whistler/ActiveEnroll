@@ -22,8 +22,9 @@ import java.io.*;
  * html viewer frame provide save schedule to disk and copy to html source code
  * function
  */
-public class ShowFrame extends JFrame implements WindowListener, ActionListener, ClipboardOwner {
+public class ShowFrame  {
 
+    String tableContent;
     JButton jbSave = new JButton("Save as html file");
     JButton jbCopy = new JButton("Copy html code to Clipboard");
     ArrayList alData = new ArrayList();
@@ -50,16 +51,12 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
      * default constructor
      */
     ShowFrame() {
-        setTitle("SchedulerView");
-        setSize(600, 800);
     }
 
     /**
      * constructor
      */
     ShowFrame(ArrayList alData) {
-        setTitle("SchedulerView");
-        setSize(800, 800);
         setTimeList();
         this.alData = alData;
         dcData = new DataControl[alData.size()];
@@ -68,8 +65,6 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
             dcData[i] = new DataControl((String) alData.get(i));
         }
         start();
-        jbSave.addActionListener(this);
-        jbCopy.addActionListener(this);
     }
 
     /**
@@ -80,7 +75,6 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
         setEndingTime();
 
         output = makeHead() + makeBody(checkMini()) + makeTail();
-        Container con = getContentPane();
 
         JPanel jp1 = new JPanel(new GridLayout(1, 2));
         jp1.add(jbSave);
@@ -92,7 +86,6 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
         JPanel jp3 = new JPanel(new BorderLayout());
         jp3.add("North", jp1);
         jp3.add("Center", jsp);
-        con.add(jp3);
     }
 
     /**
@@ -288,6 +281,8 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
             tempBody += "</table>\n";
         }
 
+        System.out.println("\n\n\n"+tempBody+"\n\n\n");
+        tableContent=tempBody;
         return tempBody;
     }
 
@@ -475,43 +470,7 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
     public void windowDeiconified(WindowEvent e) {
     }
 
-    public void actionPerformed(ActionEvent e) {
-        /**
-         * save schedule to disk
-         */
-        if (e.getSource() == jbSave) {
-            JFileChooser fc = new JFileChooser();
-            fc.addChoosableFileFilter(new HtmlFilter());
-            fc.setAcceptAllFileFilterUsed(false);
-            fc.setDialogTitle("Save");
-            int returnVal = fc.showDialog(ShowFrame.this, "Save");
-
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File myFile = fc.getSelectedFile();
-                try {
-
-                    HtmlFilter df = new HtmlFilter();
-                    if (df.accept(myFile)) {
-                        PrintWriter myWriter = new PrintWriter(new BufferedWriter(new FileWriter(myFile.getAbsolutePath())));
-                        myWriter.write(output);
-                        myWriter.close();
-                    } else {
-                        PrintWriter myWriter = new PrintWriter(new BufferedWriter(new FileWriter(myFile.getAbsolutePath() + ".html")));
-                        myWriter.write(output);
-                        myWriter.close();
-                    }
-                } catch (Exception ee) {
-                }
-            }
-
-        }
-        /**
-         * copy html code to clipboard
-         */
-        if (e.getSource() == jbCopy) {
-            setClipboardContents(output);
-        }
-    }
+   
 
     public void lostOwnership(Clipboard aClipboard, Transferable aContents) {
     }
@@ -519,7 +478,6 @@ public class ShowFrame extends JFrame implements WindowListener, ActionListener,
     public void setClipboardContents(String strClip) {
         StringSelection stringSelection = new StringSelection(strClip);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(stringSelection, this);
         String message = "HTML source code is copied to clipboard\n";
         message += "You can paste and use it";
         JOptionPane.showMessageDialog(null, message, "Notice", JOptionPane.INFORMATION_MESSAGE);
