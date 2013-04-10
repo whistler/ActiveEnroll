@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
+<AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
   <children>
     <Button layoutX="271.0" layoutY="462.0" mnemonicParsing="false" onAction="#update" text="Save" />
     <Label id="IDlabel" fx:id="IDLabel" layoutX="135.0" layoutY="75.0" text="Student ID">

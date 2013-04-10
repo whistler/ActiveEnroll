@@ -11,7 +11,7 @@
 
 <Pane prefHeight="50.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <Label layoutX="368.0" layoutY="13.0" text="TUESS" textFill="GREY">
+    <Label layoutX="368.0" layoutY="13.0" text="TUESS">
       <font>
         <Font name="System Bold" size="20.0" />
       </font>
