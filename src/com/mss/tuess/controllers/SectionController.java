@@ -7,71 +7,68 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
-import com.mss.tuess.util.DatabaseConnector;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SectionController implements Initializable {
     
     @FXML
-    TextField courseCode;
+    private TextField courseCode;
     @FXML
-    TextField courseName;
+    private TextField courseName;
     @FXML
-    TextArea courseInfo;
+    private TextArea courseInfo;
     @FXML
-    TextField courseCredits;
+    private TextField courseCredits;
     @FXML
-    TextField instructor;
+    private TextField instructor;
     @FXML
-    TextField startDate;
+    private TextField startDate;
     @FXML
-    TextField endDate;
+    private TextField endDate;
     @FXML
-    TextField lastDayToEnroll;
+    private TextField lastDayToEnroll;
     @FXML
-    TextField lastDayToWithdraw;
+    private TextField lastDayToWithdraw;
     @FXML
-    private ListView<String> preRequisiteList;
+    private Label prerequisites;
     @FXML
-    private ListView<String> coRequisiteList;
+    private Label corequisites;
     @FXML
-    Button dropButton;
+    private Button dropButton;
     @FXML
-    Button enrollButton;
+    private Button enrollButton;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        ObservableList<String> preReqItems;
-        ObservableList<String> coReqItems;
-        preReqItems = FXCollections.observableArrayList("CICS-505","CICS-520","CICS-511","CICS-502");
-        coReqItems = FXCollections.observableArrayList("CICS-580 Lecture","CICS-580 Lab");
-        
-        
+                
         Section section = State.getCurrentSection();
-        System.out.println(section.getCourseNum());
+        
         if (section != null) {
+            
+            Course course = new Course();
+            course.setCourseDept(section.getCourseDept());
+            course.setCourseNum(section.getCourseNum());
+            String prereqs = Prerequisite.getPrerequisitesString(Prerequisite.prerequisitesForCourse(course));
             //set prerequisities
-            preRequisiteList.setItems(preReqItems);
+            prerequisites.setText(prereqs);
             //set corequisites
-            coRequisiteList.setItems(coReqItems);
+            corequisites.setText(prereqs);
             //set course fields
             courseCode.setText(section.getCourse().getCourseNum() + " " 
                     + section.getCourse().getCourseDept());

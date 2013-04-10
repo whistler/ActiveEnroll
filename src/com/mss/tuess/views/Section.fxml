@@ -52,17 +52,9 @@
     <Label layoutX="108.0" layoutY="23.0" prefHeight="20.0" prefWidth="76.0" text="Course" />
     <Button fx:id="enrollButton" layoutX="271.0" layoutY="494.0" mnemonicParsing="false" onAction="#processEnroll" text="Enroll" textFill="#00993d" />
     <Button fx:id="dropButton" layoutX="273.0" layoutY="494.0" mnemonicParsing="false" onAction="#processDrop" text="Drop" textFill="#cc0000" />
-    <AnchorPane layoutX="109.0" layoutY="239.0" prefHeight="94.0" prefWidth="126.0">
-      <children>
-        <Label font="$x1" layoutY="6.0" text="Corequisites" />
-        <ListView fx:id="coRequisiteList" layoutY="30.0" prefHeight="64.0" prefWidth="127.0" />
-      </children>
-    </AnchorPane>
-    <AnchorPane layoutX="366.0" layoutY="251.0" prefHeight="94.0" prefWidth="127.0">
-      <children>
-        <Label font="$x1" layoutY="-2.0" text="Prerequisites" />
-        <ListView fx:id="preRequisiteList" layoutY="22.0" prefHeight="64.0" prefWidth="127.0" />
-      </children>
-    </AnchorPane>
+    <Label font="$x1" layoutX="108.0" layoutY="301.0" text="Corequisites" />
+    <Label font="$x1" layoutX="109.0" layoutY="271.0" text="Prerequisites" />
+    <Label fx:id="prerequisites" layoutX="235.0" layoutY="270.0" text="(List of prerequisites)" />
+    <Label fx:id="corequisites" layoutX="236.0" layoutY="300.0" text="(List of corequisites)" />
   </children>
 </AnchorPane>

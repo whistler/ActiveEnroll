@@ -3,6 +3,9 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Prerequisite {
 
@@ -11,20 +14,18 @@ public class Prerequisite {
     private String prereqDept;
     private String prereqNum;
     private int prereqGroup;
-    
+
     /**
      * @return prereqGroup
      */
-    public int getPrereqGroup()
-    {
+    public int getPrereqGroup() {
         return prereqGroup;
     }
-    
+
     /**
      * @param prereqGroup to set
      */
-    public void setPrereqGroup(int prereqGroup)
-    {
+    public void setPrereqGroup(int prereqGroup) {
         this.prereqGroup = prereqGroup;
     }
 
@@ -84,14 +85,13 @@ public class Prerequisite {
         this.prereqNum = prereqNum;
     }
 
-       /**
+    /**
      * Loads the Student by the studentID from the database and encapsulates
      * into this Student objects
      *
      * @throws SQLException
      */
-    
-    public void fetch(String courseDept, String courseNum,String prereqNum, String prereqDept) throws SQLException {
+    public void fetch(String courseDept, String courseNum, String prereqNum, String prereqDept) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM prerequisite "
                 + "WHERE  courseDept = " + courseDept + "AND courseNum = " + courseNum + "AND prereqNum = " + prereqNum + "AND prereqDept = " + prereqDept;
@@ -106,16 +106,13 @@ public class Prerequisite {
 
     }
 
-
-
     /**
      * Delete this Prerequisite record in the database.
      *
      * @throws SQLException
      */
-   
     public void delete() throws SQLException {
-        String sql = "DELETE FROM prerequisite WHERE courseDept=" + this.getCourseDept()+ ", courseNum=" + this.getCourseNum()+ ", prereqDept=" + this.getPrereqDept()+ ", prereqNum=" + this.getPrereqNum();
+        String sql = "DELETE FROM prerequisite WHERE courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum() + ", prereqDept=" + this.getPrereqDept() + ", prereqNum=" + this.getPrereqNum();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -124,16 +121,66 @@ public class Prerequisite {
      *
      * @throws SQLException
      */
-    
     public void insert() throws SQLException {
         String sql = "INSERT INTO prereqisite  (courseDept, courseNum, prereqDept,"
-                + " prereqNum, prereqGroup) values (" 
-                + this.getCourseDept() + ", '" 
+                + " prereqNum, prereqGroup) values ("
+                + this.getCourseDept() + ", '"
                 + this.getCourseNum() + "', '"
-                + this.getPrereqDept() + "', '" 
-                + this.getPrereqNum() + "', " 
+                + this.getPrereqDept() + "', '"
+                + this.getPrereqNum() + "', "
                 + this.getPrereqGroup() + ")";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
+    }
+
+    /**
+     * @param course to find prerequisites for
+     * @return ArrayList of prerequisites for the course ordered by group
+     */
+    public static ArrayList<Prerequisite> prerequisitesForCourse(Course course) {
+        ArrayList<Prerequisite> prerequisites = new ArrayList();
+        ResultSet rs;
+        String sql = "SELECT * FROM prerequisite "
+                + "WHERE  courseDept = '" + course.getCourseDept() + "' "
+                + "AND courseNum = '" + course.getCourseNum() + "' "
+                + "ORDER BY prereqGroup";
+        try {
+            rs = DatabaseConnector.returnQuery(sql);
+            while (rs.next()) {
+                Prerequisite prereq = new Prerequisite();
+                prereq.setCourseDept(rs.getString("courseDept"));
+                prereq.setCourseNum(rs.getString("courseNum"));
+                prereq.setPrereqNum(rs.getString("prereqNum"));
+                prereq.setPrereqDept(rs.getString("prereqDept"));
+                prereq.setPrereqGroup(rs.getInt("prereqGroup"));
+                prerequisites.add(prereq);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Prerequisite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return prerequisites;
+    }
+    
+    /**
+     * 
+     * @param prereqs
+     * @return 
+     */
+    public static String getPrerequisitesString(ArrayList<Prerequisite> prereqs)
+    {
+        if (prereqs.size()==0) return "none";
+        String str = "(";
+        int size = prereqs.size();
+        for(int i=0;i<size;i++)
+        {
+            String concat;
+            if (i==size-1) concat = ")";
+            else {
+                if(prereqs.get(i+1).getPrereqGroup() == prereqs.get(i).getPrereqGroup()) concat = " OR ";
+                else concat = ") AND (";
+            }
+            str = str + prereqs.get(i).getCourseDept() + " " + prereqs.get(i).getCourseNum() + concat;
+        }
+        return str;
     }
 }
