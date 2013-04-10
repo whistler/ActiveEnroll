@@ -12,11 +12,7 @@ package com.mss.tuess.timetable;
  * TScheduler v0.2
  */
 import com.mss.tuess.util.State;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
-import java.awt.datatransfer.*;
 import java.io.*;
 
 /**
@@ -26,8 +22,6 @@ import java.io.*;
 public class ShowFrame {
 
     String tableContent;
-    JButton jbSave = new JButton("Save as html file");
-    JButton jbCopy = new JButton("Copy html code to Clipboard");
     ArrayList alData = new ArrayList();
     String strMini1Sechedule = new String();
     String strMini2Sechedule = new String();
@@ -77,16 +71,7 @@ public class ShowFrame {
 
         output = makeHead() + makeBody(checkMini()) + makeTail();
 
-        JPanel jp1 = new JPanel(new GridLayout(1, 2));
-        jp1.add(jbSave);
-        jp1.add(jbCopy);
-
-        JEditorPane jep = new JEditorPane("text/html", output);
-        JScrollPane jsp = new JScrollPane(jep);
-
-        JPanel jp3 = new JPanel(new BorderLayout());
-        jp3.add("North", jp1);
-        jp3.add("Center", jsp);
+   
     }
 
     /**
@@ -449,40 +434,6 @@ public class ShowFrame {
             }
         }
     }
-
-    public void windowClosed(WindowEvent e) {
-    }
-
-    public void windowOpened(WindowEvent e) {
-    }
-
-    public void windowClosing(WindowEvent e) {
-        System.exit(0);
-    }
-
-    public void windowActivated(WindowEvent e) {
-    }
-
-    public void windowDeactivated(WindowEvent e) {
-    }
-
-    public void windowIconified(WindowEvent e) {
-    }
-
-    public void windowDeiconified(WindowEvent e) {
-    }
-
-    public void lostOwnership(Clipboard aClipboard, Transferable aContents) {
-    }
-
-    public void setClipboardContents(String strClip) {
-        StringSelection stringSelection = new StringSelection(strClip);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String message = "HTML source code is copied to clipboard\n";
-        message += "You can paste and use it";
-        JOptionPane.showMessageDialog(null, message, "Notice", JOptionPane.INFORMATION_MESSAGE);
-    }
-
     public String getClipboardContents() {
         return "";
     }
