@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
+<AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailGradesController">
   <children>
     <Label fx:id="mailGradesStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="257.0" prefWidth="223.0" textFill="#00993d">
       <font>

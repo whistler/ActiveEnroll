@@ -21,19 +21,19 @@ public class LoginController implements Initializable {
     @FXML TextField userId;
     @FXML PasswordField userPassword;
     @FXML Button login;
-    @FXML Label errorLabel;
+    @FXML Label statusLabel;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        errorLabel.setText("");
+        statusLabel.setText("");
     }
 
     /**
      * Checks if the username and password entered are correct if so sets the 
-     * currently logged in user and displays the dashboard
+     * currently logged in user and displays the view
      * @param event the button click event that triggered login
      * @throws SQLException
      * @throws Exception 
@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
     public void processLogin(ActionEvent event) throws SQLException, Exception {
 
         if (userId.getText().isEmpty() || userPassword.getText().isEmpty()) {
-            errorLabel.setText("Username and password are required");
+            ViewManager.setStatus("Username and password are required");
         } else {
 
             String type = (String) userType.getValue();
@@ -49,16 +49,16 @@ public class LoginController implements Initializable {
             String password = userPassword.getText();
             User user;
 
-            try{
-                user = User.login(loginId, password, type);
-            } catch(NullPointerException e)
+            user = User.login(loginId, password, type);
+            if (user == null)
             {
-                errorLabel.setText("Username and Password do not match");
+                ViewManager.setStatus("Username and Password do not match");
                 return;
             }
-            
+
             CurrentUser.setUser(user);
-            ViewManager.changeScene("/com/mss/tuess/views/Dashboard.fxml");
+            ViewManager.changeScene("/com/mss/tuess/views/Layout.fxml");
+            ViewManager.setStatus("Successfully logged in!");
         }
     }
 }

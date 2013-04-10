@@ -6,6 +6,6 @@
 
 }
 
-#sidebar, #header {
+#sidebar, #header, #footer {
     -fx-background-color: #c6dbdb;
 }
