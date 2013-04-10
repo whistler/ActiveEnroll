@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 /**
  * FXML Controller class
  */
-public class DashboardController implements Initializable {
+public class LayoutController implements Initializable {
     
     @FXML Pane sidebar;
     /**
