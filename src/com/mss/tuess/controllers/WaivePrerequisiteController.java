@@ -100,7 +100,7 @@ public class WaivePrerequisiteController implements Initializable {
                 Section selectedSection=new Section();
                 selectedSection=SectionList.get(coursesToWaive.getSelectionModel().getSelectedIndex());
                 
-                if(EnrollSection.isAlreadyRegistered(selectedSection, sID))
+                if(EnrollSection.isEnrolled(studentToWaive,selectedSection))
                 {
                             errorLabel.setText("ERROR: The student has already enrolled.");
                 }
