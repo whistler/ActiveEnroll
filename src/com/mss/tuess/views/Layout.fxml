@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.DashboardController">
+<BorderPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.LayoutController">
   <bottom>
     <Pane fx:id="footer" prefHeight="25.0" prefWidth="600.0">
       <Label fx:id="statusLabel" id="statusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="5.0" prefWidth="600.0" text="">
