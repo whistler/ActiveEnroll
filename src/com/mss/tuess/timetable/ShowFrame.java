@@ -11,6 +11,7 @@ package com.mss.tuess.timetable;
 /**
  * TScheduler v0.2
  */
+import com.mss.tuess.util.State;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,7 +23,7 @@ import java.io.*;
  * html viewer frame provide save schedule to disk and copy to html source code
  * function
  */
-public class ShowFrame  {
+public class ShowFrame {
 
     String tableContent;
     JButton jbSave = new JButton("Save as html file");
@@ -104,7 +105,8 @@ public class ShowFrame  {
                 }
             }
         }
-        col = mDay;
+        //col = mDay;
+        col = 4;
         return tempHead;
     }
 
@@ -247,7 +249,7 @@ public class ShowFrame  {
             tempBody += "</table>\n";
         } else {
             makeTableBody(miniFlag);
-            tempBody += "<h2>Full Semester</h2>\n";
+            tempBody += "<CENTER><h2>Semester " + State.getCurrentTerm().getTermID() + "</h2></CENTER>\n";
             tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
             tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
             tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
@@ -281,8 +283,8 @@ public class ShowFrame  {
             tempBody += "</table>\n";
         }
 
-        System.out.println("\n\n\n"+tempBody+"\n\n\n");
-        tableContent=tempBody;
+        System.out.println("\n\n\n" + tempBody + "\n\n\n");
+        tableContent = tempBody;
         return tempBody;
     }
 
@@ -469,8 +471,6 @@ public class ShowFrame  {
 
     public void windowDeiconified(WindowEvent e) {
     }
-
-   
 
     public void lostOwnership(Clipboard aClipboard, Transferable aContents) {
     }
