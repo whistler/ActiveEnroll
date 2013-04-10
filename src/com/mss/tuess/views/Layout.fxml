@@ -10,17 +10,24 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.DashboardController">
+  <bottom>
+    <Pane fx:id="footer" prefHeight="25.0" prefWidth="600.0">
+      <Label fx:id="statusLabel" id="statusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="5.0" prefWidth="600.0" text="">
+        <font>
+          <Font name="System Bold Italic" size="13.0" />
+        </font>
+      </Label>
+    </Pane>
+  </bottom>
   <center>
     <!-- start of content -->
-    <Pane fx:id="content" minWidth="600.0" prefHeight="550.0" prefWidth="600.0">
-      <Label text="You are logged in. Please select one of the options on the left.">
-      </Label>
+    <Pane fx:id="content" prefHeight="550.0" prefWidth="600.0">
+      <Label alignment="CENTER" layoutY="267.0" prefWidth="600.0" text="You are logged in. Please select one of the options on the left." />
     </Pane>
     <!-- end of content -->
   </center>
   <left>
-    <Pane fx:id="sidebar">
-    </Pane>
+    <Pane fx:id="sidebar" />
   </left>
   <stylesheets>
     <URL value="@style.css" />
