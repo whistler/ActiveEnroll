@@ -59,6 +59,7 @@ public class LoginController implements Initializable {
             CurrentUser.setUser(user);
             ViewManager.changeScene("/com/mss/tuess/views/Layout.fxml");
             ViewManager.setStatus("Successfully logged in!");
+            ViewManager.setUser(user);
         }
     }
 }
