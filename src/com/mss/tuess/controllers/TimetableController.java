@@ -35,9 +35,7 @@ public class TimetableController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TScheduler ts = new TScheduler();
-        ts.update();
         WebEngine engine = timeTable.getEngine();
-        engine.loadContent(ts.timeTable);
-
+        engine.loadContent(ts.update());
     }
 }
