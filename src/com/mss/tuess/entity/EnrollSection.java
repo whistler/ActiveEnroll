@@ -108,7 +108,7 @@ public class EnrollSection {
      *
      * @throws SQLException
      */
-    public void fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+    public int fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM enrollSection "
                 + "WHERE studentID = " + studentID
@@ -122,7 +122,9 @@ public class EnrollSection {
             this.setCourseNum(rs.getString("courseNum"));
             this.setTermID(rs.getString("termID"));
             this.setGrade(rs.getString("grade"));
+            return 1;
         }
+        else return 0;
 
     }
 

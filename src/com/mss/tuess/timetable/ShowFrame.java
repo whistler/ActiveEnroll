@@ -268,7 +268,6 @@ public class ShowFrame {
             tempBody += "</table>\n";
         }
 
-        System.out.println("\n\n\n" + tempBody + "\n\n\n");
         tableContent = tempBody;
         return tempBody;
     }
