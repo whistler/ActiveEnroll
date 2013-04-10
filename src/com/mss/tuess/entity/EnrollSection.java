@@ -101,7 +101,7 @@ public class EnrollSection {
     public void setTermID(String termID) {
         this.termID = termID;
     }
-    
+
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
@@ -135,8 +135,8 @@ public class EnrollSection {
     public void update() throws SQLException {
         String sql = "UPDATE enrollSection SET "
                 + " grade= ' " + this.getGrade() + "'"
-                + "WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID() + 
-                ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
+                + "WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID()
+                + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
                 + ", termID=" + this.getTermID();
         DatabaseConnector.updateQuery(sql);
     }
@@ -148,7 +148,7 @@ public class EnrollSection {
      */
     public void delete() throws SQLException {
         String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
-                 + ", term=" + this.getTermID();
+                + ", term=" + this.getTermID();
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -160,28 +160,30 @@ public class EnrollSection {
     public void insert() throws SQLException {
         String sql = "INSERT INTO student  (studentID, sectionID, courseDept, courseNum, termID, "
                 + "grade) values "
-                + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '"  + this.getTermID()
+                + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getTermID()
                 + "', '" + this.getGrade()
                 + "')";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
- /**
+
+    /**
      * Insert this EnrollSection into the database.
      *
      * @throws SQLException
      */
     public void insertBySecStu(Section section, int studentID) throws SQLException {
         String sql = "INSERT INTO enrollSection VALUES ("
-                    + studentID + ", '"
-                    + section.getSectionID() + "', '"
-                    + section.getCourseDept() + "', '"
-                    + section.getCourseNum() + "', '"
-                    + section.getTermID()+"', ''"
-                    + ")";
-            DatabaseConnector.updateQuery(sql);
-            System.out.println("\nCan!!!!!!!!   " + sql);
+                + studentID + ", '"
+                + section.getSectionID() + "', '"
+                + section.getCourseDept() + "', '"
+                + section.getCourseNum() + "', '"
+                + section.getTermID() + "', ''"
+                + ")";
+        DatabaseConnector.updateQuery(sql);
+        System.out.println("\nCan!!!!!!!!   " + sql);
     }
+
     /**
      * Checks whether the student is enrolled in the section or not
      *
@@ -211,6 +213,12 @@ public class EnrollSection {
         }
     }
 
+    /**
+     * Get all sections which are enrolled by the student
+     *
+     * @param studentID is the studentID of the current student
+     * @return rs the ResultSet of prerequisite information
+     */
     public static ResultSet fetchEnrolledCourses(int studentID) throws SQLException {
         ResultSet rs;
         String sql = "select * from enrollSection where studentID=" + studentID;
@@ -218,25 +226,43 @@ public class EnrollSection {
         return rs;
     }
 
-    public static ResultSet fetchPrereqCourses(Section section) throws SQLException {
+    /**
+     * Get all prerequisite courses for the section
+     *
+     * @param section is the section student wants to enroll in
+     * @return rs the ResultSet of prerequisite information
+     */
+    public static ResultSet fetchPrereqCourses(Section section) {
         //CurrentUser.getUser().getID();
-        ResultSet rs;
+        ResultSet rs = null;
         String sql = "select * from prerequisite where courseNum='"
                 + section.getCourseNum() + "' and courseDept='" + section.getCourseDept() + "'"
                 + "ORDER by prereqGroup";
-        rs = DatabaseConnector.returnQuery(sql);
+        try {
+            rs = DatabaseConnector.returnQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollSection.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return rs;
     }
 
+    /**
+     * Determines whether the section is in a section set
+     *
+     * @param rs_enrolled the ResultSet contains the sections information
+     * @param courseDept the course department of the section
+     * @param courseNum the course number of the section
+     * @return true if in the set; false if not
+     */
     public static boolean isInSet(ResultSet rs_enrolled, String courseDept, String courseNum) throws SQLException {
         rs_enrolled.beforeFirst();
         while (rs_enrolled.next()) {
             if (courseDept.compareTo(rs_enrolled.getString("courseDept")) == 0
                     && courseNum.compareTo(rs_enrolled.getString("courseNum")) == 0
-                    && (rs_enrolled.getString("grade").compareTo("A")==0
-                    || rs_enrolled.getString("grade").compareTo("B")==0
-                    || rs_enrolled.getString("grade").compareTo("C")==0
-                    || rs_enrolled.getString("grade").compareTo("D")==0)) {
+                    && (rs_enrolled.getString("grade").compareTo("A") == 0
+                    || rs_enrolled.getString("grade").compareTo("B") == 0
+                    || rs_enrolled.getString("grade").compareTo("C") == 0
+                    || rs_enrolled.getString("grade").compareTo("D") == 0)) {
                 System.out.println(courseDept + courseNum + "___is IN");
                 return true;
             }
@@ -245,6 +271,14 @@ public class EnrollSection {
         return false;
     }
 
+    /**
+     * Determines whether the student has met the prerequisites of the section
+     *
+     * @param section is the section student wants to enroll in
+     * @param studentID the current student's studentID
+     * @return true if the student has met the prerequisites of the section;
+     * false if not
+     */
     public static boolean checkPrerequisite(Section section, int studentID) throws SQLException {
 //        ResultSet rs;
 //        String sql = " SELECT prereqDept, prereqNum FROM prerequisite pr"
@@ -264,7 +298,7 @@ public class EnrollSection {
         rs_pre.last();
         int rowCount = rs_pre.getRow();
         rs_pre.beforeFirst();
-        if (rowCount==0) {
+        if (rowCount == 0) {
             System.out.println("No prerequisite!!!!...!!!!");
             return true;
         }
@@ -308,6 +342,14 @@ public class EnrollSection {
         }
     }
 
+    /**
+     * Determines whether the section is already been enrolled by the student
+     *
+     * @param section is the section student wants to enroll in
+     * @param studentID the current student's studentID
+     * @return true if the section is already been enrolled by the student;
+     * false if not
+     */
     public static boolean isAlreadyRegistered(Section section, int studentID) throws SQLException {
 
         ResultSet rs_stu_reg = fetchEnrolledCourses(CurrentUser.getUser().getID());
@@ -323,6 +365,12 @@ public class EnrollSection {
         return false;
     }
 
+    /**
+     * Determines whether the registration date is passed
+     *
+     * @param section is the section student wants to enroll in
+     * @return true if the registration date is not passed; false if is passed
+     */
     public static boolean registrationEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -335,6 +383,13 @@ public class EnrollSection {
             return false;
         }
     }
+
+    /**
+     * Determines whether the withdraw date is passed
+     *
+     * @param section is the section student wants to enroll in
+     * @return true if the withdraw date is not passed; false if is passed
+     */
     public static boolean withdrawEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -347,7 +402,13 @@ public class EnrollSection {
             return false;
         }
     }
-    
+
+    /**
+     * Determines whether the section is FULL
+     *
+     * @param section is the section student wants to enroll in
+     * @return true if the section is already full; false if it is not full
+     */
     public static boolean isFull(Section section) {
         if (section.getStatus().compareTo("full") == 0) {
             System.out.println("\nisFull returns: true");
@@ -357,45 +418,45 @@ public class EnrollSection {
             return false;
         }
     }
-    
+
     /**
      * Determines whether enrolling a student in a new course section would have
      * a time conflict with already enrolled courses
+     *
      * @param student is the student to enroll in the new section
      * @param newSection is the section student wants to enroll in
      * @return whether there is a time conflict or not
      */
-    public static boolean isTimeConflict(Student student, Section newSection)
-    {
+    public static boolean isTimeConflict(Student student, Section newSection) {
         try {
             ResultSet rs;
-            String sql = "SELECT * FROM \n" +
-            "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
+            String sql = "SELECT * FROM \n"
+                    + "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
                     + "sectionID='" + newSection.getSectionID() + "' AND "
                     + "courseDept='" + newSection.getCourseDept() + "' AND "
                     + "courseNum='" + newSection.getCourseNum() + "' AND "
-                    + "termID='" + newSection.getTermID() + "'\n" +
-            "	UNION ALL\n" +
-            "	SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
+                    + "termID='" + newSection.getTermID() + "'\n"
+                    + "	UNION ALL\n"
+                    + "	SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
                     + "FROM sectionClass sc, enrollSection es "
                     + "WHERE es.termID='" + newSection.getTermID() + "' AND "
-                    + "es.studentID=" + student.getID() + ") AS T1 \n" +
-            "INNER JOIN \n" +
-            "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
+                    + "es.studentID=" + student.getID() + ") AS T1 \n"
+                    + "INNER JOIN \n"
+                    + "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
                     + "sectionID='" + newSection.getSectionID() + "' AND "
                     + "courseDept='" + newSection.getCourseDept() + "' AND "
                     + "courseNum='" + newSection.getCourseNum() + "' AND "
-                    + "termID='" + newSection.getTermID() + "'\n" +
-            "   UNION ALL\n" +
-            "   SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
+                    + "termID='" + newSection.getTermID() + "'\n"
+                    + "   UNION ALL\n"
+                    + "   SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
                     + "FROM sectionClass sc, enrollSection es "
                     + "WHERE es.termID='" + newSection.getTermID() + "' AND "
-                    + "es.studentID=" + student.getID() + ") AS T2 \n" +
-            "WHERE T1.day = T2.day AND\n" +
-            "	T1.startTime <= T2.endTime AND\n" +
-            "	T1.endTime >= T2.endTime AND\n" +
-            "	NOT (T1.courseDept = T2.courseDept AND T1.courseNum = T2.courseNum);\n" +
-            "	";
+                    + "es.studentID=" + student.getID() + ") AS T2 \n"
+                    + "WHERE T1.day = T2.day AND\n"
+                    + "	T1.startTime <= T2.endTime AND\n"
+                    + "	T1.endTime >= T2.endTime AND\n"
+                    + "	NOT (T1.courseDept = T2.courseDept AND T1.courseNum = T2.courseNum);\n"
+                    + "	";
             rs = DatabaseConnector.returnQuery(sql);
 
             if (rs.next()) {
@@ -407,6 +468,4 @@ public class EnrollSection {
         }
         return true;
     }
-
-    
 }

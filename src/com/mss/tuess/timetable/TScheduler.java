@@ -31,6 +31,7 @@ import java.util.logging.Logger;
  */
 public class TScheduler extends JFrame {
 
+    public String timeTable;
     Container con = this.getContentPane();
     JList jlShow = new JList();
     JPanel jpEdit = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
@@ -291,7 +292,7 @@ public class TScheduler extends JFrame {
             }
 
             ShowFrame sf = new ShowFrame(alData);
-            sf.setVisible(true);
+            timeTable=sf.tableContent;
         }
     }
 
