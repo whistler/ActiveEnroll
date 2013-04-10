@@ -10,6 +10,23 @@ public class Prerequisite {
     private String courseNum;
     private String prereqDept;
     private String prereqNum;
+    private int prereqGroup;
+    
+    /**
+     * @return prereqGroup
+     */
+    public int getPrereqGroup()
+    {
+        return prereqGroup;
+    }
+    
+    /**
+     * @param prereqGroup to set
+     */
+    public void setPrereqGroup(int prereqGroup)
+    {
+        this.prereqGroup = prereqGroup;
+    }
 
     /**
      * @return the courseDept
@@ -84,6 +101,7 @@ public class Prerequisite {
             this.setCourseNum(rs.getString("courseNum"));
             this.setPrereqNum(rs.getString("prereqNum"));
             this.setPrereqDept(rs.getString("prereqDept"));
+            this.setPrereqGroup(rs.getInt("prereqGroup"));
         }
 
     }
@@ -108,9 +126,13 @@ public class Prerequisite {
      */
     
     public void insert() throws SQLException {
-        String sql = "INSERT INTO prereqisite  (courseDept, courseNum, prereqDept, prereqNum) values "
-                + "(" + this.getCourseDept() + ", '" + this.getCourseNum() + "', '" + this.getPrereqDept() + "', '" + this.getPrereqNum() 
-                + "')";
+        String sql = "INSERT INTO prereqisite  (courseDept, courseNum, prereqDept,"
+                + " prereqNum, prereqGroup) values (" 
+                + this.getCourseDept() + ", '" 
+                + this.getCourseNum() + "', '"
+                + this.getPrereqDept() + "', '" 
+                + this.getPrereqNum() + "', " 
+                + this.getPrereqGroup() + ")";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
