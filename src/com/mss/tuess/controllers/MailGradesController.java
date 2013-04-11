@@ -2,7 +2,6 @@ package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.entity.Transcriptrecord;
-import com.mss.tuess.entitylist.StudentList;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.SendEmail;
@@ -48,7 +47,7 @@ public class MailGradesController implements Initializable {
         int studentnumber=0;
         ResultSet mailrs;
 
-        mailrs = StudentList.fetchCurrentTerm();
+        mailrs = Student.fetchCurrentTerm();
 
         System.out.println("intomailfuntion");
 

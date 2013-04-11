@@ -6,11 +6,10 @@ package com.mss.tuess.controllers;
 
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
-import com.mss.tuess.entity.Section;
+import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.SectionClass;
 import com.mss.tuess.util.State;
 import com.mss.tuess.util.ViewManager;
-import com.mss.tuess.entitylist.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -107,11 +106,11 @@ public class SearchCoursesController implements Initializable {
         
         //if flag is search all courses
         if(State.getCurrentSearchView().equalsIgnoreCase("AllCourses")){
-            CourseList.fetch();
-            courseSize = CourseList.getAll().size();
+            Course.fetch();
+            courseSize = Course.getAll().size();
             
             if(courseSize > 0){
-                courseTableContent.addAll(CourseList.getAll());
+                courseTableContent.addAll(Course.getAll());
             }
             courseFilterContent.addAll(courseTableContent);
         }   
@@ -295,10 +294,10 @@ public class SearchCoursesController implements Initializable {
                             String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
                             String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
                             String currentTerm = State.getCurrentTerm().getTermID();
-                            SearchSectionClassList.fetch(courseDept, courseNum, currentTerm);
+                            SectionClass.fetch(courseDept, courseNum, currentTerm);
                             
                             sectionClassTableContent.clear();
-                            sectionClassTableContent.addAll(SearchSectionClassList.getAll());
+                            sectionClassTableContent.addAll(SectionClass.getAll());
                             sectionClassFilterContent.clear();
                             sectionClassFilterContent.addAll(sectionClassTableContent);
                         } catch (Exception ex) {
@@ -359,11 +358,11 @@ public class SearchCoursesController implements Initializable {
                 courseTableContent.clear();
                 sectionClassTableContent.clear();
 
-                CourseList.fetch(searchSQL);
-                int courseSize = CourseList.getAll().size();
+                Course.fetch(searchSQL);
+                int courseSize = Course.getAll().size();
 
                 if(courseSize > 0){
-                    courseTableContent.addAll(CourseList.getAll());    
+                    courseTableContent.addAll(Course.getAll());    
                 }
                 
                 courseFilterContent.clear();
