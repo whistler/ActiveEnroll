@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Transcriptrecord;
 import com.mss.tuess.util.ViewManager;
-import com.mss.tuess.entitylist.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -44,12 +43,12 @@ public class TranscriptController implements Initializable {
      */
     public TranscriptController() throws SQLException {
         tableContent.clear();
-        TranscriptList.fetch();
-        int transcriptSize = TranscriptList.getAll().size();
+        Transcriptrecord.fetch();
+        int transcriptSize = Transcriptrecord.getAll().size();
         int courseCounter = 0;
         tableContent.clear();
         if (transcriptSize > 0) {
-            tableContent.addAll(TranscriptList.getAll());
+            tableContent.addAll(Transcriptrecord.getAll());
         }
         /**while (transcriptSize - 1 != courseCounter) {
             tableContent.add(TranscriptList.get(courseCounter));
@@ -106,15 +105,15 @@ public class TranscriptController implements Initializable {
         termID.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("termID"));
         credit.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, Integer>("credit"));
         grade.setCellValueFactory(new PropertyValueFactory<Transcriptrecord, String>("grade"));
-        totalCredit.setText(Integer.toString(TranscriptList.getAddCredit()));
+        totalCredit.setText(Integer.toString(Transcriptrecord.getAddCredit()));
         
-        if(TranscriptList.getAddCredit()==0)
+        if(Transcriptrecord.getAddCredit()==0)
         {
             GPA.setText("0");
         }
         else
         {
-           GPA.setText(Double.toString(TranscriptList.getAddCreditMultipleGrade()/TranscriptList.getAddCredit()));
+           GPA.setText(Double.toString(Transcriptrecord.getAddCreditMultipleGrade()/Transcriptrecord.getAddCredit()));
         }
         
         transcriptTable.setItems(filterContent);
