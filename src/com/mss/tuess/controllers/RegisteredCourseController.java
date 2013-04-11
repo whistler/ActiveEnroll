@@ -3,7 +3,6 @@ package com.mss.tuess.controllers;
 
 import com.mss.tuess.util.*;
 import com.mss.tuess.entity.*;
-import com.mss.tuess.entitylist.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -37,12 +36,12 @@ public class RegisteredCourseController implements Initializable
     public RegisteredCourseController() throws SQLException
     {
         tableContent.clear();
-        RegisteredCoursesList.fetch();
-        int registeredCoursesSize = RegisteredCoursesList.getAll().size();
+        RegisteredCourse.fetch();
+        int registeredCoursesSize = RegisteredCourse.getAll().size();
         tableContent.clear();
         
         if(registeredCoursesSize > 0){
-        tableContent.addAll(RegisteredCoursesList.getAll());
+        tableContent.addAll(RegisteredCourse.getAll());
         }
     
     }
@@ -75,7 +74,7 @@ public class RegisteredCourseController implements Initializable
         credit.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, Integer>("credit"));
 
        
-        totalCredits.setText(Integer.toString(RegisteredCoursesList.getTotalCredits()));
+        totalCredits.setText(Integer.toString(RegisteredCourse.getTotalCredits()));
 
         
         registeredCoursesTable.setItems(tableContent);

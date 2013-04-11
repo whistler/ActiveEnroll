@@ -4,9 +4,9 @@
  */
 package com.mss.tuess.controllers;
 
+import com.mss.tuess.entity.Program;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.entity.User;
-import com.mss.tuess.entitylist.ProgramList;
 import com.mss.tuess.util.CurrentUser;
 import java.net.URL;
 import java.sql.SQLException;
@@ -83,13 +83,13 @@ public class AddStudentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            ProgramList.fetch();
+            Program.fetch();
         } catch (SQLException ex) {
             Logger.getLogger(AddStudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ObservableList<String> programs = FXCollections.observableArrayList();
-        for(int i=0;i<ProgramList.size();i++)
-            programs.add(ProgramList.get(i).getProgramID());
+        for(int i=0;i<Program.size();i++)
+            programs.add(Program.get(i).getProgramID());
         program.setItems( programs);
     }    
 

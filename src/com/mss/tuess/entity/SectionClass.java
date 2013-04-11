@@ -4,13 +4,103 @@
  */
 package com.mss.tuess.entity;
 
+import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.DatabaseConnector;
+import com.mss.tuess.util.State;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
  * @author chenliang
  */
 public class SectionClass {
+    private static ArrayList<SectionClass> sectionClassList = new ArrayList();
+    private static ArrayList<SectionClass> registeredSectionClassList = new ArrayList();
+
+    public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
+        String selectSectionClassListByCourse = "SELECT * FROM sectionClass" + " where" + " courseDept = '" + courseDept + "' and courseNum = '" + courseNum + "' and termID = '" + currentTerm + "'";
+        executeFetch(selectSectionClassListByCourse);
+    }
+
+    /**
+     * Loads all Section records from the database in to a list of Section
+     * objects
+     *
+     * @throws SQLException
+     */
+    public static void fetch() throws SQLException {
+        String selectAll = "SELECT * FROM sectionClass";
+        executeFetch(selectAll);
+    }
+
+    /**
+     * Returns the section stored at the given index
+     *
+     * @param index index of the section to return
+     * @return Section object at position index
+     */
+    public static SectionClass get(int index) {
+        return sectionClassList.get(index);
+    }
+
+    private static void executeFetch(String sql) throws SQLException {
+        sectionClassList.clear();
+        ResultSet rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
+            SectionClass sectionClass = new SectionClass();
+            sectionClass.setSectionID(rs.getString("sectionID"));
+            sectionClass.setCourseDept(rs.getString("courseDept"));
+            sectionClass.setCourseNum(rs.getString("courseNum"));
+            sectionClass.setTermID(rs.getString("termID"));
+            sectionClass.setType(rs.getString("type"));
+            sectionClass.setClassID(rs.getString("classID"));
+            sectionClass.setDay(rs.getString("day"));
+            sectionClass.setStartTime(rs.getTimestamp("startTime"));
+            sectionClass.setEndTime(rs.getTimestamp("endTime"));
+            sectionClass.setLocation(rs.getString("location"));
+            sectionClassList.add(sectionClass);
+        }
+    }
+
+    /**
+     * Returns the sections List
+     *
+     * @return ArrayList<Section> sections ArrayList
+     */
+    public static ArrayList<SectionClass> getAll() {
+        return sectionClassList;
+    }
+
+    public static void fetchregisteredSectionClassList() throws SQLException {
+        registeredSectionClassList.clear();
+        int currentID;
+        Term currentTerm = State.getCurrentTerm();
+        currentID = CurrentUser.getUser().getID();
+        ResultSet rs;
+        String sql = "select sc.sectionID,sc.courseDept,sc.courseNum,sc.termID,sc.type,sc.classID,sc.day,sc.startTime," + "sc.endTime, sc.location from sectionClass sc natural join enrollSection es " + "where es.studentID=" + currentID + " and es.termID='" + currentTerm.getTermID() + "'";
+        rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
+            SectionClass registeredSectionClass = new SectionClass();
+            registeredSectionClass.setSectionID(rs.getString("sectionID"));
+            registeredSectionClass.setCourseDept(rs.getString("courseDept"));
+            registeredSectionClass.setCourseNum(rs.getString("courseNum"));
+            registeredSectionClass.setTermID(rs.getString("termID"));
+            registeredSectionClass.setType(rs.getString("type"));
+            registeredSectionClass.setClassID(rs.getString("classID"));
+            registeredSectionClass.setDay(rs.getString("day"));
+            registeredSectionClass.setStartTime(rs.getTimestamp("startTime"));
+            registeredSectionClass.setEndTime(rs.getTimestamp("endTime"));
+            registeredSectionClass.setLocation(rs.getString("location"));
+            registeredSectionClassList.add(registeredSectionClass);
+        }
+    }
+
+    public static ArrayList<SectionClass> getAllregisteredSectionClassList() {
+        return registeredSectionClassList;
+    }
     
     private String sectionID;
     private String courseDept;
