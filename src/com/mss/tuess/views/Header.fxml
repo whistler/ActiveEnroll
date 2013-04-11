@@ -16,6 +16,10 @@
         <Font name="System Bold" size="20.0" />
       </font>
     </Label>
-    <Label fx:id="loggedInUser" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="626.0" layoutY="3.0" prefWidth="160.0" />
+    <Label fx:id="loggedInUser" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="611.0" layoutY="3.0" prefHeight="36.6015625" prefWidth="175.0" textFill="#606060" wrapText="true">
+      <font>
+        <Font name="System Bold" size="12.0" />
+      </font>
+    </Label>
   </children>
 </Pane>

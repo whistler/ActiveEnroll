@@ -100,8 +100,8 @@ public class ViewManager {
         if (user == null) {
             label.setText("");
         } else {
-            label.setText("Logged in as: \n" + user.getFirstName() + " "
-                    + user.getLastName() + "\nID:" + user.getID());
+            label.setText("Welcome " + user.getFirstName()
+                    + user.getLastName() + "\nID : " + user.getID());
         }
     }
 }
