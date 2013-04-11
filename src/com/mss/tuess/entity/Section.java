@@ -3,9 +3,11 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Section {
+    private static ArrayList<Section> sections = new ArrayList();
 
     private String sectionID;
     private String courseDept;
@@ -19,6 +21,80 @@ public class Section {
     private Course course = new Course();
     private Term term = new Term();
     private Instructor instructor = new Instructor();
+
+    public static void fetch(String courseNum) throws SQLException {
+        String selectSectionsByCourse = "SELECT * FROM section where courseNum = " + courseNum;
+        executeFetch(selectSectionsByCourse);
+    }
+public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
+ 
+        
+        String selectSectionClassListByCourse = "SELECT * FROM sectionClass"+
+                                                    " where"+ 
+                                                        " courseDept = '"+courseDept+
+                                                        "' and courseNum = '"+courseNum+
+                                                        "' and termID = '"+currentTerm+
+                                                        "'";
+        
+        executeFetch(selectSectionClassListByCourse);
+    }
+    /**
+     * Loads all Section records from the database in to a list of Section
+     * objects
+     *
+     * @throws SQLException
+     */
+    public static void fetch() throws SQLException {
+        String selectAll = "SELECT * FROM section";
+        executeFetch(selectAll);
+    }
+
+    /**
+     * Fetch section info from the database of one instructor's section
+     * @param instructorID the ID of instructor
+     * @param termID the specific term to query
+     * @throws SQLException
+     */
+    public static void fetchByInstructor(int instructorID, String termID) throws SQLException {
+        String selectSectionByInstructor = "SELECT * FROM section where instructorID= " + instructorID + " and termID='" + termID + "'";
+        executeFetch(selectSectionByInstructor);
+    }
+
+    /**
+     * Returns the section stored at the given index
+     *
+     * @param index index of the section to return
+     * @return Section object at position index
+     */
+    public static Section get(int index) {
+        return sections.get(index);
+    }
+
+    private static void executeFetch(String sql) throws SQLException {
+        sections.clear();
+        ResultSet rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
+            Section section = new Section();
+            section.setSectionID(rs.getString("sectionID"));
+            section.setCourseDept(rs.getString("courseDept"));
+            section.setCourseNum(rs.getString("courseNum"));
+            section.setInstructorID(rs.getInt("instructorID"));
+            section.setTermID(rs.getString("termID"));
+            section.setCapacity(rs.getInt("capacity"));
+            section.setRegistered(rs.getInt("registered"));
+            section.setStatus(rs.getString("status"));
+            sections.add(section);
+        }
+    }
+
+    /**
+     * Returns the sections List
+     *
+     * @return ArrayList<Section> sections ArrayList
+     */
+    public static ArrayList<Section> getAll() {
+        return sections;
+    }
 
     /**
      * @return the sectionID
