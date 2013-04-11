@@ -28,3 +28,7 @@
 #content {
     -fx-background-color: linear-gradient(to bottom , #F1F9F0, #F1F9F0);
 }
+
+ListView, TextField, TableView, ChoiceBox, PasswordField, TextArea {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 7,0.5,0,0 );
+}
