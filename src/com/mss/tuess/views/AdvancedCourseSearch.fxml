@@ -15,12 +15,7 @@
 <AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SearchCoursesController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <Label layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="111.0" text="Course Search:" textFill="GREY">
-      <font>
-        <Font name="System Bold" size="13.0" fx:id="x2" />
-      </font>
-    </Label>
-    <TableView fx:id="courseTable" layoutX="27.0" layoutY="190.0" prefHeight="102.0" prefWidth="498.0" tableMenuButtonVisible="true">
+    <TableView fx:id="courseTable" layoutX="6.0" layoutY="158.0" prefHeight="197.0" prefWidth="587.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
         <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
@@ -29,7 +24,7 @@
         <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
       </columns>
     </TableView>
-    <TextField id="filterText" fx:id="courseFilter" layoutX="190.0" layoutY="155.0" prefWidth="99.0" promptText="type filter text">
+    <TextField id="filterText" fx:id="courseFilter" layoutX="30.0" layoutY="125.0" prefWidth="99.0" promptText="type filter text" visible="false">
       <effect>
         <InnerShadow color="#9f9f9f" />
       </effect>
@@ -37,22 +32,20 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label layoutX="99.0" layoutY="158.0" prefWidth="87.0" text="Filter Course:" textFill="GREY">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="136.0" prefHeight="22.0" prefWidth="587.0" text="Click on a course to view the respective sections" wrapText="true">
       <font>
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
-    </Label>
-    <Label font="$x1" layoutX="344.0" layoutY="149.0" prefHeight="34.0" prefWidth="165.0" text="Click on a course to view the respective sections" wrapText="true">
       <textFill>
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <Separator layoutX="19.0" layoutY="306.0" prefWidth="514.0">
+    <Separator layoutX="3.0" layoutY="355.0" prefWidth="593.0">
       <effect>
-        <DropShadow color="#606060" />
+        <DropShadow color="$x3" />
       </effect>
     </Separator>
-    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="27.0" layoutY="361.0" prefHeight="114.0" prefWidth="498.0" tableMenuButtonVisible="true">
+    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="7.0" layoutY="384.0" prefHeight="114.0" prefWidth="587.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
         <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
@@ -62,8 +55,7 @@
         <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
       </columns>
     </TableView>
-    <Label font="$x2" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="87.0" text="Sections:" textFill="GREY" />
-    <TextField id="filterText" fx:id="sectionFilter" layoutX="190.0" layoutY="333.0" prefWidth="99.0" promptText="type filter text">
+    <TextField id="filterText" fx:id="sectionFilter" layoutX="190.0" layoutY="357.0" prefWidth="99.0" promptText="type filter text" visible="false">
       <effect>
         <InnerShadow color="GREY" />
       </effect>
@@ -71,23 +63,27 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label font="$x1" layoutX="93.0" layoutY="336.0" prefWidth="87.0" text="Filter Section:" textFill="GREY" />
-    <Label font="$x1" layoutX="344.0" layoutY="320.0" prefHeight="41.0" prefWidth="181.0" text="Click on a section to view, enroll/drop" textFill="$x3" wrapText="true" />
-    <TextField fx:id="searchCode" layoutX="87.0" layoutY="39.0" prefWidth="111.0" />
-    <TextField fx:id="searchName" layoutX="87.0" layoutY="71.0" prefWidth="111.0" />
-    <TextField fx:id="searchInfo" layoutX="324.0" layoutY="71.0" prefWidth="111.0" />
-    <TextField id="searchDepaartment" fx:id="searchDepartment" layoutX="324.0" layoutY="39.0" prefWidth="111.0" />
-    <Label layoutX="19.0" layoutY="42.0" prefHeight="16.0" prefWidth="87.0" text="Code:" />
-    <Label layoutX="19.0" layoutY="74.0" prefHeight="16.0" prefWidth="87.0" text="Name:" />
-    <Label layoutX="233.0" layoutY="42.0" prefHeight="16.0" prefWidth="87.0" text="Department:" />
-    <Label layoutX="233.0" layoutY="74.0" prefHeight="16.0" prefWidth="87.0" text="Info:" />
-    <TextField fx:id="searchCredit" layoutX="87.0" layoutY="101.0" prefWidth="111.0" />
-    <Label layoutX="19.0" layoutY="104.0" prefHeight="16.0" prefWidth="87.0" text="Credits:" />
-    <Button fx:id="searchCourseButton" defaultButton="true" layoutX="233.0" layoutY="102.0" mnemonicParsing="false" onAction="#advancedCourseSearch" text="Search" textFill="#fefefe">
+    <Label layoutX="10.0" layoutY="359.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY">
+      <font>
+        <Font name="System Bold" size="13.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label alignment="CENTER" font="$x1" layoutX="129.0" layoutY="498.0" prefHeight="25.0" prefWidth="343.0" text="Click on a section to view, enroll/drop" textFill="$x3" wrapText="true" />
+    <TextField fx:id="searchCode" layoutX="277.0" layoutY="36.0" prefWidth="111.0" />
+    <TextField fx:id="searchName" layoutX="105.0" layoutY="58.0" prefWidth="481.0" />
+    <TextField fx:id="searchInfo" layoutX="105.0" layoutY="80.0" prefWidth="481.0" />
+    <TextField id="searchDepaartment" fx:id="searchDepartment" layoutX="105.0" layoutY="36.0" prefWidth="111.0" />
+    <Label layoutX="233.0" layoutY="39.0" prefHeight="16.0" prefWidth="87.0" text="Code:" />
+    <Label layoutX="14.0" layoutY="58.0" prefHeight="16.0" prefWidth="87.0" text="Name:" />
+    <Label layoutX="14.0" layoutY="39.0" prefHeight="16.0" prefWidth="87.0" text="Department:" />
+    <Label layoutX="14.0" layoutY="80.0" prefHeight="16.0" prefWidth="87.0" text="Info:" />
+    <TextField fx:id="searchCredit" layoutX="466.0" layoutY="36.0" prefWidth="120.0" />
+    <Label layoutX="405.0" layoutY="39.0" prefHeight="16.0" prefWidth="61.0" text="Credits:" />
+    <Button fx:id="searchCourseButton" defaultButton="true" layoutX="269.0" layoutY="105.0" mnemonicParsing="false" onAction="#advancedCourseSearch" text="Search" textFill="#fefefe">
       <font>
         <Font name="System Bold" size="12.0" />
       </font>
     </Button>
-    <Label fx:id="searchErrorLabel" layoutX="324.0" layoutY="104.0" prefHeight="41.0" prefWidth="201.0" textFill="#cc0000" wrapText="true" />
+    <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" layoutX="8.0" layoutY="2.0" prefHeight="22.0" prefWidth="587.0" text="Enter one or more fields to search by" textFill="$x3" wrapText="true" />
   </children>
 </AnchorPane>

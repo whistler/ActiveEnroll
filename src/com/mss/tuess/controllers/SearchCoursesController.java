@@ -4,7 +4,6 @@
  */
 package com.mss.tuess.controllers;
 
-import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.SectionClass;
@@ -43,10 +42,6 @@ public class SearchCoursesController implements Initializable {
     private TextField searchInfo;
     @FXML
     private TextField searchCredit;
-    @FXML
-    private Button searchCourseButton;
-    @FXML
-    private Label searchErrorLabel;
     
     //filter fields
     @FXML
@@ -351,7 +346,7 @@ public class SearchCoursesController implements Initializable {
     
     private void searchCourseByParam() throws SQLException{
             
-            searchErrorLabel.setText("");
+            ViewManager.setStatus("");
             String searchSQL = validateAndBuildSearchSQL();
             if(searchSQL != null){
                 System.out.println("Search Sql :"+searchSQL);
@@ -368,7 +363,7 @@ public class SearchCoursesController implements Initializable {
                 courseFilterContent.clear();
                 courseFilterContent.addAll(courseTableContent);
             }else{
-                searchErrorLabel.setText("Atleast one field should be entered!");
+                ViewManager.setStatus("Atleast one field should be entered!");
             }
 
 
