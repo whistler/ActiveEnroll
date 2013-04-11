@@ -1,21 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.entity;
 
 import com.mss.tuess.util.CurrentUser;
-import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-/**
- *
- * @author chenliang
- */
 public class SectionClass {
     private static ArrayList<SectionClass> sectionClassList = new ArrayList();
     private static ArrayList<SectionClass> registeredSectionClassList = new ArrayList();
@@ -288,5 +280,33 @@ public class SectionClass {
      */
     public String getDisplayEndTime() {
         return this.displayEndTime;
-    }     
+    }
+    
+    /*
+    public static ArrayList<SectionClass> fetch(Section section) throws SQLException
+    {
+        ResultSet rs;
+        
+        String sql="SELECT * FROM sectionClass WHERE "
+                + "sectionID = ? AND "
+                + "courseDept = ? AND "
+;
+        
+        rs = DatabaseConnector.returnQuery(sql);
+
+        
+        
+        if (rs.next()) {
+            this.setSectionID(rs.getString("sectionID"));
+            this.setCourseDept(rs.getString("courseDept"));
+            this.setCourseNum(rs.getString("courseNum"));
+            this.setTermID(rs.getString("termID"));
+            this.setType(rs.getString("type"));
+            this.setClassID(rs.getString("classID"));
+            this.setDay(rs.getString("day"));
+            this.setStartTime(rs.getTimestamp("startTime"));
+            this.setEndTime(rs.getTimestamp("endTime"));
+            this.setLocation(rs.getString("location"));
+        }
+    }*/
 }
