@@ -26,8 +26,12 @@
     <TextField fx:id="facultyName" editable="false" layoutX="143.0" layoutY="58.0" prefWidth="436.0" />
     <Label layoutX="14.0" layoutY="79.0" prefHeight="25.0" prefWidth="111.0" text="Department" textFill="GREY" />
     <TextField fx:id="deptName" editable="false" layoutX="143.0" layoutY="80.0" prefWidth="436.0" />
-    <Label layoutX="97.0" layoutY="168.0" prefHeight="22.0" prefWidth="111.0" text="Credits Required :" textFill="GREY" wrapText="true" />
-    <TextField fx:id="creditsRequired" editable="false" layoutX="220.0" layoutY="168.0" prefWidth="86.0" />
+    <Label layoutX="20.0" layoutY="329.0" prefHeight="22.0" prefWidth="111.0" text="Courses" textFill="GREY" wrapText="true" />
+    <TextField fx:id="creditsRequired" editable="false" layoutX="143.0" layoutY="189.0" prefWidth="207.0">
+      <effect>
+        <DropShadow />
+      </effect>
+    </TextField>
     <Separator layoutX="14.0" layoutY="128.0" prefWidth="565.0">
       <effect>
         <InnerShadow choke="0.10317460317460317" color="#404040" />
@@ -38,13 +42,23 @@
         <Font name="System Bold Italic" size="14.0" />
       </font>
     </Label>
-    <Label layoutX="324.0" layoutY="157.0" prefHeight="45.0" prefWidth="122.9998779296875" text="Credits Completed :" textFill="GREY" wrapText="true" />
-    <TextField fx:id="creditsCompleted" editable="false" layoutX="447.0" layoutY="168.0" prefWidth="86.0" />
-    <ListView fx:id="courses" layoutX="97.0" layoutY="220.0" prefHeight="262.0" prefWidth="227.0">
+    <Label layoutX="20.0" layoutY="191.0" prefHeight="22.0" prefWidth="123.0" text="Credits" textFill="GREY" wrapText="true" />
+    <TextField fx:id="creditsCompleted" editable="false" layoutX="372.0" layoutY="189.0" prefWidth="207.0" />
+    <ListView id="courses" fx:id="coursesRequired" layoutX="143.0" layoutY="220.0" prefHeight="262.0" prefWidth="207.0">
       <effect>
-        <DropShadow color="GREY" />
+        <DropShadow />
       </effect>
     </ListView>
-    <Label layoutX="97.0" layoutY="194.0" prefHeight="26.0" prefWidth="86.0" text="Courses :" textFill="GREY" wrapText="true" />
+    <Label alignment="CENTER" layoutX="379.0" layoutY="157.0" prefHeight="26.0" prefWidth="196.0" text="Completed" textFill="GREY" wrapText="true">
+      <font>
+        <Font name="System Bold" size="13.0" fx:id="x1" />
+      </font>
+    </Label>
+    <ListView fx:id="coursesCompleted" layoutX="372.0" layoutY="220.0" prefHeight="262.0" prefWidth="207.0">
+      <effect>
+        <DropShadow />
+      </effect>
+    </ListView>
+    <Label alignment="CENTER" font="$x1" layoutX="143.0" layoutY="162.0" prefWidth="196.0" text="Required" textFill="#808080" />
   </children>
 </AnchorPane>

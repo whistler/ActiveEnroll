@@ -23,7 +23,8 @@ public class MyProgramController implements Initializable {
     @FXML TextField deptName;
     @FXML TextField creditsRequired;
     @FXML TextField creditsCompleted;
-    @FXML ListView courses;
+    @FXML ListView coursesCompleted;
+    @FXML ListView coursesRequired;
     
     
     /**
@@ -44,28 +45,30 @@ public class MyProgramController implements Initializable {
         deptName.setText(department.getDeptName());
         creditsRequired.setText(Integer.toString(program.getMinCredit()));
         creditsCompleted.setText(Integer.toString(student.getCreditsCompleted()));
-        loadCourseList(student);
+        loadCourseLists(student);
 
     }
     
-    private void loadCourseList(Student student)
+    private void loadCourseLists(Student student)
     {
-        ObservableList<String> list = FXCollections.observableArrayList();
+        ObservableList<String> required = FXCollections.observableArrayList();
+        ObservableList<String> completed = FXCollections.observableArrayList();
         
         ArrayList completedCourses = student.getCompletedRequiredCourses();
         for(int i=0;i<completedCourses.size();i++)
         {
             Course c = (Course)completedCourses.get(i);
-            list.add(c.getCourseDept() + " " + c.getCourseNum() + "(Completed)");
+            required.add(c.getCourseDept() + " " + c.getCourseNum());
         }
 
         ArrayList requiredCourses = student.getIncompleteRequiredCourses();
         for(int i=0;i<requiredCourses.size();i++)
         {
             Course c = (Course)requiredCourses.get(i);
-            list.add(c.getCourseDept() + " " + c.getCourseNum() + "(Required)");
+            completed.add(c.getCourseDept() + " " + c.getCourseNum());
         }
         
-        courses.setItems(list);
+        coursesCompleted.setItems(completed);
+        coursesRequired.setItems(required);
     }
 }
