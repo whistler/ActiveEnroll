@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SectionClass {
     private static ArrayList<SectionClass> sectionClassList = new ArrayList();
@@ -282,31 +284,38 @@ public class SectionClass {
         return this.displayEndTime;
     }
     
-    /*
-    public static ArrayList<SectionClass> fetch(Section section) throws SQLException
+    
+    public static ArrayList<SectionClass> getSectionClassesForSection(Section section)
     {
-        ResultSet rs;
-        
-        String sql="SELECT * FROM sectionClass WHERE "
-                + "sectionID = ? AND "
-                + "courseDept = ? AND "
-;
-        
-        rs = DatabaseConnector.returnQuery(sql);
-
-        
-        
-        if (rs.next()) {
-            this.setSectionID(rs.getString("sectionID"));
-            this.setCourseDept(rs.getString("courseDept"));
-            this.setCourseNum(rs.getString("courseNum"));
-            this.setTermID(rs.getString("termID"));
-            this.setType(rs.getString("type"));
-            this.setClassID(rs.getString("classID"));
-            this.setDay(rs.getString("day"));
-            this.setStartTime(rs.getTimestamp("startTime"));
-            this.setEndTime(rs.getTimestamp("endTime"));
-            this.setLocation(rs.getString("location"));
+        ArrayList<SectionClass> sectionClasses = new ArrayList();
+        try {
+            ResultSet rs;
+            
+            String sql="SELECT * FROM sectionClass WHERE "
+                    + "sectionID = '" + section.getSectionID() + "' AND "
+                    + "courseDept = '" + section.getCourseDept() + "' AND "
+                    + "courseNum = '" + section.getCourseNum() + "' AND "
+                    + "termID = '" + section.getTermID() + "'";
+            
+            rs = DatabaseConnector.returnQuery(sql);
+            
+            while (rs.next()) {
+                SectionClass sectionClass = new SectionClass();
+                sectionClass.setSectionID(rs.getString("sectionID"));
+                sectionClass.setCourseDept(rs.getString("courseDept"));
+                sectionClass.setCourseNum(rs.getString("courseNum"));
+                sectionClass.setTermID(rs.getString("termID"));
+                sectionClass.setType(rs.getString("type"));
+                sectionClass.setClassID(rs.getString("classID"));
+                sectionClass.setDay(rs.getString("day"));
+                sectionClass.setStartTime(rs.getTimestamp("startTime"));
+                sectionClass.setEndTime(rs.getTimestamp("endTime"));
+                sectionClass.setLocation(rs.getString("location"));
+                sectionClasses.add(sectionClass);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SectionClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+        return sectionClasses;
+    }
 }

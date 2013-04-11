@@ -38,12 +38,13 @@
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <TableView fx:id="schedule" layoutX="108.0" layoutY="345.0" prefHeight="134.0" prefWidth="413.0">
+    <TableView fx:id="sectionClassTable" layoutX="108.0" layoutY="345.0" prefHeight="134.0" prefWidth="413.0">
       <columns>
-        <TableColumn prefWidth="75.0" text="Day" />
-        <TableColumn prefWidth="75.0" text="Start Time" />
-        <TableColumn prefWidth="75.0" text="End Time" />
-        <TableColumn prefWidth="75.0" text="Room" />
+        <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
+        <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="day" />
+        <TableColumn prefWidth="75.0" text="Start Time" fx:id="displayStartTime" />
+        <TableColumn prefWidth="75.0" text="End Time" fx:id="displayEndTime" />
+        <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
       </columns>
     </TableView>
     <Label layoutX="108.0" layoutY="23.0" prefHeight="20.0" prefWidth="76.0" text="Course" />

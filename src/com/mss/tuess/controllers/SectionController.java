@@ -12,15 +12,19 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import com.mss.tuess.util.State;
-import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SectionController implements Initializable {
     
@@ -50,6 +54,20 @@ public class SectionController implements Initializable {
     private Button dropButton;
     @FXML
     private Button enrollButton;
+    @FXML
+    private TableView<SectionClass> sectionClassTable;
+    @FXML
+    private TableColumn<SectionClass, String> sectionID;
+    @FXML
+    private TableColumn<SectionClass, String> type;
+    @FXML
+    private TableColumn<SectionClass, String> day;
+    @FXML
+    private TableColumn<SectionClass, String> displayStartTime;
+    @FXML
+    private TableColumn<SectionClass, String> displayEndTime;
+    @FXML
+    private TableColumn<SectionClass, String> location;
 
     /**
      * Initializes the controller class.
@@ -61,16 +79,16 @@ public class SectionController implements Initializable {
         
         if (section != null) {
             
+            /* set the prerequisite and corequisites */
             Course course = new Course();
             course.setCourseDept(section.getCourseDept());
             course.setCourseNum(section.getCourseNum());
             String prereqs = Prerequisite.getPrerequisitesString(Prerequisite.prerequisitesForCourse(course));
             String coreqs = Corequisite.getCorequisitesString(Corequisite.corequisitesForCourse(course));
-            //set prerequisities
             prerequisites.setText(prereqs);
-            //set corequisites
             corequisites.setText(coreqs);
-            //set course fields
+            
+            /* show course fields */
             courseCode.setText(section.getCourse().getCourseDept() + "-" 
                     + section.getCourse().getCourseNum());
             courseName.setText(section.getCourse().getCourseName());
@@ -84,6 +102,18 @@ public class SectionController implements Initializable {
             lastDayToEnroll.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getRegistrationEnd()));
             lastDayToWithdraw.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getDropWithoutW()));
             
+            /* Populate the schedule table with sectionClasses */
+            type.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("type"));
+            day.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("day"));
+            displayStartTime.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("displayStartTime"));
+            displayEndTime.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("displayEndTime"));
+            location.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("location"));
+
+            ObservableList<SectionClass> sectionClasses = FXCollections.observableArrayList();
+            sectionClasses.addAll(SectionClass.getSectionClassesForSection(section));
+            sectionClassTable.setItems(sectionClasses);
+
+            /* Show the right button either to enroll or drop*/
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
             } else {
