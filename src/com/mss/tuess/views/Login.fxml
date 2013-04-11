@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="login" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.LoginController">
   <children>
     <fx:include source="Header.fxml" prefHeight="50.0" prefWidth="800.0" />
     <!-- start of content -->
