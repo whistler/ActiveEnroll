@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
 import com.mss.tuess.controllers.LayoutController;
@@ -18,10 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author ibrahim
- */
 public class ViewManager {
 
     private static Stage stage;
@@ -33,7 +25,7 @@ public class ViewManager {
      */
     public static void setStage(Stage newStage) {
         stage = newStage;
-        stage.setTitle("TUESS");
+        stage.setTitle("ActiveEnroll");
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.show();
@@ -76,6 +68,10 @@ public class ViewManager {
         label.setText(status);
     }
     
+    /**
+     * Sets title for the program
+     * @param title of the current view
+     */
     public static void setTitle(String title) {
         Label label = (Label) stage.getScene().lookup("#programTitle");
         label.setText(title);
@@ -100,6 +96,10 @@ public class ViewManager {
         sidebar.getChildren().add((Node) load);
     }
 
+    /**
+     * Displays user information in the header
+     * @param user that is logged in
+     */
     public static void setUser(User user) {
         Label label = (Label) stage.getScene().lookup("#loggedInUser");
         if (user == null) {

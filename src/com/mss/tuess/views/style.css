@@ -6,6 +6,25 @@
 
 }
 
-#sidebar, #header, #footer {
-    -fx-background-color: #c6dbdb;
+.login {
+    -fx-background-color: radial-gradient(radius 100%, #2D4F61, #F1F9F0);
+    -fx-text-fill: white;
+}
+
+#header, #footer {
+    -fx-background-color: linear-gradient(to bottom , #2D4F61, #2F4C60);
+    -fx-text-fill: white;
+}
+#sidebar Label, 
+#sidebar Hyperlink, 
+#header Label,
+#footer Label
+{ -fx-text-fill: white }
+
+#sidebar {
+    -fx-background-color: linear-gradient(to right , #2D4F61, #2F4C60);
+}
+
+#content {
+    -fx-background-color: linear-gradient(to bottom , #F1F9F0, #F1F9F0);
 }

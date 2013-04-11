@@ -6,12 +6,13 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <Pane prefHeight="50.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <Label fx:id="programTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="13.0" prefWidth="772.0" text="TUESS">
+    <Label fx:id="programTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="13.0" prefWidth="772.0" text="ActiveEnroll">
       <font>
         <Font name="System Bold" size="20.0" />
       </font>
@@ -21,5 +22,10 @@
         <Font name="System Bold" size="12.0" />
       </font>
     </Label>
+    <ImageView fitHeight="36.6015625" fitWidth="48.80208333333333" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@logo.png" preserveRatio="false" smooth="false" />
+      </image>
+    </ImageView>
   </children>
 </Pane>
