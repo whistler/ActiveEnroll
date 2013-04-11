@@ -15,12 +15,12 @@
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SearchCoursesController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <Label layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses:" textFill="GREY">
+    <Label id="title" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses" textFill="GREY">
       <font>
-        <Font name="System Bold" size="13.0" fx:id="x2" />
+        <Font name="System Bold" size="14.0" fx:id="x2" />
       </font>
     </Label>
-    <TableView fx:id="courseTable" layoutX="27.0" layoutY="73.0" prefHeight="166.0" prefWidth="498.0" tableMenuButtonVisible="true">
+    <TableView fx:id="courseTable" layoutX="14.0" layoutY="36.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
         <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
@@ -29,7 +29,7 @@
         <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
       </columns>
     </TableView>
-    <TextField id="filterText" fx:id="courseFilter" layoutX="190.0" layoutY="38.0" prefWidth="99.0" promptText="type filter text">
+    <TextField id="filterText" fx:id="courseFilter" layoutX="348.0" layoutY="11.0" prefWidth="238.0" promptText="type filter text">
       <effect>
         <InnerShadow color="#9f9f9f" />
       </effect>
@@ -37,22 +37,22 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label layoutX="99.0" layoutY="41.0" prefWidth="87.0" text="Filter Course:" textFill="GREY">
+    <Label layoutX="278.0" layoutY="10.0" prefHeight="22.0" prefWidth="87.0" text="Search" textFill="GREY">
       <font>
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label font="$x1" layoutX="344.0" layoutY="32.0" prefHeight="34.0" prefWidth="165.0" text="Click on a course to view the respective sections" wrapText="true">
+    <Label alignment="CENTER" font="$x1" layoutX="124.0" layoutY="276.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
       <textFill>
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <Separator layoutX="19.0" layoutY="255.0" prefWidth="514.0">
+    <Separator layoutX="14.0" layoutY="299.0" minHeight="3.0" prefWidth="572.0">
       <effect>
         <DropShadow color="#606060" />
       </effect>
     </Separator>
-    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="27.0" layoutY="316.0" prefHeight="146.0" prefWidth="498.0" tableMenuButtonVisible="true">
+    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="14.0" layoutY="339.0" prefHeight="149.99990000000253" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
         <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
@@ -62,8 +62,8 @@
         <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
       </columns>
     </TableView>
-    <Label font="$x2" layoutX="14.0" layoutY="263.0" prefHeight="25.0" prefWidth="87.0" text="Sections:" textFill="GREY" />
-    <TextField id="filterText" fx:id="sectionFilter" layoutX="190.0" layoutY="288.0" prefWidth="99.0" promptText="type filter text">
+    <Label font="$x2" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY" />
+    <TextField id="filterText" fx:id="sectionFilter" layoutX="348.0" layoutY="309.0" prefWidth="238.0" promptText="type filter text">
       <effect>
         <InnerShadow color="GREY" />
       </effect>
@@ -71,7 +71,7 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label font="$x1" layoutX="93.0" layoutY="291.0" prefWidth="87.0" text="Filter Section:" textFill="GREY" />
-    <Label font="$x1" layoutX="344.0" layoutY="275.0" prefHeight="41.0" prefWidth="181.0" text="Click on a section to view, enroll/drop" textFill="$x3" wrapText="true" />
+    <Label font="$x1" layoutX="278.0" layoutY="313.0" prefWidth="73.0" text="Search" textFill="GREY" />
+    <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
   </children>
 </AnchorPane>
