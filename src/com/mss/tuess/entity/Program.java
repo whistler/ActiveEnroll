@@ -3,10 +3,47 @@ package com.mss.tuess.entity;
 import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Program {
+    private static ArrayList<Program> programs = new ArrayList();
+
+    /**
+     * Loads all Program records from the database in to a list of Program
+     * objects
+     *
+     * @throws SQLException
+     */
+    public static void fetch() throws SQLException {
+        ResultSet rs;
+        String sql = "SELECT * FROM program";
+        rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
+            Program program = new Program();
+            program.setProgramID(rs.getString("programID"));
+            program.setDeptID(rs.getString("deptID"));
+            program.setDegreeTitle(rs.getString("degreeTitle"));
+            program.setMinCredit(rs.getInt("minCredit"));
+            program.setMaxLength(rs.getInt("maxLength"));
+            programs.add(program);
+        }
+    }
+
+    public static int size() {
+        return programs.size();
+    }
+
+    /**
+     * Returns the program stored at the given index
+     *
+     * @param index index of the program to return
+     * @return Program object at position index
+     */
+    public static Program get(int index) {
+        return programs.get(index);
+    }
 
     private String programID;
     private String deptID;

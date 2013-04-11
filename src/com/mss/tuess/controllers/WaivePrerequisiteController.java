@@ -4,7 +4,6 @@ import com.mss.tuess.entity.EnrollSection;
 import com.mss.tuess.entity.Section;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.entity.Term;
-import com.mss.tuess.entitylist.SectionList;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.State;
@@ -39,16 +38,16 @@ public class WaivePrerequisiteController implements Initializable {
         instructorID = CurrentUser.getUser().getID();
         Term currentTerm=State.getCurrentTerm();
         
-        SectionList.fetchByInstructor(instructorID,currentTerm.getTermID());
+        Section.fetchByInstructor(instructorID,currentTerm.getTermID());
         
         
-        int sectionListSize = SectionList.getAll().size();
+        int sectionListSize = Section.getAll().size();
         for(int i=0;i<sectionListSize;i++)
        {
-            coursesToWaiveList.addAll(SectionList.get(i).getTermID()+" "
-                                      +SectionList.get(i).getCourseDept()+" "
-                                      +SectionList.get(i).getCourseNum()+" "
-                                      +SectionList.get(i).getSectionID());
+            coursesToWaiveList.addAll(Section.get(i).getTermID()+" "
+                                      +Section.get(i).getCourseDept()+" "
+                                      +Section.get(i).getCourseNum()+" "
+                                      +Section.get(i).getSectionID());
         }
 
 
@@ -98,7 +97,7 @@ public class WaivePrerequisiteController implements Initializable {
             if(studentToWaive.getID()>0)//student ID exists
             {
                 Section selectedSection=new Section();
-                selectedSection=SectionList.get(coursesToWaive.getSelectionModel().getSelectedIndex());
+                selectedSection=Section.get(coursesToWaive.getSelectionModel().getSelectedIndex());
                 
                 if(EnrollSection.isEnrolled(studentToWaive,selectedSection))
                 {

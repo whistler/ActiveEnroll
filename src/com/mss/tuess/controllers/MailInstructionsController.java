@@ -1,6 +1,6 @@
 package com.mss.tuess.controllers;
 
-import com.mss.tuess.entitylist.StudentList;
+import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.util.SendEmail;
@@ -41,7 +41,7 @@ public class MailInstructionsController implements Initializable {
         int studentnumber=0;
 
         ResultSet mailrs;
-        mailrs = StudentList.fetchCurrentTerm();
+        mailrs = Student.fetchCurrentTerm();
 
         while (mailrs.next()) {
             int currentID = mailrs.getInt("studentID");

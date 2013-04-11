@@ -12,7 +12,6 @@ package com.mss.tuess.timetable;
  * TScheduler v0.2
  */
 import com.mss.tuess.entity.SectionClass;
-import com.mss.tuess.entitylist.SectionClassList;
 import com.mss.tuess.util.State;
 import java.util.*;
 import java.io.*;
@@ -81,8 +80,8 @@ public class TScheduler {
 
         {
             try {
-                SectionClassList.fetch();
-                ArrayList<SectionClass> registeredSectionClassList = SectionClassList.getAll();
+                SectionClass.fetchregisteredSectionClassList();
+                ArrayList<SectionClass> registeredSectionClassList = SectionClass.getAllregisteredSectionClassList();
                 int total = registeredSectionClassList.size();
                 int num = 0;
                 System.out.println("\nTotal=" + total);
