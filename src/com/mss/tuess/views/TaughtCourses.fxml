@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TaughtCourseController">
+  <children>
+  
+    <HBox layoutX="25.0" layoutY="7.0">
+      <children>
+        <Label text="Registered courses in current term: " />
+        <Label fx:id="currentTerm"/>
+      </children>
+    </HBox>
+   
+    <TableView fx:id="registeredCoursesTable" layoutX="25.0" layoutY="50.0" prefHeight="300.0" >
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="45.0" text="Dept" fx:id="courseDept" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="35.0" text="No." fx:id="courseNum" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="40.0" text="Sec." fx:id="sectionID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="330.0" text="Course" fx:id="courseName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Term" fx:id="termID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Credit" fx:id="credit" />
+      </columns>
+    </TableView>
+    <HBox layoutX="25.0" layoutY="360.0" prefHeight="35.0" prefWidth="318.0">
+      <children>
+        <Label text="Registered credits in current term: " />
+        <Label fx:id="totalCredits"/>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>
