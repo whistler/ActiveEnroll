@@ -45,7 +45,9 @@ public class Administrator extends User{
     public static Administrator get(int index) {
         return administrators.get(index);
     }
-
+/**
+ * ID of the administrator
+ */
     private int adminID;
 
     /**
