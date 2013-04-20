@@ -5,12 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Administrator class
+ */
 public class Administrator extends User{
     static ArrayList<Administrator> administrators = new ArrayList();
 
     /**
      * Loads all Administrator records from the database in to a list of Administrator
-     * objects
+     * objects.
      *
      * @throws SQLException
      */
