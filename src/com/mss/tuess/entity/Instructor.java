@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Instructor class
+ */
 public class Instructor extends User{
     private static ArrayList<Instructor> instructors = new ArrayList();
 
@@ -80,7 +83,7 @@ public class Instructor extends User{
     /**
      * Loads the Instructor by the instructorID from the database and encapsulates
      * into this Instructor objects
-     *
+     * @param InstructorID to fetch with
      * @throws SQLException
      */
     @Override
