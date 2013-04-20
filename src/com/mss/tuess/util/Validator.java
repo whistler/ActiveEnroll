@@ -5,11 +5,47 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Provides methods for validation of input fields. 
+ * Validates input fields for a form. Create a validator object. Use the 
+ * validate method on as many fields as required. Check if there were errors
+ * using hasErrors method and use getErrors to get a list of errors. Use reset
+ * to validate again.
  */
-public class Validation {
+public class Validator {
 
-    public static ArrayList errors;
+    private ArrayList<String> errors = new ArrayList();
+    
+    /**
+     * @return a list of errors for fields validated so far
+     */
+    public ArrayList getErrors()
+    {
+        return errors;
+    }
+    
+    /**
+     * Clear all errors to validate again
+     */
+    public void reset()
+    {
+        errors.clear();
+    }
+    
+    /**
+     * @return whether there were errors on the input fields of not
+     */
+    public boolean hasErrors()
+    {
+        return !errors.isEmpty();
+    }
+    
+    /**
+     * @param error error to be added to the validator for a custom validation
+     * done outside the validator
+     */
+    public void addError(String error)
+    {
+        errors.add(error);
+    }
     
     /**
      * To check if it is positive integer
@@ -17,7 +53,7 @@ public class Validation {
      * @param value
      * @return true if it is positive integer; false if not
      */
-    public static boolean isPositiveInt(String value) {
+    private static boolean isPositiveInt(String value) {
         Pattern pattern = null;
         Matcher matcher = null;
         boolean result = false;
@@ -33,7 +69,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isPureLetter_WithSpace(String str) {
+    private static boolean isPureLetter_WithSpace(String str) {
         str = str.trim();
         return isPureLetter_NoSpace(str);
     }
@@ -44,7 +80,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isPureLetter_NoSpace(String str) {
+    private static boolean isPureLetter_NoSpace(String str) {
         Pattern pattern = null;
         Matcher matcher = null;
         boolean result = false;
@@ -60,7 +96,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isPureNum_WithSpace(String str) {
+    private static boolean isPureNum_WithSpace(String str) {
         str = str.trim();
         return isPureLetter_NoSpace(str);
     }
@@ -71,7 +107,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isPureNum_NoSpace(String str) {
+    private static boolean isPureNum_NoSpace(String str) {
         Pattern pattern = null;
         Matcher matcher = null;
         boolean result = false;
@@ -87,7 +123,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isLetterNum_WithSpace(String str) {
+    private static boolean isLetterNum_WithSpace(String str) {
         str = str.trim();
         return isLetterNum_NoSpace(str);
     }
@@ -98,7 +134,7 @@ public class Validation {
      * @param str
      * @return true if it is; false if not
      */
-    public static boolean isLetterNum_NoSpace(String str) {
+    private static boolean isLetterNum_NoSpace(String str) {
         Pattern pattern = null;
         Matcher matcher = null;
         boolean result = false;
@@ -116,7 +152,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length(String str, int max, int min) {
+    private static boolean isStr_Length(String str, int max, int min) {
         if (str.length() < min || str.length() < max) {
             return false;
         }
@@ -129,7 +165,7 @@ public class Validation {
      * @param str
      * @return true if it is NULL; false if not
      */
-    public static boolean isNull(String str) {
+    private static boolean isNull(String str) {
         str = str.trim();
         if ((str.equals("null")) || (str.equals(""))) {
             return true;
@@ -146,7 +182,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_PureNum_CountSpace(String str, int max, int min) {
+    private static boolean isStr_Length_PureNum_CountSpace(String str, int max, int min) {
         if (isPureNum_NoSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
@@ -166,7 +202,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_PureLetter_CountSpace(String str, int max, int min) {
+    private static boolean isStr_Length_PureLetter_CountSpace(String str, int max, int min) {
         if (isPureLetter_NoSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
@@ -186,7 +222,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_LetterNum_CountSpace(String str, int max, int min) {
+    private static boolean isStr_Length_LetterNum_CountSpace(String str, int max, int min) {
         if (isLetterNum_WithSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
@@ -203,7 +239,7 @@ public class Validation {
      * @param email
      * @return true if it is validate; false if not
      */
-    public static boolean isEmailAddress(String email) {
+    private static boolean isEmailAddress(String email) {
         String check = "^([a-z0-9A-Z]+[-|//._]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?//.)+[a-zA-Z]{2,}$";
         Pattern regex = Pattern.compile(check);
         Matcher matcher = regex.matcher(email);
@@ -215,8 +251,11 @@ public class Validation {
         }
     }
     
-    
-    public static boolean isInteger(String input)
+    /**
+     * @param input to check if it contains an integer
+     * @return whether the given string contains an integer or not
+     */
+    private static boolean isInteger(String input)
     {
         try{
             Integer.parseInt(input);
@@ -224,10 +263,6 @@ public class Validation {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(escapeInput("A\'B\"C"));
     }
     
     /**
@@ -242,7 +277,7 @@ public class Validation {
      * @param type type of the input field
      * @return escaped string
      */
-    public static String validate(String name, String input, boolean required, int min, int max, InputType type)
+    public String validate(String name, String input, boolean required, int min, int max, InputType type)
     {
         input = escapeInput(input);
         
@@ -293,7 +328,7 @@ public class Validation {
      * @param input string to escape
      * @return a string without the following characters: \ ' "
      */
-    public static String escapeInput(String input)
+    private static String escapeInput(String input)
     {
         input = input.replaceAll("\\\\", " "); // match backslash
         input = input.replaceAll("'", " ");  // match single quote
