@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Department class
+ */
 public class Department {
     private static ArrayList<Department> departments = new ArrayList();
 
     /**
-     * Loads all Department records from the database in to a list of Department
-     * objects
+     * Loads all Department records from the database in to a list of Department.
      *
      * @throws SQLException
      */
@@ -44,13 +46,15 @@ public class Department {
     private String facultyName;
 
     /**
-     * @return the deptID
+     * Returns the department ID.
+     * @return the deptID the ID of the department
      */
     public String getDeptID() {
         return deptID;
     }
 
     /**
+     * Sets the department ID.
      * @param deptID the deptID to set
      */
     public void setDeptID(String deptID) {
@@ -58,13 +62,15 @@ public class Department {
     }
 
     /**
-     * @return the deptName
+     * Returns the department name.
+     * @return the deptName the name of the department
      */
     public String getDeptName() {
         return deptName;
     }
 
     /**
+     * Sets the name of the department.
      * @param deptName the deptName to set
      */
     public void setDeptName(String deptName) {
@@ -72,13 +78,15 @@ public class Department {
     }
 
     /**
-     * @return the facultyName
+     * Returns the name of the faculty.
+     * @return the facultyName the name of the faculty
      */
     public String getFacultyName() {
         return facultyName;
     }
 
     /**
+     * Sets the name of the faculty
      * @param facultyName the facultyName to set
      */
     public void setFacultyName(String facultyName) {
@@ -86,7 +94,7 @@ public class Department {
     }
 
     /**
-     * Loads Department with the given department number from the database
+     * Loads Department with the given department number from the database.
      *
      * @param deptID id of the department to load from
      * @throws SQLException
@@ -110,7 +118,7 @@ public class Department {
     }
 
     /**
-     * Updates the current record in the database
+     * Updates the current record in the database.
      *
      * @throws SQLException
      */
@@ -122,7 +130,7 @@ public class Department {
     }
 
     /**
-     * Deletes the record from the database
+     * Deletes the record from the database.
      *
      * @throws SQLException
      */
@@ -133,7 +141,7 @@ public class Department {
 
     /**
      * Creates a new record with the database with the properties of this
-     * Department
+     * Department.
      *
      * @throws SQLException
      */
