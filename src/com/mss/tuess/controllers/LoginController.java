@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,8 +24,6 @@ public class LoginController implements Initializable {
     TextField userId;
     private @FXML
     PasswordField userPassword;
-    private @FXML
-    Button login;
     private @FXML
     Label statusLabel;
     private Validator validator = new Validator();
@@ -56,9 +53,12 @@ public class LoginController implements Initializable {
             validator.reset();
 
             String type = validator.validate("Type", (String) userType.getValue(), true, 5, 15, InputType.STRING);
-            Integer loginId = Integer.parseInt(validator.validate("Login ID", userId.getText(), true, 8, 8, InputType.POSITIVE_INTEGER));
+            userId.setText(validator.validate("Login ID", userId.getText(), true, 10000000, 99999999, InputType.POSITIVE_INTEGER));
             String password = validator.validate("Password", userPassword.getText(), true, 6, 20, InputType.STRING);
-
+            
+            Integer loginId =0;
+            if(Validator.isInteger(userId.getText())) loginId=Integer.parseInt(userId.getText());
+                    
             User user;
             user = User.login(loginId, password, type);
 

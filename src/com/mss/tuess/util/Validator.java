@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Validates input fields for a form. Create a validator object. Use the 
+ * Validates input fields for a form. Create a validator object. Use the
  * validate method on as many fields as required. Check if there were errors
  * using hasErrors method and use getErrors to get a list of errors. Use reset
  * to validate again.
@@ -13,40 +13,36 @@ import java.util.regex.Pattern;
 public class Validator {
 
     private ArrayList<String> errors = new ArrayList();
-    
+
     /**
      * @return a list of errors for fields validated so far
      */
-    public ArrayList getErrors()
-    {
+    public ArrayList getErrors() {
         return errors;
     }
-    
+
     /**
      * Clear all errors to validate again
      */
-    public void reset()
-    {
+    public void reset() {
         errors.clear();
     }
-    
+
     /**
      * @return whether there were errors on the input fields of not
      */
-    public boolean hasErrors()
-    {
+    public boolean hasErrors() {
         return !errors.isEmpty();
     }
-    
+
     /**
      * @param error error to be added to the validator for a custom validation
      * done outside the validator
      */
-    public void addError(String error)
-    {
+    public void addError(String error) {
         errors.add(error);
     }
-    
+
     /**
      * To check if it is positive integer
      *
@@ -54,13 +50,11 @@ public class Validator {
      * @return true if it is positive integer; false if not
      */
     private static boolean isPositiveInt(String value) {
-        Pattern pattern = null;
-        Matcher matcher = null;
-        boolean result = false;
-        pattern = pattern.compile("^-?[1-9]\\d*$");
-        matcher = pattern.matcher(value);
-        result = matcher.matches();
-        return result;
+        if (isInteger(value) && (Integer.parseInt(value) > 0)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -250,25 +244,25 @@ public class Validator {
             return false;
         }
     }
-    
+
     /**
      * @param input to check if it contains an integer
      * @return whether the given string contains an integer or not
      */
-    private static boolean isInteger(String input)
-    {
-        try{
+    public static boolean isInteger(String input) {
+        try {
             Integer.parseInt(input);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
-    
+
     /**
-     * Validates an input field to meet meet the input criteria
-     * pre: the user has provided input for fields
-     * post: errors contains the list of errors for this field
+     * Validates an input field to meet meet the input criteria pre: the user
+     * has provided input for fields post: errors contains the list of errors
+     * for this field
+     *
      * @param name name of the field for use in error messages
      * @param input input from the user
      * @param required whether the field is required or optional
@@ -277,59 +271,74 @@ public class Validator {
      * @param type type of the input field
      * @return escaped string
      */
-    public String validate(String name, String input, boolean required, int min, int max, InputType type)
-    {
+    public String validate(String name, String input, boolean required, int min, int max, InputType type) {
         input = escapeInput(input);
+
+        // Check Null
+        if (required && input.length() == 0) {
+            errors.add(name + " cannot be blank");
+        }
+
+        // Check Range
+        if (type == InputType.INTEGER && type == InputType.POSITIVE_INTEGER) {
+            int num = Integer.parseInt(input);
+            if (num < min) {
+                errors.add(name + " cannot be less than " + min + "");
+            }
+            if (num > max) {
+                errors.add(name + " cannot be more than " + max + "");
+            }
+        } else {
+            if (min == max) {
+                if (input.length() != min) {
+                    errors.add(name + " has to be " + min + " characters long");
+                } else {
+                    if (input.length() < min) {
+                        errors.add(name + " cannot be shorter than " + min + " characters");
+                    }
+                    if (input.length() > max) {
+                        errors.add(name + " cannot be longer than " + max + " characters");
+                    }
+                }
+            }
+        }
         
         // Check Types
-        switch(type)
-        {
+        switch (type) {
             case LETTERS:
-                if(!isPureLetter_WithSpace(input))
-                    errors.add(input + " can only contain letters and numbers");
+                if (!isPureLetter_WithSpace(input)) {
+                    errors.add(name + " can only contain letters and numbers");
+                }
                 break;
             case LETTERS_NOSPACE:
-                if(!isPureLetter_NoSpace(input))
-                    errors.add(input + " can only contain letters");
+                if (!isPureLetter_NoSpace(input)) {
+                    errors.add(name + " can only contain letters");
+                }
                 break;
             case EMAIL:
-                if (!isEmailAddress(input)) 
-                    errors.add(input + " must be an email address");
+                if (!isEmailAddress(input)) {
+                    errors.add(name + " must be an email address");
+                }
                 break;
             case INTEGER:
-                if(!isInteger(input))
-                    errors.add(input + " must be a number");
+                if (!isInteger(input)) {
+                    errors.add(name + " is not a integer or is too large");
+                }
                 break;
             case POSITIVE_INTEGER:
-                if (!isPositiveInt(input))
-                    errors.add(input + " must be a positve integer");
+                if (!isPositiveInt(input)) {
+                    errors.add(name + " is not a positive integer or is too large");
+                }
         }
         
-        // Check Null
-        if (required && input.length()==0) errors.add(name + " cannot be blank");
-        
-        // Check Range
-        if (type == InputType.INTEGER && type == InputType.POSITIVE_INTEGER)
-        {
-            int num = Integer.parseInt(input);
-            if (num < min) errors.add(name + " cannot be less than " + min + "");
-            if (num > max) errors.add(name + " cannot be more than " + max + "");            
-
-        } else
-        {
-            if (input.length()< min) errors.add(name + " cannot be shorter than " + min + " characters");
-            if (input.length()>max) errors.add(name + " cannot be longer than " + max + " characters");            
-        }
-
         return input;
     }
-    
+
     /**
      * @param input string to escape
      * @return a string without the following characters: \ ' "
      */
-    private static String escapeInput(String input)
-    {
+    private static String escapeInput(String input) {
         input = input.replaceAll("\\\\", " "); // match backslash
         input = input.replaceAll("'", " ");  // match single quote
         input = input.replaceAll("\"", " "); // match double quote
