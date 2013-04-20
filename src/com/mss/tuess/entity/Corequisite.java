@@ -101,7 +101,10 @@ public class Corequisite {
     /**
      * Loads the Student by the studentID from the database and encapsulates
      * into this Student objects
-     *
+     * @param courseDept the deparment that offers the course
+     * @param courseNum the number of the course
+     * @param coreqDept the department that offers the corequisite course
+     * @param coreqNum  the number of the corequisite course
      * @throws SQLException
      */
     public void fetch(String courseDept, String courseNum, String coreqNum, String coreqDept) throws SQLException {
