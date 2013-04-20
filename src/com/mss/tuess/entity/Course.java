@@ -5,13 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Course class
+ */
 public class Course {
     private static ArrayList<Course> courses = new ArrayList();
 
     /**
-     * Parameterized Search
-     * objects
-     *
+     * Parameterized Search for a course.
+     * @param searchParam to be searched with
      * @throws SQLException
      */
     public static void fetch(String searchParam) throws SQLException {
@@ -20,8 +22,7 @@ public class Course {
     }
 
     /**
-     * Loads all Course records from the database in to a list of Course
-     * objects
+     * Loads all Course records from the database into an arrayList.
      *
      * @throws SQLException
      */
@@ -42,8 +43,7 @@ public class Course {
     }
 
     /**
-     * Returns the course stored at the given index
-     *
+     * Returns the course stored at the given index.
      * @param index index of the course to return
      * @return Course object at position index
      */
@@ -52,8 +52,8 @@ public class Course {
     }
 
     /**
-     *
-     * @param sqlString
+     * Executs the writen SQL in the database.
+     * @param sqlString the SQL to be executed
      * @throws SQLException
      */
     private static void executeSQL(String sqlString) throws SQLException {
@@ -87,51 +87,91 @@ public class Course {
     private String info;
     private int credit;
 
+    /**
+     * Returns the department of the course.
+     * @return this.courseDept the department of the course
+     */
     public String getCourseDept() {
         return this.courseDept;
     }
 
+    /**
+     * Sets the department of the course.
+     * @param courseDept the department to set
+     */
     public void setCourseDept(String courseDept) {
         this.courseDept = courseDept;
     }
 
+    /**
+     * Returns the number of the course.
+     * @return this.courseNum the number of the course
+     */
     public String getCourseNum() {
         return this.courseNum;
     }
 
+    /**
+     * Sets the number of the course.
+     * @param courseNum to set
+     */
     public void setCourseNum(String courseNum) {
         this.courseNum = courseNum;
     }
-
+    
+    /**
+     * Returns the name of the course
+     * @return this.courseName the name of the course
+     */
     public String getCourseName() {
         return this.courseName;
     }
 
+    /**
+     * Sets the name of the course
+     * @param courseName the name of the course to set
+     */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
+    /**
+     * Returns the info of the course
+     * @return this.info the info of the course
+     */
     public String getInfo() {
         return this.info;
     }
 
+    /**
+     * Sets the info of the course
+     * @param info to set
+     */
     public void setInfo(String info) {
         this.info = info;
     }
 
+    /**
+     * Returns the credit of a course
+     * @return this.credit the credit of the course
+     */
     public int getCredit() {
         return this.credit;
     }
 
+    /**
+     * Sets the credit of a course
+     * @param credit to 
+     */
     public void setCredit(int credit) {
         this.credit = credit;
     }
 
     /**
-     * Loads Course with the given course department and course number from the database
+     * Loads Course with the given course department and course number from the database.
      *
-     * @param department department which the course belongs to
-     * @param courseNumer number for the course to load
+     * @param courseDepartment department which the course belongs to
+     * @param courseNumber number for the course to load
      * @throws SQLException
      */
     public void fetch(String courseDepartment, String courseNumber) throws SQLException {
@@ -152,7 +192,7 @@ public class Course {
     }
 
     /**
-     * Updates the current record in the database
+     * Updates the current course record in the database.
      *
      * @throws SQLException
      */
@@ -166,7 +206,7 @@ public class Course {
     }
 
     /**
-     * Deletes the record from the database
+     * Deletes the course record from the database.
      * @throws SQLException 
      */
     public void delete() throws SQLException {
@@ -176,8 +216,8 @@ public class Course {
     }
     
     /**
-     * Creates a new record with the database with the properties of this
-     * Course
+     * Creates a new course record in the  database with the properties of this
+     * Course.
      *
      * @throws SQLException
      */
