@@ -21,7 +21,7 @@
 #footer Label
 { -fx-text-fill: white }
 
-#sidebar {
+#sidebar, #rightbar {
     -fx-background-color: linear-gradient(to right , #2D4F61, #2F4C60);
 }
 
