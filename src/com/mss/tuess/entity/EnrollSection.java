@@ -9,6 +9,9 @@ import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * EnrollSection class
+ */
 public class EnrollSection {
 
     private int studentID;
@@ -19,13 +22,15 @@ public class EnrollSection {
     private String termID;
 
     /**
-     * @return the studentID
+     * Returns the Student ID. 
+     * @return studentID the Student ID
      */
     public int getStudentID() {
         return studentID;
     }
 
     /**
+     * Sets the Student ID.
      * @param studentID the studentID to set
      */
     public void setStudentID(int studentID) {
@@ -33,13 +38,15 @@ public class EnrollSection {
     }
 
     /**
-     * @return the sectionID
+     * Returns the Section ID.
+     * @return the sectionID to set
      */
     public String getSectionID() {
         return sectionID;
     }
 
     /**
+     * Sets the Section ID.
      * @param sectionID the sectionID to set
      */
     public void setSectionID(String sectionID) {
@@ -47,13 +54,15 @@ public class EnrollSection {
     }
 
     /**
-     * @return the grade
+     * Returns the grade of a section of a student.
+     * @return grade of the section of a student
      */
     public String getGrade() {
         return grade;
     }
 
     /**
+     * Sets the grade of a section of a student.
      * @param grade the grade to set
      */
     public void setGrade(String grade) {
@@ -61,13 +70,15 @@ public class EnrollSection {
     }
 
     /**
-     * @return the courseDept
+     * Returns the department of the course.
+     * @return courseDept department of the course
      */
     public String getCourseDept() {
         return courseDept;
     }
 
     /**
+     * Sets the depart of the course.
      * @param courseDept the courseDept to set
      */
     public void setCourseDept(String courseDept) {
@@ -75,6 +86,7 @@ public class EnrollSection {
     }
 
     /**
+     * Returns the number of the course.
      * @return the courseNum
      */
     public String getCourseNum() {
@@ -82,6 +94,7 @@ public class EnrollSection {
     }
 
     /**
+     * Sets the number of the course.
      * @param courseNum the courseNum to set
      */
     public void setCourseNum(String courseNum) {
@@ -89,6 +102,7 @@ public class EnrollSection {
     }
 
     /**
+     * Returns the TermID.
      * @return the termID
      */
     public String getTermID() {
@@ -96,6 +110,7 @@ public class EnrollSection {
     }
 
     /**
+     * Sets the TermID.
      * @param termID the termID to set
      */
     public void setTermID(String termID) {
@@ -105,8 +120,13 @@ public class EnrollSection {
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
-     *
+     * @param studentID the studentID
+     * @param sectionID the sectionID
+     * @param courseDept the department of the course
+     * @param courseNum the number of the course
+     * @param termID the termID
      * @throws SQLException
+     * @return the flag if any result returns from the SQL execution in DB
      */
     public int fetch(int studentID, String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
         ResultSet rs;
@@ -172,7 +192,8 @@ public class EnrollSection {
 
     /**
      * Insert this EnrollSection into the database.
-     *
+     * @param section the section to query
+     * @param studentID the studentID to query
      * @throws SQLException
      */
     public void insertBySecStu(Section section, int studentID) throws SQLException {
@@ -188,7 +209,7 @@ public class EnrollSection {
     }
 
     /**
-     * Checks whether the student is enrolled in the section or not
+     * Checks whether the student is enrolled in the section or not.
      *
      * @param student student to check
      * @param section section to check
@@ -217,10 +238,11 @@ public class EnrollSection {
     }
 
     /**
-     * Get all sections which are enrolled by the student
+     * Get all sections which are enrolled by the student.
      *
      * @param studentID is the studentID of the current student
-     * @return rs the ResultSet of prerequisite information
+     * @return rs the ResultSet of enrolled course info
+     * @throws SQLException
      */
     public static ResultSet fetchEnrolledCourses(int studentID) throws SQLException {
         ResultSet rs;
@@ -230,7 +252,7 @@ public class EnrollSection {
     }
 
     /**
-     * Get all prerequisite courses for the section
+     * Get all prerequisite courses for the section.
      *
      * @param section is the section student wants to enroll in
      * @return rs the ResultSet of prerequisite information
@@ -250,12 +272,13 @@ public class EnrollSection {
     }
 
     /**
-     * Determines whether the section is in a section set
+     * Determines whether the section is in a section set.
      *
      * @param rs_enrolled the ResultSet contains the sections information
      * @param courseDept the course department of the section
      * @param courseNum the course number of the section
      * @return true if in the set; false if not
+     * @throws SQLException
      */
     public static boolean isInSet(ResultSet rs_enrolled, String courseDept, String courseNum) throws SQLException {
         rs_enrolled.beforeFirst();
@@ -275,12 +298,13 @@ public class EnrollSection {
     }
 
     /**
-     * Determines whether the student has met the prerequisites of the section
+     * Determines whether the student has met the prerequisites of the section.
      *
      * @param section is the section student wants to enroll in
      * @param studentID the current student's studentID
      * @return true if the student has met the prerequisites of the section;
      * false if not
+     * @throws SQLException
      */
     public static boolean checkPrerequisite(Section section, int studentID) throws SQLException {
 //        ResultSet rs;
@@ -346,12 +370,13 @@ public class EnrollSection {
     }
 
     /**
-     * Determines whether the section is already been enrolled by the student
+     * Determines whether the section is already been enrolled by the student.
      *
      * @param section is the section student wants to enroll in
      * @param studentID the current student's studentID
      * @return true if the section is already been enrolled by the student;
      * false if not
+     * @throws SQLException
      */
     public static boolean isAlreadyRegistered(Section section, int studentID) throws SQLException {
 
@@ -369,7 +394,7 @@ public class EnrollSection {
     }
 
     /**
-     * Determines whether the registration date is passed
+     * Determines whether the registration date is passed.
      *
      * @param section is the section student wants to enroll in
      * @return true if the registration date is not passed; false if is passed
