@@ -80,9 +80,9 @@ public class Validation {
         result = matcher.matches();
         return result;
     }
-    
+
     /**
-     * To check if it is Letter +  Num (Can have space) string
+     * To check if it is Letter + Num (Can have space) string
      *
      * @param str
      * @return true if it is; false if not
@@ -122,7 +122,7 @@ public class Validation {
         }
         return true;
     }
-  
+
     /**
      * To check if it is NULL
      *
@@ -138,8 +138,8 @@ public class Validation {
     }
 
     /**
-     * To check if it is a pure Num string and length is [>=
-     * max] and [<=min] Space also counted e.g. "AB CD" has 5
+     * To check if it is a pure Num string and length is [>= max] and [<=min]
+     * Space also counted e.g. "AB CD" has 5
      *
      * @param str String to check
      * @param max Max boundary
@@ -158,8 +158,8 @@ public class Validation {
     }
 
     /**
-     * To check if it is a pure letter string and length is [>=
-     * max] and [<=min] Space also counted e.g. "12 34" has 5
+     * To check if it is a pure letter string and length is [>= max] and [<=min]
+     * Space also counted e.g. "12 34" has 5
      *
      * @param str String to check
      * @param max Max boundary
@@ -177,9 +177,9 @@ public class Validation {
         }
     }
 
-     /**
-     * To check if it is a letter and Num string and length is [>=
-     * max] and [<=min] Space also counted e.g. "AB2 CD" has 6
+    /**
+     * To check if it is a letter and Num string and length is [>= max] and
+     * [<=min] Space also counted e.g. "AB2 CD" has 6
      *
      * @param str String to check
      * @param max Max boundary
@@ -196,7 +196,6 @@ public class Validation {
             return false;
         }
     }
-   
 
     /**
      * To check if it is a validate email address
