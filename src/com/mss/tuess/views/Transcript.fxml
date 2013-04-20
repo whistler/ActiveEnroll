@@ -36,6 +36,5 @@
       <Label text="GPA :" />
       <Label fx:id="GPA" font="$x1" />
     </HBox>
-    <Label font="$x1" layoutX="25.0" layoutY="20.0" prefWidth="86.0" text="My Transcript" textFill="#606060" />
   </children>
 </AnchorPane>
