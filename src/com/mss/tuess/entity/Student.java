@@ -288,7 +288,7 @@ public class Student extends User {
                     + "enrollSection.studentID = student.studentID AND "
                     + "degreeCourse.courseDept = enrollSection.courseDept AND "
                     + "degreeCourse.courseNum = enrollSection.courseNum AND "
-                    + "enrollSection.grade IN ('A', 'B', 'C', 'D', 'E');";
+                    + "enrollSection.grade NOT IN ('F', 'W');";
             rs = DatabaseConnector.returnQuery(sql);
             while (rs.next()) {
                 Course course = new Course();
@@ -318,7 +318,7 @@ public class Student extends User {
                     + "enrollSection.studentID = student.studentID AND "
                     + "degreeCourse.courseDept = enrollSection.courseDept AND "
                     + "degreeCourse.courseNum = enrollSection.courseNum AND "
-                    + "enrollSection.grade IN ('A', 'B', 'C', 'D', 'E')) T2 "
+                    + "enrollSection.grade NOT IN ('F', 'W')) T2 "
                     + "ON T1.courseNum = T2.courseNum AND T1.courseDept = T2.courseDept "
                     + "WHERE T2.courseNum IS NULL AND T2.courseDept IS NULL";
             rs = DatabaseConnector.returnQuery(sql);
