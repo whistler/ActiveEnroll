@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Faculty class
+ */
 public class Faculty {
     private static ArrayList<Faculty> faculties = new ArrayList();
 
@@ -54,7 +57,7 @@ public class Faculty {
     /**
      * Loads the Faculty by the facultyName from the database and encapsulates
      * into this Faculty objects
-     *
+     * @param facultyName the faculty used to query
      * @throws SQLException
      */
     public void fetch(String facultyName) throws SQLException {
