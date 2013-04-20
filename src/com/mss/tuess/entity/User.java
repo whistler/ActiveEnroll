@@ -147,8 +147,6 @@ public abstract class User {
     public String getPassword() {
         return this.password;
     }
-
-    ;
     
     /**
     * @param password the password to set
