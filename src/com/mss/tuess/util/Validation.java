@@ -1,18 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
- * @author wwh
+ * Provides methods for validation of input fields. 
  */
 public class Validation {
 
+    public static ArrayList errors;
+    
     /**
      * To check if it is positive integer
      *
@@ -216,9 +214,90 @@ public class Validation {
             return false;
         }
     }
+    
+    
+    public static boolean isInteger(String input)
+    {
+        try{
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
-        boolean result = isPositiveInt("25");
-        System.out.println(result);
+        System.out.println(escapeInput("A\'B\"C"));
+    }
+    
+    /**
+     * Validates an input field to meet meet the input criteria
+     * pre: the user has provided input for fields
+     * post: errors contains the list of errors for this field
+     * @param name name of the field for use in error messages
+     * @param input input from the user
+     * @param required whether the field is required or optional
+     * @param min the minimum length for a string or minimum value for a number
+     * @param max the maximum length for a string or maximum value for a number
+     * @param type type of the input field
+     * @return escaped string
+     */
+    public static String validate(String name, String input, boolean required, int min, int max, InputType type)
+    {
+        input = escapeInput(input);
+        
+        // Check Types
+        switch(type)
+        {
+            case LETTERS:
+                if(!isPureLetter_WithSpace(input))
+                    errors.add(input + " can only contain letters and numbers");
+                break;
+            case LETTERS_NOSPACE:
+                if(!isPureLetter_NoSpace(input))
+                    errors.add(input + " can only contain letters");
+                break;
+            case EMAIL:
+                if (!isEmailAddress(input)) 
+                    errors.add(input + " must be an email address");
+                break;
+            case INTEGER:
+                if(!isInteger(input))
+                    errors.add(input + " must be a number");
+                break;
+            case POSITIVE_INTEGER:
+                if (!isPositiveInt(input))
+                    errors.add(input + " must be a positve integer");
+        }
+        
+        // Check Null
+        if (required && input.length()==0) errors.add(name + " cannot be blank");
+        
+        // Check Range
+        if (type == InputType.INTEGER && type == InputType.POSITIVE_INTEGER)
+        {
+            int num = Integer.parseInt(input);
+            if (num < min) errors.add(name + " cannot be less than " + min + "");
+            if (num > max) errors.add(name + " cannot be more than " + max + "");            
+
+        } else
+        {
+            if (input.length()< min) errors.add(name + " cannot be shorter than " + min + " characters");
+            if (input.length()>max) errors.add(name + " cannot be longer than " + max + " characters");            
+        }
+
+        return input;
+    }
+    
+    /**
+     * @param input string to escape
+     * @return a string without the following characters: \ ' "
+     */
+    public static String escapeInput(String input)
+    {
+        input = input.replaceAll("\\\\", " "); // match backslash
+        input = input.replaceAll("'", " ");  // match single quote
+        input = input.replaceAll("\"", " "); // match double quote
+        return input;
     }
 }
