@@ -140,8 +140,8 @@ public class Validation {
     }
 
     /**
-     * To check if it is a pure number string (without space) and length is [>=
-     * max] and [<=min] e.g. "ABCD"
+     * To check if it is a pure Num string and length is [>=
+     * max] and [<=min] Space also counted e.g. "AB CD" has 5
      *
      * @param str String to check
      * @param max Max boundary
@@ -160,15 +160,15 @@ public class Validation {
     }
 
     /**
-     * To check if it is a pure letter string without space and length is [>=
-     * max] and [<=min] e.g. "1234"
+     * To check if it is a pure letter string and length is [>=
+     * max] and [<=min] Space also counted e.g. "12 34" has 5
      *
      * @param str String to check
      * @param max Max boundary
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_PureLetter_NoSpace(String str, int max, int min) {
+    public static boolean isStr_Length_PureLetter_CountSpace(String str, int max, int min) {
         if (isPureLetter_NoSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
@@ -180,8 +180,8 @@ public class Validation {
     }
 
      /**
-     * To check if it is a Letter + Num string (without space) and length is [>=
-     * max] and [<=min] e.g. "ABCD"
+     * To check if it is a letter and Num string and length is [>=
+     * max] and [<=min] Space also counted e.g. "AB2 CD" has 6
      *
      * @param str String to check
      * @param max Max boundary
