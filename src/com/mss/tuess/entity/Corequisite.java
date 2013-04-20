@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Corequisite class
+ */
 public class Corequisite {
 
     private String courseDept;
@@ -15,21 +18,24 @@ public class Corequisite {
     private String coreqNum;
     private int coreqGroup;
 
-    /**
-     * @return coreqGroup
+    /** 
+     * Returns the group of corequisite.
+     * @return coreqGroup the group of the corequisite
      */
-    public int getPrereqGroup() {
+    public int getCoreqGroup() {
         return coreqGroup;
     }
 
     /**
-     * @param coreqGroup to set
+     * Sets the group of corequisite.
+     * @param coreqGroup the corequisite group to set
      */
-    public void setPrereqGroup(int coreqGroup) {
+    public void setCoreqGroup(int coreqGroup) {
         this.coreqGroup = coreqGroup;
     }
 
     /**
+     * Reutns the department that offers the course.
      * @return the courseDept
      */
     public String getCourseDept() {
@@ -37,6 +43,7 @@ public class Corequisite {
     }
 
     /**
+     * Sets the department that offers the course.
      * @param courseDept the courseDept to set
      */
     public void setCourseDept(String courseDept) {
@@ -44,13 +51,15 @@ public class Corequisite {
     }
 
     /**
-     * @return the courseNum
+     * Returns the number of the course.
+     * @return the courseNum of the course
      */
     public String getCourseNum() {
         return courseNum;
     }
 
     /**
+     * Sets the number of the course.
      * @param courseNum the courseNum to set
      */
     public void setCourseNum(String courseNum) {
@@ -58,30 +67,34 @@ public class Corequisite {
     }
 
     /**
-     * @return the coreqDept
+     * Returns the department that offers the corequisite course.
+     * @return the coreqDept the department that offers the corequisite course
      */
-    public String getPrereqDept() {
+    public String getCoreqDept() {
         return coreqDept;
     }
 
     /**
+     * Sets the department that offers the corequisite course.
      * @param coreqDept the coreqDept to set
      */
-    public void setPrereqDept(String coreqDept) {
+    public void setCoreqDept(String coreqDept) {
         this.coreqDept = coreqDept;
     }
 
     /**
-     * @return the coreqNum
+     * Returns the number of the corequisite course.
+     * @return the coreqNum the course number of the corequisite course
      */
-    public String getPrereqNum() {
+    public String getCoreqNum() {
         return coreqNum;
     }
 
     /**
-     * @param coreqNum the coreqNum to set
+     * Sets the number of the crequisite course.
+     * @param coreqNum the course number to set
      */
-    public void setPrereqNum(String coreqNum) {
+    public void setCoreqNum(String coreqNum) {
         this.coreqNum = coreqNum;
     }
 
@@ -99,25 +112,25 @@ public class Corequisite {
         if (rs.next()) {
             this.setCourseDept(rs.getString("courseDept"));
             this.setCourseNum(rs.getString("courseNum"));
-            this.setPrereqNum(rs.getString("coreqNum"));
-            this.setPrereqDept(rs.getString("coreqDept"));
-            this.setPrereqGroup(rs.getInt("coreqGroup"));
+            this.setCoreqNum(rs.getString("coreqNum"));
+            this.setCoreqDept(rs.getString("coreqDept"));
+            this.setCoreqGroup(rs.getInt("coreqGroup"));
         }
 
     }
 
     /**
-     * Delete this Corequisite record in the database.
+     * Deletes this Corequisite record in the database.
      *
      * @throws SQLException
      */
     public void delete() throws SQLException {
-        String sql = "DELETE FROM corequisite WHERE courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum() + ", coreqDept=" + this.getPrereqDept() + ", coreqNum=" + this.getPrereqNum();
+        String sql = "DELETE FROM corequisite WHERE courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum() + ", coreqDept=" + this.getCoreqDept() + ", coreqNum=" + this.getCoreqNum();
         DatabaseConnector.updateQuery(sql);
     }
 
     /**
-     * Insert this Corequisite into the database.
+     * Inserts this Corequisite into the database.
      *
      * @throws SQLException
      */
@@ -126,14 +139,15 @@ public class Corequisite {
                 + " coreqNum, coreqGroup) values ("
                 + this.getCourseDept() + ", '"
                 + this.getCourseNum() + "', '"
-                + this.getPrereqDept() + "', '"
-                + this.getPrereqNum() + "', "
-                + this.getPrereqGroup() + ")";
+                + this.getCoreqDept() + "', '"
+                + this.getCoreqNum() + "', "
+                + this.getCoreqGroup() + ")";
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 
     /**
+     * Fetches the corequisite records in the database and store in the array list.
      * @param course to find corequisites for
      * @return ArrayList of corequisites for the course ordered by group
      */
@@ -150,9 +164,9 @@ public class Corequisite {
                 Corequisite coreq = new Corequisite();
                 coreq.setCourseDept(rs.getString("courseDept"));
                 coreq.setCourseNum(rs.getString("courseNum"));
-                coreq.setPrereqNum(rs.getString("coreqNum"));
-                coreq.setPrereqDept(rs.getString("coreqDept"));
-                coreq.setPrereqGroup(rs.getInt("coreqGroup"));
+                coreq.setCoreqNum(rs.getString("coreqNum"));
+                coreq.setCoreqDept(rs.getString("coreqDept"));
+                coreq.setCoreqGroup(rs.getInt("coreqGroup"));
                 corequisites.add(coreq);
             }
         } catch (SQLException ex) {
@@ -162,9 +176,9 @@ public class Corequisite {
     }
     
     /**
-     * 
-     * @param coreqs
-     * @return 
+     * Get the corequisite courses information.
+     * @param coreqs the array list that stores the all corequisite coures
+     * @return str the string of course information of the corequisite to display in the panel.
      */
     public static String getCorequisitesString(ArrayList<Corequisite> coreqs)
     {
@@ -176,7 +190,7 @@ public class Corequisite {
             String concat;
             if (i==size-1) concat = ")";
             else {
-                if(coreqs.get(i+1).getPrereqGroup() == coreqs.get(i).getPrereqGroup()) concat = " OR ";
+                if(coreqs.get(i+1).getCoreqGroup() == coreqs.get(i).getCoreqGroup()) concat = " OR ";
                 else concat = ") AND (";
             }
             str = str + coreqs.get(i).getCourseDept() + " " + coreqs.get(i).getCourseNum() + concat;
