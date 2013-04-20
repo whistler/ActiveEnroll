@@ -148,7 +148,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_PureNum_NoSpace(String str, int max, int min) {
+    public static boolean isStr_Length_PureNum_CountSpace(String str, int max, int min) {
         if (isPureNum_NoSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
@@ -188,7 +188,7 @@ public class Validation {
      * @param min Min boundary
      * @return true if it is; false if not
      */
-    public static boolean isStr_Length_LetterNum_NoSpace(String str, int max, int min) {
+    public static boolean isStr_Length_LetterNum_CountSpace(String str, int max, int min) {
         if (isLetterNum_WithSpace(str)) {
             if (isStr_Length(str, max, min)) {
                 return true;
