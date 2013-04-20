@@ -35,9 +35,8 @@ public class Administrator extends User{
     }
 
     /**
-     * Returns the administrator stored at the given index
-     *
-     * @param index index of the administrator to return
+     * Returns the administrator stored at the given index.
+     * @param index of the administrator
      * @return Administrator object at position index
      */
     public static Administrator get(int index) {
@@ -47,6 +46,7 @@ public class Administrator extends User{
     private int adminID;
 
     /**
+     * Get the administrator ID.
      * @return the adminID
      */
     @Override
@@ -55,6 +55,7 @@ public class Administrator extends User{
     }
 
     /**
+     * Set the administrator ID.
      * @param adminID the adminID to set
      */
     @Override
@@ -63,7 +64,7 @@ public class Administrator extends User{
     }
 
     /**
-     * Loads Administrator with the given adminID from the database
+     * Loads Administrator with the given adminID from the database.
      * @param adminId adminID for the Administrator to fetch
      * @throws SQLException 
      */
@@ -87,7 +88,7 @@ public class Administrator extends User{
     }
 
     /**
-     * Updates the current record in the database
+     * Updates the current administrator record in the database.
      * @throws SQLException 
      */
     @Override
@@ -105,13 +106,17 @@ public class Administrator extends User{
                 + "WHERE adminID=" + this.getID());
     }
 
+    /**
+     * Deletes the current administrator record in the database.
+     * @throws SQLException 
+     */
     @Override
     public void delete() throws SQLException {
         DatabaseConnector.updateQuery("DELETE FROM adminstrator WHERE adminID=" + this.getID());
     }
 
     /**
-     * Creates a new record with the database with the properties of this Administrator
+     * Creates a new administrator record in the database with the properties of this Administrator
      * @throws SQLException 
      */
     @Override
