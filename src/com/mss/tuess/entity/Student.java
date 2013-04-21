@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Student class
+ */
 public class Student extends User {
     private static ArrayList<Student> students = new ArrayList();
 
@@ -48,10 +51,19 @@ public class Student extends User {
         return students.get(index);
     }
 
+    /**
+     * Returns the student arreylist.
+     * @return 
+     */
     public static ArrayList<Student> getAll() {
         return students;
     }
 
+    /**
+     * Fetches current term from the database
+     * @return result set 
+     * @throws SQLException 
+     */
     public static ResultSet fetchCurrentTerm() throws SQLException {
         ResultSet rs;
         System.out.println("current term is " + State.getCurrentTerm().getTermID());
@@ -132,7 +144,7 @@ public class Student extends User {
     /**
      * Loads the Student by the studentID from the database and encapsulates
      * into this Student objects
-     *
+     * @param stuId the student ID
      * @throws SQLException
      */
     @Override
@@ -256,6 +268,10 @@ public class Student extends User {
         return 0;
     }
 
+    /**
+     * Returns required courses.
+     * @return the arraylist of required courses
+     */
     public ArrayList<Course> getRequiredCourses() {
         ArrayList list = new ArrayList();
         try {
@@ -277,6 +293,10 @@ public class Student extends User {
         return list;
     }
 
+    /**
+     * Returns complete required courses.
+     * @return the arraylist of complete required courses
+     */
     public ArrayList<Course> getCompletedRequiredCourses() {
         ArrayList list = new ArrayList();
         try {
@@ -302,6 +322,10 @@ public class Student extends User {
         return list;
     }
 
+    /**
+     * Returns incomplete required courses.
+     * @return the arraylist of incomplete required courses
+     */
     public ArrayList<Course> getIncompleteRequiredCourses() {
         ArrayList list = new ArrayList();
         try {
