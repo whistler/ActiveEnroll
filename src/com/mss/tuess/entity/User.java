@@ -4,16 +4,16 @@ import java.sql.SQLException;
 
 public abstract class User {
 
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String email;
-    private String country;
-    private String state;
-    private String zipcode;
-    private String phone;
-    private String password;
+    private String firstName = "";
+    private String lastName = "";
+    private String address = "";
+    private String city = "";
+    private String email = "";
+    private String country = "";
+    private String state = "";
+    private String zipcode = "";
+    private String phone = "";
+    private String password = "";
 
     public abstract void fetch(int id) throws SQLException;
 
@@ -147,8 +147,6 @@ public abstract class User {
     public String getPassword() {
         return this.password;
     }
-
-    ;
     
     /**
     * @param password the password to set
