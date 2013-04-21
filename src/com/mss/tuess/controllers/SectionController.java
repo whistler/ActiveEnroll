@@ -117,15 +117,24 @@ public class SectionController implements Initializable {
             /* Show the right button either to enroll or drop*/
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
+                if (!EnrollSection.withdrawEndNotPass(section)) {
+                    dropButton.setDisable(true);
+                    ViewManager.setStatus("Last day to drop has passed");
+                }
+            } else {
+                dropButton.setVisible(false);
                 if (!EnrollSection.registrationEndNotPass(section)) {
                     enrollButton.setDisable(true);
                     ViewManager.setStatus("Registration has ended");
                 }
-            } else {
-                dropButton.setVisible(false);
-                if (!EnrollSection.withdrawEndNotPass(section)) {
-                    dropButton.setDisable(true);
-                    ViewManager.setStatus("Last day to drop has passed");
+                try {
+                    if (EnrollSection.isAlreadyRegistered(section, CurrentUser.getUser().getID()))
+                    {
+                        enrollButton.setDisable(true);
+                        ViewManager.setStatus("You have withdrawn from this course");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

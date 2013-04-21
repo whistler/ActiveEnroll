@@ -465,11 +465,9 @@ public class EnrollSection {
             if (rs_stu_reg.getString("sectionID").compareTo(section.getSectionID()) == 0
                     && rs_stu_reg.getString("courseDept").compareTo(section.getCourseDept()) == 0
                     && rs_stu_reg.getString("courseNum").compareTo(section.getCourseNum()) == 0) {
-                System.out.println("\nisAlreadyRegistered returns: true");
                 return true;
             }
         }
-        System.out.println("\nisAlreadyRegistered returns: false");
         return false;
     }
 
