@@ -12,40 +12,45 @@
 
 <AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.ProfileController">
   <children>
-    <Button layoutX="271.0" layoutY="462.0" mnemonicParsing="false" onAction="#update" text="Save" />
-    <Label id="IDlabel" fx:id="IDLabel" layoutX="135.0" layoutY="75.0" text="Student ID">
+    <Button layoutX="271.0" layoutY="458.0" mnemonicParsing="false" onAction="#update" text="Save" />
+    <Label id="IDlabel" fx:id="IDLabel" layoutX="135.0" layoutY="44.0" text="Student ID">
       <font>
         <Font name="System Bold" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="ID" font="$x1" layoutX="271.0" layoutY="74.0" text="11111111" />
-    <Label layoutX="136.0" layoutY="157.0" text="First Name" />
-    <Label layoutX="134.0" layoutY="179.0" text="Last Name" />
-    <Label layoutX="134.0" layoutY="244.0" text="Address" />
-    <Label layoutX="135.0" layoutY="373.0" text="Phone" />
-    <Label fx:id="programLabel" layoutX="135.0" layoutY="96.0" text="Program" visible="false" />
-    <Label id="registeredLabel" fx:id="registeredSinceLabel" layoutX="134.0" layoutY="115.0" text="Registered Since" visible="false" />
-    <Label fx:id="statusLabel" layoutX="134.0" layoutY="134.0" text="Status" visible="false" />
-    <Label layoutX="133.0" layoutY="398.0" text="New Password" />
-    <Label layoutX="133.0" layoutY="426.0" text="Confirm Password" />
-    <TextField fx:id="firstName" layoutX="271.0" layoutY="154.0" prefWidth="200.0" />
-    <TextField fx:id="lastName" layoutX="271.0" layoutY="176.0" prefWidth="200.0" />
-    <TextField fx:id="phone" layoutX="271.0" layoutY="373.0" prefWidth="200.0" />
-    <Label fx:id="program" layoutX="273.0" layoutY="96.0" text="ProgramName" visible="false" />
-    <Label fx:id="registeredSince" layoutX="273.0" layoutY="115.0" text="Date" visible="false" />
-    <Label fx:id="status" layoutX="272.0" layoutY="134.0" text="Part-time/Full-time" visible="false" />
-    <PasswordField fx:id="newPassword" layoutX="271.0" layoutY="403.0" prefWidth="200.0" />
-    <PasswordField fx:id="confirmPassword" layoutX="271.0" layoutY="426.0" prefWidth="200.0" />
-    <TextArea fx:id="address" layoutX="271.0" layoutY="227.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
-    <TextField id="eMail" fx:id="email" layoutX="271.0" layoutY="198.0" prefWidth="200.0" />
-    <Label layoutX="134.0" layoutY="201.0" text="Email" />
-    <Label layoutX="134.0" layoutY="280.0" text="City" />
-    <Label layoutX="134.0" layoutY="302.0" text="Zip Code" />
-    <Label layoutX="134.0" layoutY="348.0" text="Country" />
-    <TextField fx:id="city" layoutX="271.0" layoutY="277.0" prefWidth="200.0" />
-    <TextField fx:id="zipCode" layoutX="271.0" layoutY="299.0" prefWidth="200.0" />
-    <TextField fx:id="country" layoutX="271.0" layoutY="348.0" prefWidth="200.0" />
-    <Label layoutX="135.0" layoutY="324.0" text="State" />
-    <TextField fx:id="state" layoutX="271.0" layoutY="324.0" prefWidth="200.0" />
+    <Label fx:id="ID" font="$x1" layoutX="271.0" layoutY="43.0" text="11111111" />
+    <Label layoutX="136.0" layoutY="126.0" text="First Name" />
+    <Label layoutX="134.0" layoutY="148.0" text="Last Name" />
+    <Label layoutX="134.0" layoutY="213.0" text="Address" />
+    <Label layoutX="135.0" layoutY="342.0" text="Phone" />
+    <Label fx:id="programLabel" layoutX="135.0" layoutY="65.0" text="Program" visible="false" />
+    <Label id="registeredLabel" fx:id="registeredSinceLabel" layoutX="134.0" layoutY="84.0" text="Registered Since" visible="false" />
+    <Label fx:id="statusLabel" layoutX="134.0" layoutY="103.0" text="Status" visible="false" />
+    <Label layoutX="133.0" layoutY="402.0" text="New Password" />
+    <Label layoutX="133.0" layoutY="425.0" text="Confirm Password" />
+    <TextField fx:id="firstName" layoutX="271.0" layoutY="123.0" prefWidth="200.0" />
+    <TextField fx:id="lastName" layoutX="271.0" layoutY="145.0" prefWidth="200.0" />
+    <TextField fx:id="phone" layoutX="271.0" layoutY="342.0" prefWidth="200.0" />
+    <Label fx:id="program" layoutX="273.0" layoutY="65.0" text="ProgramName" visible="false" />
+    <Label fx:id="registeredSince" layoutX="273.0" layoutY="84.0" text="Date" visible="false" />
+    <Label fx:id="status" layoutX="272.0" layoutY="103.0" text="Part-time/Full-time" visible="false" />
+    <PasswordField fx:id="newPassword" layoutX="271.0" layoutY="399.0" prefWidth="200.0" />
+    <PasswordField fx:id="confirmPassword" layoutX="271.0" layoutY="422.0" prefWidth="200.0" />
+    <TextArea fx:id="address" layoutX="271.0" layoutY="196.0" prefHeight="50.0" prefWidth="200.0" wrapText="true" />
+    <TextField id="eMail" fx:id="email" layoutX="271.0" layoutY="167.0" prefWidth="200.0" />
+    <Label layoutX="134.0" layoutY="170.0" text="Email" />
+    <Label layoutX="134.0" layoutY="249.0" text="City" />
+    <Label layoutX="134.0" layoutY="271.0" text="Zip Code" />
+    <Label layoutX="134.0" layoutY="317.0" text="Country" />
+    <TextField fx:id="city" layoutX="271.0" layoutY="246.0" prefWidth="200.0" />
+    <TextField fx:id="zipCode" layoutX="271.0" layoutY="268.0" prefWidth="200.0" />
+    <TextField fx:id="country" layoutX="271.0" layoutY="317.0" prefWidth="200.0" />
+    <Label layoutX="135.0" layoutY="293.0" text="State" />
+    <TextField fx:id="state" layoutX="271.0" layoutY="293.0" prefWidth="200.0" />
+    <Label layoutX="133.0" layoutY="375.0" text="Change Password">
+      <font>
+        <Font name="System Bold" size="13.0" />
+      </font>
+    </Label>
   </children>
 </AnchorPane>
