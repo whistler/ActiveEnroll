@@ -121,6 +121,7 @@ public class MailGradesController implements Initializable {
             //build email list
             emailData = new EmailData(toEmails, emailSubject, emailBody);
             System.out.println("Adding student "+studentnumber);
+            studentnumber++;
             emailList.add(emailData);
 
             //mailGradesStatus.setText("Grades successfully mailed!");
