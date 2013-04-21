@@ -14,13 +14,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TaughtCourseController">
   <children>
-    <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
+    <Label fx:id="errorLabel" layoutX="143.0" layoutY="308.0" />
     <Label id="title" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses" textFill="GREY">
       <font>
         <Font name="System Bold" size="14.0" fx:id="x2" />
       </font>
     </Label>
-    <TableView fx:id="sectionTable" layoutX="14.0" layoutY="36.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView fx:id="sectionTable" layoutX="14.0" layoutY="36.0" prefHeight="142.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
         <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
@@ -42,28 +42,28 @@
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label alignment="CENTER" font="$x1" layoutX="124.0" layoutY="276.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
+    <Label alignment="CENTER" font="$x1" layoutX="114.0" layoutY="187.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
       <textFill>
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <Separator layoutX="14.0" layoutY="299.0" minHeight="3.0" prefWidth="572.0">
+    <Separator layoutX="14.0" layoutY="209.0" minHeight="3.0" prefHeight="14.0" prefWidth="572.0">
       <effect>
-        <DropShadow color="#606060" />
+        <DropShadow>
+          <color>
+            <Color blue="0.376" green="0.376" red="0.376" fx:id="x4" />
+          </color>
+        </DropShadow>
       </effect>
     </Separator>
-    <TableView id="studentTable" fx:id="studentTable" layoutX="14.0" layoutY="339.0" prefHeight="149.99990000000253" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView fx:id="studentTable" layoutX="14.0" layoutY="253.0" prefHeight="236.0" prefWidth="372.0" tableMenuButtonVisible="true">
       <columns>
-        <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
-        <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
-        <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="day" />
-        <TableColumn prefWidth="75.0" text="Start Time" fx:id="displayStartTime" />
-        <TableColumn prefWidth="75.0" text="End Time" fx:id="displayEndTime" />
-        <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
+        <TableColumn prefWidth="75.0" text="studentID" fx:id="studentID" />
+        <TableColumn minWidth="100.0" prefWidth="100.0" text="Grade" fx:id="grade" />
       </columns>
     </TableView>
-    <Label font="$x2" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY" />
-    <TextField id="filterText" fx:id="sectionFilter" layoutX="348.0" layoutY="309.0" prefWidth="238.0" promptText="type filter text">
+    <Label font="$x2" layoutX="14.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" text="Student" textFill="GREY" />
+    <TextField id="filterText" fx:id="sectionFilter" layoutX="403.0" layoutY="305.0" prefWidth="179.0" promptText="type filter text">
       <effect>
         <InnerShadow color="GREY" />
       </effect>
@@ -71,7 +71,15 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label font="$x1" layoutX="278.0" layoutY="313.0" prefWidth="73.0" text="Search" textFill="GREY" />
+    <Label font="$x1" layoutX="463.0" layoutY="273.0" prefWidth="73.0" text="Search" textFill="GREY" />
     <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
+    <TextField layoutX="398.0" layoutY="410.0" prefWidth="188.0" />
+    <Button layoutX="457.0" layoutY="447.0" mnemonicParsing="false" text="Button" />
+    <Separator layoutX="392.0" layoutY="349.0" minHeight="3.0" prefHeight="14.0" prefWidth="200.0">
+      <effect>
+        <DropShadow color="$x4" />
+      </effect>
+    </Separator>
+    <Label font="$x1" layoutX="439.0" layoutY="379.0" prefWidth="94.0" text="Change Grade" textFill="GREY" />
   </children>
 </AnchorPane>

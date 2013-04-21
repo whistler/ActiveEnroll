@@ -4,6 +4,7 @@
  */
 package com.mss.tuess.util;
 
+import com.mss.tuess.entity.EnrollSection;
 import com.mss.tuess.entity.Section;
 import com.mss.tuess.entity.SectionClass;
 import com.mss.tuess.entity.Term;
@@ -19,6 +20,7 @@ public class State {
     private static Section currentSection = new Section();
     private static SectionClass currentSectionClass = new SectionClass();
     private static String currentSearchView;
+    private static EnrollSection currentEnrollSection = new EnrollSection();
     
     /**
      * 
@@ -36,7 +38,9 @@ public class State {
             currentSection = section;
             currentSection.fetchAssociations();
         }
-    
+      public static void setCurrentEnrollSection(EnrollSection enrollsection) throws SQLException {
+            currentEnrollSection = enrollsection; 
+        }
     public static Section getCurrentSection()
         {
             return currentSection;
