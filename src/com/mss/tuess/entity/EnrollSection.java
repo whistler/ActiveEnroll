@@ -31,7 +31,8 @@ public class EnrollSection {
         return enrollSections;
     }
     /**
-     * Returns the Student ID. 
+     * Returns the Student ID.
+     *
      * @return studentID the Student ID
      */
     public int getStudentID() {
@@ -40,6 +41,7 @@ public class EnrollSection {
 
     /**
      * Sets the Student ID.
+     *
      * @param studentID the studentID to set
      */
     public void setStudentID(int studentID) {
@@ -48,6 +50,7 @@ public class EnrollSection {
 
     /**
      * Returns the Section ID.
+     *
      * @return the sectionID to set
      */
     public String getSectionID() {
@@ -56,6 +59,7 @@ public class EnrollSection {
 
     /**
      * Sets the Section ID.
+     *
      * @param sectionID the sectionID to set
      */
     public void setSectionID(String sectionID) {
@@ -64,6 +68,7 @@ public class EnrollSection {
 
     /**
      * Returns the grade of a section of a student.
+     *
      * @return grade of the section of a student
      */
     public String getGrade() {
@@ -72,6 +77,7 @@ public class EnrollSection {
 
     /**
      * Sets the grade of a section of a student.
+     *
      * @param grade the grade to set
      */
     public void setGrade(String grade) {
@@ -80,6 +86,7 @@ public class EnrollSection {
 
     /**
      * Returns the department of the course.
+     *
      * @return courseDept department of the course
      */
     public String getCourseDept() {
@@ -88,6 +95,7 @@ public class EnrollSection {
 
     /**
      * Sets the depart of the course.
+     *
      * @param courseDept the courseDept to set
      */
     public void setCourseDept(String courseDept) {
@@ -96,6 +104,7 @@ public class EnrollSection {
 
     /**
      * Returns the number of the course.
+     *
      * @return the courseNum
      */
     public String getCourseNum() {
@@ -104,6 +113,7 @@ public class EnrollSection {
 
     /**
      * Sets the number of the course.
+     *
      * @param courseNum the courseNum to set
      */
     public void setCourseNum(String courseNum) {
@@ -112,6 +122,7 @@ public class EnrollSection {
 
     /**
      * Returns the TermID.
+     *
      * @return the termID
      */
     public String getTermID() {
@@ -120,6 +131,7 @@ public class EnrollSection {
 
     /**
      * Sets the TermID.
+     *
      * @param termID the termID to set
      */
     public void setTermID(String termID) {
@@ -152,6 +164,7 @@ public class EnrollSection {
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
+     *
      * @param studentID the studentID
      * @param sectionID the sectionID
      * @param courseDept the department of the course
@@ -164,8 +177,8 @@ public class EnrollSection {
         ResultSet rs;
         String sql = "SELECT * FROM enrollSection "
                 + "WHERE studentID = " + studentID
-                + " AND sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
-                + courseNum + "' AND termID = '" + termID+"'";
+                + " AND sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '"
+                + courseNum + "' AND termID = '" + termID + "'";
         rs = DatabaseConnector.returnQuery(sql);
 
         if (rs.next()) {
@@ -176,8 +189,9 @@ public class EnrollSection {
             this.setTermID(rs.getString("termID"));
             this.setGrade(rs.getString("grade"));
             return 1;
+        } else {
+            return 0;
         }
-        else return 0;
 
     }
 
@@ -192,7 +206,7 @@ public class EnrollSection {
                 + " grade= '" + this.getGrade() + "'"
                 + " WHERE studentID=" + this.getStudentID() + " AND sectionID='" + this.getSectionID()
                 + "' AND courseDept='" + this.getCourseDept() + "' AND courseNum='" + this.getCourseNum()
-                + "' AND termID='" + this.getTermID()+"'";
+                + "' AND termID='" + this.getTermID() + "'";
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -224,6 +238,7 @@ public class EnrollSection {
 
     /**
      * Insert this EnrollSection into the database.
+     *
      * @param section the section to query
      * @param studentID the studentID to query
      * @throws SQLException
@@ -259,7 +274,8 @@ public class EnrollSection {
         try {
             rs = DatabaseConnector.returnQuery(sql);
             if (rs.next()) {
-                return true;
+                if(rs.getString("grade")=="W") return false;
+                else return true;
             } else {
                 return false;
             }
@@ -371,7 +387,7 @@ public class EnrollSection {
      * false if not
      * @throws SQLException
      */
-    public static boolean checkPrerequisite(Section section, int studentID) throws SQLException {
+    public static boolean meetsPrerequisites(Section section, int studentID) throws SQLException {
 //        ResultSet rs;
 //        String sql = " SELECT prereqDept, prereqNum FROM prerequisite pr"
 //                + "	WHERE courseDept=" + section.getCourseDept()
@@ -390,10 +406,7 @@ public class EnrollSection {
         rs_pre.last();
         int rowCount = rs_pre.getRow();
         rs_pre.beforeFirst();
-        if (rowCount == 0) {
-            System.out.println("No prerequisite!!!!...!!!!");
-            return true;
-        }
+        if (rowCount == 0) //No prerequisites
         System.out.println("+------------------" + rowCount + "-------------------+");
         while (rs_enrolled.next()) {
             System.out.println(rs_enrolled.getString("courseDept") + "__" + rs_enrolled.getString("courseNum"));
