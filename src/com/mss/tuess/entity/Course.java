@@ -77,7 +77,7 @@ public class Course {
      * @return ArrayList<Course> Course ArrayList
      */
     public static ArrayList<Course> getAll() {
-        System.out.println(courses.get(1).getCourseName());
+        //System.out.println(courses.get(1).getCourseName());
         return courses;
     }
 

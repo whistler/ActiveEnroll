@@ -7,17 +7,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.MailInstructionsController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <Button fx:id="sendInstructions" layoutX="252.0" layoutY="213.0" mnemonicParsing="false" text="Mail Instructions" onAction="#mailInstructions"/>
-    <Label layoutX="78.0" layoutY="55.0" text="Use the button below to send registration instructions to students for the next semester" />
-    <Label fx:id="sendEmailStatus" layoutX="199.0" layoutY="256.0" opacity="0.95" prefWidth="215.0" textFill="#00993d">
+    <Button fx:id="sendInstructions" defaultButton="true" layoutX="130.0" layoutY="330.0" mnemonicParsing="false" onAction="#mailInstructions" prefHeight="34.0" text="Mail Instructions">
       <font>
-        <Font name="System Bold" size="12.0" />
+        <Font name="System Bold" size="12.0" fx:id="x1" />
       </font>
+    </Button>
+    <Label font="$x1" layoutX="52.0" layoutY="14.0" text="Use the button below to send registration instructions to students for the next semester" />
+    <Label fx:id="sendEmailStatus" font="$x1" layoutX="130.0" layoutY="394.0" opacity="0.95" prefWidth="215.0" textFill="#00993d" />
+    <TextField layoutX="130.0" layoutY="71.0" prefWidth="317.0" />
+    <TextArea layoutX="130.0" layoutY="116.0" prefHeight="182.0" prefWidth="317.0" wrapText="true" />
+    <Label font="$x1" layoutX="38.0" layoutY="74.0" prefWidth="71.0" text="Subject:">
+      <textFill>
+        <Color blue="0.250" green="0.250" red="0.250" fx:id="x2" />
+      </textFill>
     </Label>
+    <Label font="$x1" layoutX="38.0" layoutY="116.0" prefWidth="71.0" text="Body:" textFill="$x2" />
   </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package com.mss.tuess.util;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.mail.internet.InternetAddress;
 
 /**
  * Validates input fields for a form. Create a validator object. Use the
@@ -233,16 +234,16 @@ public class Validator {
      * @param email
      * @return true if it is validate; false if not
      */
-    private static boolean isEmailAddress(String email) {
-        String check = "^([a-z0-9A-Z]+[-|//._]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?//.)+[a-zA-Z]{2,}$";
-        Pattern regex = Pattern.compile(check);
-        Matcher matcher = regex.matcher(email);
-        boolean isMatched = matcher.matches();
-        if (isMatched) {
-            return true;
-        } else {
-            return false;
+    public static boolean isEmailAddress(String email) {
+        // code taken from http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (Exception ex) {
+            result = false;
         }
+        return result;
     }
 
     /**
@@ -274,13 +275,17 @@ public class Validator {
     public String validate(String name, String input, boolean required, int min, int max, InputType type) {
         input = escapeInput(input);
 
-        // Check Null
-        if (required && input.length() == 0) {
+        // Check Required
+        if (!required && (input.length() == 0)) {
+            return input;
+        }
+
+        if (required && (input.length() == 0)) {
             errors.add(name + " cannot be blank");
         }
 
         // Check Range
-        if (type == InputType.INTEGER && type == InputType.POSITIVE_INTEGER) {
+        if (type == InputType.INTEGER || type == InputType.POSITIVE_INTEGER) {
             int num = Integer.parseInt(input);
             if (num < min) {
                 errors.add(name + " cannot be less than " + min + "");
@@ -292,17 +297,17 @@ public class Validator {
             if (min == max) {
                 if (input.length() != min) {
                     errors.add(name + " has to be " + min + " characters long");
-                } else {
-                    if (input.length() < min) {
-                        errors.add(name + " cannot be shorter than " + min + " characters");
-                    }
-                    if (input.length() > max) {
-                        errors.add(name + " cannot be longer than " + max + " characters");
-                    }
+                }
+            } else {
+                if (input.length() < min) {
+                    errors.add(name + " cannot be shorter than " + min + " characters");
+                }
+                if (input.length() > max) {
+                    errors.add(name + " cannot be longer than " + max + " characters");
                 }
             }
         }
-        
+
         // Check Types
         switch (type) {
             case LETTERS:
@@ -330,7 +335,7 @@ public class Validator {
                     errors.add(name + " is not a positive integer or is too large");
                 }
         }
-        
+
         return input;
     }
 

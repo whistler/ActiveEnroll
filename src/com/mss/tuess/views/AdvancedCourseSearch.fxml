@@ -15,7 +15,7 @@
 <AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SearchCoursesController">
   <children>
     <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
-    <TableView fx:id="courseTable" layoutX="6.0" layoutY="158.0" prefHeight="197.0" prefWidth="587.0" tableMenuButtonVisible="true">
+    <TableView fx:id="courseTable" layoutX="7.0" layoutY="147.0" prefHeight="185.0" prefWidth="587.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
         <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
@@ -32,7 +32,7 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="136.0" prefHeight="22.0" prefWidth="587.0" text="Click on a course to view the respective sections" wrapText="true">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="125.0" prefHeight="22.0" prefWidth="587.0" text="Click on a course to view the respective sections" wrapText="true">
       <font>
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
@@ -40,12 +40,12 @@
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <Separator layoutX="3.0" layoutY="355.0" prefWidth="593.0">
+    <Separator layoutX="14.0" layoutY="344.0" prefWidth="577.0">
       <effect>
         <DropShadow color="$x3" />
       </effect>
     </Separator>
-    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="7.0" layoutY="384.0" prefHeight="114.0" prefWidth="587.0" tableMenuButtonVisible="true">
+    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="7.0" layoutY="372.0" prefHeight="126.0" prefWidth="587.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
         <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
@@ -63,23 +63,23 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label layoutX="10.0" layoutY="359.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY">
+    <Label layoutX="10.0" layoutY="347.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY">
       <font>
         <Font name="System Bold" size="13.0" fx:id="x2" />
       </font>
     </Label>
     <Label alignment="CENTER" font="$x1" layoutX="129.0" layoutY="498.0" prefHeight="25.0" prefWidth="343.0" text="Click on a section to view, enroll/drop" textFill="$x3" wrapText="true" />
     <TextField fx:id="searchCode" layoutX="277.0" layoutY="36.0" prefWidth="111.0" />
-    <TextField fx:id="searchName" layoutX="105.0" layoutY="58.0" prefWidth="481.0" />
-    <TextField fx:id="searchInfo" layoutX="105.0" layoutY="80.0" prefWidth="481.0" />
+    <TextField fx:id="searchName" layoutX="105.0" layoutY="63.0" prefWidth="283.0" />
+    <TextField fx:id="searchInfo" layoutX="105.0" layoutY="88.0" prefWidth="283.0" />
     <TextField id="searchDepaartment" fx:id="searchDepartment" layoutX="105.0" layoutY="36.0" prefWidth="111.0" />
     <Label layoutX="233.0" layoutY="39.0" prefHeight="16.0" prefWidth="87.0" text="Code:" />
-    <Label layoutX="14.0" layoutY="58.0" prefHeight="16.0" prefWidth="87.0" text="Name:" />
+    <Label layoutX="14.0" layoutY="66.0" prefHeight="16.0" prefWidth="87.0" text="Name:" />
     <Label layoutX="14.0" layoutY="39.0" prefHeight="16.0" prefWidth="87.0" text="Department:" />
-    <Label layoutX="14.0" layoutY="80.0" prefHeight="16.0" prefWidth="87.0" text="Info:" />
-    <TextField fx:id="searchCredit" layoutX="466.0" layoutY="36.0" prefWidth="120.0" />
+    <Label layoutX="14.0" layoutY="91.0" prefHeight="16.0" prefWidth="87.0" text="Info:" />
+    <TextField fx:id="searchCredit" layoutX="466.0" layoutY="36.0" prefWidth="41.0" />
     <Label layoutX="405.0" layoutY="39.0" prefHeight="16.0" prefWidth="61.0" text="Credits:" />
-    <Button fx:id="searchCourseButton" defaultButton="true" layoutX="269.0" layoutY="105.0" mnemonicParsing="false" onAction="#advancedCourseSearch" text="Search" textFill="#fefefe">
+    <Button fx:id="searchCourseButton" defaultButton="true" layoutX="405.0" layoutY="63.0" mnemonicParsing="false" onAction="#advancedCourseSearch" prefHeight="47.0" prefWidth="102.0" text="Search" textFill="#fefefe">
       <font>
         <Font name="System Bold" size="12.0" />
       </font>
