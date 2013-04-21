@@ -347,6 +347,7 @@ public class Validator {
         input = input.replaceAll("\\\\", " "); // match backslash
         input = input.replaceAll("'", " ");  // match single quote
         input = input.replaceAll("\"", " "); // match double quote
+        input = input.trim();
         return input;
     }
 }
