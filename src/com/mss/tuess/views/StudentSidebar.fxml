@@ -5,16 +5,25 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
   <children>
-    <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
-    <Hyperlink layoutX="38.0" layoutY="59.0" onAction="#showCourseSearch" text="Search Courses" />
-    <Hyperlink layoutX="39.0" layoutY="103.0" onAction="#showRegisteredCourses" text="Registered Courses" />
-    <Hyperlink layoutX="39.0" layoutY="147.0" onAction="#showTranscript" text="Transcript" />
-    <Hyperlink layoutX="40.0" layoutY="169.0" onAction="#showMyProgram" text="My Program" />
-    <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
-    <Hyperlink layoutX="39.0" layoutY="125.0" onAction="#showTimetable" text="Timetable" />
-    <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showAllCourses" text="View All Courses" />
+    <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile">
+      <font>
+        <Font name="System Bold" size="12.0" fx:id="x1" />
+      </font>
+      <textFill>
+        <Color blue="0.250" green="0.250" red="0.250" fx:id="x2" />
+      </textFill>
+    </Hyperlink>
+    <Hyperlink font="$x1" layoutX="38.0" layoutY="59.0" onAction="#showCourseSearch" text="Search Courses" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="39.0" layoutY="103.0" onAction="#showRegisteredCourses" text="Registered Courses" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="39.0" layoutY="147.0" onAction="#showTranscript" text="My Transcript" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="40.0" layoutY="169.0" onAction="#showMyProgram" text="My Program" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" textFill="#cc0000" />
+    <Hyperlink font="$x1" layoutX="39.0" layoutY="125.0" onAction="#showTimetable" text="My Timetable" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="39.0" layoutY="81.0" onAction="#showAllCourses" text="View All Courses" textFill="$x2" />
   </children>
 </AnchorPane>
