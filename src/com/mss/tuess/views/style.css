@@ -21,7 +21,7 @@
 #footer Label
 { -fx-text-fill: white }
 
-#sidebar {
+#sidebar, #rightbar {
     -fx-background-color: linear-gradient(to right , #2D4F61, #2F4C60);
 }
 
@@ -30,5 +30,5 @@
 }
 
 ListView, TextField, TableView, ChoiceBox, PasswordField, TextArea {
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 7,0.5,0,0 );
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 5,0.5,0,0 );
 }

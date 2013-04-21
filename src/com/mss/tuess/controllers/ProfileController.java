@@ -2,6 +2,8 @@ package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.*;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.InputType;
+import com.mss.tuess.util.Validator;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,25 +16,45 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ProfileController implements Initializable {
-    @FXML Label ID;
-    @FXML Label status;
-    @FXML Label program;
-    @FXML Label registeredSince;
-    @FXML Label statusLabel;
-    @FXML Label programLabel;
-    @FXML Label registeredSinceLabel;
-    @FXML Label IDLabel;
-    @FXML TextField firstName;
-    @FXML TextField lastName;
-    @FXML TextField email;
-    @FXML TextArea address;
-    @FXML TextField city;
-    @FXML TextField zipCode;
-    @FXML TextField state;
-    @FXML TextField country;
-    @FXML TextField phone;
-    @FXML PasswordField newPassword;
-    @FXML PasswordField confirmPassword;
+
+    @FXML
+    private Label ID;
+    @FXML
+    private Label status;
+    @FXML
+    private Label program;
+    @FXML
+    private Label registeredSince;
+    @FXML
+    private Label statusLabel;
+    @FXML
+    private Label programLabel;
+    @FXML
+    private Label registeredSinceLabel;
+    @FXML
+    private Label IDLabel;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextArea address;
+    @FXML
+    private TextField city;
+    @FXML
+    private TextField zipCode;
+    @FXML
+    private TextField state;
+    @FXML
+    private TextField country;
+    @FXML
+    private TextField phone;
+    @FXML
+    private PasswordField newPassword;
+    @FXML
+    private PasswordField confirmPassword;
 
     /**
      * Initializes the controller class. Shows the current user in the view
@@ -72,35 +94,41 @@ public class ProfileController implements Initializable {
     @FXML
     public void update() throws SQLException {
         User user = CurrentUser.getUser();
+        Validator validator = new Validator();
 
-        user.setAddress(address.getText());
-        user.setCity(city.getText());
-        user.setState(state.getText());
-        user.setCountry(country.getText());
-        user.setEmail(email.getText());
-        user.setFirstName(firstName.getText());
+        user.setAddress(validator.validate("Address", address.getText(), true, 6, 100, InputType.STRING));
+        user.setCity(validator.validate("City", city.getText(), true, 4, 20, InputType.STRING));
+        user.setState(validator.validate("State", state.getText(), true, 2, 20, InputType.STRING));
+        user.setCountry(validator.validate("Country", country.getText(), true, 4, 20, InputType.STRING));
+        user.setEmail(validator.validate("Email", email.getText(), true, 5, 30, InputType.EMAIL));
+        user.setFirstName(validator.validate("First name", firstName.getText(), true, 2, 20, InputType.STRING));
+        user.setLastName(validator.validate("Last name", lastName.getText(), true, 2, 20, InputType.STRING));
+        user.setPhone(validator.validate("Phone number", phone.getText(), true, 9, 20, InputType.STRING));
+        user.setZipcode(validator.validate("Zip code", zipCode.getText(), true, 5, 6, InputType.STRING));
+
         user.setID(Integer.parseInt(ID.getText()));
-        user.setLastName(lastName.getText());
-        user.setPhone(phone.getText());
-        user.setZipcode(zipCode.getText());
 
         if (!newPassword.getText().isEmpty()) {
             if (newPassword.getText().equals(confirmPassword.getText())) {
-                user.setPassword(newPassword.getText());
+                user.setPassword(validator.validate("Password", newPassword.getText(), true, 6, 10, InputType.STRING));
             } else {
-                ViewManager.setStatus("New password and password confimation do not match");
-                return;
+                validator.addError("New password and password confimation do not match");
             }
         }
 
-        if (user.getClass() == Student.class) {
-            Student student = (Student) user;
-            status.setText(student.getStatus());
-            registeredSince.setText(student.getRegisteredSince());
-            program.setText(student.getProgramID());
-        }
+        if (validator.hasErrors()) {
+            ViewManager.setStatus(validator.getErrors().get(0).toString());
+        } else {
 
-        user.update();
-        ViewManager.setStatus("Saved!");
+            if (user.getClass() == Student.class) {
+                Student student = (Student) user;
+                status.setText(student.getStatus());
+                registeredSince.setText(student.getRegisteredSince());
+                program.setText(student.getProgramID());
+            }
+
+            user.update();
+            ViewManager.setStatus("Saved!");
+        }
     }
 }

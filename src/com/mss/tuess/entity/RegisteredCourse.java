@@ -13,13 +13,16 @@ import java.util.ArrayList;
 
 
 /**
- *
- * @author chenliang
+ * RegisteredCourse class
  */
 public class RegisteredCourse {
     private static ArrayList<RegisteredCourse> registeredCoursesList = new ArrayList();
     private static int totalCredits = 0;
 
+    /**
+     * Fetches registered courses of the student in the current term
+     * @throws SQLException 
+     */
     public static void fetch() throws SQLException {
         totalCredits = 0;
         registeredCoursesList.clear();
@@ -43,6 +46,7 @@ public class RegisteredCourse {
     }
 
     /**
+     * Returns the registered course of a given index in the arrayList.
      * @param index the index of registered course list
      * @return one registered course of index in the list
      */
@@ -51,14 +55,14 @@ public class RegisteredCourse {
     }
 
     /**
-     * @param credit the addCredit to set
+     * Adds the credit to the total credits.
+     * @param credits the addCredit to set
      */
     public static void addTotalCredits(int credits) {
         totalCredits += credits;
     }
 
     /**
-     *
      * @return int the total credits registed current term
      */
     public static int getTotalCredits() {
@@ -66,7 +70,7 @@ public class RegisteredCourse {
     }
 
     /**
-     *
+     * Returns the whole arrayList of registered courses.
      * @return ArrayList<RegisteredCourses> Course ArrayList
      */
     public static ArrayList<RegisteredCourse> getAll() {
