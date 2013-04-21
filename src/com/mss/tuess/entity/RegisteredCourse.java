@@ -30,7 +30,11 @@ public class RegisteredCourse {
         Term currentTerm = State.getCurrentTerm();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select es.courseDept,es.courseNum,c.courseName,es.sectionID,es.termID,c.credit " + "from enrollSection es natural join course c " + "where es.studentID=" + currentID + " and es.termID='" + currentTerm.getTermID() + "'";
+        String sql = "select es.courseDept,es.courseNum,c.courseName,es.sectionID,es.termID,c.credit " 
+                + "from enrollSection es natural join course c " 
+                + "where es.studentID=" + currentID 
+                + " and es.termID='" + currentTerm.getTermID() + "'"
+                + " AND es.grade NOT IN ('W')";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             RegisteredCourse registeredCourses = new RegisteredCourse();
