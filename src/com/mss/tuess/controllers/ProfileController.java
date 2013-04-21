@@ -97,12 +97,12 @@ public class ProfileController implements Initializable {
         Validator validator = new Validator();
 
         user.setAddress(validator.validate("Address", address.getText(), true, 6, 100, InputType.STRING));
-        user.setCity(validator.validate("City", city.getText(), true, 4, 20, InputType.STRING));
-        user.setState(validator.validate("State", state.getText(), true, 2, 20, InputType.STRING));
-        user.setCountry(validator.validate("Country", country.getText(), true, 4, 20, InputType.STRING));
+        user.setCity(validator.validate("City", city.getText(), true, 4, 20, InputType.LETTERS));
+        user.setState(validator.validate("State", state.getText(), true, 2, 20, InputType.LETTERS));
+        user.setCountry(validator.validate("Country", country.getText(), true, 4, 20, InputType.LETTERS));
         user.setEmail(validator.validate("Email", email.getText(), true, 5, 30, InputType.EMAIL));
-        user.setFirstName(validator.validate("First name", firstName.getText(), true, 2, 20, InputType.STRING));
-        user.setLastName(validator.validate("Last name", lastName.getText(), true, 2, 20, InputType.STRING));
+        user.setFirstName(validator.validate("First name", firstName.getText(), true, 2, 20, InputType.LETTERS));
+        user.setLastName(validator.validate("Last name", lastName.getText(), true, 2, 20, InputType.LETTERS));
         user.setPhone(validator.validate("Phone number", phone.getText(), true, 9, 20, InputType.STRING));
         user.setZipcode(validator.validate("Zip code", zipCode.getText(), true, 5, 6, InputType.STRING));
 
