@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.Validator;
 import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,10 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Font;
 
 public class SectionController implements Initializable {
-    
+
     @FXML
     private TextField courseCode;
     @FXML
@@ -68,19 +68,18 @@ public class SectionController implements Initializable {
     private TableColumn<SectionClass, String> displayEndTime;
     @FXML
     private TableColumn<SectionClass, String> location;
-    @FXML
-    private Button back;
+    private static Validator validator = new Validator();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-                
+
         Section section = State.getCurrentSection();
-        
+
         if (section != null) {
-            
+
             /* set the prerequisite and corequisites */
             Course course = new Course();
             course.setCourseDept(section.getCourseDept());
@@ -89,9 +88,9 @@ public class SectionController implements Initializable {
             String coreqs = Corequisite.getCorequisitesString(Corequisite.corequisitesForCourse(course));
             prerequisites.setText(prereqs);
             corequisites.setText(coreqs);
-            
+
             /* show course fields */
-            courseCode.setText(section.getCourse().getCourseDept() + "-" 
+            courseCode.setText(section.getCourse().getCourseDept() + "-"
                     + section.getCourse().getCourseNum());
             courseName.setText(section.getCourse().getCourseName());
             courseInfo.setText(section.getCourse().getInfo());
@@ -103,7 +102,7 @@ public class SectionController implements Initializable {
             endDate.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getEnd()));
             lastDayToEnroll.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getRegistrationEnd()));
             lastDayToWithdraw.setText(new SimpleDateFormat("d MMM yyyy").format(section.getTerm().getDropWithoutW()));
-            
+
             /* Populate the schedule table with sectionClasses */
             type.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("type"));
             day.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("day"));
@@ -118,21 +117,31 @@ public class SectionController implements Initializable {
             /* Show the right button either to enroll or drop*/
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
+                if (!EnrollSection.registrationEndNotPass(section)) {
+                    enrollButton.setDisable(true);
+                    ViewManager.setStatus("Registration has ended");
+                }
             } else {
                 dropButton.setVisible(false);
+                if (!EnrollSection.withdrawEndNotPass(section)) {
+                    dropButton.setDisable(true);
+                    ViewManager.setStatus("Last day to drop has passed");
+                }
             }
         }
     }
-   /**
-    * 
-    */
+
+    /**
+     *
+     */
     @FXML
-    public static void processEnroll()  {
-        
+    public void processEnroll() {
+
+        validator.reset();
         Section section = State.getCurrentSection();
         int studentID = CurrentUser.getUser().getID();
         EnrollSection es = new EnrollSection();
-        
+
         es.setStudentID(studentID);
         es.setSectionID(section.getSectionID());
         es.setCourseDept(section.getCourseDept());
@@ -140,54 +149,54 @@ public class SectionController implements Initializable {
         es.setTermID(section.getTermID());
         es.setGrade("");
         try {
-            if (canEnroll(section, studentID)) {
+            validate(section, studentID);
+            if (validator.hasErrors()) {
                 es.insert();
                 section.setRegistered(section.getRegistered() + 1);
                 if (section.getRegistered() == section.getCapacity()) {
                     section.setStatus("full");
+                    section.update();
                 }
-            } else {
-                System.out.println("\nCannot be added!!!!!!!!!");
+                initialize(null, null);
+                ViewManager.setStatus("Enrolled successfully");
+            } else
+            {
+                ViewManager.setStatus(validator.getErrors().get(1).toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static boolean canEnroll(Section section, int studentID) throws SQLException {
-        Student student=new Student();
+
+    public static void validate(Section section, int studentID) throws SQLException {
+        Student student = new Student();
         student.fetch(CurrentUser.getUser().getID());
-//        if (!registrationEndNotPass(section)) {
-//            return false;
-//        }
+        if (!EnrollSection.registrationEndNotPass(section)) {
+            validator.addError("Registration period is over");
+        }
         if (EnrollSection.isAlreadyRegistered(section, studentID)) {
-            return false;
+            validator.addError("You are either already registered for this course or have dropped the course");
         }
         if (EnrollSection.isFull(section)) {
-            return false;
-            
+            validator.addError("There are no more seats remaining in this section");
         }
-        if (EnrollSection.checkPrerequisite(section, studentID) == false) {
-            System.out.println("\ncheckPrerequisite: false");
-            return false;
+        if (EnrollSection.meetsPrerequisites(section, studentID) == false) {
+            validator.addError("You do not have the prerequisites to take this course. Talk to course instructor.");
         }
-        if(EnrollSection.isTimeConflict(student, section)){
-            System.out.println("\nisTimeConflict!!!!!!!!!!!");
-            return false;
+        if (EnrollSection.isTimeConflict(student, section)) {
+            validator.addError("There is a time conflict with one of the other courses you are registered for");
         }
-        System.out.println("\ncheckPrerequisite: true");
-        return true;
     }
-    
+
     @FXML
-    public static int processDrop()  {
+    public void processDrop() {
         try {
             Section section = State.getCurrentSection();
             int studentID = CurrentUser.getUser().getID();
             EnrollSection es = new EnrollSection();
             int check = 0;
             check = es.fetch(studentID, section.getSectionID(), section.getCourseDept(), section.getCourseNum(), section.getTermID());
-            
+
             if (check == 1) {
                 if (canDropWithoutW(section, studentID)) {
                     es.delete();
@@ -198,27 +207,26 @@ public class SectionController implements Initializable {
                 } else {
                     es.setGrade("W");
                     es.update();
-                    System.out.println("\nWill be add W!!!!!!!!!");
                 }
-                return 1;
-            } else {
-                return 0;
+                initialize(null, null);
+                ViewManager.setStatus("Course has been dropped");
+            } else 
+            {
+                ViewManager.setStatus("Unable to drop course");
             }
         } catch (SQLException ex) {
             Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
     }
-    
+
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
             return true;
         }
         return false;
     }
-    
-    public static void goBack()
-    {
+
+    public static void goBack() {
         ViewManager.showPreviousView();
     }
 }
