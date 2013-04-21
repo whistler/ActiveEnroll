@@ -73,8 +73,8 @@
     </TextField>
     <Label font="$x1" layoutX="463.0" layoutY="273.0" prefWidth="73.0" text="Search" textFill="GREY" />
     <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
-    <TextField layoutX="398.0" layoutY="410.0" prefWidth="188.0" />
-    <Button layoutX="457.0" layoutY="447.0" mnemonicParsing="false" text="Button" />
+    <TextField  id="Grade" fx:id="gradeField" layoutX="398.0" layoutY="410.0" prefWidth="188.0" />
+    <Button fx:id="updateGrade" layoutX="457.0" layoutY="447.0" mnemonicParsing="false" text="Update"  onAction="#updateStuGrade" />
     <Separator layoutX="392.0" layoutY="349.0" minHeight="3.0" prefHeight="14.0" prefWidth="200.0">
       <effect>
         <DropShadow color="$x4" />
