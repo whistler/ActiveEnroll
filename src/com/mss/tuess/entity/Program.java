@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Program class
+ */
 public class Program {
     private static ArrayList<Program> programs = new ArrayList();
 
@@ -31,6 +34,10 @@ public class Program {
         }
     }
 
+    /**
+     * Retuns the size of programs arrayList.
+     * @return size of the programs arrayList
+     */
     public static int size() {
         return programs.size();
     }
@@ -87,7 +94,7 @@ public class Program {
     }
 
     /**
-     * @param degree the degree to set
+     * @param degreeTitle the degree to set
      */
     public void setDegreeTitle(String degreeTitle) {
         this.degreeTitle = degreeTitle;
@@ -125,7 +132,7 @@ public class Program {
   /**
      * Loads the Program by the programID from the database and encapsulates
      * into this Program objects
-     *
+     * @param programID to fetch with
      * @throws SQLException
      */
     public void fetch(String programID) {
