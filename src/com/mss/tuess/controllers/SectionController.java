@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Font;
 
 public class SectionController implements Initializable {
     
@@ -57,8 +59,6 @@ public class SectionController implements Initializable {
     @FXML
     private TableView<SectionClass> sectionClassTable;
     @FXML
-    private TableColumn<SectionClass, String> sectionID;
-    @FXML
     private TableColumn<SectionClass, String> type;
     @FXML
     private TableColumn<SectionClass, String> day;
@@ -68,6 +68,8 @@ public class SectionController implements Initializable {
     private TableColumn<SectionClass, String> displayEndTime;
     @FXML
     private TableColumn<SectionClass, String> location;
+    @FXML
+    private Button back;
 
     /**
      * Initializes the controller class.
@@ -124,6 +126,7 @@ public class SectionController implements Initializable {
    /**
     * 
     */
+    @FXML
     public static void processEnroll()  {
         
         Section section = State.getCurrentSection();
@@ -176,6 +179,7 @@ public class SectionController implements Initializable {
         return true;
     }
     
+    @FXML
     public static int processDrop()  {
         try {
             Section section = State.getCurrentSection();
@@ -211,5 +215,10 @@ public class SectionController implements Initializable {
             return true;
         }
         return false;
+    }
+    
+    public static void goBack()
+    {
+        ViewManager.showPreviousView();
     }
 }
