@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Transcriptrecord class
  * @author xinren
  */
 public class Transcriptrecord {
@@ -28,6 +28,10 @@ public class Transcriptrecord {
         return addCreditMultipleGrade;
     }
 
+    /**
+     * Fetches Transcriptrecord info from the database into local array list.
+     * @throws SQLException 
+     */
     public static void fetch() throws SQLException {
         int currentID;
         int gradeNum = 0;
@@ -92,6 +96,11 @@ public class Transcriptrecord {
         addCreditMultipleGrade = aAddCreditMultipleGrade;
     }
 
+    /**
+     * Returns one transcript record from the arraylist with given index
+     * @param index the index to output
+     * @return the transcript record of that index in arraylist
+     */
     public static Transcriptrecord get(int index) {
         return transcriptrecords.get(index);
     }
