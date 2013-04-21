@@ -45,8 +45,8 @@ public class SidebarController implements Initializable {
     }
     @FXML public void showTaughtSections() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/TaughtSections.fxml");
-        ViewManager.setTitle("Waive Prerequisite");
+        ViewManager.changeView("/com/mss/tuess/views/TaughtCourses.fxml");
+        ViewManager.setTitle("Taught Sections");
     }
     
     

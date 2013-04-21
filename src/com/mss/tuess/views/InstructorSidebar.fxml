@@ -10,7 +10,7 @@
     <children>
         <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
         <Hyperlink layoutX="39.0" layoutY="59.0" onAction="#showWaivePrerequisite" text="Waive Prerequisite" />
-        <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showRegisteredCourses" text="View Taught Courses" />
+        <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showTaughtSections" text="View Taught Courses" />
 
         <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
     </children>
