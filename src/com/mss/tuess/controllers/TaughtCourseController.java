@@ -57,6 +57,8 @@ public class TaughtCourseController implements Initializable {
     private TextField sectionFilter;
     @FXML
     private TextField studentFilter;
+    @FXML
+    private TextField gradeField;
     //Section list
     private ObservableList<Section> sectionTableContent = FXCollections.observableArrayList();
     private ObservableList<Section> sectionFilterContent = FXCollections.observableArrayList();
@@ -250,14 +252,14 @@ public class TaughtCourseController implements Initializable {
 
                 try {
                     State.setCurrentEnrollSection(studentFilterContent.get(selectedIndex));
-                    currentEnrollSection.fetch(studentFilterContent.get(selectedIndex).getStudentID(),studentFilterContent.get(selectedIndex).getSectionID(),
+                    currentEnrollSection.fetch(studentFilterContent.get(selectedIndex).getStudentID(),
+                            studentFilterContent.get(selectedIndex).getSectionID(),
                             studentFilterContent.get(selectedIndex).getCourseDept(),
                             studentFilterContent.get(selectedIndex).getCourseNum(),
                             studentFilterContent.get(selectedIndex).getTermID());
                     State.setCurrentEnrollSection(currentEnrollSection);
-                    System.out.println(currentEnrollSection.getStudentID());
-                    
-                    
+                    gradeField.setText(currentEnrollSection.getGrade());
+
                 } catch (Exception ex) {
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -268,11 +270,22 @@ public class TaughtCourseController implements Initializable {
         /**
          * map the section table attributes
          */
-        sectionID.setCellValueFactory(new PropertyValueFactory<EnrollSection, String>("sectionID"));
         studentID.setCellValueFactory(new PropertyValueFactory<EnrollSection, String>("studentID"));
 
         grade.setCellValueFactory(new PropertyValueFactory<EnrollSection, String>("grade"));
 
         studentTable.setItems(studentFilterContent);
+    }
+
+    public void updateStuGrade() {
+        EnrollSection se = new EnrollSection();
+        se = State.getCurrentEnrollSection();
+        se.setGrade(gradeField.getText());
+        try {
+            se.update();
+        } catch (SQLException ex) {
+            Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //studentTable.
     }
 }

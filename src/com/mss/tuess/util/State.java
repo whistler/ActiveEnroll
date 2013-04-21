@@ -59,7 +59,10 @@ public class State {
         {
             return currentSectionClass;
         }
-    
+     public static EnrollSection getCurrentEnrollSection()
+        {
+            return currentEnrollSection;
+        }
     public static void setCurrentSearchView(String searchView){
         currentSearchView = searchView;
     }
