@@ -21,7 +21,7 @@
         <Label layoutX="224.0" layoutY="292.0" text="Username" />
         <Label layoutX="224.0" layoutY="331.0" text="Password" />
         <Button layoutX="368.0" layoutY="370.0" mnemonicParsing="false" onAction="#processLogin" text="Login" />
-        <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="436.0" prefWidth="772.0" />
+        <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="436.0" prefWidth="772.0" textFill="#cc0000" />
         <ChoiceBox fx:id="userType" layoutX="300.0" layoutY="245.0" prefWidth="200.0" value="Student">
           <items>
             <FXCollections fx:factory="observableArrayList">

@@ -20,7 +20,7 @@
         <Font name="System Bold" size="14.0" fx:id="x2" />
       </font>
     </Label>
-    <TableView fx:id="courseTable" layoutX="14.0" layoutY="36.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView fx:id="courseTable" layoutX="15.0" layoutY="59.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
         <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
@@ -29,7 +29,7 @@
         <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
       </columns>
     </TableView>
-    <TextField id="filterText" fx:id="courseFilter" layoutX="348.0" layoutY="11.0" prefWidth="238.0" promptText="type filter text">
+    <TextField id="filterText" fx:id="courseFilter" layoutX="348.0" layoutY="14.0" prefWidth="238.0" promptText="type filter text">
       <effect>
         <InnerShadow color="#9f9f9f" />
       </effect>
@@ -37,12 +37,15 @@
         <Tooltip text="Type any course parameter to filter table" />
       </tooltip>
     </TextField>
-    <Label layoutX="278.0" layoutY="10.0" prefHeight="22.0" prefWidth="87.0" text="Search" textFill="GREY">
+    <Label layoutX="278.0" layoutY="14.0" prefHeight="22.0" prefWidth="59.0" text="Search:" textFill="GREY">
       <font>
         <Font name="System Bold Italic" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label alignment="CENTER" font="$x1" layoutX="124.0" layoutY="276.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
+    <Label alignment="CENTER" layoutX="118.0" layoutY="39.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
+      <font>
+        <Font name="System Bold Italic" size="13.0" fx:id="x4" />
+      </font>
       <textFill>
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
@@ -52,7 +55,7 @@
         <DropShadow color="#606060" />
       </effect>
     </Separator>
-    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="14.0" layoutY="339.0" prefHeight="149.99990000000253" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="14.0" layoutY="355.0" prefHeight="156.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
         <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
@@ -72,6 +75,6 @@
       </tooltip>
     </TextField>
     <Label font="$x1" layoutX="278.0" layoutY="313.0" prefWidth="73.0" text="Search" textFill="GREY" />
-    <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
+    <Label alignment="CENTER" font="$x4" layoutX="118.0" layoutY="335.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
   </children>
 </AnchorPane>

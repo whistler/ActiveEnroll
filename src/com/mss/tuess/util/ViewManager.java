@@ -4,6 +4,7 @@ import com.mss.tuess.controllers.LayoutController;
 import com.mss.tuess.entity.User;
 import com.mss.tuess.start.TUESS;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 public class ViewManager {
 
     private static Stage stage;
+    private static ArrayList previousNodes = new ArrayList();
 
     /**
      * Sets the window(Stage) that should be used to display Views
@@ -52,6 +54,8 @@ public class ViewManager {
     public static void changeView(String fxml) {
         setStatus("Loading...");
         Pane pane = (Pane) stage.getScene().lookup("#content");
+        previousNodes.clear();
+        previousNodes.addAll(pane.getChildren());
         Object load = "";
         try {
             load = FXMLLoader.load(TUESS.class.getResource(fxml));
@@ -108,5 +112,16 @@ public class ViewManager {
             label.setText("Welcome " + user.getFirstName() + " "
                     + user.getLastName() + "\nID : " + user.getID());
         }
+    }
+    
+    /**
+     * Displays the screen that was displayed before the current screen
+     */
+    public static void showPreviousView()
+    {
+        Pane pane = (Pane) stage.getScene().lookup("#content");
+        pane.getChildren().clear();
+        pane.getChildren().addAll(previousNodes);
+        setStatus("");
     }
 }
