@@ -10,10 +10,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * SectionClass class
+ */
 public class SectionClass {
     private static ArrayList<SectionClass> sectionClassList = new ArrayList();
     private static ArrayList<SectionClass> registeredSectionClassList = new ArrayList();
-
+    
+    /**
+     * Fetches the section class info from the database into local arraylist.
+     * @param courseDept department of the course
+     * @param courseNum number of the course
+     * @param currentTerm current term
+     * @throws SQLException 
+     */
     public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
         String selectSectionClassListByCourse = "SELECT * FROM sectionClass" + " where" + " courseDept = '" + courseDept + "' and courseNum = '" + courseNum + "' and termID = '" + currentTerm + "'";
         executeFetch(selectSectionClassListByCourse);
@@ -39,7 +49,12 @@ public class SectionClass {
     public static SectionClass get(int index) {
         return sectionClassList.get(index);
     }
-
+    
+    /**
+     * Executes the SQL to the database
+     * @param sql the written SQL query
+     * @throws SQLException 
+     */
     private static void executeFetch(String sql) throws SQLException {
         sectionClassList.clear();
         ResultSet rs = DatabaseConnector.returnQuery(sql);
@@ -68,6 +83,10 @@ public class SectionClass {
         return sectionClassList;
     }
 
+    /**
+     * Fetches registered section class from the database to local arraylis
+     * @throws SQLException 
+     */
     public static void fetchregisteredSectionClassList() throws SQLException {
         registeredSectionClassList.clear();
         int currentID;
@@ -92,6 +111,10 @@ public class SectionClass {
         }
     }
 
+    /**
+     * Returns the arrayList of all registered section class.
+     * @return the arrayList
+     */
     public static ArrayList<SectionClass> getAllregisteredSectionClassList() {
         return registeredSectionClassList;
     }
@@ -285,6 +308,11 @@ public class SectionClass {
     }
     
     
+    /**
+     * Returns all section classes of a section.
+     * @param section selected to get all section classes
+     * @return all section classes of the section
+     */
     public static ArrayList<SectionClass> getSectionClassesForSection(Section section)
     {
         ArrayList<SectionClass> sectionClasses = new ArrayList();
