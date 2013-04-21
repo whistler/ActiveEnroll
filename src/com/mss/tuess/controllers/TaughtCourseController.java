@@ -65,7 +65,7 @@ public class TaughtCourseController implements Initializable {
     //Section list
     private ObservableList<EnrollSection> studentTableContent = FXCollections.observableArrayList();
     private ObservableList<EnrollSection> studentFilterContent = FXCollections.observableArrayList();
-
+private int flag;
     /**
      * Constructor of CourseSearchController_unused
      *
@@ -73,7 +73,7 @@ public class TaughtCourseController implements Initializable {
      */
     public TaughtCourseController() throws SQLException {
         int courseSize;
-
+flag=0;
         sectionTableContent.clear();
         studentTableContent.clear();
         int instructorID = CurrentUser.getUser().getID();
@@ -218,6 +218,7 @@ public class TaughtCourseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
                 int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
+                flag=selectedIndex;
                 System.out.println("Index : " + selectedIndex);
 
                 try {
@@ -286,6 +287,6 @@ public class TaughtCourseController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //studentTable.
+
     }
 }
