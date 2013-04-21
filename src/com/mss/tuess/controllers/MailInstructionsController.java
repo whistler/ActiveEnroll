@@ -54,7 +54,7 @@ public class MailInstructionsController implements Initializable {
             System.out.println(toEmails);
 
             SendEmail sendEmail = new SendEmail();
-            sendEmail.sendMail(toEmails, emailSubject, emailBody);
+            //sendEmail.sendMail(toEmails, emailSubject, emailBody);
             
             
             studentnumber++;
