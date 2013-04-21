@@ -18,15 +18,14 @@ import javafx.scene.control.ChoiceBox;
 
 public class LoginController implements Initializable {
 
-    private @FXML
-    ChoiceBox userType;
-    private @FXML
-    TextField userId;
-    private @FXML
-    PasswordField userPassword;
-    private @FXML
-    Label statusLabel;
-    private Validator validator = new Validator();
+    @FXML
+    private ChoiceBox userType;
+    @FXML
+    private TextField userId;
+    @FXML
+    private PasswordField userPassword;
+    @FXML
+    private Label statusLabel;
 
     /**
      * Initializes the controller class.
@@ -50,7 +49,7 @@ public class LoginController implements Initializable {
             ViewManager.setStatus("Username and password are required");
         } else {
 
-            validator.reset();
+            Validator validator = new Validator();
 
             String type = validator.validate("Type", (String) userType.getValue(), true, 5, 15, InputType.STRING);
             userId.setText(validator.validate("Login ID", userId.getText(), true, 10000000, 99999999, InputType.POSITIVE_INTEGER));
