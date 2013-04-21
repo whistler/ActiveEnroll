@@ -220,7 +220,6 @@ public class EnrollSection {
                 + section.getTermID() + "', ''"
                 + ")";
         DatabaseConnector.updateQuery(sql);
-        System.out.println("\nCan!!!!!!!!   " + sql);
     }
 
     /**
@@ -242,8 +241,11 @@ public class EnrollSection {
         try {
             rs = DatabaseConnector.returnQuery(sql);
             if (rs.next()) {
-                if(rs.getString("grade")=="W") return false;
-                else return true;
+                if (rs.getString("grade").equals("W")) {
+                    return false;
+                } else {
+                    return true;
+                }
             } else {
                 return false;
             }
@@ -305,11 +307,9 @@ public class EnrollSection {
                     || rs_enrolled.getString("grade").compareTo("B") == 0
                     || rs_enrolled.getString("grade").compareTo("C") == 0
                     || rs_enrolled.getString("grade").compareTo("D") == 0)) {
-                System.out.println(courseDept + courseNum + "___is IN");
                 return true;
             }
         }
-        System.out.println(courseDept + courseNum + "___is NOT IN");
         return false;
     }
 
@@ -342,7 +342,9 @@ public class EnrollSection {
         int rowCount = rs_pre.getRow();
         rs_pre.beforeFirst();
         if (rowCount == 0) //No prerequisites
-        System.out.println("+------------------" + rowCount + "-------------------+");
+        {
+            System.out.println("+------------------" + rowCount + "-------------------+");
+        }
         while (rs_enrolled.next()) {
             System.out.println(rs_enrolled.getString("courseDept") + "__" + rs_enrolled.getString("courseNum"));
         }
@@ -415,12 +417,9 @@ public class EnrollSection {
     public static boolean registrationEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        System.out.println(now + "___" + currentTerm.getRegistrationEnd());
         if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
-            System.out.println("\nregistrationEndNotPass returns: true");
             return true;
         } else {
-            System.out.println("\nregistrationEndNotPass returns: false");
             return false;
         }
     }
@@ -434,12 +433,9 @@ public class EnrollSection {
     public static boolean withdrawEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        System.out.println(now + "___" + currentTerm.getDropWithoutW());
         if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
-            System.out.println("\nwithdrawEndNotPass returns: true");
             return true;
         } else {
-            System.out.println("\nwithdrawEndNotPass returns: false");
             return false;
         }
     }
@@ -452,10 +448,8 @@ public class EnrollSection {
      */
     public static boolean isFull(Section section) {
         if (section.getStatus().compareTo("full") == 0) {
-            System.out.println("\nisFull returns: true");
             return true;
         } else {
-            System.out.println("\nisFull returns: false");
             return false;
         }
     }
