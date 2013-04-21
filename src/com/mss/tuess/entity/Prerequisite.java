@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Prerequisite class 
+ */
 public class Prerequisite {
 
     private String courseDept;
@@ -88,7 +91,10 @@ public class Prerequisite {
     /**
      * Loads the Student by the studentID from the database and encapsulates
      * into this Student objects
-     *
+     * @param courseDept the department of the course
+     * @param courseNum the number of the course
+     * @param prereqNum the number of the prerequisite course
+     * @param prereqDept the department of the prerequisite course
      * @throws SQLException
      */
     public void fetch(String courseDept, String courseNum, String prereqNum, String prereqDept) throws SQLException {
@@ -134,6 +140,7 @@ public class Prerequisite {
     }
 
     /**
+     * Fetches the prerequisites course from the database and stors in local arrayLit
      * @param course to find prerequisites for
      * @return ArrayList of prerequisites for the course ordered by group
      */
@@ -162,9 +169,9 @@ public class Prerequisite {
     }
     
     /**
-     * 
-     * @param prereqs
-     * @return 
+     * Parses the prerequisite courses info and displays in the panel.
+     * @param prereqs the arrayList that stores the prerequisite info
+     * @return str to be parsed from the arrayList and to be displayed
      */
     public static String getPrerequisitesString(ArrayList<Prerequisite> prereqs)
     {
