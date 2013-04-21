@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
- *
- * @author chen0910
- */
+*Term class
+*/
 public class Term {
     private String termID;
     private Date start;
@@ -27,7 +26,7 @@ public class Term {
     }
 
     /**
-     * @param termID the termID to set
+     * @param term the termID to set
      */
     public void setTermID(String term) {
         this.termID = term;
@@ -120,7 +119,7 @@ public class Term {
     /**
      * Loads Term with the given termID from the database
      *
-     * @param termID termID which the course belongs to
+     * @param term termID which the course belongs to
      * @throws SQLException
      */
     public void fetch(String term) throws SQLException {
