@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
             user = User.login(loginId, password, type);
 
             if (user == null) {
-                validator.addError("Username and Password do not match");
+                validator.addError("Username and Password do not match. Contact Administrator if you have forgotten your password.");
             }
 
             if (validator.hasErrors()) {
