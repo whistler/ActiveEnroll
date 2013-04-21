@@ -52,7 +52,7 @@ public class ViewManager {
      * @param fxml path of the view to load
      */
     public static void changeView(String fxml) {
-        setStatus("Loading...");
+        ViewManager.setStatus("");
         Pane pane = (Pane) stage.getScene().lookup("#content");
         previousNodes.clear();
         previousNodes.addAll(pane.getChildren());
@@ -64,7 +64,6 @@ public class ViewManager {
         }
         pane.getChildren().clear();
         pane.getChildren().add((Node) load);
-        setStatus("");
     }
 
     public static void setStatus(String status) {
