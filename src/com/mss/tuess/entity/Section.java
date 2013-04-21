@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Section {
-    private static ArrayList<Section> sections = new ArrayList();
 
+    private static ArrayList<Section> sections = new ArrayList();
     private String sectionID;
     private String courseDept;
     private String courseNum;
@@ -17,7 +17,6 @@ public class Section {
     private int capacity;
     private int registered;
     private String status;
-    
     private Course course = new Course();
     private Term term = new Term();
     private Instructor instructor = new Instructor();
@@ -26,18 +25,33 @@ public class Section {
         String selectSectionsByCourse = "SELECT * FROM section where courseNum = " + courseNum;
         executeFetch(selectSectionsByCourse);
     }
-public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
- 
-        
-        String selectSectionClassListByCourse = "SELECT * FROM sectionClass"+
-                                                    " where"+ 
-                                                        " courseDept = '"+courseDept+
-                                                        "' and courseNum = '"+courseNum+
-                                                        "' and termID = '"+currentTerm+
-                                                        "'";
-        
+
+    public static void fetch1(String sectionID, String courseDept, String courseNum, String currentTerm) throws SQLException {
+
+
+        String selectSectionClassListByCourse = "SELECT * FROM sectionClass"
+                + " where"
+                + " sectionID = '" + sectionID
+                + " courseDept = '" + courseDept
+                + "' and courseNum = '" + courseNum
+                + "' and termID = '" + currentTerm
+                + "'";
+
         executeFetch(selectSectionClassListByCourse);
     }
+    public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
+
+
+        String selectSectionClassListByCourse = "SELECT * FROM sectionClass"
+                + " where"
+                + " courseDept = '" + courseDept
+                + "' and courseNum = '" + courseNum
+                + "' and termID = '" + currentTerm
+                + "'";
+
+        executeFetch(selectSectionClassListByCourse);
+    }
+
     /**
      * Loads all Section records from the database in to a list of Section
      * objects
@@ -51,12 +65,13 @@ public static void fetch(String courseDept, String courseNum, String currentTerm
 
     /**
      * Fetch section info from the database of one instructor's section
+     *
      * @param instructorID the ID of instructor
      * @param termID the specific term to query
      * @throws SQLException
      */
     public static void fetchByInstructor(int instructorID, String termID) throws SQLException {
-        String selectSectionByInstructor = "SELECT * FROM section where instructorID= " + instructorID + " and termID='" + termID + "'";
+        String selectSectionByInstructor = "SELECT * FROM section natural join course where instructorID= " + instructorID + " and termID='" + termID + "'";
         executeFetch(selectSectionByInstructor);
     }
 
@@ -220,8 +235,8 @@ public static void fetch(String courseDept, String courseNum, String currentTerm
                 + "sectionID = '" + sectionID + "' AND "
                 + "courseDept = '" + courseDept + "' AND "
                 + "courseNum = '" + courseNum + "' AND "
-                + "termID = '" + termID + "'" ;
-        
+                + "termID = '" + termID + "'";
+
         rs = DatabaseConnector.returnQuery(sql);
         if (rs.next()) {
             this.setSectionID(rs.getString("sectionID"));
@@ -285,49 +300,46 @@ public static void fetch(String courseDept, String courseNum, String currentTerm
         System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
-    
+
     /**
-     * Fetches related entities ie. course, instructor and term from the database
-     * into the object
-     * @throws SQLException 
+     * Fetches related entities ie. course, instructor and term from the
+     * database into the object
+     *
+     * @throws SQLException
      */
-    public void fetchAssociations() throws SQLException
-    {
+    public void fetchAssociations() throws SQLException {
         course.fetch(courseDept, courseNum);
         instructor.fetch(instructorID);
         term.fetch(termID);
     }
-    
+
     /**
-     * Returns instructor
-     * precondition: fetchAssociations() should be called before this method can
-     * be used
+     * Returns instructor precondition: fetchAssociations() should be called
+     * before this method can be used
+     *
      * @return instructor for this section
      */
-    public Instructor getInstructor()
-    {
+    public Instructor getInstructor() {
         return instructor;
     }
-    
-     /**
-     * Returns course
-     * precondition: fetchAssociations() should be called before this method can
-     * be used
+
+    /**
+     * Returns course precondition: fetchAssociations() should be called before
+     * this method can be used
+     *
      * @return course for this section
      */
-    public Course getCourse()
-    {
+    public Course getCourse() {
         return course;
     }
-    
-     /**
-     * Returns course
-     * precondition: fetchAssociations() should be called before this method can
-     * be used
+
+    /**
+     * Returns course precondition: fetchAssociations() should be called before
+     * this method can be used
+     *
      * @return course for this section
      */
-    public Term getTerm()
-    {
+    public Term getTerm() {
         return term;
     }
 }
