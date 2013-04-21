@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.TaughtCourseController">
+  <children>
+    <Label fx:id="errorLabel" layoutX="300.0" layoutY="308.0" />
+    <Label id="title" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="111.0" text="All Courses" textFill="GREY">
+      <font>
+        <Font name="System Bold" size="14.0" fx:id="x2" />
+      </font>
+    </Label>
+    <TableView fx:id="sectionTable" layoutX="14.0" layoutY="36.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
+      <columns>
+        <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
+        <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
+        <TableColumn minWidth="75.0" prefWidth="75.0" text="Department" fx:id="courseDept" />
+        <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="term" fx:id="term" />
+        <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
+      </columns>
+    </TableView>
+    <TextField id="filterText" fx:id="courseFilter" layoutX="348.0" layoutY="11.0" prefWidth="238.0" promptText="type filter text">
+      <effect>
+        <InnerShadow color="#9f9f9f" />
+      </effect>
+      <tooltip>
+        <Tooltip text="Type any course parameter to filter table" />
+      </tooltip>
+    </TextField>
+    <Label layoutX="278.0" layoutY="10.0" prefHeight="22.0" prefWidth="87.0" text="Search" textFill="GREY">
+      <font>
+        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label alignment="CENTER" font="$x1" layoutX="124.0" layoutY="276.0" prefHeight="22.0" prefWidth="353.0" text="Click on a course to view the respective sections" wrapText="true">
+      <textFill>
+        <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
+      </textFill>
+    </Label>
+    <Separator layoutX="14.0" layoutY="299.0" minHeight="3.0" prefWidth="572.0">
+      <effect>
+        <DropShadow color="#606060" />
+      </effect>
+    </Separator>
+    <TableView id="studentTable" fx:id="studentTable" layoutX="14.0" layoutY="339.0" prefHeight="149.99990000000253" prefWidth="572.0" tableMenuButtonVisible="true">
+      <columns>
+        <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
+        <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
+        <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="day" />
+        <TableColumn prefWidth="75.0" text="Start Time" fx:id="displayStartTime" />
+        <TableColumn prefWidth="75.0" text="End Time" fx:id="displayEndTime" />
+        <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
+      </columns>
+    </TableView>
+    <Label font="$x2" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY" />
+    <TextField id="filterText" fx:id="sectionFilter" layoutX="348.0" layoutY="309.0" prefWidth="238.0" promptText="type filter text">
+      <effect>
+        <InnerShadow color="GREY" />
+      </effect>
+      <tooltip>
+        <Tooltip text="Type any course parameter to filter table" />
+      </tooltip>
+    </TextField>
+    <Label font="$x1" layoutX="278.0" layoutY="313.0" prefWidth="73.0" text="Search" textFill="GREY" />
+    <Label alignment="CENTER" font="$x1" layoutX="136.0" layoutY="493.0" prefHeight="22.0" prefWidth="328.9998779296875" text="Click on a section to view, enroll or drop course" textFill="$x3" wrapText="true" />
+  </children>
+</AnchorPane>

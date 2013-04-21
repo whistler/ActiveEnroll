@@ -6,6 +6,7 @@ import com.mss.tuess.util.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
  * EnrollSection class
  */
 public class EnrollSection {
+    private static ArrayList<EnrollSection> enrollSections = new ArrayList();
 
     private int studentID;
     private String sectionID;
@@ -20,7 +22,14 @@ public class EnrollSection {
     private String courseDept;
     private String courseNum;
     private String termID;
-
+    /**
+     * Returns the EnrollSection List
+     *
+     * @return ArrayList<EnrollSection> sections ArrayList
+     */
+    public static ArrayList<EnrollSection> getAll() {
+        return enrollSections;
+    }
     /**
      * Returns the Student ID.
      *
@@ -129,6 +138,29 @@ public class EnrollSection {
         this.termID = termID;
     }
 
+   public static void fetchAll(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+
+
+        String sql = "SELECT * FROM enrollSection "
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
+                + courseNum + "' AND termID = '" + termID+"'";
+
+        executeFetch(sql);
+    }
+     private static void executeFetch(String sql) throws SQLException {
+        enrollSections.clear();
+        ResultSet rs = DatabaseConnector.returnQuery(sql);
+        while (rs.next()) {
+            EnrollSection es = new EnrollSection();
+            es.setStudentID(rs.getInt("studentID"));
+            es.setSectionID(rs.getString("sectionID"));
+            es.setCourseDept(rs.getString("courseDept"));
+            es.setCourseNum(rs.getString("courseNum"));
+            es.setTermID(rs.getString("termID"));
+            es.setGrade(rs.getString("grade"));
+            enrollSections.add(es);
+        }
+    }
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
@@ -288,7 +320,40 @@ public class EnrollSection {
         }
         return rs;
     }
+  /**
+     * Loads the EnrollSection by the studentID from the database and
+     * encapsulates into this EnrollSection objects
+     * @param studentID the studentID
+     * @param sectionID the sectionID
+     * @param courseDept the department of the course
+     * @param courseNum the number of the course
+     * @param termID the termID
+     * @throws SQLException
+     * @return the flag if any result returns from the SQL execution in DB
+     */
+    public   int fetchStus(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+        
+        
+         //CurrentUser.getUser().getID();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM enrollSection "
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
+                + courseNum + "' AND termID = '" + termID+"'";
+        
+        rs = DatabaseConnector.returnQuery(sql);
 
+        if (rs.next()) {
+            this.setStudentID(rs.getInt("studentID"));
+            this.setSectionID(rs.getString("sectionID"));
+            this.setCourseDept(rs.getString("courseDept"));
+            this.setCourseNum(rs.getString("courseNum"));
+            this.setTermID(rs.getString("termID"));
+            this.setGrade(rs.getString("grade"));
+            return 1;
+        }
+        else return 0;
+
+    }
     /**
      * Determines whether the section is in a section set.
      *
