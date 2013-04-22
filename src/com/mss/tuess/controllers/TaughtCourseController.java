@@ -9,6 +9,7 @@ import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.EnrollSection;
 import com.mss.tuess.util.CurrentUser;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.Validator;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
@@ -63,6 +64,7 @@ public class TaughtCourseController implements Initializable {
     //Section list
     private ObservableList<EnrollSection> studentTableContent = FXCollections.observableArrayList();
     private ObservableList<EnrollSection> studentFilterContent = FXCollections.observableArrayList();
+    private int flag;
 
     /**
      * Constructor of CourseSearchController_unused
@@ -74,7 +76,7 @@ public class TaughtCourseController implements Initializable {
         sectionTableContent.clear();
         studentTableContent.clear();
         int instructorID = CurrentUser.getUser().getID();
-
+        flag = 0;
         Section.fetchByInstructor(instructorID, State.getCurrentTerm().getTermID());
         courseSize = Section.getAll().size();
         System.out.println(courseSize);
@@ -203,7 +205,6 @@ public class TaughtCourseController implements Initializable {
         courseNum.setCellValueFactory(new PropertyValueFactory<Section, String>("courseNum"));
         courseDept.setCellValueFactory(new PropertyValueFactory<Section, String>("courseDept"));
         term.setCellValueFactory(new PropertyValueFactory<Section, String>("termID"));
-        credit.setCellValueFactory(new PropertyValueFactory<Section, String>("credit"));
 
         sectionTable.setItems(sectionFilterContent);
 
@@ -245,9 +246,9 @@ public class TaughtCourseController implements Initializable {
                     String sectionID = sectionFilterContent.get(selectedIndex).getSectionID();
                     String courseNum = sectionFilterContent.get(selectedIndex).getCourseNum();
                     String courseDept = sectionFilterContent.get(selectedIndex).getCourseDept();
-                    String currentTerm = State.getCurrentTerm().getTermID();
+                    String currentTerm = sectionFilterContent.get(selectedIndex).getTermID();
                     //Section.fetchStus(sectionID,courseDept, courseNum, currentTerm);
-                    EnrollSection.fetchAll(sectionID, courseDept, courseNum, currentTerm);
+                    EnrollSection.fetchAllValid(sectionID, courseDept, courseNum, currentTerm);
 
                     studentTableContent.clear();
                     studentTableContent.addAll(EnrollSection.getAll());
@@ -268,7 +269,7 @@ public class TaughtCourseController implements Initializable {
             public void changed(ObservableValue<? extends EnrollSection> ov, EnrollSection t, EnrollSection t1) {
                 int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
                 EnrollSection currentEnrollSection = new EnrollSection();
-
+                flag = 1;
                 System.out.println("Index : " + selectedIndex);
 
                 try {
@@ -280,7 +281,7 @@ public class TaughtCourseController implements Initializable {
                             studentFilterContent.get(selectedIndex).getTermID());
                     State.setCurrentEnrollSection(currentEnrollSection);
                     gradeField.setText(currentEnrollSection.getGrade());
-
+                    flag = 0;
                 } catch (Exception ex) {
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -299,16 +300,31 @@ public class TaughtCourseController implements Initializable {
     }
 
     public void updateStuGrade() {
-        EnrollSection se = new EnrollSection();
-        se = State.getCurrentEnrollSection();
-        se.setGrade(gradeField.getText());
-        try {
-            se.update();
-        } catch (SQLException ex) {
-            Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ViewManager.setStatus("Successfully Updated the Grade!");
+        Validator validator = new Validator();
+        if (flag == 1) {
+            EnrollSection se = new EnrollSection();
+            se = State.getCurrentEnrollSection();
+            String gradeToStu = gradeField.getText();
+            if ((gradeToStu.compareTo("A") == 0
+                    || gradeToStu.compareTo("B") == 0
+                    || gradeToStu.compareTo("C") == 0
+                    || gradeToStu.compareTo("D") == 0)) {
+                se.setGrade(gradeToStu);
+                try {
+                    se.update();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ViewManager.setStatus("Successfully Updated the Grade!");
+            } else {
+                ViewManager.setStatus("Please input a valid grade!");
 
+            }
+        }
+        else{
+                            ViewManager.setStatus("Must choose someone!");
+
+        }
 
     }
 }
