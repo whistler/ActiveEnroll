@@ -20,13 +20,14 @@
     </Button>
     <Label font="$x1" layoutX="52.0" layoutY="14.0" text="Use the button below to send registration instructions to students for the next semester" />
     <Label fx:id="sendEmailStatus" font="$x1" layoutX="130.0" layoutY="394.0" opacity="0.95" prefWidth="215.0" textFill="#00993d" />
-    <TextField layoutX="130.0" layoutY="71.0" prefWidth="317.0" />
-    <TextArea layoutX="130.0" layoutY="116.0" prefHeight="182.0" prefWidth="317.0" wrapText="true" />
+    <TextField fx:id="emailSubjectText" layoutX="130.0" layoutY="71.0" prefWidth="317.0" />
+    <TextArea fx:id="emailBodyText" layoutX="130.0" layoutY="116.0" prefHeight="182.0" prefWidth="317.0" wrapText="true" />
     <Label font="$x1" layoutX="38.0" layoutY="74.0" prefWidth="71.0" text="Subject:">
       <textFill>
         <Color blue="0.250" green="0.250" red="0.250" fx:id="x2" />
       </textFill>
     </Label>
     <Label font="$x1" layoutX="38.0" layoutY="116.0" prefWidth="71.0" text="Body:" textFill="$x2" />
+    <ProgressIndicator fx:id="mailInstructionsProgress" layoutX="301.0" layoutY="328.0" prefWidth="44.0" progress="-0.62" />
   </children>
 </AnchorPane>
