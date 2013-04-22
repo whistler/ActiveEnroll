@@ -275,15 +275,17 @@ public class SearchCoursesController implements Initializable {
                 System.out.println("Index : " + selectedIndex);
 
                 try {
-                    String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
-                    String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
-                    String currentTerm = State.getCurrentTerm().getTermID();
-                    SectionClass.fetch(courseDept, courseNum, currentTerm);
+                    if(selectedIndex >= 0){
+                        String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
+                        String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
+                        String currentTerm = State.getCurrentTerm().getTermID();
+                        SectionClass.fetch(courseDept, courseNum, currentTerm);
 
-                    sectionClassTableContent.clear();
-                    sectionClassTableContent.addAll(SectionClass.getAll());
-                    sectionClassFilterContent.clear();
-                    sectionClassFilterContent.addAll(sectionClassTableContent);
+                        sectionClassTableContent.clear();
+                        sectionClassTableContent.addAll(SectionClass.getAll());
+                        sectionClassFilterContent.clear();
+                        sectionClassFilterContent.addAll(sectionClassTableContent);   
+                    }
                 } catch (Exception ex) {
                     System.out.println("gotcha array out of bound 1");
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
