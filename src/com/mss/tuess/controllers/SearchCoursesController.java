@@ -305,13 +305,16 @@ public class SearchCoursesController implements Initializable {
                 System.out.println("Index : " + selectedIndex);
 
                 try {
-                    State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
-                    currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
-                            sectionClassFilterContent.get(selectedIndex).getCourseDept(),
-                            sectionClassFilterContent.get(selectedIndex).getCourseNum(),
-                            sectionClassFilterContent.get(selectedIndex).getTermID());
-                    State.setCurrentSection(currentSection);
-                    ViewManager.changeView("Section");
+                    if(selectedIndex >= 0){
+                        State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
+                        currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
+                                sectionClassFilterContent.get(selectedIndex).getCourseDept(),
+                                sectionClassFilterContent.get(selectedIndex).getCourseNum(),
+                                sectionClassFilterContent.get(selectedIndex).getTermID());
+                        State.setCurrentSection(currentSection);
+                        ViewManager.changeView("Section");
+                    }
+                    
                 } catch (Exception ex) {
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -332,31 +335,40 @@ public class SearchCoursesController implements Initializable {
         sectionClassTable.setItems(sectionClassFilterContent);
     }
 
+    /**
+     * This method performs advanced course search
+     * @throws SQLException 
+     */
     private void searchCourseByParam() throws SQLException {
 
         ViewManager.setStatus("");
         String searchSQL = validateAndBuildSearchSQL();
+        
         if (searchSQL != null) {
             System.out.println("Search Sql :" + searchSQL);
             courseTableContent.clear();
             sectionClassTableContent.clear();
-
+            
+            //fetch the results
             Course.fetch(searchSQL);
             int courseSize = Course.getAll().size();
 
             if (courseSize > 0) {
                 courseTableContent.addAll(Course.getAll());
+            } else {
+                ViewManager.setStatus("There are no results to be displayed!");
             }
-
             courseFilterContent.clear();
             courseFilterContent.addAll(courseTableContent);
         } else {
             ViewManager.setStatus("Atleast one field should be entered!");
         }
-
-
     }
 
+    /**
+     * This method validates and builds the advanced search Sql
+     * @return 
+     */
     private String validateAndBuildSearchSQL() {
 
         ArrayList<String> searchParamList = new ArrayList();
