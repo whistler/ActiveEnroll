@@ -4,6 +4,7 @@ import com.mss.tuess.controllers.LayoutController;
 import com.mss.tuess.entity.User;
 import com.mss.tuess.start.TUESS;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,13 +14,36 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+/**
+ * Manages all screens in the program including switching windows, displaying 
+ * status messages, displaying the right side bar and header
+ * @author ibrahim
+ */
 public class ViewManager {
 
     private static Stage stage;
+    private static Stage help = new Stage();
     private static ArrayList previousNodes = new ArrayList();
+    private static String currentView = "Login";
 
+    /**
+     * Initializes a new stage to use as the help window
+     */
+    public static void loadHelp()
+    {
+        Parent page;
+        try {
+            page = FXMLLoader.load(TUESS.class.getResource("/com/mss/tuess/views/Help.fxml"));
+            Scene scene = new Scene(page);
+            help.setScene(scene);
+        } catch (IOException ex) {
+            Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Sets the window(Stage) that should be used to display Views
      *
@@ -51,7 +75,9 @@ public class ViewManager {
      *
      * @param fxml path of the view to load
      */
-    public static void changeView(String fxml) {
+    public static void changeView(String view) {
+        currentView = view;
+        String fxml = "/com/mss/tuess/views/" + view + ".fxml";
         ViewManager.setStatus("");
         Pane pane = (Pane) stage.getScene().lookup("#content");
         previousNodes.clear();
@@ -66,6 +92,10 @@ public class ViewManager {
         pane.getChildren().add((Node) load);
     }
 
+    /**
+     * Update the status text of the program
+     * @param status 
+     */
     public static void setStatus(String status) {
         Label label = (Label) stage.getScene().lookup("#statusLabel");
         label.setText(status);
@@ -122,5 +152,33 @@ public class ViewManager {
         pane.getChildren().clear();
         pane.getChildren().addAll(previousNodes);
         setStatus("");
+    }
+    
+    /**
+     * Show help file in a new window
+     * @param fileName html file to load in to the help window (store in help package)
+     * @throws MalformedURLException 
+     */
+    public static void showHelp(String fileName)
+    {
+        Scene scene = help.getScene();
+        WebView webview = (WebView) scene.lookup("#htmlViewer");
+        try{
+            String url = TUESS.class.getResource("/com/mss/tuess/help/" + fileName).toExternalForm();
+            webview.getEngine().load(url);
+            help.show();
+        }
+        catch (Exception e){
+            System.out.println("Help file: " + fileName + " not found!");
+        }
+    }
+    
+    /**
+     * Show help for the current view
+     * @throws MalformedURLException 
+     */
+    public static void showCurrentHelp()
+    {
+        showHelp(currentView + ".html");
     }
 }
