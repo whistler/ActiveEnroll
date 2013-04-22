@@ -28,7 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SearchCoursesController implements Initializable {
-    
+
     //advanced search fields
     @FXML
     private TextField searchCode;
@@ -40,13 +40,11 @@ public class SearchCoursesController implements Initializable {
     private TextField searchInfo;
     @FXML
     private TextField searchCredit;
-    
     //filter fields
     @FXML
     private TextField courseFilter;
     @FXML
     private TextField sectionFilter;
-    
     //Course Table and fields
     @FXML
     private TableView<Course> courseTable;
@@ -60,8 +58,6 @@ public class SearchCoursesController implements Initializable {
     private TableColumn<Course, String> info;
     @FXML
     private TableColumn<Course, Integer> credit;
-    
-    
     //Section Table and fields
     @FXML
     private TableView<SectionClass> sectionClassTable;
@@ -77,11 +73,9 @@ public class SearchCoursesController implements Initializable {
     private TableColumn<SectionClass, String> displayEndTime;
     @FXML
     private TableColumn<SectionClass, String> location;
-    
     //Course list
     private ObservableList<Course> courseTableContent = FXCollections.observableArrayList();
     private ObservableList<Course> courseFilterContent = FXCollections.observableArrayList();
-    
     //Section list
     private ObservableList<SectionClass> sectionClassTableContent = FXCollections.observableArrayList();
     private ObservableList<SectionClass> sectionClassFilterContent = FXCollections.observableArrayList();
@@ -93,22 +87,22 @@ public class SearchCoursesController implements Initializable {
      */
     public SearchCoursesController() throws SQLException {
         int courseSize;
-        
+
         courseTableContent.clear();
         sectionClassTableContent.clear();
-        
+
         //if flag is search all courses
-        if(State.getCurrentSearchView().equalsIgnoreCase("AllCourses")){
+        if (State.getCurrentSearchView().equalsIgnoreCase("AllCourses")) {
             Course.fetch();
             courseSize = Course.getAll().size();
-            
-            if(courseSize > 0){
+
+            if (courseSize > 0) {
                 courseTableContent.addAll(Course.getAll());
             }
             courseFilterContent.addAll(courseTableContent);
-        }   
-        
-        
+        }
+
+
         //event listener for course filter 
         courseTableContent.addListener(new ListChangeListener<Course>() {
             @Override
@@ -116,7 +110,7 @@ public class SearchCoursesController implements Initializable {
                 courseFilterRefresh();
             }
         });
-        
+
         //event listener for course filter 
         sectionClassTableContent.addListener(new ListChangeListener<SectionClass>() {
             @Override
@@ -127,10 +121,10 @@ public class SearchCoursesController implements Initializable {
     }
 
     @FXML
-    private void advancedCourseSearch() throws SQLException{
+    private void advancedCourseSearch() throws SQLException {
         searchCourseByParam();
     }
-    
+
     /**
      * Handle the order for each course column
      */
@@ -139,7 +133,7 @@ public class SearchCoursesController implements Initializable {
         courseTable.getSortOrder().clear();
         courseTable.getSortOrder().addAll(sortOrder);
     }
-    
+
     /**
      * Handle the order for each section column
      */
@@ -161,7 +155,7 @@ public class SearchCoursesController implements Initializable {
         }
         tableOrderAct();
     }
-    
+
     /**
      * Refresh the content of the filter
      */
@@ -173,7 +167,7 @@ public class SearchCoursesController implements Initializable {
             }
         }
         sectionClassTableOrderAct();
-    }    
+    }
 
     /**
      * Control the course filter
@@ -184,25 +178,24 @@ public class SearchCoursesController implements Initializable {
         String filterString = courseFilter.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
-        }  
-        
+        }
+
         String lowerCaseFilterString = filterString.toLowerCase();
 
         if (course.getCourseName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
         } else if (course.getCourseDept().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if (course.getCourseNum().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (course.getCourseNum().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if(course.getInfo().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (course.getInfo().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if(Integer.toString(course.getCredit()).trim().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (Integer.toString(course.getCredit()).trim().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        }  
+        }
         return false;
     }
 
-    
     /**
      * Control the section class filter
      *
@@ -212,33 +205,32 @@ public class SearchCoursesController implements Initializable {
         String filterString = sectionFilter.getText();
         if (filterString == null || filterString.isEmpty()) {
             return true;
-        }  
-        
+        }
+
         String lowerCaseFilterString = filterString.toLowerCase();
 
         if (sectionClass.getSectionID().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
         } else if (sectionClass.getType().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if (sectionClass.getDay().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (sectionClass.getDay().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if(sectionClass.getLocation().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (sectionClass.getLocation().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if (sectionClass.getDisplayStartTime().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (sectionClass.getDisplayStartTime().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        } else if(sectionClass.getDisplayEndTime().toLowerCase().indexOf(lowerCaseFilterString) != -1){
+        } else if (sectionClass.getDisplayEndTime().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-        }  
+        }
         return false;
     }
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         //searchErrorLabel.setText("");
         /**
          * map the course table attributes
@@ -250,7 +242,7 @@ public class SearchCoursesController implements Initializable {
         credit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("credit"));
 
         courseTable.setItems(courseFilterContent);
-        
+
         /**
          * course filter event listener
          */
@@ -262,7 +254,7 @@ public class SearchCoursesController implements Initializable {
             }
         });
 
-        
+
         /**
          * section filter event listener
          */
@@ -272,64 +264,62 @@ public class SearchCoursesController implements Initializable {
                     String oldValue, String newValue) {
                 sectionClassFilterRefresh();
             }
-        });        
+        });
         /*
          * Event Handler to capture the selected course
          */
-         courseTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Course>() {
+        courseTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Course>() {
+            @Override
+            public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
+                int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
+                System.out.println("Index : " + selectedIndex);
 
-                    @Override
-                    public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
-                        int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
-                        System.out.println("Index : "+selectedIndex);
+                try {
+                    String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
+                    String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
+                    String currentTerm = State.getCurrentTerm().getTermID();
+                    SectionClass.fetch(courseDept, courseNum, currentTerm);
 
-                        try {
-                            String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
-                            String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
-                            String currentTerm = State.getCurrentTerm().getTermID();
-                            SectionClass.fetch(courseDept, courseNum, currentTerm);
-                            
-                            sectionClassTableContent.clear();
-                            sectionClassTableContent.addAll(SectionClass.getAll());
-                            sectionClassFilterContent.clear();
-                            sectionClassFilterContent.addAll(sectionClassTableContent);
-                        } catch (Exception ex) {
-                            System.out.println("gotcha array out of bound 1");
-                            Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                });
-         
+                    sectionClassTableContent.clear();
+                    sectionClassTableContent.addAll(SectionClass.getAll());
+                    sectionClassFilterContent.clear();
+                    sectionClassFilterContent.addAll(sectionClassTableContent);
+                } catch (Exception ex) {
+                    System.out.println("gotcha array out of bound 1");
+                    Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
         /*
          * Event Handler to capture the selected course
          */
-         sectionClassTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SectionClass>() {
+        sectionClassTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SectionClass>() {
+            @Override
+            public void changed(ObservableValue<? extends SectionClass> ov, SectionClass t, SectionClass t1) {
+                int selectedIndex = sectionClassTable.getSelectionModel().getSelectedIndex();
+                Section currentSection = new Section();
 
-                    @Override
-                    public void changed(ObservableValue<? extends SectionClass> ov, SectionClass t, SectionClass t1) {
-                        int selectedIndex = sectionClassTable.getSelectionModel().getSelectedIndex();
-                        Section currentSection = new Section();
-                        
-                        System.out.println("Index : "+selectedIndex);
+                System.out.println("Index : " + selectedIndex);
 
-                        try {
-                            State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
-                            currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
-                                sectionClassFilterContent.get(selectedIndex).getCourseDept(),
-                                sectionClassFilterContent.get(selectedIndex).getCourseNum(),
-                                sectionClassFilterContent.get(selectedIndex).getTermID());
-                            State.setCurrentSection(currentSection);
-                            ViewManager.changeView("Section");
-                        } catch (Exception ex) {
-                            Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                });
-         
-        
-         /**
-          * map the section table attributes
-          */
+                try {
+                    State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
+                    currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
+                            sectionClassFilterContent.get(selectedIndex).getCourseDept(),
+                            sectionClassFilterContent.get(selectedIndex).getCourseNum(),
+                            sectionClassFilterContent.get(selectedIndex).getTermID());
+                    State.setCurrentSection(currentSection);
+                    ViewManager.changeView("Section");
+                } catch (Exception ex) {
+                    Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+
+        /**
+         * map the section table attributes
+         */
         sectionID.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("sectionID"));
         type.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("type"));
         day.setCellValueFactory(new PropertyValueFactory<SectionClass, String>("day"));
@@ -339,84 +329,81 @@ public class SearchCoursesController implements Initializable {
 
         sectionClassTable.setItems(sectionClassFilterContent);
     }
-    
-    
-    
-    private void searchCourseByParam() throws SQLException{
-            
-            ViewManager.setStatus("");
-            String searchSQL = validateAndBuildSearchSQL();
-            if(searchSQL != null){
-                System.out.println("Search Sql :"+searchSQL);
-                courseTableContent.clear();
-                sectionClassTableContent.clear();
 
-                Course.fetch(searchSQL);
-                int courseSize = Course.getAll().size();
+    private void searchCourseByParam() throws SQLException {
 
-                if(courseSize > 0){
-                    courseTableContent.addAll(Course.getAll());    
-                }
-                
-                courseFilterContent.clear();
-                courseFilterContent.addAll(courseTableContent);
-            }else{
-                ViewManager.setStatus("Atleast one field should be entered!");
+        ViewManager.setStatus("");
+        String searchSQL = validateAndBuildSearchSQL();
+        if (searchSQL != null) {
+            System.out.println("Search Sql :" + searchSQL);
+            courseTableContent.clear();
+            sectionClassTableContent.clear();
+
+            Course.fetch(searchSQL);
+            int courseSize = Course.getAll().size();
+
+            if (courseSize > 0) {
+                courseTableContent.addAll(Course.getAll());
             }
+
+            courseFilterContent.clear();
+            courseFilterContent.addAll(courseTableContent);
+        } else {
+            ViewManager.setStatus("Atleast one field should be entered!");
+        }
 
 
     }
-    
-    private String validateAndBuildSearchSQL(){
-        
+
+    private String validateAndBuildSearchSQL() {
+
         ArrayList<String> searchParamList = new ArrayList();
-        String searchSQL="";
+        String searchSQL = "";
         String addParam;
         String searchField;
-        
+
         searchField = searchCode.getText().trim();
-        if(!searchField.isEmpty()){
-            addParam = " courseNum like '%"+searchField+"%'";
+        if (!searchField.isEmpty()) {
+            addParam = " courseNum like '%" + searchField + "%'";
             searchParamList.add(addParam);
         }
 
         searchField = searchDepartment.getText().trim();
-        if(!searchField.isEmpty()){
-            addParam = " courseDept like '%"+searchField+"%'";
+        if (!searchField.isEmpty()) {
+            addParam = " courseDept like '%" + searchField + "%'";
             searchParamList.add(addParam);
         }
-        
+
         searchField = searchName.getText().trim();
-        if(!searchField.isEmpty()){
-            addParam = " courseName like '%"+searchField+"%'";
+        if (!searchField.isEmpty()) {
+            addParam = " courseName like '%" + searchField + "%'";
             searchParamList.add(addParam);
         }
-        
+
         searchField = searchInfo.getText().trim();
-        if(!searchField.isEmpty()){
-            addParam = " info like '%"+searchField+"%'";
+        if (!searchField.isEmpty()) {
+            addParam = " info like '%" + searchField + "%'";
             searchParamList.add(addParam);
         }
-        
+
         searchField = searchCredit.getText().trim();
-        if(!searchField.isEmpty()){
-            addParam = " credit like '%"+searchField+"%'";
+        if (!searchField.isEmpty()) {
+            addParam = " credit like '%" + searchField + "%'";
             searchParamList.add(addParam);
-        }  
-        
-        if(searchParamList.size() > 0){
-            for(int i=0;i<searchParamList.size();i++){
-                if(i!=0){
-                    searchSQL+=" and" + searchParamList.get(i);
-                }else{
-                    searchSQL+=searchParamList.get(i);
+        }
+
+        if (searchParamList.size() > 0) {
+            for (int i = 0; i < searchParamList.size(); i++) {
+                if (i != 0) {
+                    searchSQL += " and" + searchParamList.get(i);
+                } else {
+                    searchSQL += searchParamList.get(i);
                 }
-            }   
-        }else {
+            }
+        } else {
             searchSQL = null;
         }
-        
+
         return searchSQL;
     }
-    
 }

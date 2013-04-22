@@ -65,6 +65,7 @@ public class TaughtCourseController implements Initializable {
     private ObservableList<EnrollSection> studentTableContent = FXCollections.observableArrayList();
     private ObservableList<EnrollSection> studentFilterContent = FXCollections.observableArrayList();
     private int flag;
+    
 
     /**
      * Constructor of CourseSearchController_unused
@@ -237,26 +238,26 @@ public class TaughtCourseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
                 int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
-                if (selectedIndex < 0) {
-                    selectedIndex = 0;
-                }
-                System.out.println("Index : " + selectedIndex);
+                flag=0;
+                if (sectionFilterContent.size() > 0) {
+                    System.out.println("Index : " + selectedIndex);
 
-                try {
-                    String sectionID = sectionFilterContent.get(selectedIndex).getSectionID();
-                    String courseNum = sectionFilterContent.get(selectedIndex).getCourseNum();
-                    String courseDept = sectionFilterContent.get(selectedIndex).getCourseDept();
-                    String currentTerm = sectionFilterContent.get(selectedIndex).getTermID();
-                    //Section.fetchStus(sectionID,courseDept, courseNum, currentTerm);
-                    EnrollSection.fetchAllValid(sectionID, courseDept, courseNum, currentTerm);
+                    try {
+                        String sectionID = sectionFilterContent.get(selectedIndex).getSectionID();
+                        String courseNum = sectionFilterContent.get(selectedIndex).getCourseNum();
+                        String courseDept = sectionFilterContent.get(selectedIndex).getCourseDept();
+                        String currentTerm = sectionFilterContent.get(selectedIndex).getTermID();
+                        //Section.fetchStus(sectionID,courseDept, courseNum, currentTerm);
+                        EnrollSection.fetchAllValid(sectionID, courseDept, courseNum, currentTerm);
 
-                    studentTableContent.clear();
-                    studentTableContent.addAll(EnrollSection.getAll());
-                    studentFilterContent.clear();
-                    studentFilterContent.addAll(studentTableContent);
-                } catch (Exception ex) {
-                    System.out.println("gotcha array out of bound 1");
-                    Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                        studentTableContent.clear();
+                        studentTableContent.addAll(EnrollSection.getAll());
+                        studentFilterContent.clear();
+                        studentFilterContent.addAll(studentTableContent);
+                    } catch (Exception ex) {
+                        System.out.println("gotcha array out of bound 1");
+                        Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -271,19 +272,19 @@ public class TaughtCourseController implements Initializable {
                 EnrollSection currentEnrollSection = new EnrollSection();
                 flag = 1;
                 System.out.println("Index : " + selectedIndex);
-
-                try {
-                    State.setCurrentEnrollSection(studentFilterContent.get(selectedIndex));
-                    currentEnrollSection.fetch(studentFilterContent.get(selectedIndex).getStudentID(),
-                            studentFilterContent.get(selectedIndex).getSectionID(),
-                            studentFilterContent.get(selectedIndex).getCourseDept(),
-                            studentFilterContent.get(selectedIndex).getCourseNum(),
-                            studentFilterContent.get(selectedIndex).getTermID());
-                    State.setCurrentEnrollSection(currentEnrollSection);
-                    gradeField.setText(currentEnrollSection.getGrade());
-                    flag = 0;
-                } catch (Exception ex) {
-                    Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                if ( studentFilterContent.size() > 0) {
+                    try {
+                        State.setCurrentEnrollSection(studentFilterContent.get(selectedIndex));
+                        currentEnrollSection.fetch(studentFilterContent.get(selectedIndex).getStudentID(),
+                                studentFilterContent.get(selectedIndex).getSectionID(),
+                                studentFilterContent.get(selectedIndex).getCourseDept(),
+                                studentFilterContent.get(selectedIndex).getCourseNum(),
+                                studentFilterContent.get(selectedIndex).getTermID());
+                        State.setCurrentEnrollSection(currentEnrollSection);
+                        gradeField.setText(currentEnrollSection.getGrade());
+                    } catch (Exception ex) {
+                        Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -308,21 +309,23 @@ public class TaughtCourseController implements Initializable {
             if ((gradeToStu.compareTo("A") == 0
                     || gradeToStu.compareTo("B") == 0
                     || gradeToStu.compareTo("C") == 0
-                    || gradeToStu.compareTo("D") == 0)) {
+                    || gradeToStu.compareTo("D") == 0
+                    || gradeToStu.compareTo("F") == 0)) {
                 se.setGrade(gradeToStu);
                 try {
                     se.update();
                 } catch (SQLException ex) {
                     Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                flag = 0;
+
                 ViewManager.setStatus("Successfully Updated the Grade!");
             } else {
                 ViewManager.setStatus("Please input a valid grade!");
 
             }
-        }
-        else{
-                            ViewManager.setStatus("Must choose someone!");
+        } else {
+            ViewManager.setStatus("Must choose someone!");
 
         }
 
