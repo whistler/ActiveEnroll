@@ -93,7 +93,10 @@ public class SectionClass {
         Term currentTerm = State.getCurrentTerm();
         currentID = CurrentUser.getUser().getID();
         ResultSet rs;
-        String sql = "select sc.sectionID,sc.courseDept,sc.courseNum,sc.termID,sc.type,sc.classID,sc.day,sc.startTime," + "sc.endTime, sc.location from sectionClass sc natural join enrollSection es " + "where es.studentID=" + currentID + " and es.termID='" + currentTerm.getTermID() + "'";
+        String sql = "select sc.sectionID,sc.courseDept,sc.courseNum,sc.termID,sc.type,sc.classID,sc.day,sc.startTime," +
+                "sc.endTime, sc.location from sectionClass sc natural join enrollSection es " +
+                "where es.studentID=" + currentID + " and es.termID='" + currentTerm.getTermID() + "'"+
+                "AND es.grade<>'W'";
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             SectionClass registeredSectionClass = new SectionClass();

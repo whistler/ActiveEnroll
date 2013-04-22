@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mss.tuess.controllers.SidebarController">
-    <children>
-        <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
-        <Hyperlink layoutX="39.0" layoutY="59.0" onAction="#showWaivePrerequisite" text="Waive Prerequisite" />
-        <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showTaughtSections" text="View Taught Courses" />
-
-        <Hyperlink layoutX="38.0" layoutY="300.0" onAction="#logout" text="Logout" />
-    </children>
+  <children>
+    <Hyperlink layoutX="39.0" layoutY="37.0" onAction="#showMyProfile" text="My Profile" />
+    <Hyperlink layoutX="39.0" layoutY="59.0" onAction="#showWaivePrerequisite" text="Waive Prerequisite" />
+    <Hyperlink layoutX="39.0" layoutY="81.0" onAction="#showTaughtSections" text="View Taught Courses" />
+    <Hyperlink layoutX="38.0" layoutY="469.0" onAction="#logout" text="Logout" />
+    <Hyperlink layoutX="38.0" layoutY="447.0" onAction="#showHelp" text="Help" />
+  </children>
 </AnchorPane>
