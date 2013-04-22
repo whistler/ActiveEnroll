@@ -41,14 +41,11 @@
     <TextField fx:id="city" layoutX="287.0" layoutY="238.0" prefWidth="200.0" />
     <TextField fx:id="zipCode" layoutX="287.0" layoutY="260.0" prefWidth="200.0" />
     <TextField fx:id="country" layoutX="287.0" layoutY="309.0" prefWidth="200.0" />
-    <Label id="error" fx:id="errorLabel" font="$x1" layoutX="354.0" layoutY="426.0" prefHeight="35.0" prefWidth="204.0" text="Label" wrapText="true" />
     <Label layoutX="151.0" layoutY="285.0" text="State" />
     <TextField fx:id="state" layoutX="287.0" layoutY="285.0" prefWidth="200.0" />
     <TextField id="firstName" fx:id="registeredSince" layoutX="287.0" layoutY="62.0" prefWidth="200.0" />
     <TextField fx:id="ID" layoutX="287.0" layoutY="14.0" prefWidth="200.0" />
     <TextField id="firstName" fx:id="status" layoutX="287.0" layoutY="87.0" prefWidth="200.0" />
-    <ChoiceBox fx:id="program" layoutX="287.0" layoutY="39.0" prefWidth="200.0">
-
-    </ChoiceBox>
+    <ChoiceBox fx:id="program" layoutX="287.0" layoutY="39.0" prefWidth="200.0" />
   </children>
 </AnchorPane>
