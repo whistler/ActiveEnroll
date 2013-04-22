@@ -32,8 +32,7 @@ public class ViewManager {
     /**
      * Initializes a new stage to use as the help window
      */
-    public static void loadHelp()
-    {
+    public static void loadHelp(){
         Parent page;
         try {
             page = FXMLLoader.load(TUESS.class.getResource("/com/mss/tuess/views/Help.fxml"));
@@ -159,8 +158,7 @@ public class ViewManager {
      * @param fileName html file to load in to the help window (store in help package)
      * @throws MalformedURLException 
      */
-    public static void showHelp(String fileName)
-    {
+    public static void showHelp(String fileName){
         Scene scene = help.getScene();
         WebView webview = (WebView) scene.lookup("#htmlViewer");
         try{
@@ -177,8 +175,7 @@ public class ViewManager {
      * Show help for the current view
      * @throws MalformedURLException 
      */
-    public static void showCurrentHelp()
-    {
+    public static void showCurrentHelp(){
         showHelp(currentView + ".html");
     }
 }
