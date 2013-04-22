@@ -319,7 +319,7 @@ public class SearchCoursesController implements Initializable {
                                 sectionClassFilterContent.get(selectedIndex).getCourseNum(),
                                 sectionClassFilterContent.get(selectedIndex).getTermID());
                             State.setCurrentSection(currentSection);
-                            ViewManager.changeView("/com/mss/tuess/views/Section.fxml");
+                            ViewManager.changeView("Section");
                         } catch (Exception ex) {
                             Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                         }

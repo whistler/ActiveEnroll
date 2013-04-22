@@ -505,7 +505,7 @@ public class EnrollSection {
     public static boolean withdrawEndNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        if (now.compareTo(currentTerm.getRegistrationEnd()) < 0) {
+        if (now.compareTo(currentTerm.getDropWithW()) < 0) {
             return true;
         } else {
             return false;

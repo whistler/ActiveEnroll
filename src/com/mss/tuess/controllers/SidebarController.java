@@ -24,13 +24,13 @@ public class SidebarController implements Initializable {
     
     @FXML public void showMailGrades() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/MailGrades.fxml");
+        ViewManager.changeView("MailGrades");
         ViewManager.setTitle("Mail Grades");
     }
     
     @FXML public void showMailInstructions() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/MailInstructions.fxml");
+        ViewManager.changeView("MailInstructions");
         ViewManager.setTitle("Mail Instructions");
     }
     
@@ -40,12 +40,12 @@ public class SidebarController implements Initializable {
     
     @FXML public void showWaivePrerequisite() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/WaivePrerequisite.fxml");
+        ViewManager.changeView("WaivePrerequisite");
         ViewManager.setTitle("Waive Prerequisite");
     }
     @FXML public void showTaughtSections() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/TaughtCourses.fxml");
+        ViewManager.changeView("TaughtCourses");
         ViewManager.setTitle("Taught Sections");
     }
     
@@ -55,38 +55,38 @@ public class SidebarController implements Initializable {
     @FXML public void showCourseSearch() throws Exception
     {
         State.setCurrentSearchView("CourseSearch");
-        ViewManager.changeView("/com/mss/tuess/views/AdvancedCourseSearch.fxml");
+        ViewManager.changeView("AdvancedCourseSearch");
         ViewManager.setTitle("Course Search");
     }
     
     @FXML public void showAllCourses() throws Exception
     {
         State.setCurrentSearchView("AllCourses");
-        ViewManager.changeView("/com/mss/tuess/views/ViewAllCourses.fxml");
+        ViewManager.changeView("ViewAllCourses");
         ViewManager.setTitle("View All Courses");
     }
     
     @FXML public void showRegisteredCourses() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/RegisteredCourses.fxml");
+        ViewManager.changeView("RegisteredCourses");
         ViewManager.setTitle("Registered Courses");
     }
     
     @FXML public void showTranscript() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/Transcript.fxml");
+        ViewManager.changeView("Transcript");
         ViewManager.setTitle("Transcript");
     }
     
     @FXML public void showTimetable() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/Timetable.fxml");
+        ViewManager.changeView("Timetable");
         ViewManager.setTitle("Timetable");
     }
     
     @FXML public void showMyProgram() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/MyProgram.fxml");
+        ViewManager.changeView("MyProgram");
         ViewManager.setTitle("My Program");
     }
     
@@ -102,13 +102,18 @@ public class SidebarController implements Initializable {
     
     @FXML public void showMyProfile() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/Profile.fxml");
+        ViewManager.changeView("Profile");
         ViewManager.setTitle("My Profile");
     }
     
     @FXML public void showAddStudent() throws Exception
     {
-        ViewManager.changeView("/com/mss/tuess/views/AddStudent.fxml");
+        ViewManager.changeView("AddStudent");
         ViewManager.setTitle("Add New Student");
+    }
+    
+    @FXML public void showHelp()
+    {
+        ViewManager.showCurrentHelp();
     }
 }

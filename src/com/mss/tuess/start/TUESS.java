@@ -25,6 +25,7 @@ public class TUESS extends Application {
         State.setCurrentTerm(Term.getCurrentTerm());
         ViewManager.setStage(stage);
         ViewManager.changeScene("/com/mss/tuess/views/Login.fxml");
+        ViewManager.loadHelp();
     }
 
     /**
