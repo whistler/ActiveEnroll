@@ -64,8 +64,8 @@ public class TaughtCourseController implements Initializable {
     //Section list
     private ObservableList<EnrollSection> studentTableContent = FXCollections.observableArrayList();
     private ObservableList<EnrollSection> studentFilterContent = FXCollections.observableArrayList();
-    private int flag;
-    
+    private int checkChangeOutside;
+    private int checkChangeInside;
 
     /**
      * Constructor of CourseSearchController_unused
@@ -74,10 +74,11 @@ public class TaughtCourseController implements Initializable {
      */
     public TaughtCourseController() throws SQLException {
         int courseSize;
+        checkChangeInside = 0;
         sectionTableContent.clear();
         studentTableContent.clear();
         int instructorID = CurrentUser.getUser().getID();
-        flag = 0;
+        checkChangeOutside = 0;
         Section.fetchByInstructor(instructorID, State.getCurrentTerm().getTermID());
         courseSize = Section.getAll().size();
         System.out.println(courseSize);
@@ -238,8 +239,9 @@ public class TaughtCourseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Section> ov, Section t, Section t1) {
                 int selectedIndex = sectionTable.getSelectionModel().getSelectedIndex();
-                flag=0;
-                if (sectionFilterContent.size() > 0) {
+                checkChangeOutside = 0;
+                checkChangeInside = 0;
+                if (sectionFilterContent.size() > 0 && selectedIndex >= 0) {
                     System.out.println("Index : " + selectedIndex);
 
                     try {
@@ -270,9 +272,9 @@ public class TaughtCourseController implements Initializable {
             public void changed(ObservableValue<? extends EnrollSection> ov, EnrollSection t, EnrollSection t1) {
                 int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
                 EnrollSection currentEnrollSection = new EnrollSection();
-                flag = 1;
+                checkChangeOutside = 1;
                 System.out.println("Index : " + selectedIndex);
-                if ( studentFilterContent.size() > 0) {
+                if (studentFilterContent.size() > 0 && selectedIndex >= 0) {
                     try {
                         State.setCurrentEnrollSection(studentFilterContent.get(selectedIndex));
                         currentEnrollSection.fetch(studentFilterContent.get(selectedIndex).getStudentID(),
@@ -302,7 +304,9 @@ public class TaughtCourseController implements Initializable {
 
     public void updateStuGrade() {
         Validator validator = new Validator();
-        if (flag == 1) {
+
+        if (checkChangeOutside == 1 || checkChangeInside == 1) {
+            checkChangeInside = 1;
             EnrollSection se = new EnrollSection();
             se = State.getCurrentEnrollSection();
             String gradeToStu = gradeField.getText();
@@ -317,7 +321,7 @@ public class TaughtCourseController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                flag = 0;
+                checkChangeOutside = 0;
 
                 ViewManager.setStatus("Successfully Updated the Grade!");
             } else {
