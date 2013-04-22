@@ -147,6 +147,15 @@ public class EnrollSection {
 
         executeFetch(sql);
     }
+      public static void fetchAllValid(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+
+
+        String sql = "SELECT * FROM enrollSection "
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
+                + courseNum + "' AND termID = '" + termID+"' AND grade <> 'W'";
+
+        executeFetch(sql);
+    }
      private static void executeFetch(String sql) throws SQLException {
         enrollSections.clear();
         ResultSet rs = DatabaseConnector.returnQuery(sql);
