@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 public class SectionController implements Initializable {
 
@@ -117,7 +118,7 @@ public class SectionController implements Initializable {
             /* Show the right button either to enroll or drop*/
             if (EnrollSection.isEnrolled((Student) CurrentUser.getUser(), section)) {
                 enrollButton.setVisible(false);
-                if (!EnrollSection.withdrawEndNotPass(section)) {
+                if (!EnrollSection.withdrawWithWNotPass(section)) {
                     dropButton.setDisable(true);
                     ViewManager.setStatus("Last day to drop has passed");
                 }
@@ -128,8 +129,7 @@ public class SectionController implements Initializable {
                     ViewManager.setStatus("Registration has ended");
                 }
                 try {
-                    if (EnrollSection.isAlreadyRegistered(section, CurrentUser.getUser().getID()))
-                    {
+                    if (EnrollSection.isAlreadyRegistered(section, CurrentUser.getUser().getID())) {
                         enrollButton.setDisable(true);
                         ViewManager.setStatus("You have withdrawn from this course");
                     }
@@ -168,8 +168,7 @@ public class SectionController implements Initializable {
                 }
                 initialize(null, null);
                 ViewManager.setStatus("Enrolled successfully");
-            } else
-            {
+            } else {
                 ViewManager.setStatus(validator.getErrors().get(1).toString());
             }
         } catch (SQLException ex) {
@@ -214,13 +213,20 @@ public class SectionController implements Initializable {
                         section.update();
                     }
                 } else {
-                    es.setGrade("W");
-                    es.update();
+                    if (canDropWithW(section, studentID)) {
+                        int n = JOptionPane.showConfirmDialog(null, "Time passed!! Be careful!! You will get a W!!", "Confirm", JOptionPane.YES_NO_OPTION);
+                        if (n == JOptionPane.YES_OPTION) {
+                            System.out.println("YES!!!!!!!!!");
+                            es.setGrade("W");
+                            es.update();
+                        } else if (n == JOptionPane.NO_OPTION) {
+                            System.out.println("NO!!!!!!!!!");
+                        }
+                    }
                 }
                 initialize(null, null);
                 ViewManager.setStatus("Course has been dropped");
-            } else 
-            {
+            } else {
                 ViewManager.setStatus("Unable to drop course");
             }
         } catch (SQLException ex) {
@@ -230,6 +236,13 @@ public class SectionController implements Initializable {
 
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean canDropWithW(Section section, int studentID) throws SQLException {
+        if (EnrollSection.withdrawWithWNotPass(section)) {
             return true;
         }
         return false;
