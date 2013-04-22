@@ -1,5 +1,6 @@
 package com.mss.tuess.util;
 
+import com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,17 +10,17 @@ import java.sql.ResultSet;
 import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DatabaseConnector {
 
     private static Connection conn;
-    private static final String url = "jdbc:mysql://198.71.87.177:3306/TUESS1";
-    private static final String user = "user";
-    private static final String password = "cheese";
-    
-//    private static final String url = "jdbc:mysql://127.0.0.1/TUESS1";
-//    private static final String user = "root";
-//    private static final String password = "123456"; 
+//    private static final String url = "jdbc:mysql://198.71.87.177:3306/TUESS1";
+//    private static final String user = "user";
+//    private static final String password = "cheese";
+    private static final String url = "jdbc:mysql://127.0.0.1/TUESS1";
+    private static final String user = "root";
+    private static final String password = "123456";
 
     /**
      * Creates a connection to the database
@@ -67,9 +68,15 @@ public class DatabaseConnector {
      */
     public static void updateQuery(String sql) throws SQLException {
         System.out.println(sql);
-
         Statement stmt = conn.createStatement();
-        stmt.execute(sql);
+        try {
+            stmt.execute(sql);
+        } catch (MySQLNonTransientConnectionException se) {
+            int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
+            if (n == JOptionPane.OK_OPTION) {
+                Connect();
+            }
+        }
         stmt.close();
     }
 
@@ -83,7 +90,14 @@ public class DatabaseConnector {
     public static ResultSet returnQuery(String sql) throws SQLException {
         System.out.println(sql);
         Statement stmt = conn.createStatement();
-        stmt.execute(sql);
+        try {
+            stmt.execute(sql);
+        } catch (MySQLNonTransientConnectionException se) {
+            int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
+            if (n == JOptionPane.OK_OPTION) {
+                Connect();
+            }
+        }
         ResultSet rs = stmt.getResultSet();
         return rs;
     }
