@@ -6,6 +6,10 @@ import com.mss.tuess.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,36 +31,21 @@ public class RegisteredCourseController implements Initializable
     
     private ObservableList<RegisteredCourse> tableContent = FXCollections.observableArrayList();
  
-   
      /**
      * Constructor of RegisteredCourseController
      *
      * @throws SQLException
      */
-    public RegisteredCourseController() throws SQLException
-    {
+    public RegisteredCourseController() throws SQLException {
         tableContent.clear();
         RegisteredCourse.fetch();
         int registeredCoursesSize = RegisteredCourse.getAll().size();
-        tableContent.clear();
         
         if(registeredCoursesSize > 0){
-        tableContent.addAll(RegisteredCourse.getAll());
+            tableContent.addAll(RegisteredCourse.getAll());
         }
-    
     }
-    
-     /**
-     * Handle the order for each column
-     */
-    private void tableOrderAct() {
-        ArrayList<TableColumn<RegisteredCourse, ?>> sortOrder = new ArrayList(registeredCoursesTable.getSortOrder());
-        registeredCoursesTable.getSortOrder().clear();
-        registeredCoursesTable.getSortOrder().addAll(sortOrder);
-    }
-
   
-    
     /**
      * Initializes the controller class.
      */
@@ -73,13 +62,36 @@ public class RegisteredCourseController implements Initializable
         termID.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, String>("termID"));
         credit.setCellValueFactory(new PropertyValueFactory<RegisteredCourse, Integer>("credit"));
 
-       
-        totalCredits.setText(Integer.toString(RegisteredCourse.getTotalCredits()));
-
-        
+        totalCredits.setText(Integer.toString(RegisteredCourse.getTotalCredits()));   
         registeredCoursesTable.setItems(tableContent);
-  
+        
+        
+        /*
+         * Event Handler to capture the selected course
+         */
+        registeredCoursesTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RegisteredCourse>() {
+            @Override
+            public void changed(ObservableValue<? extends RegisteredCourse> ov, RegisteredCourse t, RegisteredCourse t1) {
+                int selectedIndex = registeredCoursesTable.getSelectionModel().getSelectedIndex();
+                
+
+                System.out.println("Index : " + selectedIndex);
+                try {
+                    Section currentSection = new Section();
+                    currentSection.fetch(tableContent.get(selectedIndex).getSectionID(),
+                                         tableContent.get(selectedIndex).getCourseDept(),
+                                         tableContent.get(selectedIndex).getCourseNum(),
+                                         tableContent.get(selectedIndex).getTermID());
+                    State.setCurrentSection(currentSection);
+                    ViewManager.changeView("Section");
+                } catch (Exception ex) {
+                    Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
+    
+
    
     
     
