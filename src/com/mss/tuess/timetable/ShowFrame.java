@@ -168,7 +168,7 @@ public class ShowFrame {
             //For Mini 1
             tempBody += "<h2>Mini 1 Semester</h2>\n";
             tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
-            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#E4EEE6'>\n";
             tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
             tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
             for (int i = 0; i < col + 1; i++) {
@@ -190,7 +190,7 @@ public class ShowFrame {
                     } else if (intScheduleTable1[i][j] == -1) {
                     } else {
                         tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable1[i][j];
-                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#728B93'>";
                         tempBody += strScheduleTable1[i][j];
                         tempBody += "</td>\n";
                     }
@@ -202,7 +202,7 @@ public class ShowFrame {
             //For Mini 2
             tempBody += "<h2>Mini 2 Semester</h2>\n";
             tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
-            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#E4EEE6'>\n";
             tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
             tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
             for (int i = 0; i < col + 1; i++) {
@@ -224,7 +224,7 @@ public class ShowFrame {
                     } else if (intScheduleTable2[i][j] == -1) {
                     } else {
                         tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable2[i][j];
-                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#728B93'>";
                         tempBody += strScheduleTable2[i][j];
                         tempBody += "</td>\n";
                     }
@@ -236,7 +236,7 @@ public class ShowFrame {
             makeTableBody(miniFlag);
             tempBody += "<CENTER><h2>Semester " + State.getCurrentTerm().getTermID() + "</h2></CENTER>\n";
             tempBody += "<table width='100%' border='1' cellpadding='1' cellspacing='0' ";
-            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#FBF2D7'>\n";
+            tempBody += "bordercolorlight='#F9ECBF' bordercolordark='#FBFEE2' bgcolor='#E4EEE6'>\n";
             tempBody += "<tr align='center' valign='middle' bordercolor='#6D5A0E'>\n";
             tempBody += "<td width='15%' bordercolor='#705C0E'>&nbsp;</td>\n";
             for (int i = 0; i < col + 1; i++) {
@@ -258,7 +258,7 @@ public class ShowFrame {
                     } else if (intScheduleTable1[i][j] == -1) {
                     } else {
                         tempBody += "<td width='15%' height='30' rowspan='" + intScheduleTable1[i][j];
-                        tempBody += "' bordercolor='#FF0000' bgcolor='#FFD1B0'>";
+                        tempBody += "' bordercolor='#FF0000' bgcolor='#728B93'>";
                         tempBody += strScheduleTable1[i][j];
                         tempBody += "</td>\n";
                     }
