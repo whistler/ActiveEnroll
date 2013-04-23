@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Prerequisite class 
+ * Prerequisite class. To keep constraint information about courses that should be taken before current term.
+ * prereqGroup is the flag that needs to be computed to get the "AND" or "OR" relationship of each prerequsitie course pair.
  */
 public class Prerequisite {
 
