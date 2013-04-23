@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Program class
+ * Program class. Program is offered by a department.
+ * Constraints like minimal credit required, maximum length of study and the degree title are stored.
  */
 public class Program {
     private static ArrayList<Program> programs = new ArrayList();
