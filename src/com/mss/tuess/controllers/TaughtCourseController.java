@@ -256,7 +256,6 @@ public class TaughtCourseController implements Initializable {
                         String courseNum = sectionFilterContent.get(selectedIndex).getCourseNum();
                         String courseDept = sectionFilterContent.get(selectedIndex).getCourseDept();
                         String currentTerm = sectionFilterContent.get(selectedIndex).getTermID();
-                        //Section.fetchStus(sectionID,courseDept, courseNum, currentTerm);
                         EnrollSection.fetchAllValid(sectionID, courseDept, courseNum, currentTerm);
 
                         studentTableContent.clear();

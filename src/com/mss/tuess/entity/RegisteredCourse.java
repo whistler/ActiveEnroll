@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 
 /**
- * RegisteredCourse class
+ * RegisteredCourse class. Object that store information of registered course of a certain student in current term.
+ * Once a student drops a course, the course is not credited as registered.
  */
 public class RegisteredCourse {
     private static ArrayList<RegisteredCourse> registeredCoursesList = new ArrayList();
