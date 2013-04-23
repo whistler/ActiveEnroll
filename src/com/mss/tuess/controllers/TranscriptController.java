@@ -120,7 +120,10 @@ public class TranscriptController implements Initializable {
         }
         else
         {
-           GPA.setText(Double.toString(Transcriptrecord.getAddCreditMultipleGrade()/Transcriptrecord.getAddCredit()));
+           int addCmG = Transcriptrecord.getAddCreditMultipleGrade();
+           int addC = Transcriptrecord.getAddCredit();
+           double targetGPA = addCmG / (double) addC;
+           GPA.setText(Double.toString(targetGPA));
         }
         
         transcriptTable.setItems(filterContent);

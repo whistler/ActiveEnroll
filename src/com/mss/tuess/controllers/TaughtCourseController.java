@@ -194,7 +194,8 @@ public class TaughtCourseController implements Initializable {
             return true;
         }
 
-        String lowerCaseFilterString = filterString.toLowerCase();
+        String lowerCaseFilterString;
+        lowerCaseFilterString = filterString.toLowerCase();
 
         if (Integer.toString(enrollsection.getStudentID()).indexOf(lowerCaseFilterString) != -1) {
             return true;
@@ -320,7 +321,8 @@ public class TaughtCourseController implements Initializable {
     */
 
     public void updateStuGrade() {
-        Validator validator = new Validator();
+        Validator validator;
+        validator = new Validator();
 
         if (checkChangeOutside == 1 || checkChangeInside == 1) {
             checkChangeInside = 1;
