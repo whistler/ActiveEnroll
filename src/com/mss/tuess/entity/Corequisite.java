@@ -197,7 +197,7 @@ public class Corequisite {
                 if(coreqs.get(i+1).getCoreqGroup() == coreqs.get(i).getCoreqGroup()) concat = " OR ";
                 else concat = ") AND (";
             }
-            str = str + coreqs.get(i).getCourseDept() + " " + coreqs.get(i).getCourseNum() + concat;
+            str = str + coreqs.get(i).getCoreqDept() + " " + coreqs.get(i).getCoreqNum() + concat;
         }
         return str;
     }
