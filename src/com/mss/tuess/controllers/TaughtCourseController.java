@@ -32,6 +32,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+/**
+ * @TaughtCourseController
+ * This method is the controller of getting all courses taught by a instructor.
+ */
+
 public class TaughtCourseController implements Initializable {
 
     //Section Table and fields
@@ -201,6 +206,8 @@ public class TaughtCourseController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -307,6 +314,10 @@ public class TaughtCourseController implements Initializable {
 
         studentTable.setItems(studentFilterContent);
     }
+    /**
+    * @updateStuGrade
+    * This method is to update the grade of a student in a particular section.
+    */
 
     public void updateStuGrade() {
         Validator validator = new Validator();

@@ -18,6 +18,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * @TranscriptController
+ * This method is to get all the grades information of a particular student.
+ */
+
 public class TranscriptController implements Initializable {
 
     
@@ -96,6 +101,8 @@ public class TranscriptController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

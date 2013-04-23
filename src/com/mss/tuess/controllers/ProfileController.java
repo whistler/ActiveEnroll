@@ -15,6 +15,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+/**
+ * @ProfileController
+ * This method is the controller of modifying personal profile of all three kinds of users
+ */
+
 public class ProfileController implements Initializable {
 
     @FXML
@@ -58,6 +63,8 @@ public class ProfileController implements Initializable {
 
     /**
      * Initializes the controller class. Shows the current user in the view
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,6 +97,12 @@ public class ProfileController implements Initializable {
             program.setText(student.getProgramID());
         }
     }
+    
+     /**
+     * Update is to update personal information from input.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
+     */
 
     @FXML
     public void update() throws SQLException {

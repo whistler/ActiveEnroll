@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ * DatabaseConnector class. JDBC driver to connect to mysql server.
+ */
 public class DatabaseConnector {
 
     private static Connection conn;

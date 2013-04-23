@@ -29,6 +29,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javax.swing.JOptionPane;
 
+/**
+ * @SectionController
+ * This method is the controller of section operations, validating enroll constrains 
+ */
+
 public class SectionController implements Initializable {
 
     @FXML
@@ -73,6 +78,8 @@ public class SectionController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,6 +183,11 @@ public class SectionController implements Initializable {
         }
     }
 
+ /**
+ * @validate
+ * This method checks all kinds of constrains when trying to enroll in a particular course section.
+ */
+    
     public static void validate(Section section, int studentID) throws SQLException {
         Student student = new Student();
         student.fetch(CurrentUser.getUser().getID());
@@ -196,6 +208,10 @@ public class SectionController implements Initializable {
         }
     }
 
+/**
+ * @processDrop
+ * This method is to perform the drop enrolled course sections.
+ */    
     @FXML
     public void processDrop() {
         try {
@@ -233,20 +249,30 @@ public class SectionController implements Initializable {
             Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * @canDropWithoutW
+     * This method is to check if one section could be dropped without a W label.
+     */    
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
             return true;
         }
         return false;
     }
-
+    /**
+     * @canDropWithW
+     * This method is to check if one section could be dropped with a W label.
+     */    
     public static boolean canDropWithW(Section section, int studentID) throws SQLException {
         if (EnrollSection.withdrawWithWNotPass(section)) {
             return true;
         }
         return false;
     }
+    /**
+     * @goBack
+     * This method is to go to previous page of search course results.
+     */    
 
     public static void goBack() {
         ViewManager.showPreviousView();

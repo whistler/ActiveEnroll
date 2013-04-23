@@ -8,10 +8,17 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+/**
+ * @SidebarController
+ * This method is the controller of loading all the content of the sidebar.
+ */
+
 public class SidebarController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -21,7 +28,10 @@ public class SidebarController implements Initializable {
     
     
     /* Admin Navigation */
-    
+    /**
+    * @showMailGrades
+    * This method is the controller of showing mail grades interface.
+    */
     @FXML public void showMailGrades() throws Exception
     {
         ViewManager.changeView("MailGrades");
@@ -37,12 +47,19 @@ public class SidebarController implements Initializable {
     
     
     /* Instructor Navigation */
-    
+    /**
+    * @showWaivePrerequisite
+    * This method is the controller of showing waive prerequisites
+    */
     @FXML public void showWaivePrerequisite() throws Exception
     {
         ViewManager.changeView("WaivePrerequisite");
         ViewManager.setTitle("Waive Prerequisite");
     }
+    /**
+    * @showTaughtSections
+    * This method is the controller of showing taught sections of a instructor
+    */
     @FXML public void showTaughtSections() throws Exception
     {
         ViewManager.changeView("TaughtCourses");
