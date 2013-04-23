@@ -288,14 +288,14 @@ public class Section {
      */
     public void update() throws SQLException {
         String sql = "UPDATE section SET "
-                + "courseDept=" + this.getCourseDept() + ", "
-                + "courseNum=" + this.getCourseNum() + ", "
-                + "instructorID=" + this.getInstructorID() + ", "
-                + "termID=" + this.getTermID() + ", "
-                + "capacity=" + this.getCapacity() + ", "
-                + "registered=" + this.getRegistered() + ", "
-                + "status=" + this.getStatus()
-                + "WHERE sectionID=" + this.getSectionID();
+                + "courseDept='" + this.getCourseDept() + "' AND "
+                + "courseNum='" + this.getCourseNum() + "' AND "
+                + "instructorID=" + this.getInstructorID() + " AND "
+                + "termID='" + this.getTermID() + "' AND "
+                + "capacity='" + this.getCapacity() + "' AND "
+                + "registered='" + this.getRegistered() + "' AND "
+                + "status='" + this.getStatus()
+                + "' WHERE sectionID='" + this.getSectionID()+"'";
         DatabaseConnector.updateQuery(sql);
     }
 
