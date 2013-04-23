@@ -114,6 +114,6 @@ public class SidebarController implements Initializable {
     
     @FXML public void showHelp()
     {
-        ViewManager.showCurrentHelp();
+        ViewManager.showHelp();
     }
 }
