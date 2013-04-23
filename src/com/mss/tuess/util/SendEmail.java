@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
 import java.util.ArrayList;
@@ -13,7 +9,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.MimeMessage;
- 
+
+/**
+ * SendEmail class. Used to send email to student.
+ */
 public class SendEmail {
     
     private Properties emailProperties;
