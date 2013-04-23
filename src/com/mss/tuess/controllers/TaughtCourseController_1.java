@@ -32,7 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-public class TaughtCourseController implements Initializable {
+public class TaughtCourseController_1 implements Initializable {
 
     //Section Table and fields
     @FXML
@@ -76,12 +76,13 @@ public class TaughtCourseController implements Initializable {
      *
      * @throws SQLException
      */
-    public TaughtCourseController() throws SQLException {
+    public TaughtCourseController_1() throws SQLException {
         int courseSize;
         tracker = 0;
         checkChangeInside = 0;
         sectionTableContent.clear();
         studentTableContent.clear();
+        grade.setEditable(true);
         int instructorID = CurrentUser.getUser().getID();
         checkChangeOutside = 0;
         Section.fetchByInstructor(instructorID, State.getCurrentTerm().getTermID());
@@ -323,11 +324,29 @@ public class TaughtCourseController implements Initializable {
                     || gradeToStu.compareTo("D") == 0
                     || gradeToStu.compareTo("F") == 0)) {
                 se.setGrade(gradeToStu);
+
                 try {
-                    System.out.println(se.getStudentID()+"___"+se.getGrade());
                     se.update();
-                    studentTableContent.set(tracker, se);
-                    
+                    System.out.println(se.getStudentID());
+                    studentTableContent.set(tracker, se); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 } catch (SQLException ex) {
