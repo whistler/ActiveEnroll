@@ -3,7 +3,6 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.EmailData;
-import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.util.SendEmail;
 import java.net.URL;
 import java.sql.ResultSet;
