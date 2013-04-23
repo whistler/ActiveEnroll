@@ -45,10 +45,10 @@
         <Color blue="0.376" green="0.376" red="0.376" fx:id="x3" />
       </textFill>
     </Label>
-    <TableView fx:id="studentTable" layoutX="340.0" layoutY="80.0" prefHeight="366.0" prefWidth="230.0" tableMenuButtonVisible="true">
+    <TableView fx:id="studentTable" editable="true" layoutX="340.0" layoutY="80.0" prefHeight="366.0" prefWidth="230.0" tableMenuButtonVisible="true">
       <columns>
-        <TableColumn prefWidth="75.0" text="studentID" fx:id="studentID" />
-        <TableColumn minWidth="100.0" prefWidth="100.0" text="Grade" fx:id="grade" />
+        <TableColumn editable="false" prefWidth="75.0" text="studentID" fx:id="studentID" />
+        <TableColumn editable="true" minWidth="100.0" prefWidth="100.0" text="Grade" fx:id="grade" />
       </columns>
     </TableView>
     <Label font="$x2" layoutX="331.0" layoutY="2.0" prefHeight="25.0" prefWidth="87.0" text="Student" textFill="GREY" />

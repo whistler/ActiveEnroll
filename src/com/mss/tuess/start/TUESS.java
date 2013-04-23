@@ -7,6 +7,9 @@ import com.mss.tuess.util.ViewManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * TUESS class. The main function.
+ */
 public class TUESS extends Application {
     
     private static TUESS instance;
