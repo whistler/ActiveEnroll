@@ -7,11 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-import static java.lang.System.out;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 /**
  * DatabaseConnector class. JDBC driver to connect to mysql server.
  */
@@ -34,9 +29,9 @@ public class DatabaseConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
-            out.println("success conn =" + (conn).toString());
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("success conn =" + (conn).toString());
+        } catch (Exception ex) {
+            ViewManager.showError("Network Errorr", "Unable to connect to database server");
         }
     }
 
@@ -48,9 +43,8 @@ public class DatabaseConnector {
             if (conn != null) {
                 conn.close();
             }
-
         } catch (Exception ex) {
-            out.println("fail....");
+            System.out.println("Unable to disconnect");
         }
     }
 
@@ -60,7 +54,15 @@ public class DatabaseConnector {
      * @return database connection
      */
     public static Connection getConn() {
-        return conn;
+        try {
+            if (!conn.isValid(100)) {
+                Connect();
+            }
+        } catch (SQLException ex) {
+            ViewManager.showError("Connection Lost", "Make sure that you are connected to the internet");
+        } finally {
+            return conn;
+        }
     }
 
     /**
@@ -71,14 +73,11 @@ public class DatabaseConnector {
      */
     public static void updateQuery(String sql) throws SQLException {
         System.out.println(sql);
-        Statement stmt = conn.createStatement();
+        Statement stmt = getConn().createStatement();
         try {
             stmt.execute(sql);
         } catch (MySQLNonTransientConnectionException se) {
-            int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
-            if (n == JOptionPane.OK_OPTION) {
-                Connect();
-            }
+            ViewManager.showError("Connection Lost", "Make sure that you are connected to the internet");
         }
         stmt.close();
     }
@@ -92,16 +91,15 @@ public class DatabaseConnector {
      */
     public static ResultSet returnQuery(String sql) throws SQLException {
         System.out.println(sql);
-        Statement stmt = conn.createStatement();
+        Statement stmt;
+        ResultSet rs = null;
         try {
+            stmt = getConn().createStatement();
             stmt.execute(sql);
-        } catch (MySQLNonTransientConnectionException se) {
-            int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
-            if (n == JOptionPane.OK_OPTION) {
-                Connect();
-            }
+            rs = stmt.getResultSet();
+        } catch (Exception ex) {
+            ViewManager.showError("Connection Lost", "Make sure that you are connected to the internet");
         }
-        ResultSet rs = stmt.getResultSet();
         return rs;
     }
 }

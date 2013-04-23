@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
@@ -167,5 +168,10 @@ public class ViewManager {
         catch (Exception e){
             System.out.println("Help file: not found!");
         }
+    }
+    
+    public static void showError(String error, String description)
+    {
+        Dialogs.showErrorDialog(stage, description, error, "Error");
     }
 }
