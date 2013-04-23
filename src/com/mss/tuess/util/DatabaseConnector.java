@@ -71,16 +71,16 @@ public class DatabaseConnector {
      */
     public static void updateQuery(String sql) throws SQLException {
         System.out.println(sql);
-        Statement stmt = conn.createStatement();
-        try {
-            stmt.execute(sql);
-        } catch (MySQLNonTransientConnectionException se) {
-            int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
-            if (n == JOptionPane.OK_OPTION) {
-                Connect();
+        try (Statement stmt = conn.createStatement()) {
+            try {
+                stmt.execute(sql);
+            } catch (MySQLNonTransientConnectionException se) {
+                int n = JOptionPane.showConfirmDialog(null, "Connection Lost, click OK to reconnect", "OK", JOptionPane.OK_OPTION);
+                if (n == JOptionPane.OK_OPTION) {
+                    Connect();
+                }
             }
         }
-        stmt.close();
     }
 
     /**
@@ -92,7 +92,8 @@ public class DatabaseConnector {
      */
     public static ResultSet returnQuery(String sql) throws SQLException {
         System.out.println(sql);
-        Statement stmt = conn.createStatement();
+        Statement stmt;
+        stmt = conn.createStatement();
         try {
             stmt.execute(sql);
         } catch (MySQLNonTransientConnectionException se) {
