@@ -325,11 +325,11 @@ public class TaughtCourseController implements Initializable {
                 se.setGrade(gradeToStu);
                 try {
                     System.out.println(se.getStudentID()+"___"+se.getGrade());
+                    System.out.println("Tracker: "+tracker);
+                    System.out.println("Index: "+studentTable.getSelectionModel().getSelectedIndex());
                     se.update();
-                    studentTableContent.set(tracker, se);
+                    studentFilterContent.set(studentTable.getSelectionModel().getSelectedIndex(), se);
                     
-
-
                 } catch (SQLException ex) {
                     Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -338,12 +338,9 @@ public class TaughtCourseController implements Initializable {
                 ViewManager.setStatus("Successfully Updated the Grade!");
             } else {
                 ViewManager.setStatus("Please input a valid grade!");
-
             }
         } else {
             ViewManager.setStatus("Must choose someone!");
-
         }
-
     }
 }
