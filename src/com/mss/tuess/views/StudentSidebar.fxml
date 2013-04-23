@@ -18,7 +18,7 @@
         <Color blue="0.250" green="0.250" red="0.250" fx:id="x2" />
       </textFill>
     </Hyperlink>
-    <Hyperlink font="$x1" layoutX="38.0" layoutY="59.0" onAction="#showCourseSearch" text="Search Courses" textFill="$x2" />
+    <Hyperlink font="$x1" layoutX="38.0" layoutY="59.0" onAction="#showCourseSearch" text="Register Courses" textFill="$x2" />
     <Hyperlink font="$x1" layoutX="39.0" layoutY="103.0" onAction="#showRegisteredCourses" text="Registered Courses" textFill="$x2" />
     <Hyperlink font="$x1" layoutX="39.0" layoutY="147.0" onAction="#showTranscript" text="My Transcript" textFill="$x2" />
     <Hyperlink font="$x1" layoutX="40.0" layoutY="169.0" onAction="#showMyProgram" text="My Program" textFill="$x2" />

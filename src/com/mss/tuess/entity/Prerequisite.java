@@ -187,7 +187,7 @@ public class Prerequisite {
                 if(prereqs.get(i+1).getPrereqGroup() == prereqs.get(i).getPrereqGroup()) concat = " OR ";
                 else concat = ") AND (";
             }
-            str = str + prereqs.get(i).getCourseDept() + " " + prereqs.get(i).getCourseNum() + concat;
+            str = str + prereqs.get(i).getPrereqDept() + " " + prereqs.get(i).getPrereqNum() + concat;
         }
         return str;
     }

@@ -157,7 +157,6 @@ public class MailGradesController implements Initializable {
                         + "</body>\n"
                         + "</html>";
 
-            
                 String emailBody = emailBody1 + emailBody2 + emailBody3;
 
                 //build email list
