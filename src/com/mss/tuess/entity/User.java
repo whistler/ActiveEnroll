@@ -1,7 +1,9 @@
 package com.mss.tuess.entity;
 
 import java.sql.SQLException;
-
+/**
+ * User class. User has subclasses of student, instructor and administrator.
+ */
 public abstract class User {
 
     private String firstName = "";
