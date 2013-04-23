@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Faculty class
+ * Faculty class. There is only one faculty for this project. 
  */
 public class Faculty {
     private static ArrayList<Faculty> faculties = new ArrayList();

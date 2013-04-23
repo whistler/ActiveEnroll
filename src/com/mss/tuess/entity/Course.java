@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Course class
+ * Course class. Course object stores information of courseDept, courseNum , courseName, info and credit of a course offered by the university.
  */
 public class Course {
     private static ArrayList<Course> courses = new ArrayList();

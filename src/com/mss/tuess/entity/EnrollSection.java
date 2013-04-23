@@ -11,7 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * EnrollSection class
+ * EnrollSection class. EnrollSection object can fetch and store student enrolling section infomation with parameterized query from the database.
+ * We can get grade of a student who took a section in certain term. Grade are limited to "A", "B", "C", "D", "F" and "W".
  */
 public class EnrollSection {
     private static ArrayList<EnrollSection> enrollSections = new ArrayList();
