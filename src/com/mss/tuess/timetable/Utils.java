@@ -23,7 +23,7 @@ public class Utils {
     public final static String html = "html";
     public final static String htm = "htm";
     public final static String data = "dat";
-
+ 
     /**
      * Get the extension of a file.
      */
