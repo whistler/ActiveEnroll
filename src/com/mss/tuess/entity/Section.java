@@ -4,7 +4,6 @@ import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Section class. Weak entity of a course of a certain term. Stores constraints

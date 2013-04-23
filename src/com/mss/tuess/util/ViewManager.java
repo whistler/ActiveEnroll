@@ -4,7 +4,6 @@ import com.mss.tuess.controllers.LayoutController;
 import com.mss.tuess.entity.User;
 import com.mss.tuess.start.TUESS;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
