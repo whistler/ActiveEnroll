@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 
 /**
- * FXML Controller class
+ * AddStudentController Controller class, which links to fxml panel and 
  *
  * @author Prabal
  */
@@ -79,6 +79,9 @@ public class AddStudentController implements Initializable {
    
     /**
      * Initializes the controller class.
+     * This class is the initializer of the controller, correlating the fxml buttons with actions triggered afterwards.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,7 +95,11 @@ public class AddStudentController implements Initializable {
             programs.add(Program.get(i).getProgramID());
         program.setItems( programs);
     }    
-
+/**
+ * @addNewStudent
+ * This method get all the student information from input, and then set thses values as the information of the new student
+ * Passwrod is supposed to be input twice, and both input should be the same, then the password is initiated successfully
+ */
     @FXML
     public void addNewStudent() {
       
