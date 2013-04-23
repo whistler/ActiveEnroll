@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Corequisite class
+ * Corequisite class. To keep constraint information about courses that should be taken at the same term.
+ * corerGroup is the flag that needs to be computed to get the "AND" or "OR" relationship of each corequsitie course pair.
  */
 public class Corequisite {
 
