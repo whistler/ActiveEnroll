@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 
 /**
- * Transcriptrecord class
- * @author xinren
+ * Transcriptrecord class. Used for displaying transcript of a student.
  */
 public class Transcriptrecord {
     private static ArrayList<Transcriptrecord> transcriptrecords = new ArrayList();

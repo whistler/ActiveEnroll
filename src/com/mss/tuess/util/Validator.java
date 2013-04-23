@@ -285,7 +285,8 @@ public class Validator {
         }
 
         // Check Range
-        if (type == InputType.INTEGER || type == InputType.POSITIVE_INTEGER) {
+        if ((type == InputType.INTEGER && isInteger(input)) || 
+                (type == InputType.POSITIVE_INTEGER && isPositiveInt(input))) {
             int num = Integer.parseInt(input);
             if (num < min) {
                 errors.add(name + " cannot be less than " + min + "");

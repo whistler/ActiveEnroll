@@ -226,8 +226,9 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void delete() throws SQLException {
-        String sql = "DELETE FROM student WHERE studentID=" + this.getStudentID() + ", sectionID=" + this.getSectionID() + ", courseDept=" + this.getCourseDept() + ", courseNum=" + this.getCourseNum()
-                + ", term=" + this.getTermID();
+        String sql = "DELETE FROM enrollSection WHERE studentID=" + this.getStudentID() + " AND sectionID='" +
+                this.getSectionID() + "' AND courseDept='" + this.getCourseDept() + "' AND courseNum='" + this.getCourseNum()
+                + "' AND termID='" + this.getTermID()+"'";
         DatabaseConnector.updateQuery(sql);
     }
 

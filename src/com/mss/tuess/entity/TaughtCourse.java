@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *TaughtCourse class
+ *TaughtCourse class. Object used to store course taught by a instructor.
  */
 public class TaughtCourse {
 

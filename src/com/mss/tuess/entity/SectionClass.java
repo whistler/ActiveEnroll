@@ -11,7 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * SectionClass class
+ * SectionClass class. Weak entity of section. SectionClass has specific information, like Lab or Lec of each class.
+ * Location and class start and end time are stored in SectionClass object.
  */
 public class SectionClass {
     private static ArrayList<SectionClass> sectionClassList = new ArrayList();

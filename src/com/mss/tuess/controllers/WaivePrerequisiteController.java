@@ -17,6 +17,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+/**
+ * @WaivePrerequisiteController
+ * This method is the controller of waiving prerequisites for instructor operation
+ */
+
 public class WaivePrerequisiteController implements Initializable {
     
  @FXML ComboBox coursesToWaive;
@@ -56,6 +61,8 @@ public class WaivePrerequisiteController implements Initializable {
     
      /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -82,10 +89,10 @@ public class WaivePrerequisiteController implements Initializable {
         else {
 
                 String courseInfo = coursesToWaive.getValue().toString();
-                String termID=courseInfo.substring(0,5);
-                String courseDept=courseInfo.substring(6, 10);
-                String courseNum=courseInfo.substring(11, 14);
-                String sectionID=courseInfo.substring(15,16);
+                //String termID=courseInfo.substring(0,5);
+                //String courseDept=courseInfo.substring(6, 10);
+                //String courseNum=courseInfo.substring(11, 14);
+                //String sectionID=courseInfo.substring(15,16);
             
            // System.out.print(termID+":"+courseDept+":"+courseNum+":"+sectionID);
           

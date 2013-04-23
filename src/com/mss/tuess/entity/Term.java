@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
-*Term class
+*Term class. Term object would be referenced to check constraints like start/end of registration and dropping dates that is important.
 */
 public class Term {
     private String termID;

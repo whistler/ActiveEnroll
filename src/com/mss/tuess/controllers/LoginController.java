@@ -16,6 +16,12 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import javafx.scene.control.ChoiceBox;
 
+/**
+ * @LoginController
+ * This method gets the login information from user, including user catagory, password comparision, exception catch.
+ * Warning will be prompted if any errors.
+ */
+
 public class LoginController implements Initializable {
 
     @FXML
@@ -29,6 +35,8 @@ public class LoginController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
