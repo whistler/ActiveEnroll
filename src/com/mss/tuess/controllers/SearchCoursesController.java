@@ -7,7 +7,9 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.entity.Course;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.SectionClass;
+import com.mss.tuess.util.InputType;
 import com.mss.tuess.util.State;
+import com.mss.tuess.util.Validator;
 import com.mss.tuess.util.ViewManager;
 import java.net.URL;
 import java.sql.SQLException;
@@ -147,26 +149,30 @@ public class SearchCoursesController implements Initializable {
      * Refresh the content of the filter
      */
     private void courseFilterRefresh() {
-        courseFilterContent.clear();
-        for (Course course : courseTableContent) {
-            if (courseFilterChecker(course)) {
-                courseFilterContent.add(course);
+        if (areFilterFieldsValid()) {
+            courseFilterContent.clear();
+            for (Course course : courseTableContent) {
+                if (courseFilterChecker(course)) {
+                    courseFilterContent.add(course);
+                }
             }
+            tableOrderAct();
         }
-        tableOrderAct();
     }
 
     /**
      * Refresh the content of the filter
      */
     private void sectionClassFilterRefresh() {
-        sectionClassFilterContent.clear();
-        for (SectionClass sectionClass : sectionClassTableContent) {
-            if (sectionClassFilterChecker(sectionClass)) {
-                sectionClassFilterContent.add(sectionClass);
+        if (areFilterFieldsValid()) {
+            sectionClassFilterContent.clear();
+            for (SectionClass sectionClass : sectionClassTableContent) {
+                if (sectionClassFilterChecker(sectionClass)) {
+                    sectionClassFilterContent.add(sectionClass);
+                }
             }
+            sectionClassTableOrderAct();
         }
-        sectionClassTableOrderAct();
     }
 
     /**
@@ -275,7 +281,7 @@ public class SearchCoursesController implements Initializable {
                 System.out.println("Index : " + selectedIndex);
 
                 try {
-                    if(selectedIndex >= 0){
+                    if (selectedIndex >= 0) {
                         String courseNum = courseFilterContent.get(selectedIndex).getCourseNum();
                         String courseDept = courseFilterContent.get(selectedIndex).getCourseDept();
                         String currentTerm = State.getCurrentTerm().getTermID();
@@ -284,7 +290,7 @@ public class SearchCoursesController implements Initializable {
                         sectionClassTableContent.clear();
                         sectionClassTableContent.addAll(SectionClass.getAll());
                         sectionClassFilterContent.clear();
-                        sectionClassFilterContent.addAll(sectionClassTableContent);   
+                        sectionClassFilterContent.addAll(sectionClassTableContent);
                     }
                 } catch (Exception ex) {
                     System.out.println("gotcha array out of bound 1");
@@ -305,7 +311,7 @@ public class SearchCoursesController implements Initializable {
                 System.out.println("Index : " + selectedIndex);
 
                 try {
-                    if(selectedIndex >= 0){
+                    if (selectedIndex >= 0) {
                         State.setCurrentSectionClass(sectionClassFilterContent.get(selectedIndex));
                         currentSection.fetch(sectionClassFilterContent.get(selectedIndex).getSectionID(),
                                 sectionClassFilterContent.get(selectedIndex).getCourseDept(),
@@ -314,7 +320,7 @@ public class SearchCoursesController implements Initializable {
                         State.setCurrentSection(currentSection);
                         ViewManager.changeView("Section");
                     }
-                    
+
                 } catch (Exception ex) {
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -337,37 +343,41 @@ public class SearchCoursesController implements Initializable {
 
     /**
      * This method performs advanced course search
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     private void searchCourseByParam() throws SQLException {
 
         ViewManager.setStatus("");
-        String searchSQL = validateAndBuildSearchSQL();
-        
-        if (searchSQL != null) {
-            System.out.println("Search Sql :" + searchSQL);
-            courseTableContent.clear();
-            sectionClassTableContent.clear();
-            
-            //fetch the results
-            Course.fetch(searchSQL);
-            int courseSize = Course.getAll().size();
+        if (areFieldsValid()) {
+            String searchSQL = validateAndBuildSearchSQL();
 
-            if (courseSize > 0) {
-                courseTableContent.addAll(Course.getAll());
+            if (searchSQL != null) {
+                System.out.println("Search Sql :" + searchSQL);
+                courseTableContent.clear();
+                sectionClassTableContent.clear();
+
+                //fetch the results
+                Course.fetch(searchSQL);
+                int courseSize = Course.getAll().size();
+
+                if (courseSize > 0) {
+                    courseTableContent.addAll(Course.getAll());
+                } else {
+                    ViewManager.setStatus("There are no results to be displayed!");
+                }
+                courseFilterContent.clear();
+                courseFilterContent.addAll(courseTableContent);
             } else {
-                ViewManager.setStatus("There are no results to be displayed!");
+                ViewManager.setStatus("Atleast one field should be entered!");
             }
-            courseFilterContent.clear();
-            courseFilterContent.addAll(courseTableContent);
-        } else {
-            ViewManager.setStatus("Atleast one field should be entered!");
         }
     }
 
     /**
      * This method validates and builds the advanced search Sql
-     * @return 
+     *
+     * @return
      */
     private String validateAndBuildSearchSQL() {
 
@@ -419,5 +429,45 @@ public class SearchCoursesController implements Initializable {
         }
 
         return searchSQL;
+    }
+
+    /**
+     * Validates search fields
+     * @return whether all fields have valid input
+     */
+    private boolean areFieldsValid() {
+        Validator validator = new Validator();
+
+        searchCode.setText(validator.validate("Course Code", searchCode.getText(), false, 0, 999, InputType.POSITIVE_INTEGER));
+        searchName.setText(validator.validate("Course Name", searchName.getText(), false, 0, 30, InputType.STRING));
+        searchDepartment.setText(validator.validate("Department", searchDepartment.getText(), false, 0, 100, InputType.STRING));
+        searchInfo.setText(validator.validate("Information", searchInfo.getText(), false, 0, 200, InputType.STRING));
+        searchCredit.setText(validator.validate("Credits", searchCredit.getText(), false, 0, 6, InputType.POSITIVE_INTEGER));
+        
+                
+        if (validator.hasErrors()) {
+            ViewManager.setStatus(validator.getErrors().get(0).toString());
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    /**
+     * Validates course filters
+     * @return whether filters have valid input
+     */
+    private boolean areFilterFieldsValid()
+    {
+        Validator validator = new Validator();
+        courseFilter.setText(validator.validate("Filter", courseFilter.getText(), false, 0, 40, InputType.STRING));
+        sectionFilter.setText(validator.validate("Filter", sectionFilter.getText(), false, 0, 40, InputType.STRING));
+        
+        if (validator.hasErrors()) {
+            ViewManager.setStatus(validator.getErrors().get(0).toString());
+            return false;
+        } else {
+            return true;
+        }
     }
 }
