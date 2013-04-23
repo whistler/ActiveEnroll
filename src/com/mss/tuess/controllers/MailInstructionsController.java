@@ -3,7 +3,6 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.DatabaseConnector;
 import com.mss.tuess.util.EmailData;
-import com.mss.tuess.util.ViewManager;
 import com.mss.tuess.util.SendEmail;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -22,6 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javax.mail.MessagingException;
 
+/**
+ * @LoginController
+ * This method is the controller of mailing instruction function of administrator
+ */
+
 public class MailInstructionsController implements Initializable {
     
     
@@ -38,12 +42,20 @@ public class MailInstructionsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sendEmailStatus.setText("");
         mailInstructionsProgress.setVisible(false);
     }
+    
+    
+    /**
+     * @mailInstructions
+     * This method gets result set from database operation, and then for each student, there is a whole loop to generate instuctions
+     */
 
     @FXML
     private void mailInstructions() throws MessagingException, SQLException {

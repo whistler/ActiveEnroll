@@ -4,7 +4,6 @@ import com.mss.tuess.controllers.LayoutController;
 import com.mss.tuess.entity.User;
 import com.mss.tuess.start.TUESS;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
@@ -167,5 +167,10 @@ public class ViewManager {
         catch (Exception e){
             System.out.println("Help file: not found!");
         }
+    }
+    
+    public static void showError(String error, String description)
+    {
+        Dialogs.showErrorDialog(stage, description, error, "Error");
     }
 }

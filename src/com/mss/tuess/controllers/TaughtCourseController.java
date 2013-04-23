@@ -32,6 +32,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+/**
+ * @TaughtCourseController
+ * This method is the controller of getting all courses taught by a instructor.
+ */
+
 public class TaughtCourseController implements Initializable {
 
     //Section Table and fields
@@ -189,7 +194,8 @@ public class TaughtCourseController implements Initializable {
             return true;
         }
 
-        String lowerCaseFilterString = filterString.toLowerCase();
+        String lowerCaseFilterString;
+        lowerCaseFilterString = filterString.toLowerCase();
 
         if (Integer.toString(enrollsection.getStudentID()).indexOf(lowerCaseFilterString) != -1) {
             return true;
@@ -201,6 +207,8 @@ public class TaughtCourseController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -307,9 +315,14 @@ public class TaughtCourseController implements Initializable {
 
         studentTable.setItems(studentFilterContent);
     }
+    /**
+    * @updateStuGrade
+    * This method is to update the grade of a student in a particular section.
+    */
 
     public void updateStuGrade() {
-        Validator validator = new Validator();
+        Validator validator;
+        validator = new Validator();
 
         if (checkChangeOutside == 1 || checkChangeInside == 1) {
             checkChangeInside = 1;

@@ -15,6 +15,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+/**
+ * @MyProgramController
+ * This method is the controller of mailing grades function of administrator
+ */
+
+
 public class MyProgramController implements Initializable {
 
     @FXML TextField programID;
@@ -29,6 +35,8 @@ public class MyProgramController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

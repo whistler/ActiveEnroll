@@ -16,6 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * @RegisteredCourseController
+ * This method is the controller of registering courses for students.
+ */
+
 public class RegisteredCourseController implements Initializable 
 {
     @FXML  TableView<RegisteredCourse> registeredCoursesTable;
@@ -48,6 +53,8 @@ public class RegisteredCourseController implements Initializable
   
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

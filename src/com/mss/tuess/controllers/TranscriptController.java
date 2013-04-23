@@ -3,9 +3,7 @@ package com.mss.tuess.controllers;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Transcriptrecord;
-import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,6 +15,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+/**
+ * @TranscriptController
+ * This method is to get all the grades information of a particular student.
+ */
 
 public class TranscriptController implements Initializable {
 
@@ -96,6 +99,8 @@ public class TranscriptController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,7 +118,10 @@ public class TranscriptController implements Initializable {
         }
         else
         {
-           GPA.setText(Double.toString(Transcriptrecord.getAddCreditMultipleGrade()/Transcriptrecord.getAddCredit()));
+           int addCmG = Transcriptrecord.getAddCreditMultipleGrade();
+           int addC = Transcriptrecord.getAddCredit();
+           double targetGPA = addCmG / (double) addC;
+           GPA.setText(Double.toString(targetGPA));
         }
         
         transcriptTable.setItems(filterContent);

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
 import com.mss.tuess.entity.EnrollSection;
@@ -11,8 +7,7 @@ import com.mss.tuess.entity.Term;
 import java.sql.SQLException;
 
 /**
- *
- * @author Karthik
+ * Stete Class. Object to store current state of term, section, sectionClass, currentSearchView and currentEnrollSection
  */
 public class State {
     

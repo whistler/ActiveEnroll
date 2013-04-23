@@ -4,8 +4,11 @@ import com.mss.tuess.util.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
+/**
+ * Section class. Weak entity of a course of a certain term. Stores constraints
+ * like registered student number, capacity and status of a section.
+ */
 public class Section {
 
     private static ArrayList<Section> sections = new ArrayList();
@@ -21,11 +24,26 @@ public class Section {
     private Term term = new Term();
     private Instructor instructor = new Instructor();
 
+    /**
+     * Fetches with course number.
+     *
+     * @param courseNum the number of a course to fetch.
+     * @throws SQLException
+     */
     public static void fetch(String courseNum) throws SQLException {
         String selectSectionsByCourse = "SELECT * FROM section where courseNum = " + courseNum;
         executeFetch(selectSectionsByCourse);
     }
 
+    /**
+     * Fetches with sectionID, courseDept, courseNum and currentTerm
+     *
+     * @param sectionID "1"
+     * @param courseDept "CICS"
+     * @param courseNum "505"
+     * @param currentTerm "20131"
+     * @throws SQLException
+     */
     public static void fetch1(String sectionID, String courseDept, String courseNum, String currentTerm) throws SQLException {
 
 
@@ -39,6 +57,15 @@ public class Section {
 
         executeFetch(selectSectionClassListByCourse);
     }
+
+    /**
+     * Fetches with courseDept, courseNumber and currentTerm.
+     *
+     * @param courseDept "CICS"
+     * @param courseNum "505"
+     * @param currentTerm "20131"
+     * @throws SQLException
+     */
     public static void fetch(String courseDept, String courseNum, String currentTerm) throws SQLException {
 
 
@@ -175,7 +202,7 @@ public class Section {
     }
 
     /**
-     * @param termID the termID to set
+     * @param term the termID to set
      */
     public void setTermID(String term) {
         this.termID = term;
@@ -227,6 +254,10 @@ public class Section {
      * Loads the Section by the sectionID from the database and encapsulates
      * into this Section objects
      *
+     * @param sectionID "1"
+     * @param courseDept "CICS"
+     * @param courseNum "505"
+     * @param termID "20131"
      * @throws SQLException
      */
     public void fetch(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
@@ -259,14 +290,14 @@ public class Section {
      */
     public void update() throws SQLException {
         String sql = "UPDATE section SET "
-                + "courseDept=" + this.getCourseDept() + ", "
-                + "courseNum=" + this.getCourseNum() + ", "
-                + "instructorID=" + this.getInstructorID() + ", "
-                + "termID=" + this.getTermID() + ", "
-                + "capacity=" + this.getCapacity() + ", "
-                + "registered=" + this.getRegistered() + ", "
-                + "status=" + this.getStatus()
-                + "WHERE sectionID=" + this.getSectionID();
+                + "instructorID=" + this.getInstructorID() + " AND "
+                + "capacity='" + this.getCapacity() + "' AND "
+                + "registered='" + this.getRegistered() + "' AND "
+                + "status='" + this.getStatus()
+                + "' WHERE sectionID='" + this.getSectionID() + "' AND"
+                + " courseDept='" + this.getCourseDept() + "' AND "
+                + "courseNum='" + this.getCourseNum() + "' AND "
+                + "termID='" + this.getTermID() + "'";
         DatabaseConnector.updateQuery(sql);
     }
 
