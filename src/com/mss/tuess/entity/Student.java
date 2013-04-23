@@ -9,7 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Student class
+ * Student class. Concrete object of abstract User class. Student object has additional attribute of registered date and status.
+ * A student can search, enroll/drop a course, check timetable, registered courses and transcripts. 
  */
 public class Student extends User {
     private static ArrayList<Student> students = new ArrayList();

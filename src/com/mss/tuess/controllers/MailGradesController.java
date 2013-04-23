@@ -18,6 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javax.mail.MessagingException;
 
+/**
+ * @MailGradesController
+ * This method is the controller of mailing grades function of administrator
+ */
+
+
 public class MailGradesController implements Initializable {
 
     @FXML
@@ -31,6 +37,8 @@ public class MailGradesController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,6 +46,12 @@ public class MailGradesController implements Initializable {
         mailGradeProgress.setVisible(false);
         mailProgressLabel.setText("");
     }
+    
+/**
+ * @mailInstructions
+ * This method gets result set from database operation, and then for each student, there is a whole loop to generate his own transcript table
+ */
+
 
     @FXML
     private void mailInstructions() throws MessagingException, InterruptedException, SQLException {
