@@ -3,9 +3,7 @@ package com.mss.tuess.controllers;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
 import com.mss.tuess.entity.Transcriptrecord;
-import com.mss.tuess.util.ViewManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -120,7 +118,10 @@ public class TranscriptController implements Initializable {
         }
         else
         {
-           GPA.setText(Double.toString(Transcriptrecord.getAddCreditMultipleGrade()/Transcriptrecord.getAddCredit()));
+           int addCmG = Transcriptrecord.getAddCreditMultipleGrade();
+           int addC = Transcriptrecord.getAddCredit();
+           double targetGPA = addCmG / (double) addC;
+           GPA.setText(Double.toString(targetGPA));
         }
         
         transcriptTable.setItems(filterContent);
