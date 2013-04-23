@@ -1,7 +1,7 @@
 package com.mss.tuess.util;
 
 /**
- * EmailData class. Used to send email to student. 
+ * EmailData class. Data object used to send email to student. 
  */
 public class EmailData {
     
