@@ -9,7 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Student class
+ * Student class. Concrete object of abstract User class. Student object has additional attribute of registered date and status.
+ * A student can search, enroll/drop a course, check timetable, registered courses and transcripts. 
  */
 public class Student extends User {
     private static ArrayList<Student> students = new ArrayList();
@@ -292,12 +293,11 @@ public class Student extends User {
         }
         return list;
     }
-
     /**
-     * Returns complete required courses.
-     * @return the arraylist of complete required courses
+     * Returns incomplete required courses.
+     * @return the arraylist of incomplete required courses
      */
-    public ArrayList<Course> getCompletedRequiredCourses() {
+    public ArrayList<Course> getIncompleteRequiredCourses() {
         ArrayList list = new ArrayList();
         try {
             ResultSet rs;
@@ -323,21 +323,21 @@ public class Student extends User {
     }
 
     /**
-     * Returns incomplete required courses.
-     * @return the arraylist of incomplete required courses
+     * Returns complete required courses.
+     * @return the arraylist of complete required courses
      */
-    public ArrayList<Course> getIncompleteRequiredCourses() {
+    public ArrayList<Course> getCompletedRequiredCourses() {
         ArrayList list = new ArrayList();
         try {
             ResultSet rs;
             String sql = "SELECT T1.courseNum, T1.courseDept FROM"
                     + "(SELECT courseNum, courseDept FROM degreeCourse, student "
-                    + "WHERE student.studentID = '12345678' AND "
+                    + "WHERE student.studentID = '" + getID() + "' AND "
                     + "student.programID = degreeCourse.programID) T1 "
                     + "LEFT JOIN "
                     + "(SELECT degreeCourse.courseDept, degreeCourse.courseNum "
                     + "FROM degreeCourse, student, enrollSection "
-                    + "WHERE student.studentID = '12345678' AND "
+                    + "WHERE student.studentID = '" + getID() + "' AND "
                     + "student.programID = degreeCourse.programID AND "
                     + "enrollSection.studentID = student.studentID AND "
                     + "degreeCourse.courseDept = enrollSection.courseDept AND "

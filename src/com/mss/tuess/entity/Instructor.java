@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Instructor class
+ * Instructor class. Concrete object of User abstract class. 
+ * Instructor has additional attribute of the department he/she works in. 
+ * Instructor can grade student of the course he/she taught and waive prerequisite for a student.
  */
 public class Instructor extends User{
     private static ArrayList<Instructor> instructors = new ArrayList();

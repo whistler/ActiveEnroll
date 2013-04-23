@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Department class
+ * Department class. Department object stores information of departmentID, deparment name and faculty name.
+ * "EECE - Electrical and Computer Engineering (EEE/ECE) - Faculty of Applied Science"
  */
 public class Department {
     private static ArrayList<Department> departments = new ArrayList();
@@ -25,7 +26,7 @@ public class Department {
         while (rs.next()) {
             Department department = new Department();
             department.setDeptID(rs.getString("deptID"));
-            department.setDeptName(rs.getString("courseName"));
+            department.setDeptName(rs.getString("deptName"));
             department.setFacultyName(rs.getString("facultyName"));
             departments.add(department);
         }

@@ -32,12 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-/**
- * @TaughtCourseController
- * This method is the controller of getting all courses taught by a instructor.
- */
-
-public class TaughtCourseController implements Initializable {
+public class TaughtCourseController_1 implements Initializable {
 
     //Section Table and fields
     @FXML
@@ -81,12 +76,13 @@ public class TaughtCourseController implements Initializable {
      *
      * @throws SQLException
      */
-    public TaughtCourseController() throws SQLException {
+    public TaughtCourseController_1() throws SQLException {
         int courseSize;
         tracker = 0;
         checkChangeInside = 0;
         sectionTableContent.clear();
         studentTableContent.clear();
+        grade.setEditable(true);
         int instructorID = CurrentUser.getUser().getID();
         checkChangeOutside = 0;
         Section.fetchByInstructor(instructorID, State.getCurrentTerm().getTermID());
@@ -206,8 +202,6 @@ public class TaughtCourseController implements Initializable {
 
     /**
      * Initializes the controller class.
-     * @param url is the address, implements java.io.Serializable
-     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -263,6 +257,7 @@ public class TaughtCourseController implements Initializable {
                         String courseNum = sectionFilterContent.get(selectedIndex).getCourseNum();
                         String courseDept = sectionFilterContent.get(selectedIndex).getCourseDept();
                         String currentTerm = sectionFilterContent.get(selectedIndex).getTermID();
+                        //Section.fetchStus(sectionID,courseDept, courseNum, currentTerm);
                         EnrollSection.fetchAllValid(sectionID, courseDept, courseNum, currentTerm);
 
                         studentTableContent.clear();
@@ -314,10 +309,6 @@ public class TaughtCourseController implements Initializable {
 
         studentTable.setItems(studentFilterContent);
     }
-    /**
-    * @updateStuGrade
-    * This method is to update the grade of a student in a particular section.
-    */
 
     public void updateStuGrade() {
         Validator validator = new Validator();
@@ -333,13 +324,31 @@ public class TaughtCourseController implements Initializable {
                     || gradeToStu.compareTo("D") == 0
                     || gradeToStu.compareTo("F") == 0)) {
                 se.setGrade(gradeToStu);
+
                 try {
-                    System.out.println(se.getStudentID()+"___"+se.getGrade());
-                    System.out.println("Tracker: "+tracker);
-                    System.out.println("Index: "+studentTable.getSelectionModel().getSelectedIndex());
                     se.update();
-                    studentFilterContent.set(studentTable.getSelectionModel().getSelectedIndex(), se);
-                    
+                    System.out.println(se.getStudentID());
+                    studentTableContent.set(tracker, se); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 } catch (SQLException ex) {
                     Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -348,9 +357,12 @@ public class TaughtCourseController implements Initializable {
                 ViewManager.setStatus("Successfully Updated the Grade!");
             } else {
                 ViewManager.setStatus("Please input a valid grade!");
+
             }
         } else {
             ViewManager.setStatus("Must choose someone!");
+
         }
+
     }
 }

@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mss.tuess.util;
 
 /**
- *
- * @author Karthik Krish
+ * EmailData class. Data object used to send email to student. 
  */
 public class EmailData {
     
