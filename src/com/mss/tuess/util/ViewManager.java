@@ -27,7 +27,6 @@ public class ViewManager {
     private static Stage stage;
     private static Stage help = new Stage();
     private static ArrayList previousNodes = new ArrayList();
-    private static String currentView = "Login";
 
     /**
      * Initializes a new stage to use as the help window
@@ -76,7 +75,6 @@ public class ViewManager {
      * @param fxml path of the view to load
      */
     public static void changeView(String view) {
-        currentView = view;
         String fxml = "/com/mss/tuess/views/" + view + ".fxml";
         ViewManager.setStatus("");
         Pane pane = (Pane) stage.getScene().lookup("#content");
@@ -157,28 +155,18 @@ public class ViewManager {
     /**
      * Show help file in a new window
      * @param fileName html file to load in to the help window (store in help package)
-     * @throws MalformedURLException 
      */
-    public static void showHelp(String fileName)
+    public static void showHelp()
     {
         Scene scene = help.getScene();
         WebView webview = (WebView) scene.lookup("#htmlViewer");
         try{
-            String url = TUESS.class.getResource("/com/mss/tuess/help/" + fileName).toExternalForm();
+            String url = TUESS.class.getResource("/com/mss/tuess/help/index.html").toExternalForm();
             webview.getEngine().load(url);
             help.show();
         }
         catch (Exception e){
-            System.out.println("Help file: " + fileName + " not found!");
+            System.out.println("Help file: not found!");
         }
-    }
-    
-    /**
-     * Show help for the current view
-     * @throws MalformedURLException 
-     */
-    public static void showCurrentHelp()
-    {
-        showHelp(currentView + ".html");
     }
 }
