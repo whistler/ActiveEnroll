@@ -20,11 +20,11 @@
         <Font name="System Bold" size="14.0" fx:id="x2" />
       </font>
     </Label>
-    <TableView fx:id="courseTable" layoutX="15.0" layoutY="59.0" prefHeight="240.0" prefWidth="572.0" tableMenuButtonVisible="true">
+    <TableView fx:id="courseTable" layoutX="15.0" layoutY="59.0" prefHeight="227.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
-        <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
-        <TableColumn minWidth="170.0" prefWidth="170.0" resizable="false" text="Course Name" fx:id="courseName" />
         <TableColumn minWidth="75.0" prefWidth="75.0" text="Department" fx:id="courseDept" />
+        <TableColumn minWidth="40.0" prefWidth="40.0" resizable="false" text="Code" fx:id="courseNum" />
+        <TableColumn minWidth="245.0" prefWidth="245.0" resizable="false" text="Course Name" fx:id="courseName" />
         <TableColumn minWidth="130.0" prefWidth="130.0" resizable="false" text="Course Info" fx:id="info" />
         <TableColumn editable="false" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="Credits" fx:id="credit" />
       </columns>
@@ -58,11 +58,11 @@
     <TableView id="sectionTable" fx:id="sectionClassTable" layoutX="14.0" layoutY="355.0" prefHeight="156.0" prefWidth="572.0" tableMenuButtonVisible="true">
       <columns>
         <TableColumn prefWidth="75.0" text="Section ID" fx:id="sectionID" />
-        <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
+        <TableColumn minWidth="90.0" prefWidth="90.0" text="Type" fx:id="type" />
         <TableColumn minWidth="100.0" prefWidth="100.0" text="Days" fx:id="day" />
-        <TableColumn prefWidth="75.0" text="Start Time" fx:id="displayStartTime" />
-        <TableColumn prefWidth="75.0" text="End Time" fx:id="displayEndTime" />
-        <TableColumn minWidth="84.0" prefWidth="84.0" text="Location" fx:id="location" />
+        <TableColumn minWidth="90.0" prefWidth="90.0" text="Start Time" fx:id="displayStartTime" />
+        <TableColumn minWidth="90.0" prefWidth="90.0" text="End Time" fx:id="displayEndTime" />
+        <TableColumn minWidth="90.0" prefWidth="90.0" text="Location" fx:id="location" />
       </columns>
     </TableView>
     <Label font="$x2" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="87.0" text="Sections" textFill="GREY" />
