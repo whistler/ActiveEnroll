@@ -27,6 +27,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * @SearchCoursesController
+ * This method is the controller of searching course function for both students and instructors during registration
+ */
+
 public class SearchCoursesController implements Initializable {
 
     //advanced search fields
@@ -227,6 +232,8 @@ public class SearchCoursesController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

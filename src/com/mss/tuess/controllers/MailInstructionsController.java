@@ -22,6 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javax.mail.MessagingException;
 
+/**
+ * @LoginController
+ * This method is the controller of mailing instruction function of administrator
+ */
+
 public class MailInstructionsController implements Initializable {
     
     
@@ -38,12 +43,20 @@ public class MailInstructionsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url is the address, implements java.io.Serializable
+     * @param rb is the resource boundary
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sendEmailStatus.setText("");
         mailInstructionsProgress.setVisible(false);
     }
+    
+    
+    /**
+     * @mailInstructions
+     * This method gets result set from database operation, and then for each student, there is a whole loop to generate instuctions
+     */
 
     @FXML
     private void mailInstructions() throws MessagingException, SQLException {
