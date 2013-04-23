@@ -6,7 +6,6 @@ package com.mss.tuess.controllers;
 
 import com.mss.tuess.entity.Program;
 import com.mss.tuess.entity.Student;
-import com.mss.tuess.entity.User;
 import com.mss.tuess.util.CurrentUser;
 import java.net.URL;
 import java.sql.SQLException;

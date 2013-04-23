@@ -89,10 +89,10 @@ public class WaivePrerequisiteController implements Initializable {
         else {
 
                 String courseInfo = coursesToWaive.getValue().toString();
-                String termID=courseInfo.substring(0,5);
-                String courseDept=courseInfo.substring(6, 10);
-                String courseNum=courseInfo.substring(11, 14);
-                String sectionID=courseInfo.substring(15,16);
+                //String termID=courseInfo.substring(0,5);
+                //String courseDept=courseInfo.substring(6, 10);
+                //String courseNum=courseInfo.substring(11, 14);
+                //String sectionID=courseInfo.substring(15,16);
             
            // System.out.print(termID+":"+courseDept+":"+courseNum+":"+sectionID);
           
