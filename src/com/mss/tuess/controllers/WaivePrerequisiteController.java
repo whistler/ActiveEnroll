@@ -118,8 +118,16 @@ public class WaivePrerequisiteController implements Initializable {
                         }
                         else
                         {
-                            enrollToSection(selectedSection,studentToWaive);
-                            errorLabel.setText("Succeed: Student "+studentToWaive.getID()+" is enrolled to "+selectedSection.getCourseDept()+" "+selectedSection.getCourseNum());        
+                            if(!EnrollSection.registrationEndNotPass(selectedSection))
+                            {
+                                errorLabel.setText("ERROR: Registration period is over.");
+                            }
+                            
+                            else
+                            {
+                                enrollToSection(selectedSection,studentToWaive);
+                                errorLabel.setText("Succeed: Student "+studentToWaive.getID()+" is enrolled to "+selectedSection.getCourseDept()+" "+selectedSection.getCourseNum());        
+                            }
                         }    
                     }
                 }

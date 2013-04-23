@@ -31,8 +31,7 @@ public class ViewManager {
     /**
      * Initializes a new stage to use as the help window
      */
-    public static void loadHelp()
-    {
+    public static void loadHelp(){
         Parent page;
         try {
             page = FXMLLoader.load(TUESS.class.getResource("/com/mss/tuess/views/Help.fxml"));

@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Administrator class
+ * Administrator class. Concrete object of User abstract class.
+ * Administrator can mail grades,instructions to students and create new student information into database.
  */
 public class Administrator extends User{
     static ArrayList<Administrator> administrators = new ArrayList();

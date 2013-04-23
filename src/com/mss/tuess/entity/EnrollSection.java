@@ -147,6 +147,15 @@ public class EnrollSection {
 
         executeFetch(sql);
     }
+      public static void fetchAllValid(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+
+
+        String sql = "SELECT * FROM enrollSection "
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
+                + courseNum + "' AND termID = '" + termID+"' AND grade <> 'W'";
+
+        executeFetch(sql);
+    }
      private static void executeFetch(String sql) throws SQLException {
         enrollSections.clear();
         ResultSet rs = DatabaseConnector.returnQuery(sql);
@@ -493,7 +502,7 @@ public class EnrollSection {
      * @param section is the section student wants to enroll in
      * @return true if the withdraw date is not passed; false if is passed
      */
-    public static boolean withdrawEndNotPass(Section section) {
+    public static boolean withdrawWithWNotPass(Section section) {
         Term currentTerm = State.getCurrentTerm();
         Timestamp now = new Timestamp(System.currentTimeMillis());
         if (now.compareTo(currentTerm.getDropWithW()) < 0) {
@@ -503,6 +512,22 @@ public class EnrollSection {
         }
     }
 
+        /**
+     * Determines whether the withdrawWithoutW date is passed
+     *
+     * @param section is the section student wants to enroll in
+     * @return true if the withdraw date is not passed; false if is passed
+     */
+    public static boolean withdrawWithoutWNotPass(Section section) {
+        Term currentTerm = State.getCurrentTerm();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        if (now.compareTo(currentTerm.getDropWithoutW()) < 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * Determines whether the section is FULL
      *
