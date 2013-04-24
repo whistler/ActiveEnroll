@@ -15,10 +15,10 @@ public class DatabaseConnector {
     private static Connection conn;
 //    private static final String url = "jdbc:mysql://198.71.87.177:3306/TUESS1";
 //    private static final String user = "user";
+////    private static final String password = "cheese";
+//    private static final String url = "jdbc:mysql://ec2-54-244-163-174.us-west-2.compute.amazonaws.com:3306/TUESS?connectTimeout=0&socketTimeout=0&autoReconnect=true";
+//    private static final String user = "root";
 //    private static final String password = "cheese";
-    private static final String url = "jdbc:mysql://ec2-54-244-163-174.us-west-2.compute.amazonaws.com:3306/TUESS?connectTimeout=0&socketTimeout=0&autoReconnect=true";
-    private static final String user = "root";
-    private static final String password = "cheese";
 
     /**
      * Creates a connection to the database
@@ -28,7 +28,9 @@ public class DatabaseConnector {
     public static void Connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(url, user, password);
+            //conn = DriverManager.getConnection(url, user, password);  
+            System.out.println(XMLReader.loadconfig().server+ XMLReader.loadconfig().user+ XMLReader.loadconfig().pass);
+            conn = DriverManager.getConnection(XMLReader.loadconfig().server, XMLReader.loadconfig().user, XMLReader.loadconfig().pass);
             System.out.println("success conn =" + (conn).toString());
         } catch (Exception ex) {
             ViewManager.showError("Network Errorr", "Unable to connect to database server");
