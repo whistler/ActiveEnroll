@@ -7,6 +7,8 @@ package com.mss.tuess.controllers;
 import com.mss.tuess.entity.Program;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
+import com.mss.tuess.util.InputType;
+import com.mss.tuess.util.Validator;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -103,17 +105,27 @@ public class AddStudentController implements Initializable {
     public void addNewStudent() {
       
         Student student = new Student();
+         Validator validator = new Validator();
 
-        student.setAddress(address.getText());
-        student.setCity(city.getText());
-        student.setState(state.getText());
-        student.setCountry(country.getText());
-        student.setEmail(email.getText());
-        student.setFirstName(firstName.getText());
+        student.setAddress(validator.validate("Address", address.getText(), true, 6, 100, InputType.STRING));
+       student.setCity(validator.validate("City", city.getText(), true, 4, 20, InputType.LETTERS));
+        student.setState(validator.validate("State", state.getText(), true, 2, 20, InputType.LETTERS));
+        student.setCountry(validator.validate("Country", country.getText(), true, 4, 20, InputType.LETTERS));
+        student.setEmail(validator.validate("Email", email.getText(), true, 5, 30, InputType.EMAIL));
+        student.setFirstName(validator.validate("First name", firstName.getText(), true, 2, 20, InputType.LETTERS));
+        
+        student.fetch(Integer.parseInt(validator.validate("StudentID", ID.getText(), true, 10000000, 99999999, InputType.POSITIVE_INTEGER)));
+         
+        if (student.getID()==0)
+        {
         student.setID(Integer.parseInt(ID.getText()));
-        student.setLastName(lastName.getText());
-        student.setPhone(phone.getText());
-        student.setZipcode(zipCode.getText());
+        }
+        else
+        {
+         validator.addError("Student ID already exist!!");
+        }
+        student.setPhone(validator.validate("Phone number", phone.getText(), true, 9, 20, InputType.STRING));
+       student.setZipcode(validator.validate("Zip code", zipCode.getText(), true, 5, 6, InputType.STRING));
         student.setProgramID((String)program.getValue());
         student.setRegisteredSince(registeredSince.getText());
         student.setStatus(status.getText());
