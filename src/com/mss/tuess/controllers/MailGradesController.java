@@ -48,8 +48,13 @@ public class MailGradesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         mailGradesStatus.setText("");
-        mailGradeProgress.setVisible(false);
+        //mailGradeProgress.setVisible(false);
         mailProgressLabel.setText("");
+        
+        mailGradeProgress.progressProperty().bind(service1.progressProperty());
+        //veil.visibleProperty().bind(service1.runningProperty());
+        mailGradeProgress.visibleProperty().bind(service1.runningProperty());
+        mailProgressLabel.visibleProperty().bind(service1.runningProperty());
         
     }
     
@@ -61,8 +66,11 @@ public class MailGradesController implements Initializable {
 
     @FXML
     private void mailInstructions() throws MessagingException, InterruptedException, SQLException {
-        
-       service1.restart();
+       
+        mailProgressLabel.setText("Please wait. Mailing Grades...");
+        //mailGradeProgress.setVisible(true);
+        //mailGradeProgress.setProgress(-0.59F); 
+        service1.restart();
     }
     
     /**
@@ -91,10 +99,14 @@ public class MailGradesController implements Initializable {
             ArrayList<EmailData> emailList;
             emailList = new ArrayList<>();
             EmailData emailData;
-            String message = "Sucess";
+            String message;
+            message = "initial";
+            Thread.sleep(500);
+            /*
             mailProgressLabel.setText("Please wait. Mailing Grades...");
             mailGradeProgress.setVisible(true);
-            mailGradeProgress.setProgress(-0.59F);
+            mailGradeProgress.setProgress(-0.59F);*/
+            Thread.sleep(500);
             int studentnumber = 0;
 
             ResultSet mailrs;
@@ -173,15 +185,14 @@ public class MailGradesController implements Initializable {
                 if(emailList.size() <= 0){
                 } else {
                     SendEmail sendMail = new SendEmail();
-                    sendMail.sendMail(emailList);
-                    mailProgressLabel.setText("Grades mailed succesfully");
-                    mailGradeProgress.setProgress(1.00F);
+                    message = sendMail.sendMail(emailList);
+                    Thread.sleep(100);
                 }
             } catch (MessagingException ex) {
                 Logger.getLogger(com.mss.tuess.controllers.MailGradesController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
                 return message;
-            }
+        }
         }
 }
