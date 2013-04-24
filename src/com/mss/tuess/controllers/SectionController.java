@@ -4,6 +4,9 @@
  */
 package com.mss.tuess.controllers;
 
+import static com.mss.tuess.controllers.SectionController.canDropWithW;
+import static com.mss.tuess.controllers.SectionController.canDropWithoutW;
+import static com.mss.tuess.controllers.SectionController.validate;
 import com.mss.tuess.entity.*;
 import com.mss.tuess.entity.Student;
 import com.mss.tuess.util.CurrentUser;
@@ -21,19 +24,22 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
- * @SectionController
- * This method is the controller of section operations, validating enroll constrains 
+ * @SectionController This method is the controller of section operations,
+ * validating enroll constrains
  */
-
 public class SectionController implements Initializable {
 
     @FXML
@@ -75,9 +81,11 @@ public class SectionController implements Initializable {
     @FXML
     private TableColumn<SectionClass, String> location;
     private static Validator validator = new Validator();
+    private static Stage stage;
 
     /**
      * Initializes the controller class.
+     *
      * @param url is the address, implements java.io.Serializable
      * @param rb is the resource boundary
      */
@@ -166,7 +174,7 @@ public class SectionController implements Initializable {
         es.setGrade("");
         try {
             validate(section, studentID);
-            if (validator.hasErrors()) {
+            if (!validator.hasErrors()) {
                 es.insert();
                 section.setRegistered(section.getRegistered() + 1);
                 if (section.getRegistered() == section.getCapacity()) {
@@ -176,18 +184,17 @@ public class SectionController implements Initializable {
                 initialize(null, null);
                 ViewManager.setStatus("Enrolled successfully");
             } else {
-                ViewManager.setStatus(validator.getErrors().get(1).toString());
+                ViewManager.setStatus(validator.getErrors().get(0).toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
- /**
- * @validate
- * This method checks all kinds of constrains when trying to enroll in a particular course section.
- */
-    
+    /**
+     * @validate This method checks all kinds of constrains when trying to
+     * enroll in a particular course section.
+     */
     public static void validate(Section section, int studentID) throws SQLException {
         Student student = new Student();
         student.fetch(CurrentUser.getUser().getID());
@@ -204,14 +211,13 @@ public class SectionController implements Initializable {
             validator.addError("You do not have the prerequisites to take this course. Talk to course instructor.");
         }
         if (EnrollSection.isTimeConflict(student, section)) {
-            validator.addError("There is a time conflict with one of the other courses you are registered for");
+            //validator.addError("There is a time conflict with one of the other courses you are registered for");
         }
     }
 
-/**
- * @processDrop
- * This method is to perform the drop enrolled course sections.
- */    
+    /**
+     * @processDrop This method is to perform the drop enrolled course sections.
+     */
     @FXML
     public void processDrop() {
         try {
@@ -230,18 +236,22 @@ public class SectionController implements Initializable {
                     }
                 } else {
                     if (canDropWithW(section, studentID)) {
-                        int n = JOptionPane.showConfirmDialog(null, "Time passed!! Be careful!! You will get a W!!", "Confirm", JOptionPane.YES_NO_OPTION);
-                        if (n == JOptionPane.YES_OPTION) {
+                        DialogResponse response = Dialogs.showConfirmDialog(stage,
+                                "Do you want to continue? You will get a 'W' if you choose YES on your transcript", "Confirm Dialog", "title");
+                        if (response.equals(DialogResponse.YES)) {
                             System.out.println("YES!!!!!!!!!");
                             es.setGrade("W");
                             es.update();
-                        } else if (n == JOptionPane.NO_OPTION) {
+                            ViewManager.setStatus("Course has been dropped");
+
+                        } else if (response.equals(DialogResponse.NO)) {
                             System.out.println("NO!!!!!!!!!");
+                            ViewManager.setStatus("Drop Canceled");
+
                         }
                     }
                 }
                 initialize(null, null);
-                ViewManager.setStatus("Course has been dropped");
             } else {
                 ViewManager.setStatus("Unable to drop course");
             }
@@ -249,31 +259,32 @@ public class SectionController implements Initializable {
             Logger.getLogger(SectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * @canDropWithoutW
-     * This method is to check if one section could be dropped without a W label.
-     */    
+     * @canDropWithoutW This method is to check if one section could be dropped
+     * without a W label.
+     */
     public static boolean canDropWithoutW(Section section, int studentID) throws SQLException {
         if (EnrollSection.registrationEndNotPass(section)) {
             return true;
         }
         return false;
     }
+
     /**
-     * @canDropWithW
-     * This method is to check if one section could be dropped with a W label.
-     */    
+     * @canDropWithW This method is to check if one section could be dropped
+     * with a W label.
+     */
     public static boolean canDropWithW(Section section, int studentID) throws SQLException {
         if (EnrollSection.withdrawWithWNotPass(section)) {
             return true;
         }
         return false;
     }
-    /**
-     * @goBack
-     * This method is to go to previous page of search course results.
-     */    
 
+    /**
+     * @goBack This method is to go to previous page of search course results.
+     */
     public static void goBack() {
         ViewManager.showPreviousView();
     }

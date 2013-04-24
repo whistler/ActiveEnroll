@@ -290,7 +290,7 @@ public class Section {
      */
     public void update() throws SQLException {
         String sql = "UPDATE section SET "
-                + "instructorID=" + this.getInstructorID() + " AND "
+                
                 + "capacity='" + this.getCapacity() + "' AND "
                 + "registered='" + this.getRegistered() + "' AND "
                 + "status='" + this.getStatus()

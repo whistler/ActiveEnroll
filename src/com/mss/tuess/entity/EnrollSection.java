@@ -420,6 +420,7 @@ public class EnrollSection {
         if (rowCount == 0) //No prerequisites
         {
             System.out.println("+------------------" + rowCount + "-------------------+");
+            return true;
         }
         while (rs_enrolled.next()) {
             System.out.println(rs_enrolled.getString("courseDept") + "__" + rs_enrolled.getString("courseNum"));
