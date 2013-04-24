@@ -23,6 +23,7 @@ public class Program {
     public static void fetch() throws SQLException {
         ResultSet rs;
         String sql = "SELECT * FROM program";
+        programs.clear();
         rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
             Program program = new Program();
