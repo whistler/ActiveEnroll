@@ -67,18 +67,5 @@ public class AdministratorTest {
     }
 
 
-    /**
-     * Test of update method, of class Administrator.
-     */
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        DatabaseConnector.Connect(); 
-        Administrator instance = new Administrator();
-        instance.update();
-        assertNotNull(instance);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
 
 }
