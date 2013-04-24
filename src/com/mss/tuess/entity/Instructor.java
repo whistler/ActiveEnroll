@@ -30,6 +30,7 @@ public class Instructor extends User{
             instructor.setLastName(rs.getString("lastName"));
             instructor.setAddress(rs.getString("address"));
             instructor.setCity(rs.getString("city"));
+            instructor.setState("state");
             instructor.setZipcode(rs.getString("zipcode"));
             instructor.setCountry(rs.getString("country"));
             instructor.setPhone(rs.getString("phone"));
@@ -98,6 +99,7 @@ public class Instructor extends User{
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
             this.setCity(rs.getString("city"));      
+            this.setState(rs.getString("state"));
             this.setZipcode(rs.getString("zipcode"));
             this.setCountry(rs.getString("country"));
             this.setPhone(rs.getString("phone"));
@@ -116,14 +118,19 @@ public class Instructor extends User{
      */
     @Override
     public void update() throws SQLException {
-        DatabaseConnector.updateQuery("UPDATE instructor SET firstName=" + this.getFirstName()
-                + ", lastName=" + this.getLastName() + ", address=" + this.getAddress()
-                + ", city=" + this.getCity() + ", country=" + this.getCountry()
-                + ", zipcode=" + this.getZipcode() + ", phone=" + this.getPhone()
-                + ", deptID=" + this.getDeptID()
-                + ", email=" + this.getEmail()
-                + ", password=" + this.getPassword()
-                + "WHERE instructorID=" + this.getID());
+        DatabaseConnector.updateQuery("UPDATE instructor SET "
+                + "firstName='" + this.getFirstName()
+                + "', lastName='" + this.getLastName() 
+                + "', address='" + this.getAddress()
+                + "', city='" + this.getCity() 
+                + "', state='" + this.getState()
+                + "', country='" + this.getCountry()
+                + "', zipcode='" + this.getZipcode() 
+                + "', phone='" + this.getPhone()
+                + "', deptID='" + this.getDeptID()
+                + "', email='" + this.getEmail()
+                + "', password='" + this.getPassword()
+                + "' WHERE instructorID=" + this.getID());
     }
     
     /**
@@ -143,9 +150,9 @@ public class Instructor extends User{
      */
     @Override
     public void insert() throws SQLException {
-        String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, country, "
+        String sql="INSERT INTO instructor (instructorID, firstName, lastName, address, city, state, country, "
                 + "zipcode, phone, deptID, email, password) values "
-                + "("+ this.getID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
+                + "("+ this.getID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+ "', '"+ this.getState() + "', '" + this.getCountry()
                 +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '"+ this.getEmail()+"', '" + this.getPassword()
                 +  "')";
         DatabaseConnector.updateQuery(sql);

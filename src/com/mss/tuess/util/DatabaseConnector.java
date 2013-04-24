@@ -46,7 +46,7 @@ public class DatabaseConnector {
                 conn.close();
             }
         } catch (Exception ex) {
-            System.out.println("Unable to disconnect");
+            ViewManager.showError("Unable to disconnect", "There was a problem with the database connection");
         }
     }
 

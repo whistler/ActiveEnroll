@@ -85,6 +85,7 @@ public class Administrator extends User{
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
             this.setCity(rs.getString("city"));
+            this.setState(rs.getString("state"));
             this.setCountry(rs.getString("country"));
             this.setZipcode(rs.getString("zipcode"));
             this.setPhone(rs.getString("phone"));
@@ -105,11 +106,12 @@ public class Administrator extends User{
                 + "lastName='" + this.getLastName() + "', " 
                 + "address='" + this.getAddress() + "', "
                 + "city='" + this.getCity() + "', "
+                + "state='" + this.getState() + "', "
                 + "country='" + this.getCountry() + "', "
                 + "zipcode='" + this.getZipcode() + "', " 
                 + "phone='" + this.getPhone() + "', " 
-                + "password='" + this.getPassword() + "'"
-                + "email='" + this.getEmail ()+ "'"
+                + "password='" + this.getPassword() + "', "
+                + "email='" + this.getEmail ()+ "' "
                 + "WHERE adminID=" + this.getID());
     }
 
