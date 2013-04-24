@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.Region;
 import javax.mail.MessagingException;
 
 /**
@@ -36,6 +37,8 @@ public class MailGradesController implements Initializable {
     ProgressIndicator mailGradeProgress;
     @FXML
     Label mailProgressLabel;
+    @FXML
+    Region veil; 
     
     final SendMailService service1 = new SendMailService();
 
@@ -48,14 +51,12 @@ public class MailGradesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         mailGradesStatus.setText("");
-        //mailGradeProgress.setVisible(false);
         mailProgressLabel.setText("");
-        
+        veil.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4)");
         mailGradeProgress.progressProperty().bind(service1.progressProperty());
-        //veil.visibleProperty().bind(service1.runningProperty());
+        veil.visibleProperty().bind(service1.runningProperty());
         mailGradeProgress.visibleProperty().bind(service1.runningProperty());
-        mailProgressLabel.visibleProperty().bind(service1.runningProperty());
-        
+        mailProgressLabel.visibleProperty().bind(service1.runningProperty()); 
     }
     
 /**
@@ -68,8 +69,6 @@ public class MailGradesController implements Initializable {
     private void mailInstructions() throws MessagingException, InterruptedException, SQLException {
        
         mailProgressLabel.setText("Please wait. Mailing Grades...");
-        //mailGradeProgress.setVisible(true);
-        //mailGradeProgress.setProgress(-0.59F); 
         service1.restart();
     }
     
@@ -102,15 +101,8 @@ public class MailGradesController implements Initializable {
             String message;
             message = "initial";
             Thread.sleep(500);
-            /*
-            mailProgressLabel.setText("Please wait. Mailing Grades...");
-            mailGradeProgress.setVisible(true);
-            mailGradeProgress.setProgress(-0.59F);*/
-            Thread.sleep(500);
-            int studentnumber = 0;
 
             ResultSet mailrs;
-
             mailrs = Student.fetchCurrentTerm();
 
             while (mailrs.next()) {
@@ -171,7 +163,6 @@ public class MailGradesController implements Initializable {
 
                 //build email list
                 emailData = new EmailData(toEmails, emailSubject, emailBody);
-                studentnumber++;
                 emailList.add(emailData);
             }
 
