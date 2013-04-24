@@ -18,7 +18,7 @@ public class DatabaseConnector {
 //    private static final String password = "cheese";
     private static final String url = "jdbc:mysql://ec2-54-244-163-174.us-west-2.compute.amazonaws.com:3306/TUESS?connectTimeout=0&socketTimeout=0&autoReconnect=true";
     private static final String user = "root";
-    private static final String password = "123456";
+    private static final String password = "cheese";
 
     /**
      * Creates a connection to the database
