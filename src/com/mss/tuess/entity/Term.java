@@ -182,7 +182,6 @@ public class Term {
                 + this.dropWithW + ", '"
                 + this.end + "')";
 
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
     

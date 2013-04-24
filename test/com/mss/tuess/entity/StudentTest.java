@@ -5,7 +5,6 @@
 package com.mss.tuess.entity;
 
 import com.mss.tuess.util.DatabaseConnector;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;

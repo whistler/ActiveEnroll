@@ -84,7 +84,6 @@ public class TScheduler {
                 ArrayList<SectionClass> registeredSectionClassList = SectionClass.getAllregisteredSectionClassList();
                 int total = registeredSectionClassList.size();
                 int num = 0;
-                System.out.println("\nTotal=" + total);
                 if (total==0)
                     return "\nYou do not have any courses this term\n";
                 while (num < total) {
@@ -95,10 +94,6 @@ public class TScheduler {
                     dc.setStart(registeredSectionClassList.get(num).getDisplayStartTime().trim());
                     dc.setEnd(registeredSectionClassList.get(num).getDisplayEndTime().trim());
                     dc.setSemester(("Full").trim());
-                    System.out.println(dc.getStart() + "_~_" + dc.getEnd() + "_" + registeredSectionClassList.get(num).getCourseDept() + "_"
-                            + registeredSectionClassList.get(num).getDay() + "_"
-                            + registeredSectionClassList.get(num).getCourseNum() + "_" + registeredSectionClassList.get(num).getType()
-                            + "_" + registeredSectionClassList.get(num).getClassID());
                     alData.add(dc.getData());
 
                     num++;

@@ -113,8 +113,6 @@ public class MailGradesController implements Initializable {
 
             mailrs = Student.fetchCurrentTerm();
 
-            System.out.println("intomailfuntion");
-
             while (mailrs.next()) {
 
                 int currentID = mailrs.getInt("studentID");
@@ -173,7 +171,6 @@ public class MailGradesController implements Initializable {
 
                 //build email list
                 emailData = new EmailData(toEmails, emailSubject, emailBody);
-                System.out.println("Adding student "+studentnumber);
                 studentnumber++;
                 emailList.add(emailData);
             }
