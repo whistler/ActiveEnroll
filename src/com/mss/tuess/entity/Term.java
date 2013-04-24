@@ -193,7 +193,7 @@ public class Term {
      */
     public static Term getCurrentTerm() throws SQLException
     {
-        String query = "SELECT * FROM term WHERE start < NOW() AND end > NOW();";
+        String query = "SELECT * FROM term WHERE start <= NOW() AND end >= NOW();";
         
         ResultSet rs;
         rs = DatabaseConnector.returnQuery(query);
