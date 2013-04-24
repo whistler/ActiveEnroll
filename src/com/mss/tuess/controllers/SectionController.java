@@ -144,7 +144,7 @@ public class SectionController implements Initializable {
                     ViewManager.setStatus("Registration has ended");
                 }
                 try {
-                    if (EnrollSection.isAlreadyRegistered(section, CurrentUser.getUser().getID())) {
+                    if (EnrollSection.hasWithdrawn(section, CurrentUser.getUser().getID())) {
                         enrollButton.setDisable(true);
                         ViewManager.setStatus("You have withdrawn from this course");
                     }
@@ -201,7 +201,7 @@ public class SectionController implements Initializable {
         if (!EnrollSection.registrationEndNotPass(section)) {
             validator.addError("Registration period is over");
         }
-        if (EnrollSection.isAlreadyRegistered(section, studentID)) {
+        if (EnrollSection.hasWithdrawn(section, studentID)) {
             validator.addError("You are either already registered for this course or have dropped the course");
         }
         if (EnrollSection.isFull(section)) {
@@ -211,7 +211,7 @@ public class SectionController implements Initializable {
             validator.addError("You do not have the prerequisites to take this course. Talk to course instructor.");
         }
         if (EnrollSection.isTimeConflict(student, section)) {
-            //validator.addError("There is a time conflict with one of the other courses you are registered for");
+            validator.addError("There is a time conflict with one of the other courses you are registered for");
         }
     }
 
@@ -239,13 +239,11 @@ public class SectionController implements Initializable {
                         DialogResponse response = Dialogs.showConfirmDialog(stage,
                                 "Do you want to continue? You will get a 'W' if you choose YES on your transcript", "Confirm Dialog", "title");
                         if (response.equals(DialogResponse.YES)) {
-                            System.out.println("YES!!!!!!!!!");
                             es.setGrade("W");
                             es.update();
                             ViewManager.setStatus("Course has been dropped");
 
                         } else if (response.equals(DialogResponse.NO)) {
-                            System.out.println("NO!!!!!!!!!");
                             ViewManager.setStatus("Drop Canceled");
 
                         }

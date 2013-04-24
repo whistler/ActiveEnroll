@@ -40,34 +40,6 @@ public class CourseTest {
 
 
     /**
-     * Test of get method, of class Course.
-     */
-    @Test
-    public void testGet() {
-        System.out.println("get");
-        int index = 0;
-        Course expResult = null;
-        Course result = Course.get(index);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAll method, of class Course.
-     */
-    @Test
-    public void testGetAll() {
-        System.out.println("getAll");
-        ArrayList expResult = null;
-        
-        ArrayList result = Course.getAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getCourseDept method, of class Course.
      */
     @Test
@@ -206,17 +178,6 @@ public class CourseTest {
         //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of update method, of class Course.
-     */
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        Course instance = new Course();
-        instance.update();
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
-    }
 
     /**
      * Test of delete method, of class Course.
@@ -233,16 +194,4 @@ public class CourseTest {
         //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of insert method, of class Course.
-     */
-    @Test
-    public void testInsert() throws Exception {
-        
-        System.out.println("insert");
-        Course instance = new Course();
-        instance.insert();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
 }

@@ -19,7 +19,7 @@
       </font>
     </Button>
     <Label font="$x1" layoutX="52.0" layoutY="14.0" text="Use the button below to send registration instructions to students for the next semester" />
-    <Label fx:id="sendEmailStatus" font="$x1" layoutX="130.0" layoutY="394.0" opacity="0.95" prefWidth="215.0" textFill="#00993d" />
+    <Label fx:id="sendEmailStatus" font="$x1" layoutX="130.0" layoutY="394.0" opacity="0.95" prefWidth="296.0" textFill="#0029ff" />
     <TextField fx:id="emailSubjectText" layoutX="130.0" layoutY="71.0" prefWidth="317.0" />
     <TextArea fx:id="emailBodyText" layoutX="130.0" layoutY="116.0" prefHeight="182.0" prefWidth="317.0" wrapText="true" />
     <Label font="$x1" layoutX="38.0" layoutY="74.0" prefWidth="71.0" text="Subject:">
@@ -28,6 +28,7 @@
       </textFill>
     </Label>
     <Label font="$x1" layoutX="38.0" layoutY="116.0" prefWidth="71.0" text="Body:" textFill="$x2" />
+    <Region fx:id="veil" prefHeight="525.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <ProgressIndicator fx:id="mailInstructionsProgress" layoutX="301.0" layoutY="328.0" prefWidth="44.0" progress="-0.62" />
   </children>
 </AnchorPane>

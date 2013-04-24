@@ -148,7 +148,6 @@ public class Instructor extends User{
                 + "("+ this.getID()+", '"+ this.getFirstName()+"', '" + this.getLastName()+"', '" +  this.getAddress() +"', '"+ this.getCity()+"', '" + this.getCountry()
                 +"', '"+ this.getZipcode()+"', '" + this.getPhone() +"', '"+ this.getDeptID()+"', '"+ this.getEmail()+"', '" + this.getPassword()
                 +  "')";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 }

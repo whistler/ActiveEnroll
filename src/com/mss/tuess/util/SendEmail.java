@@ -24,10 +24,20 @@ public class SendEmail {
         setMailServerProperties();
     }
 
-    public void sendMail(ArrayList<EmailData> emailList) throws MessagingException{
+    /**
+     *
+     * @param emailList
+     * @return
+     * @throws MessagingException
+     */
+    public String sendMail(ArrayList<EmailData> emailList) throws MessagingException{
+        
+        String result;
+        
         this.emailList = emailList;
         createEmailMessage();
-        sendEmail();
+        result = sendEmail();
+        return result;
     }
  
     private void setMailServerProperties() {
@@ -46,7 +56,7 @@ public class SendEmail {
         emailMessage = new MimeMessage(mailSession);
     }
  
-    private void sendEmail() throws AddressException, MessagingException {
+    private String sendEmail() throws AddressException, MessagingException {
 
             String emailHost = "smtp.gmail.com";
             String fromUser = "tuessteam@gmail.com";
@@ -70,6 +80,7 @@ public class SendEmail {
 
             transport.close();
             System.out.println("Email sent successfully.");
+            return "Email sent successfully.";
     }
  
 }
