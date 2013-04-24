@@ -287,8 +287,6 @@ public class ShowFrame {
         for (int i = 0; i < dcData.length; i++) {
             if (dcData[i].getSemester().trim().equals("Mini 1")
                     || dcData[i].getSemester().trim().equals("Mini 2")) {
-                //System.out.println(dcData[i].getSemester());
-                //System.out.println("true");
                 return true;
             }
         }

@@ -250,7 +250,7 @@ public class EnrollSection {
                 + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getTermID()
                 + "', '" + this.getGrade()
                 + "')";
-        System.out.println(sql);
+        
         DatabaseConnector.updateQuery(sql);
     }
 

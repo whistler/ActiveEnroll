@@ -190,7 +190,6 @@ public class Program {
                 + "(" + this.getProgramID() + ", " + this.getDeptID()+ ", " + this.getDegreeTitle()+","
                 + this.getMinCredit() + ", " + this.getMaxLength()
                 + ")";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 

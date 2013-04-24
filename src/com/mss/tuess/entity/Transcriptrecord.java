@@ -50,7 +50,7 @@ public class Transcriptrecord {
             Transcriptrecord.setTermID(rs.getString("termID"));
             Transcriptrecord.setCredit(rs.getInt("credit"));
             Transcriptrecord.setGrade(rs.getString("grade"));
-            System.out.println(Transcriptrecord.getCourseName() + " inloop");
+            
             if (rs.getString("grade").equalsIgnoreCase("A")) {
                 gradeNum = 4;
             } else if (rs.getString("grade").equalsIgnoreCase("B")) {

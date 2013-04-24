@@ -239,13 +239,11 @@ public class SectionController implements Initializable {
                         DialogResponse response = Dialogs.showConfirmDialog(stage,
                                 "Do you want to continue? You will get a 'W' if you choose YES on your transcript", "Confirm Dialog", "title");
                         if (response.equals(DialogResponse.YES)) {
-                            System.out.println("YES!!!!!!!!!");
                             es.setGrade("W");
                             es.update();
                             ViewManager.setStatus("Course has been dropped");
 
                         } else if (response.equals(DialogResponse.NO)) {
-                            System.out.println("NO!!!!!!!!!");
                             ViewManager.setStatus("Drop Canceled");
 
                         }

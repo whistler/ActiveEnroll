@@ -146,7 +146,6 @@ public class Corequisite {
                 + this.getCoreqDept() + "', '"
                 + this.getCoreqNum() + "', "
                 + this.getCoreqGroup() + ")";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 

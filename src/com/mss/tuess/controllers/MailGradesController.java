@@ -104,6 +104,7 @@ public class MailGradesController implements Initializable {
             String message;
             message = "initial";
             Thread.sleep(500);
+
             ResultSet mailrs;
             mailrs = Student.fetchCurrentTerm();
 

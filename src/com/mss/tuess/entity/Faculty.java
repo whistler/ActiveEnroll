@@ -102,7 +102,6 @@ public class Faculty {
         String sql = "INSERT INTO faculty  (facultyName, "
                 + "(" + this.getFacultyName()
                 + "')";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 }
