@@ -14,7 +14,10 @@ import java.util.logging.Logger;
  */
 public class Student extends User {
     private static ArrayList<Student> students = new ArrayList();
-
+    private int studentID =0;
+    private String programID;
+    private String registeredSince;
+    private String status;
     /**
      * Loads all Student records from the database in to a list of Student
      * objects
@@ -79,10 +82,6 @@ public class Student extends User {
         return rs;
     }
 
-    private int studentID;
-    private String programID;
-    private String registeredSince;
-    private String status;
 
     /**
      * @return the studentID
