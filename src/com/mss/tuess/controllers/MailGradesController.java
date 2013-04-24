@@ -86,6 +86,9 @@ public class MailGradesController implements Initializable {
         }
     }
 
+    /**
+     * This class implements the thread to trigger grade mails to the students
+     */
     public class TriggerMails extends Task<String>{  
 
         /**
@@ -111,8 +114,6 @@ public class MailGradesController implements Initializable {
                 String sql;
                 sql = "select distinct course.coursenum, course.coursename ,course.credit, enrollSection.termID, enrollSection.grade, student.email from student,course,enrollSection where enrollSection.coursedept=course.courseDept and enrollSection.studentID=student.studentID and enrollSection.courseNum=course.coursenum and enrollSection.studentID='" + currentID + "'";
                 rs = DatabaseConnector.returnQuery(sql);
-
-
                 rs.first();
 
                 String toEmails = rs.getString("email");
@@ -178,8 +179,7 @@ public class MailGradesController implements Initializable {
             } catch (MessagingException ex) {
                 Logger.getLogger(com.mss.tuess.controllers.MailGradesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-                return message;
+            return message;
         }
-        }
+    }
 }
