@@ -114,7 +114,7 @@ public class WaivePrerequisiteController implements Initializable {
                 {
                     if(EnrollSection.isFull(selectedSection))
                     {
-                        errorLabel.setText("ERROS: The selected section is full.");
+                        errorLabel.setText("ERROR: The selected section is full.");
                     }
 
                     else
