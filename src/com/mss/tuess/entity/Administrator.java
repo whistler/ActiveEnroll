@@ -29,6 +29,7 @@ public class Administrator extends User{
             administrator.setLastName(rs.getString("lastName"));
             administrator.setAddress(rs.getString("address"));
             administrator.setCity(rs.getString("city"));
+            administrator.setState(rs.getString("state"));
             administrator.setCountry(rs.getString("country"));
             administrator.setZipcode(rs.getString("zipcode"));
             administrator.setPhone(rs.getString("phone"));
@@ -85,6 +86,7 @@ public class Administrator extends User{
             this.setLastName(rs.getString("lastName"));
             this.setAddress(rs.getString("address"));
             this.setCity(rs.getString("city"));
+            this.setState(rs.getString("state"));
             this.setCountry(rs.getString("country"));
             this.setZipcode(rs.getString("zipcode"));
             this.setPhone(rs.getString("phone"));
@@ -105,11 +107,12 @@ public class Administrator extends User{
                 + "lastName='" + this.getLastName() + "', " 
                 + "address='" + this.getAddress() + "', "
                 + "city='" + this.getCity() + "', "
+                + "state='" + this.getState() + "', "
                 + "country='" + this.getCountry() + "', "
                 + "zipcode='" + this.getZipcode() + "', " 
                 + "phone='" + this.getPhone() + "', " 
-                + "password='" + this.getPassword() + "'"
-                + "email='" + this.getEmail ()+ "'"
+                + "password='" + this.getPassword() + "' "
+                + "email='" + this.getEmail ()+ "' "
                 + "WHERE adminID=" + this.getID());
     }
 
@@ -128,13 +131,14 @@ public class Administrator extends User{
      */
     @Override
     public void insert() throws SQLException {
-        String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, country, "
+        String sql = "INSERT INTO administrator (studentID, firstName, lastName, address, city, state, country, "
                 + "zipcode, phone, password) values " + "(" 
                 + this.getID() + ", '" 
                 + this.getFirstName() + "', '" 
                 + this.getLastName() + "', '" 
                 + this.getAddress() + "', '" 
                 + this.getCity() + "', '" 
+                + this.getState() + "', '" 
                 + this.getCountry() + "', '" 
                 + this.getZipcode() + "', '" 
                 + this.getPhone() + "', '" 

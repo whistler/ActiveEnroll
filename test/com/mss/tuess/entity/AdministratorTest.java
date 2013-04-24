@@ -4,7 +4,6 @@
  */
 package com.mss.tuess.entity;
 
-import com.mss.tuess.util.DatabaseConnector;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

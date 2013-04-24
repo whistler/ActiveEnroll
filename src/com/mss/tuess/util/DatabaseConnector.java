@@ -13,12 +13,14 @@ import java.sql.ResultSet;
 public class DatabaseConnector {
 
     private static Connection conn;
-//    private static final String url = "jdbc:mysql://198.71.87.177:3306/TUESS1";
-//    private static final String user = "user";
-//    private static final String password = "cheese";
-    private static final String url = "jdbc:mysql://ec2-54-244-163-174.us-west-2.compute.amazonaws.com:3306/TUESS?connectTimeout=0&socketTimeout=0&autoReconnect=true";
+    private static final String url = "jdbc:mysql://localhost:3306/TUESS";
     private static final String user = "root";
-    private static final String password = "cheese";
+    private static final String password = "simple123";
+    
+    // This server can be used to test the apliation (would be on till end of April)
+    //private static final String url = "jdbc:mysql://ec2-54-244-163-174.us-west-2.compute.amazonaws.com:3306/TUESS?connectTimeout=0&socketTimeout=0&autoReconnect=true";
+    //private static final String user = "root";
+    //private static final String password = "cheese";
 
     /**
      * Creates a connection to the database
