@@ -153,7 +153,6 @@ public class Department {
                 + this.getDeptName() + "', '"
                 + this.getFacultyName() + "')";
 
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 }
