@@ -430,17 +430,14 @@ public class EnrollSection {
         rs_pre.beforeFirst();
         if (rowCount == 0) //No prerequisites
         {
-            System.out.println("+------------------" + rowCount + "-------------------+");
             return true;
         }
         while (rs_enrolled.next()) {
-            System.out.println(rs_enrolled.getString("courseDept") + "__" + rs_enrolled.getString("courseNum"));
+            
         }
-        System.out.println("=========");
         while (rs_pre.next()) {
-            System.out.println(rs_pre.getString("prereqDept") + "__" + rs_pre.getString("prereqNum") + "__" + rs_pre.getString("prereqGroup"));
+            
         }
-        System.out.println("+-------------------------------------+");
         rs_enrolled.beforeFirst();
         rs_pre.beforeFirst();
         int flag = 0;
