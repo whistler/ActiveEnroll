@@ -4,7 +4,7 @@
  */
 package com.mss.tuess.entity;
 
-import com.mss.tuess.util.DatabaseConnector;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author Administrator
  */
-public class AdministratorTest {
+public class CorequisiteTest {
     
-    public AdministratorTest() {
+    public CorequisiteTest() {
     }
     
     @BeforeClass
@@ -38,34 +38,32 @@ public class AdministratorTest {
     }
 
     /**
-     * Test of getID method, of class Administrator.
+     * Test of getCoreqGroup method, of class Corequisite.
      */
     @Test
-    public void testGetID() {
-        System.out.println("getID");
-        Administrator instance = new Administrator();
-        int expResult = 66666666;
-        instance.setID(expResult);
-        int result = instance.getID();
+    public void testGetCoreqGroup() {
+        System.out.println("getCoreqGroup");
+        Corequisite instance = new Corequisite();
+        int expResult = 0;
+        int result = instance.getCoreqGroup();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setID method, of class Administrator.
-     */
-    @Test
-    public void testSetID() {
-        System.out.println("setID");
-        int adminID = 66666666;
-        Administrator instance = new Administrator();
-        instance.setID(adminID);
-        assertEquals(adminID, instance.getID());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
-
+    /**
+     * Test of setCoreqGroup method, of class Corequisite.
+     */
+    @Test
+    public void testSetCoreqGroup() {
+        System.out.println("setCoreqGroup");
+        int coreqGroup = 0;
+        Corequisite instance = new Corequisite();
+        instance.setCoreqGroup(coreqGroup);
+        int result = instance.getCoreqGroup();
+        assertEquals(coreqGroup, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
 
 }

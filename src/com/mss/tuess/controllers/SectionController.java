@@ -179,8 +179,8 @@ public class SectionController implements Initializable {
                 section.setRegistered(section.getRegistered() + 1);
                 if (section.getRegistered() == section.getCapacity()) {
                     section.setStatus("full");
-                    section.update();
                 }
+                    section.update();
                 initialize(null, null);
                 ViewManager.setStatus("Enrolled successfully");
             } else {

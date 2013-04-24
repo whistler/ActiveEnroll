@@ -291,8 +291,8 @@ public class Section {
     public void update() throws SQLException {
         String sql = "UPDATE section SET "
                 
-                + "capacity='" + this.getCapacity() + "' AND "
-                + "registered='" + this.getRegistered() + "' AND "
+                + "capacity=" + this.getCapacity() + ", "
+                + "registered=" + this.getRegistered() + ", "
                 + "status='" + this.getStatus()
                 + "' WHERE sectionID='" + this.getSectionID() + "' AND"
                 + " courseDept='" + this.getCourseDept() + "' AND "
