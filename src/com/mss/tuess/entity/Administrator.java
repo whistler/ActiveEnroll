@@ -141,7 +141,6 @@ public class Administrator extends User{
                 + this.getPassword()
                 + "')";
         
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 }

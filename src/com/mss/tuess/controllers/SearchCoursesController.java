@@ -285,7 +285,6 @@ public class SearchCoursesController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Course> ov, Course t, Course t1) {
                 int selectedIndex = courseTable.getSelectionModel().getSelectedIndex();
-                System.out.println("Index : " + selectedIndex);
 
                 try {
                     if (selectedIndex >= 0) {
@@ -300,7 +299,6 @@ public class SearchCoursesController implements Initializable {
                         sectionClassFilterContent.addAll(sectionClassTableContent);
                     }
                 } catch (Exception ex) {
-                    System.out.println("gotcha array out of bound 1");
                     Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -314,8 +312,6 @@ public class SearchCoursesController implements Initializable {
             public void changed(ObservableValue<? extends SectionClass> ov, SectionClass t, SectionClass t1) {
                 int selectedIndex = sectionClassTable.getSelectionModel().getSelectedIndex();
                 Section currentSection = new Section();
-
-                System.out.println("Index : " + selectedIndex);
 
                 try {
                     if (selectedIndex >= 0) {
@@ -360,7 +356,6 @@ public class SearchCoursesController implements Initializable {
             String searchSQL = validateAndBuildSearchSQL();
 
             if (searchSQL != null) {
-                System.out.println("Search Sql :" + searchSQL);
                 courseTableContent.clear();
                 sectionClassTableContent.clear();
 

@@ -70,7 +70,6 @@ public class Student extends User {
      */
     public static ResultSet fetchCurrentTerm() throws SQLException {
         ResultSet rs;
-        System.out.println("current term is " + State.getCurrentTerm().getTermID());
         int currentTerm = Integer.valueOf(State.getCurrentTerm().getTermID());
         if (currentTerm % 10 != 1) {
             currentTerm--;
@@ -235,7 +234,6 @@ public class Student extends User {
                 + this.getStatus() + "', '" 
                 + this.getPassword() + "', '" 
                 + this.getEmail() + "')";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 

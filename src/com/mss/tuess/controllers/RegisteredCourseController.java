@@ -81,8 +81,6 @@ public class RegisteredCourseController implements Initializable
             public void changed(ObservableValue<? extends RegisteredCourse> ov, RegisteredCourse t, RegisteredCourse t1) {
                 int selectedIndex = registeredCoursesTable.getSelectionModel().getSelectedIndex();
                 
-
-                System.out.println("Index : " + selectedIndex);
                 try {
                     Section currentSection = new Section();
                     currentSection.fetch(tableContent.get(selectedIndex).getSectionID(),
