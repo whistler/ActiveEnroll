@@ -29,7 +29,6 @@ public class DatabaseConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("success conn =" + (conn).toString());
         } catch (Exception ex) {
             ViewManager.showError("Network Errorr", "Unable to connect to database server");
         }
@@ -44,7 +43,7 @@ public class DatabaseConnector {
                 conn.close();
             }
         } catch (Exception ex) {
-            System.out.println("Unable to disconnect");
+            ViewManager.showError("Unable to disconnect", "There was a problem with the database connection");
         }
     }
 
