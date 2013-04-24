@@ -91,7 +91,6 @@ public class TaughtCourseController implements Initializable {
         checkChangeOutside = 0;
         Section.fetchByInstructor(instructorID, State.getCurrentTerm().getTermID());
         courseSize = Section.getAll().size();
-        System.out.println(courseSize);
         if (courseSize > 0) {
             sectionTableContent.addAll(Section.getAll());
         }
@@ -257,7 +256,6 @@ public class TaughtCourseController implements Initializable {
                 tracker = selectedIndex;
 
                 if (sectionFilterContent.size() > 0 && selectedIndex >= 0) {
-                    System.out.println("Index : " + selectedIndex);
 
                     try {
                         String sectionID = sectionFilterContent.get(selectedIndex).getSectionID();
@@ -271,7 +269,6 @@ public class TaughtCourseController implements Initializable {
                         studentFilterContent.clear();
                         studentFilterContent.addAll(studentTableContent);
                     } catch (Exception ex) {
-                        System.out.println("gotcha array out of bound 1");
                         Logger.getLogger(SearchCoursesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -287,7 +284,6 @@ public class TaughtCourseController implements Initializable {
                 int selectedIndex = studentTable.getSelectionModel().getSelectedIndex();
                 EnrollSection currentEnrollSection = new EnrollSection();
                 checkChangeOutside = 1;
-                System.out.println("Index : " + selectedIndex);
                 if (studentFilterContent.size() > 0 && selectedIndex >= 0) {
                     try {
                         State.setCurrentEnrollSection(studentFilterContent.get(selectedIndex));
@@ -336,9 +332,6 @@ public class TaughtCourseController implements Initializable {
                     || gradeToStu.compareTo("F") == 0)) {
                 se.setGrade(gradeToStu);
                 try {
-                    System.out.println(se.getStudentID()+"___"+se.getGrade());
-                    System.out.println("Tracker: "+tracker);
-                    System.out.println("Index: "+studentTable.getSelectionModel().getSelectedIndex());
                     se.update();
                     studentFilterContent.set(studentTable.getSelectionModel().getSelectedIndex(), se);
                     
@@ -346,8 +339,6 @@ public class TaughtCourseController implements Initializable {
                     Logger.getLogger(TaughtCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 checkChangeOutside = 0;
-
-                ViewManager.setStatus("Successfully Updated the Grade!");
             } else {
                 ViewManager.setStatus("Please input a valid grade!");
             }

@@ -136,7 +136,6 @@ public class Prerequisite {
                 + this.getPrereqDept() + "', '"
                 + this.getPrereqNum() + "', "
                 + this.getPrereqGroup() + ")";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 

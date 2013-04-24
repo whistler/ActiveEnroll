@@ -69,7 +69,6 @@ public class DataControl {
      * returns a String which store all data
      */
     public String getData() {
-        System.out.println("\n" + title + " " + room + " " + day + " " + start + " " + end + " " + semester);
         return title + " " + room + " " + day + " " + start + " " + end + " " + semester;
     }
 

@@ -14,7 +14,10 @@ import java.util.logging.Logger;
  */
 public class Student extends User {
     private static ArrayList<Student> students = new ArrayList();
-
+    private int studentID =0;
+    private String programID;
+    private String registeredSince;
+    private String status;
     /**
      * Loads all Student records from the database in to a list of Student
      * objects
@@ -67,7 +70,6 @@ public class Student extends User {
      */
     public static ResultSet fetchCurrentTerm() throws SQLException {
         ResultSet rs;
-        System.out.println("current term is " + State.getCurrentTerm().getTermID());
         int currentTerm = Integer.valueOf(State.getCurrentTerm().getTermID());
         if (currentTerm % 10 != 1) {
             currentTerm--;
@@ -79,10 +81,6 @@ public class Student extends User {
         return rs;
     }
 
-    private int studentID;
-    private String programID;
-    private String registeredSince;
-    private String status;
 
     /**
      * @return the studentID
@@ -236,7 +234,6 @@ public class Student extends User {
                 + this.getStatus() + "', '" 
                 + this.getPassword() + "', '" 
                 + this.getEmail() + "')";
-        System.out.println(sql);
         DatabaseConnector.updateQuery(sql);
     }
 

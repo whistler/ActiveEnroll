@@ -43,7 +43,6 @@ public class MyProgramController implements Initializable {
         Student student = (Student) CurrentUser.getUser();
         Program program = new Program();
         program.fetch(student.getProgramID());
-        System.out.println(program.getDeptID());
         Department department = new Department();
         department.fetch(program.getDeptID());
         

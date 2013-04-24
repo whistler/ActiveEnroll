@@ -135,8 +135,7 @@ public class ViewManager {
         if (user == null) {
             label.setText("");
         } else {
-            label.setText("Welcome " + user.getFirstName() + " "
-                    + user.getLastName() + "\nID : " + user.getID());
+            label.setText("Welcome " + user.getFirstName() + " " + user.getLastName() + "! ");
         }
     }
     
@@ -169,6 +168,11 @@ public class ViewManager {
         }
     }
     
+    /**
+     * Shows an error dialog
+     * @param error title of the error
+     * @param description description of the error
+     */
     public static void showError(String error, String description)
     {
         Dialogs.showErrorDialog(stage, description, error, "Error");

@@ -11,18 +11,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * EnrollSection class. EnrollSection object can fetch and store student enrolling section infomation with parameterized query from the database.
- * We can get grade of a student who took a section in certain term. Grade are limited to "A", "B", "C", "D", "F" and "W".
+ * EnrollSection class. EnrollSection object can fetch and store student
+ * enrolling section infomation with parameterized query from the database. We
+ * can get grade of a student who took a section in certain term. Grade are
+ * limited to "A", "B", "C", "D", "F" and "W".
  */
 public class EnrollSection {
-    private static ArrayList<EnrollSection> enrollSections = new ArrayList();
 
+    private static ArrayList<EnrollSection> enrollSections = new ArrayList();
     private int studentID;
     private String sectionID;
     private String grade;
     private String courseDept;
     private String courseNum;
     private String termID;
+
     /**
      * Returns the EnrollSection List
      *
@@ -31,6 +34,7 @@ public class EnrollSection {
     public static ArrayList<EnrollSection> getAll() {
         return enrollSections;
     }
+
     /**
      * Returns the Student ID.
      *
@@ -139,25 +143,27 @@ public class EnrollSection {
         this.termID = termID;
     }
 
-   public static void fetchAll(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+    public static void fetchAll(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
 
 
         String sql = "SELECT * FROM enrollSection "
-                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
-                + courseNum + "' AND termID = '" + termID+"'";
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '"
+                + courseNum + "' AND termID = '" + termID + "'";
 
         executeFetch(sql);
     }
-      public static void fetchAllValid(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+
+    public static void fetchAllValid(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
 
 
         String sql = "SELECT * FROM enrollSection "
-                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
-                + courseNum + "' AND termID = '" + termID+"' AND grade <> 'W'";
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '"
+                + courseNum + "' AND termID = '" + termID + "' AND grade <> 'W'";
 
         executeFetch(sql);
     }
-     private static void executeFetch(String sql) throws SQLException {
+
+    private static void executeFetch(String sql) throws SQLException {
         enrollSections.clear();
         ResultSet rs = DatabaseConnector.returnQuery(sql);
         while (rs.next()) {
@@ -171,6 +177,7 @@ public class EnrollSection {
             enrollSections.add(es);
         }
     }
+
     /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
@@ -226,9 +233,9 @@ public class EnrollSection {
      * @throws SQLException
      */
     public void delete() throws SQLException {
-        String sql = "DELETE FROM enrollSection WHERE studentID=" + this.getStudentID() + " AND sectionID='" +
-                this.getSectionID() + "' AND courseDept='" + this.getCourseDept() + "' AND courseNum='" + this.getCourseNum()
-                + "' AND termID='" + this.getTermID()+"'";
+        String sql = "DELETE FROM enrollSection WHERE studentID=" + this.getStudentID() + " AND sectionID='"
+                + this.getSectionID() + "' AND courseDept='" + this.getCourseDept() + "' AND courseNum='" + this.getCourseNum()
+                + "' AND termID='" + this.getTermID() + "'";
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -243,7 +250,7 @@ public class EnrollSection {
                 + "(" + this.getStudentID() + ", '" + this.getSectionID() + "', '" + this.getCourseDept() + "', '" + this.getCourseNum() + "', '" + this.getTermID()
                 + "', '" + this.getGrade()
                 + "')";
-        System.out.println(sql);
+        
         DatabaseConnector.updateQuery(sql);
     }
 
@@ -331,9 +338,11 @@ public class EnrollSection {
         }
         return rs;
     }
-  /**
+
+    /**
      * Loads the EnrollSection by the studentID from the database and
      * encapsulates into this EnrollSection objects
+     *
      * @param studentID the studentID
      * @param sectionID the sectionID
      * @param courseDept the department of the course
@@ -342,15 +351,15 @@ public class EnrollSection {
      * @throws SQLException
      * @return the flag if any result returns from the SQL execution in DB
      */
-    public   int fetchStus(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
-        
-        
-         //CurrentUser.getUser().getID();
+    public int fetchStus(String sectionID, String courseDept, String courseNum, String termID) throws SQLException {
+
+
+        //CurrentUser.getUser().getID();
         ResultSet rs = null;
         String sql = "SELECT * FROM enrollSection "
-                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '" 
-                + courseNum + "' AND termID = '" + termID+"'";
-        
+                + "WHERE sectionID = '" + sectionID + "' AND courseDept = '" + courseDept + "' AND courseNum = '"
+                + courseNum + "' AND termID = '" + termID + "'";
+
         rs = DatabaseConnector.returnQuery(sql);
 
         if (rs.next()) {
@@ -361,10 +370,12 @@ public class EnrollSection {
             this.setTermID(rs.getString("termID"));
             this.setGrade(rs.getString("grade"));
             return 1;
+        } else {
+            return 0;
         }
-        else return 0;
 
     }
+
     /**
      * Determines whether the section is in a section set.
      *
@@ -462,7 +473,8 @@ public class EnrollSection {
     }
 
     /**
-     * Determines whether the section is already been enrolled by the student.
+     * Determines whether a student has withdrawn from a section and gotten a
+     * W grade
      *
      * @param section is the section student wants to enroll in
      * @param studentID the current student's studentID
@@ -470,17 +482,15 @@ public class EnrollSection {
      * false if not
      * @throws SQLException
      */
-    public static boolean isAlreadyRegistered(Section section, int studentID) throws SQLException {
-
-        ResultSet rs_stu_reg = fetchEnrolledCourses(CurrentUser.getUser().getID());
-        while (rs_stu_reg.next()) {
-            if (rs_stu_reg.getString("sectionID").compareTo(section.getSectionID()) == 0
-                    && rs_stu_reg.getString("courseDept").compareTo(section.getCourseDept()) == 0
-                    && rs_stu_reg.getString("courseNum").compareTo(section.getCourseNum()) == 0) {
-                return true;
-            }
+    public static boolean hasWithdrawn(Section section, int studentID) throws SQLException {
+        EnrollSection es = new EnrollSection();
+        int withdrawn = es.fetch(CurrentUser.getUser().getID(), section.getSectionID(),
+                section.getCourseDept(), section.getCourseNum(), section.getTermID());
+        if (withdrawn == 1 && es.getGrade().equals("W")) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -515,7 +525,7 @@ public class EnrollSection {
         }
     }
 
-        /**
+    /**
      * Determines whether the withdrawWithoutW date is passed
      *
      * @param section is the section student wants to enroll in
@@ -530,7 +540,7 @@ public class EnrollSection {
             return false;
         }
     }
-    
+
     /**
      * Determines whether the section is FULL
      *
@@ -564,9 +574,10 @@ public class EnrollSection {
                     + "termID='" + newSection.getTermID() + "'\n"
                     + "	UNION ALL\n"
                     + "	SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
-                    + "FROM sectionClass sc, enrollSection es "
+                    + "FROM sectionClass sc NATURAL JOIN enrollSection es "
                     + "WHERE es.termID='" + newSection.getTermID() + "' AND "
-                    + "es.studentID=" + student.getID() + ") AS T1 \n"
+                    + "es.studentID=" + student.getID() + " AND "
+                    + "es.grade <> 'W') AS T1 \n"
                     + "INNER JOIN \n"
                     + "(SELECT day, startTime, endTime, courseDept, courseNum FROM sectionClass WHERE "
                     + "sectionID='" + newSection.getSectionID() + "' AND "
@@ -575,9 +586,10 @@ public class EnrollSection {
                     + "termID='" + newSection.getTermID() + "'\n"
                     + "   UNION ALL\n"
                     + "   SELECT day, startTime, endTime, sc.courseDept, sc.courseNum "
-                    + "FROM sectionClass sc, enrollSection es "
+                    + "FROM sectionClass sc NATURAL JOIN enrollSection es "
                     + "WHERE es.termID='" + newSection.getTermID() + "' AND "
-                    + "es.studentID=" + student.getID() + ") AS T2 \n"
+                    + "es.studentID=" + student.getID() + " AND "
+                    + "es.grade <> 'W') AS T2 \n"
                     + "WHERE T1.day = T2.day AND\n"
                     + "	T1.startTime <= T2.endTime AND\n"
                     + "	T1.endTime >= T2.endTime AND\n"
